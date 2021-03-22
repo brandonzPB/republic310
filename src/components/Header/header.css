@@ -1,0 +1,19 @@
+#header__container {
+  margin: 0 auto;
+  width: 100vw;
+  height: 60rem;
+  display: block;
+  z-index: -1;
+}
+
+#hero-img__container {
+  margin: 0 auto;
+  text-align: center;
+  width: 100%;
+  display: block;
+}
+
+#hero-img {
+  width: 100%;
+  height: auto;
+}
