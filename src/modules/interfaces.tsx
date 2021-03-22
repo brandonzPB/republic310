@@ -26,6 +26,7 @@ export interface Address {
   country: string;
 };
 
+// user object is created when logging in
 export interface User {
   firstName: string;
   lastName: string;
@@ -43,4 +44,11 @@ export interface User {
 export interface State {
   user?: User;
   cart: Cart;
+};
+
+/// DISPATCH INTERFACE ///
+
+export interface Dispatch {
+  type: string;
+  payload?: any;
 };

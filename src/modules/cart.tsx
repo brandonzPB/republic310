@@ -1,13 +1,13 @@
 import * as interfaces from './interfaces';
 import Product from './product';
 
-export default class Cart implements interfaces.Cart {
+class Cart implements interfaces.Cart {
   products: interfaces.Product[];
   subtotal?: number;
   taxes?: number;
   total?: number;
   
-  constructor(products: interfaces.Product[] = []) {
+  constructor(products: interfaces.Product[]) {
     this.products = products;
   }
 
@@ -27,3 +27,5 @@ export default class Cart implements interfaces.Cart {
 
   getTotal() {}
 }
+
+export default Cart;

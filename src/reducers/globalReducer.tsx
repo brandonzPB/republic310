@@ -1,15 +1,6 @@
 import * as interfaces from '../modules/interfaces';
 
-type ACTION_TYPE =
-  | { type: 'LOG_IN';            payload: object }
-  | { type: 'LOG_OUT'                            }
-  | { type: 'ADD_TO_CART';       payload: object }
-  | { type: 'REMOVE_FROM_CART'                   }
-  | { type: 'UPDATE_USER';       payload: object }
-  | { type: 'CHECKOUT';          payload: object }
-  | { type: 'GET_ORDER_HISTORY'; payload: object }
-
-const globalReducer = (state: interfaces.State, action: ACTION_TYPE) => {
+const globalReducer = (state: interfaces.State, action: interfaces.Dispatch) => {
   switch(action.type) {
     case 'LOG_IN':
       return state;

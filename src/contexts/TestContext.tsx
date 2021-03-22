@@ -9,15 +9,22 @@ const initialState: interfaces.State = {
 };
 
 const initialDispatch: interfaces.Dispatch = {
-  type: 'default',
+  type: '',
   payload: null
 };
 
-export const GlobalStateContext = createContext<interfaces.State>(initialState);
-export const GlobalDispatchContext = createContext<interfaces.Dispatch>(initialDispatch);
+interface Context {
+  state: interfaces.State;
+  dispatch: interfaces.Dispatch;
+};
+
+export const TestContext = createContext<Context>({
+  state: initialState,
+  dispatch: initialDispatch
+});
 
 // state: { user, cart }
-const GlobalContextProvider: React.FC = (props) => {
+const TestContextProvider: React.FC = (props) => {
   const initialState: interfaces.State = {
     user: undefined,
     cart: new Cart([])
@@ -26,12 +33,10 @@ const GlobalContextProvider: React.FC = (props) => {
   const [state, dispatch] = useReducer(globalReducer, initialState);
 
   return (
-    <GlobalStateContext.Provider value={state}>
-      <GlobalDispatchContext.Provider value={dispatch}>
-        {props.children}
-      </GlobalDispatchContext.Provider>
-    </GlobalStateContext.Provider>
+    <TestContext.Provider value={{ state, dispatch }}>
+      {props.children}
+    </TestContext.Provider>
   )
 }
 
-export default GlobalContextProvider;
+export default TestContextProvider;

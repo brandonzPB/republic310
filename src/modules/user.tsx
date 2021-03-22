@@ -33,3 +33,5 @@ class User implements interfaces.User {
 
   updateOrderHistory() {}
 }
+
+export default User;
