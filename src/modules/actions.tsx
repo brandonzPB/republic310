@@ -1,4 +1,4 @@
-export enum ActionType {
+export enum ActionTypes {
   login = 'LOG_IN',
   logout = 'LOG_OUT',
   addToCart = 'ADD_TO_CART',
@@ -7,3 +7,6 @@ export enum ActionType {
   updateUser = 'UPDATE_USER',
   getOrders = 'GET_ORDERS',
 };
+
+type ActionType = 
+  | { type: ActionTypes.login }

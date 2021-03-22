@@ -50,14 +50,7 @@ export interface State {
 
 /// DISPATCH INTERFACE ///
 
-// export interface Dispatch {
-//   type: ActionType;
-//   payload?: any;
-// };
-
-interface DispatchArgs {
+export interface Dispatch {
   type: ActionType;
   payload?: any;
 };
-
-export type Dispatch<DispatchArgs> = (type: ActionType, payload: any) => State;
