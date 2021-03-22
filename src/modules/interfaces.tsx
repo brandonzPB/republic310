@@ -1,5 +1,6 @@
 /// CART INTERFACES ///
 
+// product object is created when adding to cart
 export interface Product {
   id: number;
   name: string;
@@ -10,7 +11,7 @@ export interface Product {
 
 export interface Cart {
   products: Product[];
-  subtotal: number;
+  subtotal?: number;
   taxes?: number;
   total?: number;
 };
@@ -30,12 +31,11 @@ export interface User {
   lastName: string;
   email: string;
   password: string;
-  id: string;
-  _id: string;
-  resetCode: string;
-  shippingAddress: Address;
-  phoneNumber: number;
-  orderHistory: Cart[];
+  _id?: string;
+  resetCode?: string;
+  shippingAddress?: Address;
+  phoneNumber?: number;
+  orderHistory?: Cart[];
 };
 
 /// STATE INTERFACE ///
