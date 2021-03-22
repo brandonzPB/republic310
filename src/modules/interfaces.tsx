@@ -1,3 +1,5 @@
+import { ActionType } from './actions';
+
 /// CART INTERFACES ///
 
 // product object is created when adding to cart
@@ -48,7 +50,14 @@ export interface State {
 
 /// DISPATCH INTERFACE ///
 
-export interface Dispatch {
-  type: string;
+// export interface Dispatch {
+//   type: ActionType;
+//   payload?: any;
+// };
+
+interface DispatchArgs {
+  type: ActionType;
   payload?: any;
 };
+
+export type Dispatch<DispatchArgs> = (type: ActionType, payload: any) => State;

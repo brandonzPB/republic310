@@ -3,6 +3,7 @@ import { BrowserRouter, HashRouter, Route } from 'react-router-dom';
 import GlobalContextProvider from './contexts/GlobalContext';
 import NavBar from './components/NavBar/NavBar';
 import Header from './components/Header/Header';
+import Testing from './components/Testing';
 
 function App() {
   return (
@@ -10,6 +11,8 @@ function App() {
       <div className="App">
         <GlobalContextProvider>
           <NavBar />
+
+          <Testing />
 
           <Route exact path="/" component={Header} />
 
