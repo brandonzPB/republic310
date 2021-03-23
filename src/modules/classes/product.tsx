@@ -1,4 +1,4 @@
-import * as interfaces from './interfaces';
+import * as interfaces from '../interfaces';
 const {v4: uuidv4} = require('uuid');
 
 class Product implements interfaces.Product {

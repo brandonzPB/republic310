@@ -1,5 +1,5 @@
 import React from 'react';
-import { GlobalStateContext, GlobalDispatchContext } from '../../contexts/GlobalContext';
+import { GlobalContext } from '../../contexts/GlobalContext';
 import './navBar.css';
 const logoSrc = require('../../assets/images/logo.jpg');
 

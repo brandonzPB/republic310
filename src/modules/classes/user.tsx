@@ -1,4 +1,4 @@
-import * as interfaces from './interfaces';
+import * as interfaces from '../interfaces';
 
 class User implements interfaces.User {
   firstName: string;

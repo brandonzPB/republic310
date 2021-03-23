@@ -47,10 +47,8 @@ export interface State {
   login: (name: string) => void;
   logout: () => void;
   addToCart: () => void;
-};
-
-/// DISPATCH INTERFACE ///
-
-export interface Dispatch {
-  method: () => void
+  removeFromCart: () => void;
+  checkout: () => void;
+  updateUser: () => void;
+  getOrders: () => void;
 };

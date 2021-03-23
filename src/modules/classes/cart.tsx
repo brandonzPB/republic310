@@ -1,4 +1,4 @@
-import * as interfaces from './interfaces';
+import * as interfaces from '../interfaces';
 import Product from './product';
 
 class Cart implements interfaces.Cart {
