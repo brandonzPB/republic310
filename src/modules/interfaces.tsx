@@ -14,6 +14,7 @@ export interface Cart {
   subtotal?: number;
   taxes?: number;
   total?: number;
+  date: Date;
 };
 
 /// USER INTERFACES ///
@@ -44,11 +45,11 @@ export interface User {
 export interface State {
   user?: User;
   cart: Cart;
-  login: (name: string) => void;
+  login: (user: User) => void;
   logout: () => void;
-  addToCart: () => void;
-  removeFromCart: () => void;
-  checkout: () => void;
-  updateUser: () => void;
-  getOrders: () => void;
+  addToCart: (product: Product) => void;
+  removeFromCart: (product: Product) => void;
+  checkout: (cart: Cart) => void;
+  updateUser: (user: User) => void;
+  getOrders: (orders: Cart[]) => void;
 };

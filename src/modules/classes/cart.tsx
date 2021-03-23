@@ -6,9 +6,11 @@ class Cart implements interfaces.Cart {
   subtotal?: number;
   taxes?: number;
   total?: number;
+  date: Date;
   
-  constructor(products: interfaces.Product[]) {
+  constructor(products: interfaces.Product[], date: Date = new Date()) {
     this.products = products;
+    this.date = date;
   }
 
   addProductToCart() {}

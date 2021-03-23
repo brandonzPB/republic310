@@ -1,5 +1,7 @@
 import * as interfaces from './interfaces';
 import User from './classes/user';
+import Product from './classes/product';
+import Cart from './classes/cart';
 
 export type ActionType = 
   | { type: 'login',            payload: interfaces.User    }
@@ -10,17 +12,11 @@ export type ActionType =
   | { type: 'update_user',      payload: interfaces.User    }
   | { type: 'get_orders',       payload: interfaces.Cart[]  }
 
-export const login = (name: string): void => {
-  console.log(`Hello ${name}`);
-};
+export const login = () => {}
 
-export const logout = () => {
-  console.log('logout')
-};
+export const logout = () => {}
 
-export const addToCart = () => {
-  console.log('add to cart');
-};
+export const addToCart = () => {}
 
 export const removeFromCart = () => {}
 

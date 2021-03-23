@@ -5,7 +5,6 @@ const Body: React.FC = () => {
   const { login } = useContext(GlobalContext);
 
   const handleClick = () => {
-    login('Brandon');
   }
   
   return (

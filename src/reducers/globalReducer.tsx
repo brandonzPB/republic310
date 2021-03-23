@@ -4,7 +4,6 @@ import { ActionType } from '../modules/actions';
 function globalReducer(state: interfaces.State, action: ActionType): interfaces.State {
   switch(action.type) {
     case 'login':
-      console.log(`${action.payload.name}`);
       return state;
     case 'logout':
       return state;
