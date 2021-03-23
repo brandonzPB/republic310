@@ -1,4 +1,5 @@
 import React from 'react';
+import { Route, Redirect } from 'react-router-dom';
 import { GlobalContext } from '../../contexts/GlobalContext';
 import './navBar.css';
 import logoSrc from '../../assets/images/logo.jpg';
