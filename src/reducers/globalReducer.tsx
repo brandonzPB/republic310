@@ -1,23 +1,21 @@
 import * as interfaces from '../modules/interfaces';
 import { ActionType } from '../modules/actions';
 
-function globalReducer(state: interfaces.State, action:interfaces.Dispatch): interfaces.State {
-  const { type, payload } = action;
-
-  switch(type) {
-    case ActionType.login:
+function globalReducer(state: interfaces.State, action: ActionType): interfaces.State {
+  switch(action.type) {
+    case 'login':
       return state;
-    case ActionType.logout:
+    case 'logout':
       return state;
-    case ActionType.addToCart:
+    case 'add_to_cart':
       return state;
-    case ActionType.removeFromCart:
+    case 'remove_from_cart':
       return state;
-    case ActionType.checkout:
+    case 'checkout':
       return state;
-    case ActionType.updateUser:
+    case 'update_user':
       return state;
-    case ActionType.getOrders:
+    case 'get_orders':
       return state;
     default:
       return state;

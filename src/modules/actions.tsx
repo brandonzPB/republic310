@@ -1,12 +1,7 @@
-export enum ActionTypes {
-  login = 'LOG_IN',
-  logout = 'LOG_OUT',
-  addToCart = 'ADD_TO_CART',
-  removeFromCart = 'REMOVE_FROM_CART',
-  checkout = 'CHECKOUT',
-  updateUser = 'UPDATE_USER',
-  getOrders = 'GET_ORDERS',
-};
+export type ActionType = 
+  | { type: 'login' | 'add_to_cart' | 'remove_from_cart' | 'checkout' | 'update_user' | 'get_orders', payload: object }
+  | { type: 'logout' };
 
-type ActionType = 
-  | { type: ActionTypes.login }
+export const login = (name: string): void => {
+  console.log(`Hello ${name}`);
+};

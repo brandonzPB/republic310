@@ -1,5 +1,3 @@
-import { ActionType } from './actions';
-
 /// CART INTERFACES ///
 
 // product object is created when adding to cart
@@ -46,11 +44,13 @@ export interface User {
 export interface State {
   user?: User;
   cart: Cart;
+  login: (name: string) => void;
+  logout: () => void;
+  addToCart: () => void;
 };
 
 /// DISPATCH INTERFACE ///
 
 export interface Dispatch {
-  type: ActionType;
-  payload?: any;
+  method: () => void
 };

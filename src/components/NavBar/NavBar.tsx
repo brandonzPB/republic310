@@ -3,7 +3,7 @@ import { GlobalStateContext, GlobalDispatchContext } from '../../contexts/Global
 import './navBar.css';
 const logoSrc = require('../../assets/images/logo.jpg');
 
-const NavBar = () => {
+const NavBar: React.FC  = () => {
   return (
     <div id="nav__container">
       <h1 id ="nav-link-text">SHOP</h1>
