@@ -2,8 +2,7 @@ import React from 'react';
 import { BrowserRouter, HashRouter, Route } from 'react-router-dom';
 import GlobalContextProvider from './contexts/GlobalContext';
 import NavBar from './components/NavBar/NavBar';
-import Header from './components/Header/Header';
-import Body from './components/Body';
+import Index from './components/Index/Index';
 
 function App() {
   return (
@@ -12,10 +11,7 @@ function App() {
         <GlobalContextProvider>
           <NavBar />
 
-          <Body />
-
-          <Route exact path="/" component={Header} />
-
+          <Route exact path="/" component={Index} />
         </GlobalContextProvider>
       </div>
     </BrowserRouter>
