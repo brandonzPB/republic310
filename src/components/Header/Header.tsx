@@ -1,6 +1,6 @@
 import React from 'react';
 import './header.css';
-const heroSrc = require('../../assets/images/hero_1.jpg');
+import heroSrc from '../../assets/images/hero_1.jpg';
 
 const Header = () => {
   return (

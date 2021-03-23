@@ -1,7 +1,7 @@
 import React from 'react';
 import { GlobalContext } from '../../contexts/GlobalContext';
 import './navBar.css';
-const logoSrc = require('../../assets/images/logo.jpg');
+import logoSrc from '../../assets/images/logo.jpg';
 
 const NavBar: React.FC  = () => {
   return (
