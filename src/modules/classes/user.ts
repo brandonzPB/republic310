@@ -1,30 +1,46 @@
+import { access } from 'node:fs';
 import * as interfaces from '../interfaces';
 
 class User implements interfaces.User {
-  firstName: string;
-  lastName: string;
-  email: string;
-  password: string;
-  _id: string;
+  isAuthorized: boolean;
+  firstName?: string;
+  lastName?: string;
+  email?: string;
+  password?: string;
+  _id?: string;
+  accessToken?: string;
   shippingAddress?: interfaces.Address;
   phoneNumber?: number;
   orderHistory?: interfaces.Cart[];
 
-  constructor(firstName: string, lastName: string, email: string, password: string, _id: string) {
+  constructor() {
+    this.isAuthorized = false;
+  }
+
+  initiateUserDetails(firstName: string, lastName: string, email: string, password: string, _id: string, accessToken: string) {
     this.firstName = firstName;
     this.lastName = lastName;
     this.email = email;
     this.password = password;
     this._id = _id;
+    this.accessToken = accessToken;
   }
 
-  updateShippingAddress() {}
+  updateShippingAddress(shippingAddress: interfaces.Address) {
+    this.shippingAddress = shippingAddress;
+  }
 
-  getShippingAddress() {}
+  getShippingAddress() {
+    return this.shippingAddress;
+  }
 
-  updatePhoneNumber() {}
+  updatePhoneNumber(phoneNumber: number) {
+    this.phoneNumber = phoneNumber;
+  }
 
-  getPhoneNumber() {}
+  getPhoneNumber() {
+    return this.phoneNumber;
+  }
 
   updateOrderHistory() {}
 }

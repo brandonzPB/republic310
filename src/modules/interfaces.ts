@@ -29,11 +29,13 @@ export interface Address {
 
 // user object is created when logging in
 export interface User {
-  firstName: string;
-  lastName: string;
-  email: string;
-  password: string;
+  isAuthorized: boolean;
+  firstName?: string;
+  lastName?: string;
+  email?: string;
+  password?: string;
   _id?: string;
+  accessToken?: string;
   shippingAddress?: Address;
   phoneNumber?: number;
   orderHistory?: Cart[];
@@ -42,18 +44,19 @@ export interface User {
 /// STATE INTERFACE ///
 
 export interface State {
-  user?: User;
+  user: User;
   cart: Cart;
+  resetToken: string;
   createUser: (user: object) => any;
   requestReset: (email: string) => any;
   postResetCode: (code: string) => void;
-  resetPassword: (password: string) => void;
-  login: (user: object) => void;
+  resetPassword: (password: string) => any;
+  login: (user: object) => any;
   logout: () => void;
+  updateUser: (update: object) => any;
+  updateShipping: () => any;
   addToCart: (product: object) => void;
   removeFromCart: (product: object) => void;
   checkout: (cart: object) => void;
-  updateUser: (user: object) => void;
-  updateShipping: () => void;
   getOrders: () => void;
 };

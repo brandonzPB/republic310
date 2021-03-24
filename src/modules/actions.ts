@@ -6,8 +6,9 @@ import * as userService from '../services/userServices';
 import * as productService from '../services/productServices';
 
 export type ActionType = 
+  | { type: 'get_reset_token',  payload: string             }
   | { type: 'login',            payload: interfaces.User    }
-  | { type: 'logout'                                        }
+  | { type: 'logout',           payload: interfaces.State   }
   | { type: 'add_to_cart',      payload: interfaces.Product }
   | { type: 'remove_from_cart', payload: interfaces.Product }
   | { type: 'checkout',         payload: interfaces.Cart    }
@@ -30,7 +31,7 @@ export const requestReset = async (email: string): Promise<any> => {
 
   if (!requestResult || requestResult.result !== 'Success') return 'Error';
 
-  return 'Success';
+  return requestResult;
 }
 
 export const postResetCode = async (code: string, token: string): Promise<any> => {
@@ -48,24 +49,29 @@ export const resetPassword = async (password: string, token: string): Promise<an
 
   const resetResult: any = await userService.resetPassword(passwordObj, token);
 
-  if (!resetResult || resetResult !== 'Success') return 'Error';
+  if (!resetResult || resetResult.result !== 'Success') return 'Error';
 
   return 'Success';
 }
 
-export const login = (user: object): any => {
+export const login = async (credentials: object): Promise<any> => {
+  const loginResult: any = await userService.login(credentials);
+
+  if (!loginResult || loginResult.result !== 'Success') return 'Error';
+
+  return loginResult;
 }
 
-export const logout = (): any => {}
+export const updateUser = async (user: object, userId: string, token: string): Promise<any> => {
+  const updateResult: any = await userService.updateUserDetails(user, userId, token);
+}
+
+export const updateShipping = (): any => {}
 
 export const addToCart = (): any => {}
 
 export const removeFromCart = (): any => {}
 
 export const checkout = (): any => {}
-
-export const updateUser = (): any => {}
-
-export const updateShipping = (): any => {}
 
 export const getOrders = (): any => {}
