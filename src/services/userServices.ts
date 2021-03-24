@@ -13,7 +13,7 @@ export const createUser = (user: object): any => {
 /// RESET PASSWORD METHODS ///
 
 // POST RESET REQUEST
-export const postResetRequest = (email: string): any => {
+export const postResetRequest = (email: object): any => {
   const req: any = axios.post(`${baseUrl}/reset`, email);
 
   return req.then((res: any) => res.data)
@@ -21,7 +21,7 @@ export const postResetRequest = (email: string): any => {
 }
 
 // POST RESET CODE (after successful request)
-export const postResetCode = (code: string, token: string): any => {
+export const postResetCode = (code: object, token: string): any => {
   const req: any = axios.post(`${baseUrl}/reset/code`, code, {
     headers: {
       'Authorization': `Bearer ${token}`
@@ -33,7 +33,7 @@ export const postResetCode = (code: string, token: string): any => {
 }
 
 // RESET PASSWORD (after inputting correct code)
-export const resetPassword = (password: string, token: string): any => {
+export const resetPassword = (password: object, token: string): any => {
   const req: any = axios.put(`${baseUrl}/reset/password`, password, {
     headers: {
       'Authorization': `Bearer ${token}`
@@ -45,7 +45,7 @@ export const resetPassword = (password: string, token: string): any => {
 }
 
 // LOGIN
-export const login = (credentials: string[]): any => {
+export const login = (credentials: object): any => {
   const req: any = axios.post(`${baseUrl}/login`, credentials);
 
   return req.then((res: any) => res.data)

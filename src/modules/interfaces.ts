@@ -34,7 +34,6 @@ export interface User {
   email: string;
   password: string;
   _id?: string;
-  resetCode?: string;
   shippingAddress?: Address;
   phoneNumber?: number;
   orderHistory?: Cart[];
@@ -45,8 +44,8 @@ export interface User {
 export interface State {
   user?: User;
   cart: Cart;
-  createUser: (user: object) => void;
-  requestReset: (email: string) => void;
+  createUser: (user: object) => any;
+  requestReset: (email: string) => any;
   postResetCode: (code: string) => void;
   resetPassword: (password: string) => void;
   login: (user: object) => void;

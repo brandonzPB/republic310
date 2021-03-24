@@ -15,13 +15,43 @@ export type ActionType =
   | { type: 'update_shipping',  payload: interfaces.Address }
   | { type: 'get_orders',       payload: interfaces.Cart[]  }
 
-export const createUser = (user: object): void => {}
+export const createUser = async (user: object): Promise<any> => {
+  const createResult: any = await userService.createUser(user);
 
-export const requestReset = (email: string): any => {}
+  if (!createResult || createResult.result !== 'Success') return 'Error';
 
-export const postResetCode = (code: string, token: string): any => {}
+  return 'Success';
+}
 
-export const resetPassword = (password: string, token: string): any => {}
+export const requestReset = async (email: string): Promise<any> => {
+  const emailObj: object = { email };
+
+  const requestResult: any = await userService.postResetRequest(emailObj);
+
+  if (!requestResult || requestResult.result !== 'Success') return 'Error';
+
+  return 'Success';
+}
+
+export const postResetCode = async (code: string, token: string): Promise<any> => {
+  const codeObj: object = { code };
+
+  const resetResult: any = await userService.postResetCode(codeObj, token);
+
+  if (!resetResult || resetResult.result !== 'Success') return 'Error';
+
+  return 'Success';
+}
+
+export const resetPassword = async (password: string, token: string): Promise<any> => {
+  const passwordObj: object = { password };
+
+  const resetResult: any = await userService.resetPassword(passwordObj, token);
+
+  if (!resetResult || resetResult !== 'Success') return 'Error';
+
+  return 'Success';
+}
 
 export const login = (user: object): any => {
 }

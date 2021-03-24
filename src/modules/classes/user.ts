@@ -6,7 +6,6 @@ class User implements interfaces.User {
   email: string;
   password: string;
   _id: string;
-  resetCode?: string;
   shippingAddress?: interfaces.Address;
   phoneNumber?: number;
   orderHistory?: interfaces.Cart[];
@@ -18,10 +17,6 @@ class User implements interfaces.User {
     this.password = password;
     this._id = _id;
   }
-
-  updateResetCode() {}
-
-  getResetCode() {}
 
   updateShippingAddress() {}
 

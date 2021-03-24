@@ -8,7 +8,7 @@ const initialState: interfaces.State = {
   user: undefined,
   cart: new Cart([]),
   createUser: actions.createUser,
-  requestReset: (email: string): void => {},
+  requestReset: actions.requestReset,
   postResetCode: (code: string): void => {},
   resetPassword: (password: string): void => {},
   login: (user: object): void => {},
@@ -25,8 +25,6 @@ export const GlobalContext = createContext<interfaces.State>(initialState);
 
 const GlobalContextProvider: React.FC = ({ children }) => {
   const [state, dispatch] = useReducer(globalReducer, initialState);
-
-  const requestReset = (email: string): void => {}
 
   const postResetCode = (code: string): void => {}
 
