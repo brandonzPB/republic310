@@ -45,11 +45,16 @@ export interface User {
 export interface State {
   user?: User;
   cart: Cart;
-  login: (user: User) => void;
+  createUser: (user: object) => void;
+  requestReset: (email: string) => void;
+  postResetCode: (code: string) => void;
+  resetPassword: (password: string) => void;
+  login: (user: object) => void;
   logout: () => void;
-  addToCart: (product: Product) => void;
-  removeFromCart: (product: Product) => void;
-  checkout: (cart: Cart) => void;
-  updateUser: (user: User) => void;
-  getOrders: (orders: Cart[]) => void;
+  addToCart: (product: object) => void;
+  removeFromCart: (product: object) => void;
+  checkout: (cart: object) => void;
+  updateUser: (user: object) => void;
+  updateShipping: () => void;
+  getOrders: () => void;
 };

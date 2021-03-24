@@ -2,6 +2,8 @@ import * as interfaces from './interfaces';
 import User from './classes/user';
 import Product from './classes/product';
 import Cart from './classes/cart';
+import * as userService from '../services/userServices';
+import * as productService from '../services/productServices';
 
 export type ActionType = 
   | { type: 'login',            payload: interfaces.User    }
@@ -10,18 +12,30 @@ export type ActionType =
   | { type: 'remove_from_cart', payload: interfaces.Product }
   | { type: 'checkout',         payload: interfaces.Cart    }
   | { type: 'update_user',      payload: interfaces.User    }
+  | { type: 'update_shipping',  payload: interfaces.Address }
   | { type: 'get_orders',       payload: interfaces.Cart[]  }
 
-export const login = () => {}
+export const createUser = (user: object): void => {}
 
-export const logout = () => {}
+export const requestReset = (email: string): any => {}
 
-export const addToCart = () => {}
+export const postResetCode = (code: string, token: string): any => {}
 
-export const removeFromCart = () => {}
+export const resetPassword = (password: string, token: string): any => {}
 
-export const checkout = () => {}
+export const login = (user: object): any => {
+}
 
-export const updateUser = () => {}
+export const logout = (): any => {}
 
-export const getOrders = () => {}
+export const addToCart = (): any => {}
+
+export const removeFromCart = (): any => {}
+
+export const checkout = (): any => {}
+
+export const updateUser = (): any => {}
+
+export const updateShipping = (): any => {}
+
+export const getOrders = (): any => {}
