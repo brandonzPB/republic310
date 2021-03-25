@@ -7,6 +7,10 @@ interface UserState {
   err: null | 'email' | 'password';
 };
 
+/*
+  DON'T HAVE AN ACCOUNT? DON'T WORRY, YOU CAN EASILY CREATE ONE AT CHECKOUT
+*/
+
 const Login: React.FC = () => {
   const { login } = useContext(GlobalContext);
 
