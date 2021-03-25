@@ -33,7 +33,7 @@ function globalReducer(state: interfaces.State, action: ActionType): interfaces.
       return state;
 
     case 'add_to_cart':
-      state.cart = action.payload;
+      state.cart = state.cart.addProduct(action.payload);
       return state;
 
     case 'remove_from_cart':

@@ -8,6 +8,7 @@ import Product from '../modules/classes/product';
 
 const initialState: interfaces.State = {
   user: new User(),
+  date: undefined,
   cart: new Cart([]),
   resetToken: '',
   createUser: actions.createUser,
@@ -148,18 +149,18 @@ const GlobalContextProvider: React.FC = ({ children }) => {
 
   // ADD PRODUCT TO CART
   const addToCart = (product: any): void => {
-    const newProduct: interfaces.Product = new Product(product.name, product.quantity, product.price, product.isTaxed);
+    const newProduct: interfaces.Product = new Product(product.name, product.quantity, product.price);
 
-    // create new cart
-
-    // dispatch({ type: 'add_to_cart', payload: newCart });
+    dispatch({ type: 'add_to_cart', payload: newProduct });
   }
 
   // REMOVE PRODUCT FROM CART
   const removeFromCart = (product: object): void => {}
 
   // CHECKOUT CART
-  const checkout = (cart: object): void => {}
+  const checkout = (cart: object): void => {
+    // add date to cart
+  }
 
   // I've found that doing the following allows for the functions
   // defined within GlobalContextProvider to be consumed globally.

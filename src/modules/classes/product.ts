@@ -6,14 +6,12 @@ class Product implements interfaces.Product {
   name: string;
   quantity: number;
   price: number;
-  isTaxed: boolean;
 
-  constructor(name: string, quantity: number, price: number, isTaxed: boolean) {
+  constructor(name: string, quantity: number, price: number) {
     this.id = uuidv4();
     this.name = name;
     this.quantity = quantity;
     this.price = price;
-    this.isTaxed = isTaxed;
   }
 }
 

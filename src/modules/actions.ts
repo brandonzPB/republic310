@@ -12,8 +12,8 @@ export type ActionType =
   | { type: 'update_user',      payload: any                }
   | { type: 'update_shipping',  payload: interfaces.Address }
   | { type: 'get_orders',       payload: interfaces.Cart[]  }
-  | { type: 'add_to_cart',      payload: interfaces.Cart    }
-  | { type: 'remove_from_cart', payload: interfaces.Cart    }
+  | { type: 'add_to_cart',      payload: interfaces.Product }
+  | { type: 'remove_from_cart', payload: interfaces.Product }
   | { type: 'checkout',         payload: interfaces.Cart    }
 
 export const createUser = async (user: object): Promise<any> => {

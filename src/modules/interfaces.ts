@@ -6,15 +6,19 @@ export interface Product {
   name: string;
   quantity: number;
   price: number;
-  isTaxed: boolean;
 };
 
 export interface Cart {
   products: Product[];
+  date?: Date;
   subtotal?: number;
   taxes?: number;
   total?: number;
-  date: Date;
+  addProduct: (product: Product) => any;
+  calculateSubtotal: (products: Product[]) => any;
+  calculateTaxTotal: (products: Product[]) => any;
+  calculateTotal: (products: Product[]) => any;
+  checkout: (date: Date) => any;
 };
 
 /// USER INTERFACES ///
@@ -49,6 +53,7 @@ export interface User {
 
 export interface State {
   user: User;
+  date?: Date;
   cart: Cart;
   resetToken: string;
   createUser: (user: object) => any;
