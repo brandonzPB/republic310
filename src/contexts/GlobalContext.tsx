@@ -1,8 +1,8 @@
 import React, { useEffect, useReducer, createContext } from 'react';
 import globalReducer from '../reducers/globalReducer';
-import * as interfaces from '../modules/interfaces';
-import Cart from '../modules/classes/cart';
+import * as interfaces from '../modules/interfaces'
 import * as actions from '../modules/actions';
+import Cart from '../modules/classes/cart';
 import User from '../modules/classes/user';
 
 const initialState: interfaces.State = {
@@ -58,18 +58,21 @@ const GlobalContextProvider: React.FC = ({ children }) => {
 
   // CREATE USER OBJECT (to be added to state)
   const createUserState = (loginResult: any): any => {
-    const firstName: string = loginResult.userToken.firstName;
-    const lastName: string = loginResult.userToken.lastName;
-    const email: string = loginResult.userToken.email;
-    const password: string = loginResult.userToken.password;
+    const authorizedUser: interfaces.User = new User();
 
-    const _id: string = loginResult.userToken._id;
-    const accessToken: string = loginResult.accessToken;
+    const details = {
+      firstName: loginResult.userToken.firstName,
+      lastName: loginResult.userToken.lastName,
+      email: loginResult.userToken.email,
+      password: loginResult.userToken.password,
+      _id: loginResult.userToken._id,
+      accessToken: loginResult.accessToken
+    };
+
+    authorizedUser.initiateDetails(details);
 
     const shippingAddress: interfaces.Address = loginResult.userToken.shipping_address;
     const phoneNumber: number = loginResult.phone_number;
-
-    const authorizedUser = new User(firstName, lastName, email, password, _id, accessToken);
 
     authorizedUser.updateShippingAddress(shippingAddress);
     authorizedUser.updatePhoneNumber(phoneNumber);
@@ -106,7 +109,10 @@ const GlobalContextProvider: React.FC = ({ children }) => {
       updatePassword: !!update.password.trim()
     };
 
-    const updateResult: any = await actions.updateUser(user, state.user._id, state.user.accessToken);
+    const userId: string = state.user._id!;
+    const accessToken: string = state.user.accessToken!;
+
+    const updateResult: any = await actions.updateUser(user, userId, accessToken);
   }
 
   // UPDATE SHIPPING DETAILS

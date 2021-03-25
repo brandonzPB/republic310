@@ -1,4 +1,3 @@
-import { access } from 'node:fs';
 import * as interfaces from '../interfaces';
 
 class User implements interfaces.User {
@@ -12,37 +11,35 @@ class User implements interfaces.User {
   shippingAddress?: interfaces.Address;
   phoneNumber?: number;
   orderHistory?: interfaces.Cart[];
+  initiateDetails: (inputs: any) => void; 
+  updateShippingAddress: (address: interfaces.Address) => void;
+  updatePhoneNumber: (phoneNumber: number) => void;
+  updateOrderHistory: (history: interfaces.Cart[]) => void;
 
   constructor() {
     this.isAuthorized = false;
-  }
 
-  initiateUserDetails(firstName: string, lastName: string, email: string, password: string, _id: string, accessToken: string) {
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.email = email;
-    this.password = password;
-    this._id = _id;
-    this.accessToken = accessToken;
-  }
+    this.initiateDetails = function(inputs: any): void {
+      this.firstName = inputs.firstName;
+      this.lastName = inputs.lastName;
+      this.email = inputs.email;
+      this.password = inputs.password;
+      this._id = inputs._id;
+      this.accessToken = inputs.accessToken;
+    }
 
-  updateShippingAddress(shippingAddress: interfaces.Address) {
-    this.shippingAddress = shippingAddress;
-  }
+    this.updateShippingAddress = function(address: interfaces.Address): void {
+      this.shippingAddress = address;
+    }
 
-  getShippingAddress() {
-    return this.shippingAddress;
-  }
+    this.updatePhoneNumber = function(phoneNumber: number): void {
+      this.phoneNumber = phoneNumber;
+    }
 
-  updatePhoneNumber(phoneNumber: number) {
-    this.phoneNumber = phoneNumber;
+    this.updateOrderHistory = function(history: interfaces.Cart[]): void {
+      this.orderHistory = history;
+    }
   }
-
-  getPhoneNumber() {
-    return this.phoneNumber;
-  }
-
-  updateOrderHistory() {}
 }
 
 export default User;

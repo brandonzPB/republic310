@@ -39,6 +39,10 @@ export interface User {
   shippingAddress?: Address;
   phoneNumber?: number;
   orderHistory?: Cart[];
+  initiateDetails: (inputs: any) => void;
+  updateShippingAddress: (address: Address) => void;
+  updatePhoneNumber: (phoneNumber: number) => void;
+  updateOrderHistory: (history: Cart[]) => void;
 };
 
 /// STATE INTERFACE ///
