@@ -5,6 +5,7 @@ import RouteContextProvider from './contexts/RouteContext';
 import NavBar from './components/NavBar/NavBar';
 import Index from './components/Index/Index';
 import Login from './components/User/Login/Login';
+import CreateUser from './components/User/Create/CreateUser';
 
 function App() {
   return (
@@ -14,8 +15,9 @@ function App() {
           <RouteContextProvider>
             <NavBar />
 
-            <Route exact path="/" component={Index} />
+            <Route exact path="/" component={CreateUser} />
             <Route exact path="/user/login" component={Login} />
+            <Route exact path="/user/create" component={CreateUser} />
 
           </RouteContextProvider>
         </GlobalContextProvider>

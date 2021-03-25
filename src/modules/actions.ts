@@ -16,6 +16,16 @@ export type ActionType =
   | { type: 'remove_from_cart', payload: string             }
   | { type: 'checkout',         payload: Date               }
 
+export const checkEmail = async (email: string): Promise<any> => {
+  const emailObj = { email };
+
+  const emailResult: any = await userService.checkEmail(emailObj);
+
+  if (!emailResult || emailResult.result !== 'Success') return false;
+
+  return true;
+}
+
 export const createUser = async (user: object): Promise<any> => {
   const createResult: any = await userService.createUser(user);
 

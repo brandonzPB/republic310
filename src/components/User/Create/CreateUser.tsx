@@ -1,119 +1,159 @@
-import React, { useState, useContext } from 'react';
-import { GlobalContext } from '../../../contexts/GlobalContext';
-import { RouteContext } from '../../../contexts/RouteContext';
+import React, { useContext } from 'react';
 import { Route, Redirect } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import { RouteContext } from '../../../contexts/RouteContext';
 import * as interfaces from '../../../modules/interfaces';
 import * as actions from '../../../modules/actions';
 
-interface UserForm {
+interface UserData {
   firstName: string;
   lastName: string;
   email: string;
   password: string;
   confirmPassword: string;
   phoneNumber: number;
-  shippingAddress: interfaces.Address;
-  error: any
+  street: string;
+  city: string;
+  zipCode: number;
+  country: string;
+  state: string;
 };
 
-const initialUser: UserForm = {
+const user: UserData = {
   firstName: '',
   lastName: '',
   email: '',
   password: '',
   confirmPassword: '',
   phoneNumber: 0,
-  shippingAddress: {
-    street: '',
-    city: '',
-    zipCode: 0,
-    state: '',
-    country: '',
-  },
-  error: '',
-}
+  street: '',
+  city: '',
+  zipCode: 0,
+  state: '',
+  country: '',
+};
 
 const CreateUser: React.FC = () => {
-  const { dest, changeDest } = useContext(RouteContext);
+  const { register, handleSubmit, errors } = useForm<UserData>();
 
-  const [user, setUser] = useState<UserForm>(initialUser);
+  const onSubmit = (data: UserData): void => console.log(data);
 
-  const handleChange = (e: React.FormEvent<HTMLInputElement>): void => {
-    const { name, value } = e.currentTarget;
-
-    setUser({
-      ...user,
-      [name]: value
-    });
-  }
-
-  const handleSubmit = async (e: React.FormEvent<HTMLInputElement>): Promise<any> => {
-    e.preventDefault();
-
-    setUser({
-      ...user,
-      error: '',
-    });
-
-    /// FORM ERROR CHECKS ///
-
-    if (!user.firstName.trim()) { return setUser({ ...user, error: 'firstName' })};
-    if (!user.lastName.trim()) { return setUser({ ...user, error: 'lastName' })};
-    if (!user.email.trim()) { return setUser({ ...user, error: 'email' })};
-    if (!user.phoneNumber) { return setUser({ ...user, error: 'phone' })};
-
-    if (!user.password.trim() || !user.confirmPassword.trim() || user.password !== user.confirmPassword) {
-      return setUser({
-        ...user,
-        error: 'password'
-      });
-    }
-
-    if (!user.shippingAddress.street.trim()) { return setUser({ ...user, error: 'street' })};
-    if (!user.shippingAddress.city.trim()) { return setUser({ ...user, error: 'city' })};
-    if (!user.shippingAddress.zipCode) { return setUser({ ...user, error: 'zipCode' })};
-    if (!user.shippingAddress.state.trim()) { return setUser({ ...user, error: 'state' })};
-    if (!user.shippingAddress.country.trim()) { return setUser({ ...user, error: 'country' })};
-
-    const createResult: any = await actions.createUser(user);
-
-    if (createResult === 'Error') { return setUser({ ...user, error: 'email_exists' })};
-
-    // success: redirect to order payment page
-    changeDest('payment');
-
-    setUser({
-      ...user,
-      firstName: '',
-      lastName: '',
-      email: '',
-      password: '',
-      confirmPassword: '',
-      phoneNumber: 0,
-      shippingAddress: {
-        street: '',
-        city: '',
-        zipCode: 0,
-        state: '',
-        country: '',
-      },
-      error: '',
-    })
+  const isAvailable = async (email: string): Promise<any> => {
+    return await actions.checkEmail(email);
   }
 
   return (
-    <div id="create-user__container">
-      <form onSubmit={handleSubmit}>
-        <input 
-          type="text"
-          className="create-input"
-          id="name-input"
-          onChange={handleChange}
-          name="firstName"
-          value={user.firstName}
-        />
+    <div id="create-user__container" style={{ width: '100vw', height: '100vh' }}>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <div id="contact-input__container">
+          <label>
+            Email: 
+            <input 
+              type="email"
+              name="email"
+              ref={register({ required: true, validate: isAvailable })}
+            />
+          </label>
 
-        <button id="create-user-btn">Create Account and Continue to Payment</button>
+          {errors.email && <div>Email is requred</div>}
+
+          <label>
+            Phone Number:
+            <input 
+              style={{ backgroundColor: errors.phoneNumber ? 'pink' : 'white' }}
+              type="tel"
+              name="phoneNumber"
+              ref={register({ required: true })}
+            />
+          </label>
+
+          {errors.phoneNumber && <div style={{ color: 'red' }}>Phone number is required</div>}
+        </div>
+
+        <div id="shipping-input__container">
+          <div id="name-input__container">
+            <label>
+              First Name:
+              <input 
+                type="text"
+                name="firstName"
+                ref={register({ required: true })}
+              />
+            </label>
+
+            {errors.firstName && <div>First name is required</div>}
+
+            <label>
+              Last Name:
+              <input 
+                type="text"
+                name="lastName"
+                ref={register({ required: true })}
+              />
+            </label>
+
+            {errors.lastName && <div>Last name is required</div>}
+          </div>
+
+          <label>
+            Street
+            <input 
+              type="text"
+              name="street"
+              ref={register({ required: true })}
+            />
+          </label>
+          
+          {errors.street && <div>Street is required</div>}
+
+          <label>
+            City:
+            <input 
+              type="text"
+              name="city"
+              ref={register({ required: true })}
+            />
+          </label>
+
+          {errors.city && <div>City is required</div>}
+
+          <div id="country-input__container">
+            <label>
+              Country:
+              <input 
+                type="text"
+                name="country"
+                ref={register({ required: true })}
+              />
+            </label>
+
+            {errors.country && <div>Country is required</div>}
+
+            <label>
+              State:
+              <input 
+                type="text"
+                name="lastName"
+                ref={register({ required: true })}
+              />
+            </label>
+
+            {errors.state && <div>State is required</div>}
+
+            <label>
+              Zip Code:
+              <input 
+                type="number"
+                name="zipCode"
+                ref={register({ required: true })}
+              />
+            </label>
+
+            {errors.zipCode && <div>Zip code is required</div>}
+          </div>
+        </div>
+
+        <button id="create-user-btn">Create Account and Continue to Shipping</button>
       </form>
     </div>
   )

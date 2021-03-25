@@ -2,6 +2,14 @@ import axios from 'axios';
 
 const baseUrl: string = '/catalog/user';
 
+// CHECK EMAIL AVAILABILITY
+export const checkEmail = (email: object): any => {
+  const req: any = axios.post(`${baseUrl}/email`, email);
+
+  return req.then((res: any) => res.data)
+    .catch((err: any) => console.error(err));
+}
+
 // CREATE USER
 export const createUser = (user: object): any => {
   const req: any = axios.post(`${baseUrl}/create`, user);
