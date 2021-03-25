@@ -13,8 +13,8 @@ export type ActionType =
   | { type: 'update_shipping',  payload: interfaces.Address }
   | { type: 'get_orders',       payload: interfaces.Cart[]  }
   | { type: 'add_to_cart',      payload: interfaces.Product }
-  | { type: 'remove_from_cart', payload: interfaces.Product }
-  | { type: 'checkout',         payload: interfaces.Cart    }
+  | { type: 'remove_from_cart', payload: string             }
+  | { type: 'checkout',         payload: Date               }
 
 export const createUser = async (user: object): Promise<any> => {
   const createResult: any = await userService.createUser(user);

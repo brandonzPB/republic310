@@ -2,7 +2,7 @@
 
 // product object is created when adding to cart
 export interface Product {
-  id: number;
+  id: string;
   name: string;
   quantity: number;
   price: number;
@@ -66,6 +66,6 @@ export interface State {
   updateShippingAddress: (address: Address) => any;
   getOrders: () => any;
   addToCart: (product: any) => void;
-  removeFromCart: (product: any) => void;
-  checkout: (cart: any) => void;
+  removeFromCart: (productId: string) => void;
+  checkout: () => void;
 };

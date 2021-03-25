@@ -21,8 +21,8 @@ const initialState: interfaces.State = {
   updateShippingAddress: (address: interfaces.Address): any => {},
   getOrders: (): any => {},
   addToCart: (product: any): void => {},
-  removeFromCart: (product: any): void => {},
-  checkout: (cart: any): void => {},
+  removeFromCart: (productId: string): void => {},
+  checkout: (): void => {},
 };
 
 export const GlobalContext = createContext<interfaces.State>(initialState);
@@ -155,11 +155,15 @@ const GlobalContextProvider: React.FC = ({ children }) => {
   }
 
   // REMOVE PRODUCT FROM CART
-  const removeFromCart = (product: object): void => {}
+  const removeFromCart = (productId: string): void => {
+    dispatch({ type: 'remove_from_cart', payload: productId });
+  }
 
   // CHECKOUT CART
-  const checkout = (cart: object): void => {
-    // add date to cart
+  const checkout = (): void => {
+    const date: Date = state.date!;
+    
+    dispatch({ type: 'checkout', payload: date });
   }
 
   // I've found that doing the following allows for the functions

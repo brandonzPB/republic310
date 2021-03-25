@@ -2,7 +2,7 @@ import * as interfaces from '../interfaces';
 const {v4: uuidv4} = require('uuid');
 
 class Product implements interfaces.Product {
-  id: number;
+  id: string;
   name: string;
   quantity: number;
   price: number;

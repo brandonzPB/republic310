@@ -33,13 +33,16 @@ function globalReducer(state: interfaces.State, action: ActionType): interfaces.
       return state;
 
     case 'add_to_cart':
-      state.cart = state.cart.addProduct(action.payload);
+      state.cart.products = [...state.cart.products, action.payload];
+      state.cart.subtotal = state.cart.calculateSubtotal(state.cart.products);
       return state;
 
     case 'remove_from_cart':
+      state.cart.products = state.cart.products.filter(product => product.id !== action.payload);
       return state;
 
     case 'checkout':
+      state.cart = state.cart.checkout(action.payload);
       return state;
 
     default:
