@@ -4,6 +4,7 @@ import * as interfaces from '../modules/interfaces'
 import * as actions from '../modules/actions';
 import Cart from '../modules/classes/cart';
 import User from '../modules/classes/user';
+import Product from '../modules/classes/product';
 
 const initialState: interfaces.State = {
   user: new User(),
@@ -16,11 +17,11 @@ const initialState: interfaces.State = {
   login: (user: object): any => {},
   logout: (): void => {},
   updateUser: (update: object): any => {},
-  updateShipping: (): any => {},
-  addToCart: (product: object): void => {},
-  removeFromCart: (product: object): void => {},
-  checkout: (cart: object): void => {},
-  getOrders: (): void => {}
+  updateShippingAddress: (address: interfaces.Address): any => {},
+  getOrders: (): any => {},
+  addToCart: (product: any): void => {},
+  removeFromCart: (product: any): void => {},
+  checkout: (cart: any): void => {},
 };
 
 export const GlobalContext = createContext<interfaces.State>(initialState);
@@ -113,22 +114,52 @@ const GlobalContextProvider: React.FC = ({ children }) => {
     const accessToken: string = state.user.accessToken!;
 
     const updateResult: any = await actions.updateUser(user, userId, accessToken);
+
+    if (updateResult === 'Error') return 'Error';
+
+    dispatch({ type: 'update_user', payload: user });
   }
 
   // UPDATE SHIPPING DETAILS
-  const updateShipping = async (): Promise<any> => {}
+  const updateShippingAddress = async (address: interfaces.Address): Promise<any> => {
+    const userId: string = state.user._id!;
+    const accessToken: string = state.user.accessToken!;
+
+    const user: object = { shippingAddress: address };
+
+    const updateResult: any = await actions.updateShipping(user, userId, accessToken);
+
+    if (updateResult === 'Error') return 'Error';
+
+    dispatch({ type: 'update_shipping', payload: address });
+  }
+
+  // GET ORDER HISTORY
+  const getOrders = async (): Promise<any> => {
+    const userId: string = state.user._id!;
+    const accessToken: string = state.user.accessToken!;
+
+    const axiosResult: any = await actions.getOrders(userId, accessToken);
+
+    if (axiosResult === 'Error') return 'Error';
+
+    dispatch({ type: 'get_orders', payload: axiosResult.orders });
+  }
 
   // ADD PRODUCT TO CART
-  const addToCart = (product: object): void => {}
+  const addToCart = (product: any): void => {
+    const newProduct: interfaces.Product = new Product(product.name, product.quantity, product.price, product.isTaxed);
+
+    // create new cart
+
+    // dispatch({ type: 'add_to_cart', payload: newCart });
+  }
 
   // REMOVE PRODUCT FROM CART
   const removeFromCart = (product: object): void => {}
 
   // CHECKOUT CART
   const checkout = (cart: object): void => {}
-
-  // GET ORDER HISTORY
-  const getOrders = (): void => {}
 
   // I've found that doing the following allows for the functions
   // defined within GlobalContextProvider to be consumed globally.
@@ -141,11 +172,11 @@ const GlobalContextProvider: React.FC = ({ children }) => {
   initialState.login = login;
   initialState.logout = logout;
   initialState.updateUser = updateUser;
-  initialState.updateShipping = updateShipping;
+  initialState.updateShippingAddress = updateShippingAddress;
+  initialState.getOrders = getOrders;
   initialState.addToCart = addToCart;
   initialState.removeFromCart = removeFromCart;
   initialState.checkout = checkout;
-  initialState.getOrders = getOrders;
 
   return (
     <GlobalContext.Provider value={state}>

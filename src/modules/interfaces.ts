@@ -58,9 +58,9 @@ export interface State {
   login: (user: object) => any;
   logout: () => void;
   updateUser: (update: object) => any;
-  updateShipping: () => any;
-  addToCart: (product: object) => void;
-  removeFromCart: (product: object) => void;
-  checkout: (cart: object) => void;
-  getOrders: () => void;
+  updateShippingAddress: (address: Address) => any;
+  getOrders: () => any;
+  addToCart: (product: any) => void;
+  removeFromCart: (product: any) => void;
+  checkout: (cart: any) => void;
 };

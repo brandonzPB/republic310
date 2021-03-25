@@ -9,12 +9,12 @@ export type ActionType =
   | { type: 'get_reset_token',  payload: string             }
   | { type: 'login',            payload: interfaces.User    }
   | { type: 'logout',           payload: interfaces.State   }
-  | { type: 'add_to_cart',      payload: interfaces.Product }
-  | { type: 'remove_from_cart', payload: interfaces.Product }
-  | { type: 'checkout',         payload: interfaces.Cart    }
-  | { type: 'update_user',      payload: interfaces.User    }
+  | { type: 'update_user',      payload: any                }
   | { type: 'update_shipping',  payload: interfaces.Address }
   | { type: 'get_orders',       payload: interfaces.Cart[]  }
+  | { type: 'add_to_cart',      payload: interfaces.Cart    }
+  | { type: 'remove_from_cart', payload: interfaces.Cart    }
+  | { type: 'checkout',         payload: interfaces.Cart    }
 
 export const createUser = async (user: object): Promise<any> => {
   const createResult: any = await userService.createUser(user);
@@ -64,14 +64,30 @@ export const login = async (credentials: object): Promise<any> => {
 
 export const updateUser = async (user: object, userId: string, token: string): Promise<any> => {
   const updateResult: any = await userService.updateUserDetails(user, userId, token);
+
+  if (!updateResult || updateResult.result !== 'Success') return 'Error';
+
+  return 'Success';
 }
 
-export const updateShipping = (): any => {}
+export const updateShipping = async (user: object, userId: string, token: string): Promise<any> => {
+  const updateResult: any = await userService.updateUserShippingDetails(user, userId, token);
+
+  if (!updateResult || updateResult.result !== 'Success') return 'Error';
+
+  return 'Success';
+}
+
+export const getOrders = async (userId: string, token: string): Promise<any> => {
+  const axiosResult: any = await userService.getOrderHistory(userId, token);
+
+  if (!axiosResult || axiosResult.result !== 'Success') return 'Error';
+
+  return axiosResult;
+}
 
 export const addToCart = (): any => {}
 
 export const removeFromCart = (): any => {}
 
 export const checkout = (): any => {}
-
-export const getOrders = (): any => {}
