@@ -16,12 +16,12 @@ export type ActionType =
   | { type: 'remove_from_cart', payload: string             }
   | { type: 'checkout',         payload: Date               }
 
-export const checkEmail = async (email: string): Promise<any> => {
+export const emailIsAvailable = async (email: string): Promise<any> => {
   const emailObj = { email };
 
   const emailResult: any = await userService.checkEmail(emailObj);
 
-  if (!emailResult || emailResult.result !== 'Success') return false;
+  if (!emailResult || emailResult.result === 'Error') return false;
 
   return true;
 }

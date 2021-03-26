@@ -29,7 +29,7 @@ const CreateUser: React.FC = () => {
   };
 
   const isAvailable = async (email: string): Promise<any> => {
-    return await actions.checkEmail(email);
+    return await actions.emailIsAvailable(email);
   }
 
   return (

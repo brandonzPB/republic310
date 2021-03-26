@@ -1,4 +1,5 @@
-import React, { useEffect, useReducer, createContext } from 'react';
+import React, { useEffect, useReducer, useCallback, createContext } from 'react';
+import { useLocalStorage } from 'react-use';
 import globalReducer from '../reducers/globalReducer';
 import * as interfaces from '../modules/interfaces'
 import * as actions from '../modules/actions';
@@ -25,10 +26,29 @@ const initialState: interfaces.State = {
   checkout: (): void => {},
 };
 
+const LOCAL_STORAGE_KEY: string = 'my-state';
+
 export const GlobalContext = createContext<interfaces.State>(initialState);
 
 const GlobalContextProvider: React.FC = ({ children }) => {
-  const [state, dispatch] = useReducer(globalReducer, initialState);
+  const usePersistReducer = (): any => {
+    const [savedState, saveState] = useLocalStorage(LOCAL_STORAGE_KEY, initialState);
+
+    const reducerLocalStorage = useCallback(
+      (state, action) => {
+        const newState: any = globalReducer(state, action);
+
+        saveState(newState);
+
+        return newState;
+      },
+      [saveState],
+    )
+
+    return useReducer(reducerLocalStorage, savedState);
+  }
+
+  const [state, dispatch] = usePersistReducer();
   
   useEffect(() => {
     console.log(`state`, state);
@@ -91,6 +111,8 @@ const GlobalContextProvider: React.FC = ({ children }) => {
     const authorizedUser = createUserState(loginResult);
 
     dispatch({ type: 'login', payload: authorizedUser });
+
+    return 'Success';
   }
 
   // LOGOUT
