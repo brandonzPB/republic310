@@ -69,3 +69,8 @@ export interface State {
   removeFromCart: (productId: string) => void;
   checkout: () => void;
 };
+
+export interface Path {
+  dest: string;
+  changeDest: (dest: string) => void;
+}

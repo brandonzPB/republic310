@@ -4,15 +4,18 @@ import { RouteContext } from '../../../contexts/RouteContext';
 
 const Body: React.FC = () => {
   const { changeDest } = useContext(RouteContext);
-
+  const { login } = useContext(GlobalContext);
   /*
-    What's hot
     top 3 products
-    view all products
   */
 
+  console.log(useContext(RouteContext).changeDest);
+  console.log(useContext(RouteContext).dest);
+
   const viewProducts = (): void => {
-    changeDest('products');
+    // changeDest('products');
+    const test: any = login
+    console.log(test);
   }
   
   return (

@@ -102,6 +102,8 @@ const NavBar: React.FC  = () => {
           </form>
         </div>
       </div>
+
+      <div id="nav-cart__container"></div>"
     </div>
   )
 }

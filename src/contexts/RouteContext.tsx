@@ -1,33 +1,31 @@
-import React, { useState, useEffect, createContext } from 'react';
+import React, { useState, useEffect, useCallback, createContext, useReducer } from 'react';
+import { useLocalStorage } from 'react-use';
+import * as interfaces from '../modules/interfaces';
+import { routeReducer } from '../reducers/routeReducer';
 
-interface Path {
-  dest: string;
-  changeDest: (dest: string) => void;
-}
-
-const initialPath: Path = {
-  dest: '',
+// INITIAL STATE
+const initialPath: interfaces.Path = {
+  dest: 'test',
   changeDest: (dest: string): void => {}
 };
 
-export const RouteContext = createContext<Path>(initialPath);
+const LOCAL_STORAGE_KEY_PATH = 'my-path';
 
+export const RouteContext = createContext<interfaces.Path>(initialPath);
+
+// FUNCTIONAL COMPONENT
 const RouteContextProvider: React.FC = ({ children }) => {
-  const [path, setPath] = useState(() => {
-    const storedPath: any = localStorage.getItem('my-path');
+  const [path, dispatch] = useReducer(routeReducer, initialPath, () => {
+    const storedPath = localStorage.getItem(LOCAL_STORAGE_KEY_PATH);
     return storedPath ? JSON.parse(storedPath) : initialPath;
   });
 
   useEffect(() => {
-    console.log('path', path);
-    localStorage.setItem('my-path', JSON.stringify(path));
+    localStorage.setItem(LOCAL_STORAGE_KEY_PATH, JSON.stringify(path));
   }, [path]);
 
   const changeDest = (dest: string): void => {
-    setPath({
-      ...path,
-      dest: dest
-    });
+    dispatch({ type: 'change_dest', payload: dest });
   }
 
   initialPath.changeDest = changeDest;
