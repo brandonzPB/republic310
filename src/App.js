@@ -15,7 +15,7 @@ function App() {
           <RouteContextProvider>
             <NavBar />
 
-            <Route exact path="/" component={CreateUser} />
+            <Route exact path="/" component={Index} />
             <Route exact path="/user/login" component={Login} />
             <Route exact path="/user/create" component={CreateUser} />
 
