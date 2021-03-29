@@ -1,5 +1,4 @@
-import React, { useEffect, useReducer, useCallback, createContext } from 'react';
-import { useLocalStorage } from 'react-use';
+import React, { useEffect, useReducer, createContext } from 'react';
 import globalReducer from '../reducers/globalReducer';
 import * as interfaces from '../modules/interfaces'
 import * as actions from '../modules/actions';
@@ -7,51 +6,43 @@ import Cart from '../modules/classes/cart';
 import User from '../modules/classes/user';
 import Product from '../modules/classes/product';
 
-const initialState: interfaces.State = {
-  user: new User(),
-  date: undefined,
-  cart: new Cart([]),
-  resetToken: '',
-  createUser: actions.createUser,
-  requestReset: (email: string): any => {},
-  postResetCode: (code: string): void => {},
-  resetPassword: (password: string): any => {},
-  login: (user: object): any => {},
-  logout: (): void => {},
-  updateUser: (update: object): any => {},
-  updateShippingAddress: (address: interfaces.Address): any => {},
-  getOrders: (): any => {},
-  addToCart: (product: any): void => {},
-  removeFromCart: (productId: string): void => {},
-  checkout: (): void => {},
-};
-
 const LOCAL_STORAGE_KEY: string = 'my-state';
+const storedState = localStorage.getItem(LOCAL_STORAGE_KEY);
+
+const initialState: interfaces.State = storedState
+  ? JSON.parse(storedState)
+  : {
+      user: new User(),
+      date: undefined,
+      cart: new Cart([]),
+      resetToken: '',
+      createUser: actions.createUser,
+      requestReset: (email: string): any => {},
+      postResetCode: (code: string): void => {},
+      resetPassword: (password: string): any => {},
+      login: (user: object): any => {},
+      logout: (): void => {},
+      updateUser: (update: object): any => {},
+      updateShippingAddress: (address: interfaces.Address): any => {},
+      getOrders: (): any => {},
+      addToCart: (product: any): void => {},
+      removeFromCart: (productId: string): void => {},
+      checkout: (): void => {},
+    };
 
 export const GlobalContext = createContext<interfaces.State>(initialState);
 
 const GlobalContextProvider: React.FC = ({ children }) => {
-  const usePersistReducer = (): any => {
-    const [savedState, saveState] = useLocalStorage(LOCAL_STORAGE_KEY, initialState);
-
-    const reducerLocalStorage = useCallback(
-      (state, action) => {
-        const newState: any = globalReducer(state, action);
-
-        saveState(newState);
-
-        return newState;
-      },
-      [saveState],
-    )
-
-    return useReducer(reducerLocalStorage, savedState);
-  }
-
-  const [state, dispatch] = usePersistReducer();
+  const [state, dispatch] = useReducer(globalReducer, initialState);
   
   useEffect(() => {
     console.log(`state`, state);
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(state));
+    
+    initialState.user = state.user;
+    initialState.cart = state.cart;
+    initialState.date = state.date;
+    initialState.resetToken = state.resetToken;
   }, [state]);
 
   // REQUEST RESET

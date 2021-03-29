@@ -1,7 +1,7 @@
 import * as interfaces from '../modules/interfaces';
 import { ActionType } from '../modules/actions';
 
-function globalReducer(state: interfaces.State, action: ActionType): interfaces.State {
+function globalReducer(state: interfaces.State, action: ActionType): typeof state {
   switch(action.type) {
     case 'get_reset_token':
       state.resetToken = action.payload;
