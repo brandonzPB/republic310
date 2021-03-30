@@ -1,8 +1,5 @@
-import React, { useState, useEffect, useCallback, createContext, useReducer } from 'react';
-import { useLocalStorage } from 'react-use';
+import React, { useState, useEffect, createContext, useReducer } from 'react';
 import * as interfaces from '../modules/interfaces';
-import * as hooks from '../modules/hooks';
-import * as types from '../modules/types';
 import { routeReducer } from '../reducers/routeReducer';
 
 // INITIAL STATE

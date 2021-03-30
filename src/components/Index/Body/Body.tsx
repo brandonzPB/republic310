@@ -2,11 +2,15 @@ import React, { useContext } from 'react';
 import { GlobalContext } from '../../../contexts/GlobalContext';
 import { RouteContext } from '../../../contexts/RouteContext';
 
+import './body.css';
+
 const Body: React.FC = () => {
   const { changeDest } = useContext(RouteContext);
   const { login } = useContext(GlobalContext);
   /*
-    top 3 products
+    the hollywood
+    the san andreas
+    the malibu
   */
 
   console.log(useContext(RouteContext).changeDest);

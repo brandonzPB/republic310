@@ -1,10 +1,21 @@
 import React from 'react';
 
-const Product: React.FC = () => {
-  /// THIS IS JUST THE DISPLAY/CARD COMPONENT OF A PRODUCT
+interface ProductProps {
+  name: string;
+  description: string;
+  price: number;
+  
+}
+
+const Product: React.FC = ({ product }) => {
+  /// THIS IS THE DISPLAY/CARD COMPONENT OF A PRODUCT
   
   return (
-    <div id="product__container"></div>
+    <div id="product__container">
+      <div id="product-name__container">
+        <span id="product-name">{product.name}</span>
+      </div>
+    </div>
   )
 }
 
