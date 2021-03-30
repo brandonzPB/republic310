@@ -1,5 +1,7 @@
 /// CART INTERFACES ///
 
+import { ShorthandPropertyAssignment } from "typescript";
+
 // product object is created when adding to cart
 export interface Product {
   id: string;
@@ -49,7 +51,7 @@ export interface User {
   updateOrderHistory: (history: Cart[]) => void;
 };
 
-/// STATE INTERFACE ///
+/// GLOBAL CONTEXT STATE ///
 
 export interface State {
   user: User;
@@ -70,7 +72,18 @@ export interface State {
   checkout: () => void;
 };
 
+/// PATH CONTEXT ///
+
 export interface Path {
   dest: string;
   changeDest: (dest: string) => void;
+}
+
+/// DISPLAY PRODUCT ///
+
+export interface DisplayProduct {
+  name: string;
+  price: number;
+  imageUrl: string;
+  alt: string;
 }

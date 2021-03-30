@@ -60,8 +60,6 @@ const NavBar: React.FC  = () => {
 
   const handleNav = (path: string): void => {
     changeDest(path);
-    console.log('Expected: ', path);
-    console.log('Actual: ', dest);
   }
 
   // DON'T HAVE AN ACCOUNT? YOU CAN EASILY CREATE ONE AT CHECKOUT
