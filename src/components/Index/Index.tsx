@@ -1,12 +1,19 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { RouteContext } from '../../contexts/RouteContext';
-import { GlobalContext } from '../../contexts/GlobalContext';
 import Header from './Header/Header';
 import Body from './Body/Body'
 
 const Index: React.FC = () => {
   const { dest, changeDest } = useContext(RouteContext);
+
+  if (dest === 'productDetails') {
+    return (
+      <Route exact path="/">
+        <Redirect to="/product/details" />
+      </Route>
+    )
+  }
 
   if (dest === 'products') {
     return (

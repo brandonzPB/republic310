@@ -91,5 +91,7 @@ export interface State {
 
 export interface Path {
   dest: string;
+  product: DisplayProduct;
   changeDest: (dest: string) => void;
+  changeProduct: (product: DisplayProduct) => void;
 }

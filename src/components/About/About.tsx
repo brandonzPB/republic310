@@ -5,6 +5,14 @@ import { RouteContext } from '../../contexts/RouteContext';
 const About: React.FC = () => {
   const { dest, changeDest } = useContext(RouteContext);
 
+  if (dest === 'productDetails') {
+    return (
+      <Route exact path="/about">
+        <Redirect to="/product/details" />
+      </Route>
+    )
+  }
+
   if (dest === 'home') {
     return (
       <Route exact path="/about">

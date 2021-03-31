@@ -12,11 +12,10 @@ import sanAndreasSrc from '../../../assets/images/products/the_san_andreas.jpg';
 
 const Body: React.FC = () => {
   const { changeDest } = useContext(RouteContext);
-  const { login } = useContext(GlobalContext);
 
   const viewProducts = (): void => {}
 
-  const ProductComponents: any = topProducts.map((product, index) => (
+  const ProductComponents: any = topProducts.map((product: any, index: number) => (
     <Product 
       name={product.name}
       price={product.price}

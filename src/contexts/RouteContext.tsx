@@ -10,7 +10,18 @@ const initialPath: interfaces.Path = storedPath
   ? JSON.parse(storedPath)
   : {
       dest: 'test',
-      changeDest: (dest: string): void => {}
+      product: {
+        name: '',
+        description: '',
+        price: 0,
+        id: 0,
+        _id: 0,
+        stock: 0,
+        imageUrl: '',
+        alt: ''
+      },
+      changeDest: (dest: string): void => {},
+      changeProduct: (product: interfaces.DisplayProduct): void => {}
     };
 
 export const RouteContext = createContext<interfaces.Path>(initialPath);
@@ -28,7 +39,10 @@ const RouteContextProvider: React.FC = ({ children }) => {
     dispatch({ type: 'change_dest', payload: dest });
   }
 
+  const changeProduct = (product: interfaces.DisplayProduct): void => {}
+
   initialPath.changeDest = changeDest;
+  initialPath.changeProduct = changeProduct;
 
   return (
     <RouteContext.Provider value={path}>
