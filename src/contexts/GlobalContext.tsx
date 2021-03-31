@@ -2,11 +2,12 @@ import React, { useEffect, useReducer, createContext } from 'react';
 import globalReducer from '../reducers/globalReducer';
 import * as interfaces from '../modules/interfaces'
 import * as actions from '../modules/actions';
+import * as productServices from '../services/productServices';
 import Cart from '../modules/classes/cart';
 import User from '../modules/classes/user';
 import Product from '../modules/classes/product';
 
-const LOCAL_STORAGE_KEY: string = 'my-state';
+const LOCAL_STORAGE_KEY: string = 'republic-310-state';
 const storedState = localStorage.getItem(LOCAL_STORAGE_KEY);
 
 const initialState: interfaces.State = storedState
@@ -15,6 +16,7 @@ const initialState: interfaces.State = storedState
       user: new User(),
       date: undefined,
       cart: new Cart([]),
+      allProducts: undefined,
       resetToken: '',
       createUser: actions.createUser,
       requestReset: (email: string): any => {},
@@ -34,6 +36,20 @@ export const GlobalContext = createContext<interfaces.State>(initialState);
 
 const GlobalContextProvider: React.FC = ({ children }) => {
   const [state, dispatch] = useReducer(globalReducer, initialState);
+
+  useEffect(() => {
+    console.log('state', state);
+
+    if (state.allProducts !== undefined) return;
+
+    async function getAllProducts(): Promise<void> {
+      const allProducts: interfaces.DisplayProduct[] = await actions.getAllProducts();
+
+      dispatch({ type: 'get_all_products', payload: allProducts });
+    }
+
+    getAllProducts();
+  }, []);
   
   useEffect(() => {
     console.log(`state`, state);

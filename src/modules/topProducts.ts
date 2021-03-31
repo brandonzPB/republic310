@@ -1,6 +1,11 @@
-import * as interfaces from './interfaces';
+type TopProduct = {
+  name: string;
+  price: number;
+  imageUrl: string;
+  alt: string;
+};
 
-export const topProducts: interfaces.DisplayProduct[] = [
+export const topProducts: TopProduct[] = [
   {
     name: 'The Hollywood',
     price: 0,

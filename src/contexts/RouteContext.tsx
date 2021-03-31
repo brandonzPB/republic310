@@ -3,7 +3,7 @@ import * as interfaces from '../modules/interfaces';
 import { routeReducer } from '../reducers/routeReducer';
 
 // INITIAL STATE
-const LOCAL_STORAGE_KEY_PATH = 'my-path';
+const LOCAL_STORAGE_KEY_PATH = 'republic-310-path';
 const storedPath = localStorage.getItem(LOCAL_STORAGE_KEY_PATH);
 
 const initialPath: interfaces.Path = storedPath

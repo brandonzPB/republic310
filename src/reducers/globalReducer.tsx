@@ -3,17 +3,26 @@ import { ActionType } from '../modules/actions';
 
 function globalReducer(state: interfaces.State, action: ActionType): typeof state {
   switch(action.type) {
+    case 'get_all_products':
+      state = {
+        ...state,
+        allProducts: action.payload
+      };
+      return state;
+
     case 'get_reset_token':
-      state.resetToken = action.payload;
+      state = {
+        ...state,
+        resetToken: action.payload
+      };
       return state;
 
     case 'login':
-      state.resetToken = '';
-      state.user = action.payload;
-      return state;
-
-    case 'logout':
-      state = action.payload;
+      state = {
+        ...state,
+        resetToken: '',
+        user: action.payload
+      };
       return state;
 
     case 'update_user':
@@ -43,6 +52,10 @@ function globalReducer(state: interfaces.State, action: ActionType): typeof stat
 
     case 'checkout':
       state.cart = state.cart.checkout(action.payload);
+      return state;
+
+    case 'logout':
+      state = action.payload;
       return state;
 
     default:

@@ -6,15 +6,41 @@ import * as userService from '../services/userServices';
 import * as productService from '../services/productServices';
 
 export type ActionType = 
-  | { type: 'get_reset_token',  payload: string             }
-  | { type: 'login',            payload: interfaces.User    }
-  | { type: 'logout',           payload: interfaces.State   }
-  | { type: 'update_user',      payload: any                }
-  | { type: 'update_shipping',  payload: interfaces.Address }
-  | { type: 'get_orders',       payload: interfaces.Cart[]  }
-  | { type: 'add_to_cart',      payload: interfaces.Product }
-  | { type: 'remove_from_cart', payload: string             }
-  | { type: 'checkout',         payload: Date               }
+  | { type: 'get_all_products', payload: interfaces.DisplayProduct[] }
+  | { type: 'get_reset_token',  payload: string                      }
+  | { type: 'login',            payload: interfaces.User             }
+  | { type: 'logout',           payload: interfaces.State            }
+  | { type: 'update_user',      payload: any                         }
+  | { type: 'update_shipping',  payload: interfaces.Address          }
+  | { type: 'get_orders',       payload: interfaces.Cart[]           }
+  | { type: 'add_to_cart',      payload: interfaces.Product          }
+  | { type: 'remove_from_cart', payload: string                      }
+  | { type: 'checkout',         payload: Date                        }
+
+const getProductDetailArray = (products: any): any => {
+  const productArray: interfaces.DisplayProduct[] = products.map((product: any) => {
+    return {
+      name: product.name,
+      description: product.description,
+      price: product.price,
+      stock: product.stock,
+      id: product.id,
+      _id: product._id,
+    }
+  });
+
+  return productArray;
+}
+
+export const getAllProducts = async (): Promise<any> => {
+  const axiosResult: any = await productService.getAllProducts();
+
+  if (!axiosResult) { return 'Error' }
+
+  const productArray: interfaces.DisplayProduct[] = getProductDetailArray(axiosResult);
+
+  return productArray;
+}
 
 export const emailIsAvailable = async (email: string): Promise<any> => {
   const emailObj = { email };

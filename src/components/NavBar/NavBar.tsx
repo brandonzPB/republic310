@@ -1,5 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { useForm } from 'react-hook-form';
+import { RiShoppingCart2Line } from 'react-icons/ri';
+import { IconContext } from 'react-icons';
 import { GlobalContext } from '../../contexts/GlobalContext';
 import { RouteContext } from '../../contexts/RouteContext';
 import './navBar.css';
@@ -60,6 +62,8 @@ const NavBar: React.FC  = () => {
 
   const handleNav = (path: string): void => {
     changeDest(path);
+    console.log('Expected: ', path);
+    console.log('Actual: ', dest);
   }
 
   // DON'T HAVE AN ACCOUNT? YOU CAN EASILY CREATE ONE AT CHECKOUT
@@ -103,7 +107,14 @@ const NavBar: React.FC  = () => {
         </div>
       </div>
 
-      <div id="nav-cart__container"></div>"
+      <IconContext.Provider value={{ style: { fontSize: '2.5rem', backgroundColor: '#ef3b24', textDecoration: 'none' }}}>
+        <div id="nav-cart__container">
+          <div id="cart-qty__container">
+            <span id="cart-qty">0</span>
+          </div>
+          <RiShoppingCart2Line />
+        </div>
+      </IconContext.Provider>
     </div>
   )
 }

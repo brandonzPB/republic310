@@ -23,6 +23,20 @@ export interface Cart {
   checkout: (date: Date) => any;
 };
 
+/// DISPLAY PRODUCT ///
+
+// this is used for display purposes only
+export interface DisplayProduct {
+  name: string;
+  price: number;
+  id: number;
+  _id: number;
+  description: string;
+  stock: number;
+  imageUrl: string;
+  alt?: string;
+}
+
 /// USER INTERFACES ///
 
 export interface Address {
@@ -57,6 +71,7 @@ export interface State {
   user: User;
   date?: Date;
   cart: Cart;
+  allProducts?: DisplayProduct[];
   resetToken: string;
   createUser: (user: object) => any;
   requestReset: (email: string) => any;
@@ -77,13 +92,4 @@ export interface State {
 export interface Path {
   dest: string;
   changeDest: (dest: string) => void;
-}
-
-/// DISPLAY PRODUCT ///
-
-export interface DisplayProduct {
-  name: string;
-  price: number;
-  imageUrl: string;
-  alt: string;
 }

@@ -9,7 +9,9 @@
 
 #product-img__container {}
 
-#product-img {}
+#product-img {
+  width: 25%;
+}
 
 #product-price__container {}
 

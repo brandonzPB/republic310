@@ -34,3 +34,21 @@
   margin: 0 auto;
   z-index: 2;
 }
+
+#login__container {}
+
+#login-form__container {}
+
+#close-login-btn {}
+
+.login-input {}
+
+#email-login-input {}
+
+#password-login-input {}
+
+#nav-cart__container {}
+
+#cart-qty-container {}
+
+#cart-qty {}

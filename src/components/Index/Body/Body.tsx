@@ -28,7 +28,7 @@ const Body: React.FC = () => {
       alt={product.alt}
       key={index}
     />
-  ))
+  ));
   
   return (
     <div id="body__container">

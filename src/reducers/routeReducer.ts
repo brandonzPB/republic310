@@ -7,6 +7,7 @@ export const routeReducer = (state: interfaces.Path, action: Action): typeof sta
     case 'change_dest':
       state = { ...state, dest: action.payload };
       return state;
+      
     default:
       return state;
   }

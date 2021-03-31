@@ -8,6 +8,8 @@ import Index from './components/Index/Index';
 
 import AllProducts from './components/Products/AllProducts';
 import ProductDetails from './components/Products/ProductDetails';
+import About from './components/About/About';
+import Contact from './components/Contact/Contact';
 
 import CreateUser from './components/User/Create/CreateUser';
 import Footer from './components/Footer/Footer';
@@ -21,9 +23,10 @@ function App() {
             <NavBar />
 
             <Route exact path="/" component={Index} />
-            <Route exact path="/user/create" component={CreateUser} />
             <Route exact path="/products" component={AllProducts} />
             <Route exact path="/product/details" components={ProductDetails} />
+            <Route exact path="/about" component={About} />
+            <Route exact path="/contact" component={Contact} />
 
             <Footer />
           </RouteContextProvider>

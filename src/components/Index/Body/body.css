@@ -1,6 +1,11 @@
-#body__container {}
+#body__container {
+  display: block;
+  width: 100%;
+}
 
-#hot-products__container {}
+#hot-products__container {
+  width: 85%;
+}
 
 #hot-text {
   color: black;
