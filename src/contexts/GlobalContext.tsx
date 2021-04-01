@@ -16,7 +16,7 @@ const initialState: interfaces.State = storedState
       user: new User(),
       date: undefined,
       cart: new Cart([]),
-      allProducts: undefined,
+      allProducts: [],
       resetToken: '',
       createUser: actions.createUser,
       requestReset: (email: string): any => {},
@@ -27,7 +27,8 @@ const initialState: interfaces.State = storedState
       updateUser: (update: object): any => {},
       updateShippingAddress: (address: interfaces.Address): any => {},
       getOrders: (): any => {},
-      addToCart: (product: any): void => {},
+      addToCart: (product: any): any => {},
+      increaseQuantity: (productId: string, newQuantity: number): void => {},
       removeFromCart: (productId: string): void => {},
       checkout: (): void => {},
     };
@@ -40,7 +41,7 @@ const GlobalContextProvider: React.FC = ({ children }) => {
   useEffect(() => {
     console.log('state', state);
 
-    if (state.allProducts !== undefined) return;
+    if (state.allProducts.length) return;
 
     async function getAllProducts(): Promise<void> {
       const allProducts: interfaces.DisplayProduct[] = await actions.getAllProducts();
@@ -177,11 +178,20 @@ const GlobalContextProvider: React.FC = ({ children }) => {
   }
 
   // ADD PRODUCT TO CART
-  const addToCart = (product: any): void => {
-    const newProduct: interfaces.Product = new Product(product.name, product.quantity, product.price);
+  const addToCart = (product: any): any => {
+    const productInCart: boolean = state.cart.isProductInCart(product.id);
 
-    dispatch({ type: 'add_to_cart', payload: newProduct });
+    if (productInCart) {
+      return dispatch({ type: 'increment_product_quantity', payload: product.id });
+    }
+
+    const newProduct: interfaces.Product = new Product(product.name, 1, product.price);
+
+    return dispatch({ type: 'add_to_cart', payload: newProduct });
   }
+
+  // INCREASE QUANTITY OF A PRODUCT IN CART
+  const increaseQuantity = (productId: string, newQuantity: number): void => {}
 
   // REMOVE PRODUCT FROM CART
   const removeFromCart = (productId: string): void => {
@@ -209,6 +219,7 @@ const GlobalContextProvider: React.FC = ({ children }) => {
   initialState.updateShippingAddress = updateShippingAddress;
   initialState.getOrders = getOrders;
   initialState.addToCart = addToCart;
+  initialState.increaseQuantity = increaseQuantity;
   initialState.removeFromCart = removeFromCart;
   initialState.checkout = checkout;
 

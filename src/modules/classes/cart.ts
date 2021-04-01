@@ -7,11 +7,14 @@ class Cart implements interfaces.Cart {
   subtotal?: number;
   taxes?: number;
   total?: number;
+  length: number;
   addProduct: (product: interfaces.Product) => any;
   calculateSubtotal: (products: interfaces.Product[]) => any;
   calculateTaxTotal: (products: interfaces.Product[]) => any;
   calculateTotal: (products: interfaces.Product[]) => any;
   checkout: (date: Date) => any;
+  isProductInCart: (productId: string) => any;
+  updateProductQuantity: (productId: string, newQuantity: number) => void;
   
   constructor(products: interfaces.Product[]) {
     this.calculateSubtotal = function(products: interfaces.Product[]): any {
@@ -22,12 +25,37 @@ class Cart implements interfaces.Cart {
     }
 
     this.products = products;
+    this.length = products.length;
     this.subtotal = this.calculateSubtotal(this.products);
 
     this.addProduct = function(product: interfaces.Product): any {
       this.products = [...this.products, product];
+      this.length += 1;
       
       this.subtotal = this.calculateSubtotal(this.products);
+    }
+
+    this.isProductInCart = function(productId: string): any {
+      return this.products.findIndex((item: any) => item.id === productId) > -1;
+    }
+
+    this.updateProductQuantity = function(productId: string, newQuantity: number): void {
+      let prevQuantity: number = 1;
+
+      this.products = this.products.map((product: interfaces.Product) => {
+        if (product.id === productId) {
+          prevQuantity = product.quantity;
+
+          return {
+            ...product,
+            quantity: newQuantity
+          }
+        }
+
+        return product;
+      });
+
+      this.length = this.length - prevQuantity + newQuantity;
     }
 
     this.calculateTaxTotal = function(products: interfaces.Product[]): any {

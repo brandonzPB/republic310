@@ -5,20 +5,34 @@ import * as interfaces from '../../modules/interfaces';
 import * as types from '../../modules/types';
 import './product.css';
 
+/// THIS IS THE DISPLAY/CARD COMPONENT OF A PRODUCT ///
+
 const Product: React.FC<types.DisplayProduct> = ({ name, price, imageUrl, alt }: types.DisplayProduct) => {
-  const { allProducts } = useContext(GlobalContext);
+  const { allProducts, addToCart } = useContext(GlobalContext);
 
   const { changeDest, changeProduct } = useContext(RouteContext);
 
-  /// THIS IS THE DISPLAY/CARD COMPONENT OF A PRODUCT
-
-  const addProductToCart = (e: React.SyntheticEvent): void => {}
-
-  const handleNav = (productName: string): void => {
-    if (allProducts === undefined) return;
-
+  const getProductDetails = (productName: string): any => {
     const productDetails: interfaces.DisplayProduct = allProducts
       .find((product: interfaces.DisplayProduct) => product.name === productName)!;
+
+    return productDetails;
+  }
+
+  const handleAddToCart = (productName: string): void => {
+    const productDetails: interfaces.DisplayProduct = getProductDetails(productName);
+
+    const productObj = {
+      name: productDetails.name,
+      id: productDetails.id,
+      price: productDetails.price
+    };
+
+    addToCart(productObj);
+  }
+
+  const handleNav = (productName: string): void => {
+    const productDetails: interfaces.DisplayProduct = getProductDetails(productName);
 
     changeProduct(productDetails);
 
@@ -26,12 +40,12 @@ const Product: React.FC<types.DisplayProduct> = ({ name, price, imageUrl, alt }:
   }
   
   return (
-    <div id="product__container" onClick={() => handleNav(name)}>
+    <div id="product__container">
       <div id="product-name__container">
         <span id="product-name">{name}</span>
       </div>
 
-      <div id="product-img__container">
+      <div id="product-img__container" onClick={() => handleNav(name)}>
         <img id="product-img" src={imageUrl} alt={alt} />
       </div>
 
@@ -40,7 +54,7 @@ const Product: React.FC<types.DisplayProduct> = ({ name, price, imageUrl, alt }:
       </div>
 
       <div id="add-btn__container">
-        <button id="add-to-cart-btn" onClick={addProductToCart}>Add to Cart</button>
+        <button id="add-to-cart-btn" onClick={() => handleAddToCart(name)}>Add to Cart</button>
       </div>
 
       <div id="view-details-btn__container">
