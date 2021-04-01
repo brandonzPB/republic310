@@ -22,9 +22,8 @@ const Product: React.FC<types.DisplayProduct> = ({ name, price, imageUrl, alt }:
   const handleAddToCart = (productName: string): void => {
     const productDetails: interfaces.DisplayProduct = getProductDetails(productName);
 
-    const productObj = {
+    const productObj: object = {
       name: productDetails.name,
-      id: productDetails.id,
       price: productDetails.price
     };
 

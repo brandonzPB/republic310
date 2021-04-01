@@ -42,8 +42,37 @@ function globalReducer(state: interfaces.State, action: ActionType): typeof stat
       return state;
 
     case 'add_to_cart':
-      state.cart.products = [...state.cart.products, action.payload];
-      state.cart.subtotal = state.cart.calculateSubtotal(state.cart.products);
+      state = {
+        ...state,
+        cart: {
+          ...state.cart,
+          products: [
+            ...state.cart.products,
+            action.payload
+          ],
+        }
+      };
+      return state;
+
+    case 'increment_product_quantity':
+      state = {
+        ...state,
+        cart: {
+          ...state.cart,
+          products: [
+            ...state.cart.products.map((product: interfaces.Product) => {
+              if (product.name === action.payload) {
+                return {
+                  ...product,
+                  quantity: product.quantity + 1
+                }
+              }
+
+              return product;
+            })
+          ],
+        }
+      };
       return state;
 
     case 'remove_from_cart':

@@ -16,14 +16,10 @@ export interface Cart {
   subtotal?: number;
   taxes?: number;
   total?: number;
-  length: number;
-  addProduct: (product: Product) => any;
   calculateSubtotal: (products: Product[]) => any;
   calculateTaxTotal: (products: Product[]) => any;
   calculateTotal: (products: Product[]) => any;
   checkout: (date: Date) => any;
-  isProductInCart: (id: string) => any;
-  updateProductQuantity: (id: string, newQuantity: number) => void;
 };
 
 /// DISPLAY PRODUCT ///
@@ -32,8 +28,8 @@ export interface Cart {
 export interface DisplayProduct {
   name: string;
   price: number;
-  id: number;
-  _id: number;
+  id: string;
+  _id: string;
   description: string;
   stock: number;
   imageUrl: string;

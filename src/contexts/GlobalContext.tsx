@@ -10,28 +10,49 @@ import Product from '../modules/classes/product';
 const LOCAL_STORAGE_KEY: string = 'republic-310-state';
 const storedState = localStorage.getItem(LOCAL_STORAGE_KEY);
 
-const initialState: interfaces.State = storedState
-  ? JSON.parse(storedState)
-  : {
-      user: new User(),
-      date: undefined,
-      cart: new Cart([]),
-      allProducts: [],
-      resetToken: '',
-      createUser: actions.createUser,
-      requestReset: (email: string): any => {},
-      postResetCode: (code: string): void => {},
-      resetPassword: (password: string): any => {},
-      login: (user: object): any => {},
-      logout: (): void => {},
-      updateUser: (update: object): any => {},
-      updateShippingAddress: (address: interfaces.Address): any => {},
-      getOrders: (): any => {},
-      addToCart: (product: any): any => {},
-      increaseQuantity: (productId: string, newQuantity: number): void => {},
-      removeFromCart: (productId: string): void => {},
-      checkout: (): void => {},
-    };
+// const initialState: interfaces.State = storedState
+//   ? JSON.parse(storedState)
+//   : {
+//       user: new User(),
+//       date: undefined,
+//       cart: new Cart([]),
+//       allProducts: [],
+//       resetToken: '',
+//       createUser: actions.createUser,
+//       requestReset: (email: string): any => {},
+//       postResetCode: (code: string): void => {},
+//       resetPassword: (password: string): any => {},
+//       login: (user: object): any => {},
+//       logout: (): void => {},
+//       updateUser: (update: object): any => {},
+//       updateShippingAddress: (address: interfaces.Address): any => {},
+//       getOrders: (): any => {},
+//       addToCart: (product: any): any => {},
+//       increaseQuantity: (productId: string, newQuantity: number): void => {},
+//       removeFromCart: (productId: string): void => {},
+//       checkout: (): void => {},
+//     };
+
+const initialState: interfaces.State = {
+  user: new User(),
+  date: undefined,
+  cart: new Cart([]),
+  allProducts: [],
+  resetToken: '',
+  createUser: actions.createUser,
+  requestReset: (email: string): any => {},
+  postResetCode: (code: string): void => {},
+  resetPassword: (password: string): any => {},
+  login: (user: object): any => {},
+  logout: (): void => {},
+  updateUser: (update: object): any => {},
+  updateShippingAddress: (address: interfaces.Address): any => {},
+  getOrders: (): any => {},
+  addToCart: (product: any): any => {},
+  increaseQuantity: (productName: string, newQuantity: number): void => {},
+  removeFromCart: (productName: string): void => {},
+  checkout: (): void => {},
+};
 
 export const GlobalContext = createContext<interfaces.State>(initialState);
 
@@ -51,16 +72,20 @@ const GlobalContextProvider: React.FC = ({ children }) => {
 
     getAllProducts();
   }, []);
-  
+
   useEffect(() => {
-    console.log(`state`, state);
-    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(state));
-    
-    initialState.user = state.user;
-    initialState.cart = state.cart;
-    initialState.date = state.date;
-    initialState.resetToken = state.resetToken;
+    console.log('state', state);
   }, [state]);
+  
+  // useEffect(() => {
+  //   console.log(`state`, state);
+  //   localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(state));
+    
+  //   initialState.user = state.user;
+  //   initialState.cart = state.cart;
+  //   initialState.date = state.date;
+  //   initialState.resetToken = state.resetToken;
+  // }, [state]);
 
   // REQUEST RESET
   const requestReset = async (email: string): Promise<any> => {
@@ -177,12 +202,17 @@ const GlobalContextProvider: React.FC = ({ children }) => {
     dispatch({ type: 'get_orders', payload: axiosResult.orders });
   }
 
+  // CHECK IF PRODUCT EXISTS IN CART
+  const isProductInCart = (productName: string): any => {
+    console.log('cart', state.cart);
+  }
+
   // ADD PRODUCT TO CART
   const addToCart = (product: any): any => {
-    const productInCart: boolean = state.cart.isProductInCart(product.id);
+    const productInCart: boolean = isProductInCart(product.name);
 
     if (productInCart) {
-      return dispatch({ type: 'increment_product_quantity', payload: product.id });
+      return dispatch({ type: 'increment_product_quantity', payload: product.name });
     }
 
     const newProduct: interfaces.Product = new Product(product.name, 1, product.price);
@@ -191,11 +221,18 @@ const GlobalContextProvider: React.FC = ({ children }) => {
   }
 
   // INCREASE QUANTITY OF A PRODUCT IN CART
-  const increaseQuantity = (productId: string, newQuantity: number): void => {}
+  const increaseQuantity = (productName: string, newQuantity: number): void => {
+    const productObj: object = {
+      productName,
+      newQuantity
+    };
+
+    dispatch({ type: 'increase_product_quantity', payload: productObj });
+  }
 
   // REMOVE PRODUCT FROM CART
-  const removeFromCart = (productId: string): void => {
-    dispatch({ type: 'remove_from_cart', payload: productId });
+  const removeFromCart = (productName: string): void => {
+    dispatch({ type: 'remove_from_cart', payload: productName });
   }
 
   // CHECKOUT CART

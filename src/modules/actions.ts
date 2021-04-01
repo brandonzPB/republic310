@@ -15,7 +15,7 @@ export type ActionType =
   | { type: 'get_orders',                 payload: interfaces.Cart[]           }
   | { type: 'add_to_cart',                payload: interfaces.Product          }
   | { type: 'increment_product_quantity', payload: string                      }
-  | { type: 'increase_product_quantity',  payload: number                      }
+  | { type: 'increase_product_quantity',  payload: object                      }
   | { type: 'remove_from_cart',           payload: string                      }
   | { type: 'checkout',                   payload: Date                        }
 
