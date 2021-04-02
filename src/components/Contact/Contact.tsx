@@ -12,6 +12,7 @@ const Contact: React.FC = () => {
       </Route>
     )
   }
+
   if (dest === 'shipping') {
     return (
       <Route exact path="/contact">
@@ -19,6 +20,7 @@ const Contact: React.FC = () => {
       </Route>
     )
   }
+
   if (dest === 'payment') {
     return (
       <Route exact path="/contact">
@@ -26,6 +28,7 @@ const Contact: React.FC = () => {
       </Route>
     )
   }
+  
   if (dest === 'confirmation') {
     return (
       <Route exact path="/contact">

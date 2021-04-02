@@ -2,11 +2,11 @@ import * as interfaces from '../interfaces';
 
 class Cart implements interfaces.Cart {
   products: interfaces.Product[];
+  totalItemCount: number;
   date?: Date;
   subtotal?: number;
   taxes?: number;
   total?: number;
-  length: number;
   calculateSubtotal: (products: interfaces.Product[]) => any;
   calculateTaxTotal: (products: interfaces.Product[]) => any;
   calculateTotal: (products: interfaces.Product[]) => any;
@@ -20,8 +20,8 @@ class Cart implements interfaces.Cart {
       return subtotal;
     }
 
+    this.totalItemCount = 0;
     this.products = products;
-    this.length = products.length;
     this.subtotal = this.calculateSubtotal(this.products);
 
     this.calculateTaxTotal = function(products: interfaces.Product[]): any {

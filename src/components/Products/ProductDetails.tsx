@@ -1,11 +1,15 @@
-import React, { useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { RouteContext } from '../../contexts/RouteContext';
 
 const ProductDetails: React.FC = () => {
   const { dest, changeDest, product, changeProduct } = useContext(RouteContext);
 
-  if (!product.name.trim()) {
+  useEffect(() => {
+    console.log(product);
+  }, []);
+
+  if (product.price === 0) {
     changeDest('home');
 
     return (

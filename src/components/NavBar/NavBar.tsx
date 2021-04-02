@@ -110,7 +110,7 @@ const NavBar: React.FC  = () => {
       <IconContext.Provider value={{ style: { fontSize: '2.5rem', backgroundColor: '#ef3b24', textDecoration: 'none' }}}>
         <div id="nav-cart__container">
           <div id="cart-qty__container">
-            <span id="cart-qty">{cart.products.length}</span>
+            <span id="cart-qty">{cart.totalItemCount}</span>
           </div>
           <RiShoppingCart2Line />
         </div>

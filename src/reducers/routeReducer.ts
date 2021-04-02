@@ -7,12 +7,10 @@ type Action =
 export const routeReducer = (state: interfaces.Path, action: Action): typeof state => {
   switch(action.type) {
     case 'change_dest':
-      state = { ...state, dest: action.payload };
-      return state;
+      return { ...state, dest: action.payload };
 
     case 'change_product':
-      state = { ...state, product: action.payload };
-      return state;
+      return { ...state, product: action.payload };
       
     default:
       return state;

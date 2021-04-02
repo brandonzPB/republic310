@@ -39,7 +39,9 @@ const RouteContextProvider: React.FC = ({ children }) => {
     dispatch({ type: 'change_dest', payload: dest });
   }
 
-  const changeProduct = (product: interfaces.DisplayProduct): void => {}
+  const changeProduct = (product: interfaces.DisplayProduct): void => {
+    dispatch({ type: 'change_product', payload: product });
+  }
 
   initialPath.changeDest = changeDest;
   initialPath.changeProduct = changeProduct;

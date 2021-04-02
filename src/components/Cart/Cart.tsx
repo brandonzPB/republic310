@@ -42,7 +42,7 @@ const Cart: React.FC = () => {
   if (dest === 'productDetails') {
     return (
       <Route exact path="/cart">
-        <Redirect to="/productDetails" />
+        <Redirect to="/product/details" />
       </Route>
     )
   }

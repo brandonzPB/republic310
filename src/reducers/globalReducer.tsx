@@ -4,26 +4,13 @@ import { ActionType } from '../modules/actions';
 function globalReducer(state: interfaces.State, action: ActionType): typeof state {
   switch(action.type) {
     case 'get_all_products':
-      state = {
-        ...state,
-        allProducts: action.payload
-      };
-      return state;
+      return { ...state, allProducts: action.payload };
 
     case 'get_reset_token':
-      state = {
-        ...state,
-        resetToken: action.payload
-      };
-      return state;
+      return { ...state, resetToken: action.payload };
 
     case 'login':
-      state = {
-        ...state,
-        resetToken: '',
-        user: action.payload
-      };
-      return state;
+      return { ...state, resetToken: '', user: action.payload };
 
     case 'update_user':
       state.user.firstName = action.payload.firstName;
@@ -42,30 +29,23 @@ function globalReducer(state: interfaces.State, action: ActionType): typeof stat
       return state;
 
     case 'add_to_cart':
-      state = {
+      return {
         ...state,
         cart: {
           ...state.cart,
-          products: [
-            ...state.cart.products,
-            action.payload
-          ],
+          products: [ ...state.cart.products, action.payload ],
         }
       };
-      return state;
 
-    case 'increment_product_quantity':
-      state = {
+    case 'update_product_quantity':
+      return {
         ...state,
         cart: {
           ...state.cart,
           products: [
             ...state.cart.products.map((product: interfaces.Product) => {
-              if (product.name === action.payload) {
-                return {
-                  ...product,
-                  quantity: product.quantity + 1
-                }
+              if (product.name === action.payload.productName) {
+                return { ...product, quantity: action.payload.newQuantity }
               }
 
               return product;
@@ -73,7 +53,15 @@ function globalReducer(state: interfaces.State, action: ActionType): typeof stat
           ],
         }
       };
-      return state;
+
+    case 'update_total_item_count':
+      return {
+        ...state,
+        cart: {
+          ...state.cart,
+          totalItemCount: action.payload
+        }
+      };
 
     case 'remove_from_cart':
       state.cart.products = state.cart.products.filter(product => product.id !== action.payload);

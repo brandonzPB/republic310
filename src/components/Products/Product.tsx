@@ -8,7 +8,7 @@ import './product.css';
 /// THIS IS THE DISPLAY/CARD COMPONENT OF A PRODUCT ///
 
 const Product: React.FC<types.DisplayProduct> = ({ name, price, imageUrl, alt }: types.DisplayProduct) => {
-  const { allProducts, addToCart } = useContext(GlobalContext);
+  const { allProducts, addToCart, updateQuantity, updateTotalItemCount, cart } = useContext(GlobalContext);
 
   const { changeDest, changeProduct } = useContext(RouteContext);
 
@@ -19,12 +19,32 @@ const Product: React.FC<types.DisplayProduct> = ({ name, price, imageUrl, alt }:
     return productDetails;
   }
 
-  const handleAddToCart = (productName: string): void => {
+  const isProductInCart = (productName: string): any => {
+    return cart.products.find((item: interfaces.Product) => item.name === productName);
+  }
+
+  const getCartItemTotal = (): any => {
+    return cart.products.reduce((count, item) => { return count + item.quantity }, 0);
+  }
+
+  const handleCartUpdate = (productName: string): any => {
+    const productInCart: interfaces.Product = isProductInCart(productName);
+
+    const cartItemTotal: number = getCartItemTotal();
+    updateTotalItemCount(cartItemTotal + 1);
+    
+    // product already exists in cart: increment quantity
+    if (productInCart) {
+      return updateQuantity(productInCart.name, productInCart.quantity + 1);
+    }
+
+    // product doesn't exist in cart:
+    // create new product object and add to cart
     const productDetails: interfaces.DisplayProduct = getProductDetails(productName);
 
-    const productObj: object = {
+    const productObj: any = {
       name: productDetails.name,
-      price: productDetails.price
+      price: productDetails.price,
     };
 
     addToCart(productObj);
@@ -53,7 +73,7 @@ const Product: React.FC<types.DisplayProduct> = ({ name, price, imageUrl, alt }:
       </div>
 
       <div id="add-btn__container">
-        <button id="add-to-cart-btn" onClick={() => handleAddToCart(name)}>Add to Cart</button>
+        <button id="add-to-cart-btn" onClick={() => handleCartUpdate(name)}>Add to Cart</button>
       </div>
 
       <div id="view-details-btn__container">

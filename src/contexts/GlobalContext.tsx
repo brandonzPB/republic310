@@ -28,7 +28,7 @@ const storedState = localStorage.getItem(LOCAL_STORAGE_KEY);
 //       updateShippingAddress: (address: interfaces.Address): any => {},
 //       getOrders: (): any => {},
 //       addToCart: (product: any): any => {},
-//       increaseQuantity: (productId: string, newQuantity: number): void => {},
+//       updateQuantity: (productId: string, newQuantity: number): void => {},
 //       removeFromCart: (productId: string): void => {},
 //       checkout: (): void => {},
 //     };
@@ -49,7 +49,8 @@ const initialState: interfaces.State = {
   updateShippingAddress: (address: interfaces.Address): any => {},
   getOrders: (): any => {},
   addToCart: (product: any): any => {},
-  increaseQuantity: (productName: string, newQuantity: number): void => {},
+  updateQuantity: (productName: string, newQuantity: number): void => {},
+  updateTotalItemCount: (newTotal: number): void => {},
   removeFromCart: (productName: string): void => {},
   checkout: (): void => {},
 };
@@ -59,6 +60,7 @@ export const GlobalContext = createContext<interfaces.State>(initialState);
 const GlobalContextProvider: React.FC = ({ children }) => {
   const [state, dispatch] = useReducer(globalReducer, initialState);
 
+  // GET ALL PRODUCTS FROM DATABASE (only on initial load)
   useEffect(() => {
     console.log('state', state);
 
@@ -73,6 +75,7 @@ const GlobalContextProvider: React.FC = ({ children }) => {
     getAllProducts();
   }, []);
 
+  // SHOW CHANGES TO STATE
   useEffect(() => {
     console.log('state', state);
   }, [state]);
@@ -202,32 +205,24 @@ const GlobalContextProvider: React.FC = ({ children }) => {
     dispatch({ type: 'get_orders', payload: axiosResult.orders });
   }
 
-  // CHECK IF PRODUCT EXISTS IN CART
-  const isProductInCart = (productName: string): any => {
-    console.log('cart', state.cart);
+  // UPDATE TOTAL ITEM COUNT (in cart)
+  const updateTotalItemCount = (newTotal: number): void => {
+    dispatch({ type: 'update_total_item_count', payload: newTotal });
   }
 
   // ADD PRODUCT TO CART
   const addToCart = (product: any): any => {
-    const productInCart: boolean = isProductInCart(product.name);
-
-    if (productInCart) {
-      return dispatch({ type: 'increment_product_quantity', payload: product.name });
-    }
-
     const newProduct: interfaces.Product = new Product(product.name, 1, product.price);
 
     return dispatch({ type: 'add_to_cart', payload: newProduct });
   }
 
   // INCREASE QUANTITY OF A PRODUCT IN CART
-  const increaseQuantity = (productName: string, newQuantity: number): void => {
-    const productObj: object = {
+  const updateQuantity = (productName: string, newQuantity: number): void => {
+    dispatch({ type: 'update_product_quantity', payload: {
       productName,
       newQuantity
-    };
-
-    dispatch({ type: 'increase_product_quantity', payload: productObj });
+    }});
   }
 
   // REMOVE PRODUCT FROM CART
@@ -243,9 +238,9 @@ const GlobalContextProvider: React.FC = ({ children }) => {
   }
 
   // I've found that doing the following allows for the functions
-  // defined within GlobalContextProvider to be consumed globally.
+  // defined within GlobalContextProvider to be consumed globally (and correctly).
   // I've yet to find a better way to go about this...
-  // (once I do, this will be changed and cleaned up)
+  // (once I do, the following area will be improved upon)
 
   initialState.requestReset = requestReset;
   initialState.postResetCode = postResetCode;
@@ -256,7 +251,8 @@ const GlobalContextProvider: React.FC = ({ children }) => {
   initialState.updateShippingAddress = updateShippingAddress;
   initialState.getOrders = getOrders;
   initialState.addToCart = addToCart;
-  initialState.increaseQuantity = increaseQuantity;
+  initialState.updateQuantity = updateQuantity;
+  initialState.updateTotalItemCount = updateTotalItemCount;
   initialState.removeFromCart = removeFromCart;
   initialState.checkout = checkout;
 

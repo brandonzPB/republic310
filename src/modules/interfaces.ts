@@ -12,6 +12,7 @@ export interface Product {
 
 export interface Cart {
   products: Product[];
+  totalItemCount: number;
   date?: Date;
   subtotal?: number;
   taxes?: number;
@@ -82,7 +83,8 @@ export interface State {
   updateShippingAddress: (address: Address) => any;
   getOrders: () => any;
   addToCart: (product: any) => void;
-  increaseQuantity: (productId: string, newQuantity: number) => void;
+  updateQuantity: (productId: string, newQuantity: number) => void;
+  updateTotalItemCount: (newTotal: number) => void;
   removeFromCart: (productId: string) => void;
   checkout: () => void;
 };
