@@ -1,10 +1,24 @@
 import React, { useContext } from 'react';
 import { Route, Redirect } from 'react-router-dom';
+import * as interfaces from '../../modules/interfaces';
 import { GlobalContext } from '../../contexts/GlobalContext';
 import { RouteContext } from '../../contexts/RouteContext';
+import ProductThumbnail from '../Products/ProductThumbnail';
 import './cart.css';
 
+import hollywoodSrc from '../../assets/images/products/the_hollywood.jpg';
+import malibuSrc from '../../assets/images/products/the_malibu.jpg';
+import sanAndreasSrc from '../../assets/images/products/the_san_andreas.jpg';
+import mudslideSrc from '../../assets/images/products/the_mudslide.jpg';
+import bruinSrc from '../../assets/images/products/the_bruins.jpg';
+import goldenGateSrc from '../../assets/images/products/the_golden_gate.jpg';
+import smogSrc from '../../assets/images/products/the_smog.png';
+import bearSrc from '../../assets/images/products/the_bear.jpg';
+import surferSrc from '../../assets/images/products/the_surfer.jpg';
+
 const Cart: React.FC = () => {
+  const { cart, allProducts } = useContext(GlobalContext);
+
   const { dest, changeDest, product } = useContext(RouteContext);
 
   if (dest === 'home') {
@@ -70,6 +84,31 @@ const Cart: React.FC = () => {
       </Route>
     )
   }
+
+  if (!allProducts || !cart.totalItemCount) {
+    return (
+      <div id="empty-cart__container"></div>
+    )
+  }
+
+  const ProductComponents: any = cart.products.map((item: any) => (
+    <ProductThumbnail 
+      key={item.id}
+      name={item.name}
+      imageUrl={
+        product.name === 'The Hollywood' ? hollywoodSrc
+          : product.name === 'The Malibu' ? malibuSrc
+          : product.name === 'The Surfer' ? surferSrc
+          : product.name === 'The Mudslide' ? mudslideSrc
+          : product.name === 'The Bruins' ? bruinSrc
+          : product.name === 'The San Andreas' ? sanAndreasSrc
+          : product.name === 'The Golden Gate' ? goldenGateSrc
+          : product.name === 'The Bear' ? bearSrc
+          : smogSrc
+      }
+      alt={allProducts ? allProducts.find((product: interfaces.DisplayProduct) => product.name === item.name).description : ''}
+    />
+  ))
   
   return (
     <div id="cart__container"></div>

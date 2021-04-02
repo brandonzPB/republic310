@@ -1,5 +1,6 @@
 import * as interfaces from '../modules/interfaces';
 import { ActionType } from '../modules/actions';
+import { convertTypeAcquisitionFromJson } from 'typescript';
 
 function globalReducer(state: interfaces.State, action: ActionType): typeof state {
   switch(action.type) {
@@ -43,6 +44,7 @@ function globalReducer(state: interfaces.State, action: ActionType): typeof stat
         cart: {
           ...state.cart,
           products: [
+            ...state.cart.products,
             ...state.cart.products.map((product: interfaces.Product) => {
               if (product.name === action.payload.productName) {
                 return { ...product, quantity: action.payload.newQuantity }
@@ -64,8 +66,16 @@ function globalReducer(state: interfaces.State, action: ActionType): typeof stat
       };
 
     case 'remove_from_cart':
-      state.cart.products = state.cart.products.filter(product => product.id !== action.payload);
-      return state;
+      return {
+        ...state,
+        cart: {
+          ...state.cart,
+          products: [
+            ...state.cart.products,
+            ...state.cart.products.filter((item: interfaces.Product) => item.name !== action.payload)
+          ]
+        }
+      };
 
     case 'checkout':
       state.cart = state.cart.checkout(action.payload);
