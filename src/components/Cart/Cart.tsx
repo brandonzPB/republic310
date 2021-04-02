@@ -47,7 +47,23 @@ const Cart: React.FC = () => {
     )
   }
 
-  if (dest === 'checkout') {
+  if (dest === 'payment') {
+    return (
+      <Route exact path="/cart">
+        <Redirect to="/checkout/payment" />
+      </Route>
+    )
+  }
+
+  if (dest === 'confirmation') {
+    return (
+      <Route exact path="/cart">
+        <Redirect to="/checkout/confirmation" />
+      </Route>
+    )
+  }
+
+  if (dest === 'shipping') {
     return (
       <Route exact path="/cart">
         <Redirect to="/checkout/shipping" />

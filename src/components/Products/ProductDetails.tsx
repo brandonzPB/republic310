@@ -15,6 +15,62 @@ const ProductDetails: React.FC = () => {
     )
   }
 
+  if (dest === 'cart') {
+    return (
+      <Route exact path="/product/details">
+        <Redirect to="/cart" />
+      </Route>
+    )
+  }
+
+  if (dest === 'shipping') {
+    return (
+      <Route exact path="/product/details">
+        <Redirect to="/checkout/shipping" />
+      </Route>
+    )
+  }
+
+  if (dest === 'payment') {
+    return (
+      <Route exact path="/product/details">
+        <Redirect to="/checkout/payment" />
+      </Route>
+    )
+  }
+
+  if (dest === 'confirmation') {
+    return (
+      <Route exact path="/product/details">
+        <Redirect to="/checkout/confirmation" />
+      </Route>
+    )
+  }
+
+  if (dest === 'contact') {
+    return (
+      <Route exact path="/product/details">
+        <Redirect to="/contact" />
+      </Route>
+    )
+  }
+
+  if (dest === 'about') {
+    return (
+      <Route exact path="/product/details">
+        <Redirect to="/about" />
+      </Route>
+    )
+  }
+
+  if (dest === 'products') {
+    return (
+      <Route exact path="/product/details">
+        <Redirect to="/products" />
+      </Route>
+    )
+  }
+
   if (dest === 'home') {
     return (
       <Route exact path="/product/details">

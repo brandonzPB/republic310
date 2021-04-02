@@ -29,6 +29,38 @@ const AllProducts: React.FC = () => {
     )
   }
 
+  if (dest === 'cart') {
+    return (
+      <Route exact path="/products">
+        <Redirect to="/cart" />
+      </Route>
+    )
+  }
+
+  if (dest === 'shipping') {
+    return (
+      <Route exact path="/products">
+        <Redirect to="/checkout/shipping" />
+      </Route>
+    )
+  }
+
+  if (dest === 'payment') {
+    return (
+      <Route exact path="/products">
+        <Redirect to="/checkout/payment" />
+      </Route>
+    )
+  }
+
+  if (dest === 'confirmation') {
+    return (
+      <Route exact path="/products">
+        <Redirect to="/checkout/confirmation" />
+      </Route>
+    )
+  }
+
   if (dest === 'productDetails') {
     return (
       <Route exact path="/products">
