@@ -1,6 +1,5 @@
 import * as interfaces from '../modules/interfaces';
 import { ActionType } from '../modules/actions';
-import { convertTypeAcquisitionFromJson } from 'typescript';
 
 function globalReducer(state: interfaces.State, action: ActionType): typeof state {
   switch(action.type) {
@@ -35,6 +34,7 @@ function globalReducer(state: interfaces.State, action: ActionType): typeof stat
         cart: {
           ...state.cart,
           products: [ ...state.cart.products, action.payload ],
+
         }
       };
 
@@ -44,7 +44,6 @@ function globalReducer(state: interfaces.State, action: ActionType): typeof stat
         cart: {
           ...state.cart,
           products: [
-            ...state.cart.products,
             ...state.cart.products.map((product: interfaces.Product) => {
               if (product.name === action.payload.productName) {
                 return { ...product, quantity: action.payload.newQuantity }

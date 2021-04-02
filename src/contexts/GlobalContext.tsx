@@ -221,7 +221,7 @@ const GlobalContextProvider: React.FC = ({ children }) => {
   const updateQuantity = (productName: string, newQuantity: number): void => {
     dispatch({ type: 'update_product_quantity', payload: {
       productName,
-      newQuantity
+      newQuantity,
     }});
   }
 

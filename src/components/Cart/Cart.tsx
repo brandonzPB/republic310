@@ -3,7 +3,7 @@ import { Route, Redirect } from 'react-router-dom';
 import * as interfaces from '../../modules/interfaces';
 import { GlobalContext } from '../../contexts/GlobalContext';
 import { RouteContext } from '../../contexts/RouteContext';
-import ProductThumbnail from '../Products/ProductThumbnail';
+import ProductCartDetails from '../Products/ProductCartDetails';
 import './cart.css';
 
 import hollywoodSrc from '../../assets/images/products/the_hollywood.jpg';
@@ -20,6 +20,26 @@ const Cart: React.FC = () => {
   const { cart, allProducts } = useContext(GlobalContext);
 
   const { dest, changeDest, product } = useContext(RouteContext);
+
+  if (cart.totalItemCount === 0 || cart.products.length === 0) {
+    changeDest('home');
+
+    return (
+      <Route exact path="/cart">
+        <Redirect to="/" />
+      </Route>
+    )
+  }
+
+  if (allProducts === undefined) {
+    changeDest('home');
+
+    return (
+      <Route exact path="/cart">
+        <Redirect to="/" />
+      </Route>
+    )
+  }
 
   if (dest === 'home') {
     return (
@@ -92,26 +112,32 @@ const Cart: React.FC = () => {
   }
 
   const ProductComponents: any = cart.products.map((item: any) => (
-    <ProductThumbnail 
+    <ProductCartDetails 
       key={item.id}
       name={item.name}
       imageUrl={
-        product.name === 'The Hollywood' ? hollywoodSrc
-          : product.name === 'The Malibu' ? malibuSrc
-          : product.name === 'The Surfer' ? surferSrc
-          : product.name === 'The Mudslide' ? mudslideSrc
-          : product.name === 'The Bruins' ? bruinSrc
-          : product.name === 'The San Andreas' ? sanAndreasSrc
-          : product.name === 'The Golden Gate' ? goldenGateSrc
-          : product.name === 'The Bear' ? bearSrc
+        item.name === 'The Hollywood' ? hollywoodSrc
+          : item.name === 'The Malibu' ? malibuSrc
+          : item.name === 'The Surfer' ? surferSrc
+          : item.name === 'The Mudslide' ? mudslideSrc
+          : item.name === 'The Bruins' ? bruinSrc
+          : item.name === 'The San Andreas' ? sanAndreasSrc
+          : item.name === 'The Golden Gate' ? goldenGateSrc
+          : item.name === 'The Bear' ? bearSrc
           : smogSrc
       }
-      alt={allProducts ? allProducts.find((product: interfaces.DisplayProduct) => product.name === item.name).description : ''}
+      price={item.price}
+      quantity={item.quantity}
+      alt={item.name}
     />
-  ))
+  ));
   
   return (
-    <div id="cart__container"></div>
+    <div id="cart__container">
+      <div id="cart-products__container">
+        {ProductComponents}
+      </div>
+    </div>
   )
 }
 

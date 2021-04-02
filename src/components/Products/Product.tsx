@@ -19,7 +19,7 @@ const Product: React.FC<types.DisplayProduct> = ({ name, price, imageUrl, alt }:
     return productDetails;
   }
 
-  const isProductInCart = (productName: string): any => {
+  const getProductInCart = (productName: string): any => {
     return cart.products.find((item: interfaces.Product) => item.name === productName);
   }
 
@@ -27,19 +27,26 @@ const Product: React.FC<types.DisplayProduct> = ({ name, price, imageUrl, alt }:
     return cart.products.reduce((count, item) => { return count + item.quantity }, 0);
   }
 
-  const handleCartUpdate = (productName: string): any => {
-    const productInCart: interfaces.Product = isProductInCart(productName);
-
+  const updateCartCount = (): any => {
     const cartItemTotal: number = getCartItemTotal();
     updateTotalItemCount(cartItemTotal + 1);
+  }
+
+  const handleCartUpdate = (productName: string): any => {
+    const productInCart: interfaces.Product = getProductInCart(productName);
+
+    updateCartCount();
     
     // product already exists in cart: increment quantity
     if (productInCart) {
+      console.log('product already in cart');
       return updateQuantity(productInCart.name, productInCart.quantity + 1);
     }
 
+    console.log('product not yet in cart');
+
     // product doesn't exist in cart:
-    // create new product object and add to cart
+    // add product to cart (new object to be created)
     const productDetails: interfaces.DisplayProduct = getProductDetails(productName);
 
     const productObj: any = {
