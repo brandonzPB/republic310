@@ -29,20 +29,24 @@ const NavBar: React.FC  = () => {
   // LOGIN FORM
   const { register, handleSubmit, errors } = useForm<UserForm>();
 
-  const showLoginFromText = (): void => {
+  // SHOW LOGIN FORM (triggered by clicking 'Login')
+  const showLoginForm = (): void => {
     if (loginForm) return;
 
     setLoginForm(!loginForm);
   }
 
-  const showLoginFromButton = (): void => {
+  // CLOSE LOGIN FORM (triggered by clicking 'Close' button)
+  const closeLoginForm = (): void => {
     if (!loginForm) return;
 
     setLoginForm(!loginForm);
   }
 
+  // SUBMIT LOGIN FORM
   const onSubmit = async (data: UserForm): Promise<void> => {}
 
+  // CHECK IF EMAIL IS AVAILABLE
   const isAvailable = async (email: string): Promise<any> => {
     const emailIsAvailable: any = actions.emailIsAvailable(email);
 
@@ -53,6 +57,7 @@ const NavBar: React.FC  = () => {
     return emailIsAvailable;
   }
 
+  // CHECK IF PASSWORD IS CORRECT
   const correctPassword = async (password: string): Promise<any> => {
     const credentials: object = {
       email: loginInput.email,
@@ -64,13 +69,12 @@ const NavBar: React.FC  = () => {
     return loginResult === 'Success';
   }
 
+  // HANDLE NAVBAR NAVIGATION
   const handleNav = (path: string): void => {
     if (path === 'cart' && cart.products.length === 0) return;
 
     changeDest(path);
   }
-
-  // DON'T HAVE AN ACCOUNT? YOU CAN EASILY CREATE ONE AT CHECKOUT
 
   return (
     <div id="nav__container">
@@ -83,11 +87,11 @@ const NavBar: React.FC  = () => {
       <h1 id ="nav-link-text" onClick={() => handleNav('contact')}>CONTACT US</h1>
 
       <div id="login__container" style={{ backgroundColor: 'transparent' }}>
-        <h1 id ="nav-link-text" onClick={showLoginFromText}>LOGIN</h1>
+        <h1 id ="nav-link-text" onClick={showLoginForm}>LOGIN</h1>
 
         <div id="login-form__container" style={{ display: loginForm ? 'block' : 'none' }}>
-          <span id="close-login-btn" onClick={showLoginFromButton}>Close</span>
-          
+          <span id="close-login-btn" onClick={closeLoginForm}>Close</span>
+
           <span id="no-account-text">Don't have account? No problem, you can easily create one at checkout!</span>
 
           <form onSubmit={handleSubmit(onSubmit)}>

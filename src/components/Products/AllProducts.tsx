@@ -1,5 +1,7 @@
-import React, { useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { Route, Redirect } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+
 import { GlobalContext } from '../../contexts/GlobalContext';
 import { RouteContext } from '../../contexts/RouteContext';
 import Product from './Product';
@@ -18,6 +20,16 @@ const AllProducts: React.FC = () => {
   const { allProducts } = useContext(GlobalContext);
 
   const { dest, changeDest } = useContext(RouteContext);
+
+  const [sort, setSort] = useState({ type: 'bestSelling' });
+
+  const { register, handleSubmit } = useForm();
+
+  const onSubmit = (data: any) => {
+    console.log(data);
+
+    // setSort({ ...sort, type: data });
+  }
 
   if (!allProducts || !allProducts.length) {
     changeDest('home');
@@ -93,7 +105,9 @@ const AllProducts: React.FC = () => {
     )
   }
 
-  const ProductComponents: any = allProducts.map((product: any, index: number) => (
+  let sortedProducts = allProducts;
+
+  let ProductComponents: any = allProducts.map((product: any, index: number) => (
     <Product 
       key={index}
       name={product.name}
@@ -115,7 +129,19 @@ const AllProducts: React.FC = () => {
 
   return (
     <div id="all-products__container">
-      {ProductComponents}
+      <div id="sort-form__container">
+        <form onSubmit={handleSubmit(onSubmit)}>
+
+          <select name="sort" id="sort-select" ref={register}>
+            <option value="bestSelling">Best Selling</option>
+            <option value="alphaAscend">A-Z (ascending alphabetical)</option>
+            <option value="alphaDescend">Z-A (descending alphabetical)</option>
+          </select>
+
+          <button id="update-sort-btn">Update List</button>
+
+        </form>
+      </div>
     </div>
   )
 }
