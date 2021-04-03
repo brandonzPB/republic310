@@ -70,7 +70,6 @@ function globalReducer(state: interfaces.State, action: ActionType): typeof stat
         cart: {
           ...state.cart,
           products: [
-            ...state.cart.products,
             ...state.cart.products.filter((item: interfaces.Product) => item.name !== action.payload)
           ]
         }

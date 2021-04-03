@@ -113,10 +113,6 @@ const AllProducts: React.FC = () => {
     />
   ));
 
-  const handleNav = (path: string): void => {
-    changeDest(path);
-  }
-
   return (
     <div id="all-products__container">
       {ProductComponents}

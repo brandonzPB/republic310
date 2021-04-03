@@ -10,8 +10,9 @@ import './product.css';
 const Product: React.FC<types.DisplayProduct> = ({ name, price, imageUrl, alt }: types.DisplayProduct) => {
   const { allProducts, addToCart, updateQuantity, updateTotalItemCount, cart } = useContext(GlobalContext);
 
-  const { changeDest, changeProduct } = useContext(RouteContext);
+  const { changeDest, changeProduct, product } = useContext(RouteContext);
 
+  // GET PRODUCT DETAILS (helper)
   const getProductDetails = (productName: string): any => {
     const productDetails: interfaces.DisplayProduct = allProducts
       .find((product: interfaces.DisplayProduct) => product.name === productName)!;
@@ -19,22 +20,28 @@ const Product: React.FC<types.DisplayProduct> = ({ name, price, imageUrl, alt }:
     return productDetails;
   }
 
+  // GET PRODUCT IN CART (helper)
   const getProductInCart = (productName: string): any => {
     return cart.products.find((item: interfaces.Product) => item.name === productName);
   }
 
+  // GET CART ITEM COUNT (helper)
   const getCartItemTotal = (): any => {
     return cart.products.reduce((count, item) => { return count + item.quantity }, 0);
   }
 
+  // UPDATE CART ITEM COUNT
   const updateCartCount = (): any => {
     const cartItemTotal: number = getCartItemTotal();
-    updateTotalItemCount(cartItemTotal + 1);
+    return updateTotalItemCount(cartItemTotal + 1);
   }
 
+  // HANDLE CART UPDATE
   const handleCartUpdate = (productName: string): any => {
+    // get product from cart (if it exists)
     const productInCart: interfaces.Product = getProductInCart(productName);
 
+    // increment cart item count
     updateCartCount();
     
     // product already exists in cart: increment quantity
@@ -54,13 +61,19 @@ const Product: React.FC<types.DisplayProduct> = ({ name, price, imageUrl, alt }:
       price: productDetails.price,
     };
 
-    addToCart(productObj);
+    return addToCart(productObj);
   }
 
+  // UPDATE PRODUCT (variable in RouteContext state)
+  const updateProductNav = (productDetails: interfaces.DisplayProduct): any => {
+    return changeProduct(productDetails);
+  }
+
+  // HANDLE PRODUCT NAVIGATION
   const handleNav = (productName: string): void => {
     const productDetails: interfaces.DisplayProduct = getProductDetails(productName);
 
-    changeProduct(productDetails);
+    updateProductNav(productDetails);
 
     changeDest('productDetails');
   }

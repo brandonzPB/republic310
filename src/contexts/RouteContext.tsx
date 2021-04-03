@@ -30,7 +30,11 @@ export const RouteContext = createContext<interfaces.Path>(initialPath);
 const RouteContextProvider: React.FC = ({ children }) => {
   const [path, dispatch] = useReducer(routeReducer, initialPath);
 
+  // CONSOLE LOG CHANGES TO STATE (path);
+  // UPDATE LOCAL STORAGE
   useEffect(() => {
+    console.log(path);
+
     localStorage.setItem(LOCAL_STORAGE_KEY_PATH, JSON.stringify(path));
     initialPath.dest = path.dest;
   }, [path]);

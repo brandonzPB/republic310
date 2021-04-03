@@ -31,7 +31,7 @@ function App() {
             <Route exact path="/contact" component={Contact} />
 
             <Route exact path="/products" component={AllProducts} />
-            <Route exact path="/product/details" components={ProductDetails} />
+            <Route exact path="/product/details" component={ProductDetails} />
 
             <Route exact path="/cart" component={Cart} />
             <Route exact path="/checkout/shipping" component={ShippingDetails} />

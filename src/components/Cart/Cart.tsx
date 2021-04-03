@@ -22,23 +22,11 @@ const Cart: React.FC = () => {
   const { dest, changeDest, product } = useContext(RouteContext);
 
   if (cart.totalItemCount === 0 || cart.products.length === 0) {
-    changeDest('home');
-
-    return (
-      <Route exact path="/cart">
-        <Redirect to="/" />
-      </Route>
-    )
+    setTimeout(() => { changeDest('home') }, 700);
   }
 
   if (allProducts === undefined) {
     changeDest('home');
-
-    return (
-      <Route exact path="/cart">
-        <Redirect to="/" />
-      </Route>
-    )
   }
 
   if (dest === 'home') {

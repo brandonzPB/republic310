@@ -14,12 +14,19 @@ interface UserForm {
 }
 
 const NavBar: React.FC  = () => {
-  const { dest, changeDest } = useContext(RouteContext);
+  // GLOBAL CONTEXT
   const { login, cart } = useContext(GlobalContext);
 
+  // ROUTE CONTEXT
+  const { dest, changeDest } = useContext(RouteContext);
+
+  // LOGIN FORM STATE (display purposes)
   const [loginForm, setLoginForm] = useState(false);
+
+  // EMAIL INPUT STATE (used to check if email exists in database)
   const [loginInput, setLoginInput] = useState({ email: '' });
 
+  // LOGIN FORM
   const { register, handleSubmit, errors } = useForm<UserForm>();
 
   const showLoginFromText = (): void => {
@@ -40,10 +47,7 @@ const NavBar: React.FC  = () => {
     const emailIsAvailable: any = actions.emailIsAvailable(email);
 
     if (emailIsAvailable) {
-      setLoginInput({
-        ...loginInput,
-        email
-      });
+      setLoginInput({ ...loginInput, email });
     }
 
     return emailIsAvailable;
@@ -61,9 +65,9 @@ const NavBar: React.FC  = () => {
   }
 
   const handleNav = (path: string): void => {
+    if (path === 'cart' && cart.products.length === 0) return;
+
     changeDest(path);
-    console.log('Expected: ', path);
-    console.log('Actual: ', dest);
   }
 
   // DON'T HAVE AN ACCOUNT? YOU CAN EASILY CREATE ONE AT CHECKOUT
@@ -83,6 +87,8 @@ const NavBar: React.FC  = () => {
 
         <div id="login-form__container" style={{ display: loginForm ? 'block' : 'none' }}>
           <span id="close-login-btn" onClick={showLoginFromButton}>Close</span>
+          
+          <span id="no-account-text">Don't have account? No problem, you can easily create one at checkout!</span>
 
           <form onSubmit={handleSubmit(onSubmit)}>
             <input 

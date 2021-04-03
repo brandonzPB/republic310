@@ -1,6 +1,8 @@
 import React, { useState, useContext } from 'react';
 import { GlobalContext } from '../../contexts/GlobalContext';
+import { RouteContext } from '../../contexts/RouteContext';
 import * as types from '../../modules/types';
+import * as interfaces from '../../modules/interfaces';
 
 type CartProduct = {
   name: string;
@@ -11,7 +13,9 @@ type CartProduct = {
 };
 
 const ProductCartDetails: React.FC<CartProduct> = ({ name, price, quantity, imageUrl, alt }: CartProduct) => {
-  const { cart, updateTotalItemCount, updateQuantity, removeFromCart } = useContext(GlobalContext);
+  const { cart, updateTotalItemCount, updateQuantity, removeFromCart, allProducts } = useContext(GlobalContext);
+
+  const { dest, changeDest, changeProduct } = useContext(RouteContext);
 
   const [qty, setQty] = useState({ amount: quantity });
 
@@ -49,6 +53,21 @@ const ProductCartDetails: React.FC<CartProduct> = ({ name, price, quantity, imag
     });
   }
 
+  const getProductDetails = (productName: string): any => {
+    const productDetails: interfaces.DisplayProduct = allProducts
+      .find((product: interfaces.DisplayProduct) => product.name === productName)!;
+
+    return productDetails;
+  }
+
+  const handleNav = () => {
+    const productDetails: interfaces.DisplayProduct = getProductDetails(name);
+    
+    changeProduct(productDetails);
+
+    changeDest('productDetails');
+  }
+
   return (
     <div id="product-thumbnail__container">
       <div id="product-thumbnail-name__container">
@@ -57,6 +76,8 @@ const ProductCartDetails: React.FC<CartProduct> = ({ name, price, quantity, imag
 
       <div id="product-thumbnail-image__container">
         <img src={imageUrl} alt={alt} id="product-thumbnail-image" />
+
+        <button id="product-thumbnail-view-btn" onClick={handleNav}>View Details</button>
       </div>
 
       <div id="product-thumbnail-price__container">
