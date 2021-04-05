@@ -18,6 +18,8 @@ export type ActionType =
   | { type: 'update_total_item_count',    payload: number                      }
   | { type: 'update_subtotal',            payload: number                      }
   | { type: 'remove_from_cart',           payload: string                      }
+  | { type: 'update_tax_total',           payload: number                      }
+  | { type: 'update_total_cost',          payload: number                      }
   | { type: 'checkout',                   payload: Date                        }
 
 const getProductDetailArray = (products: any): any => {

@@ -15,12 +15,11 @@ export interface Cart {
   totalItemCount: number;
   date?: Date;
   subtotal: number;
-  taxes?: number;
-  total?: number;
+  taxes: number;
+  total: number;
   calculateSubtotal: (products: Product[]) => any;
-  calculateTaxTotal: (products: Product[]) => any;
-  calculateTotal: (products: Product[]) => any;
-  checkout: (date: Date) => any;
+  calculateTaxTotal: () => any;
+  calculateTotal: () => any;
 };
 
 /// DISPLAY PRODUCT ///
@@ -57,11 +56,11 @@ export interface User {
   _id?: string;
   accessToken?: string;
   shippingAddress?: Address;
-  phoneNumber?: number;
+  phoneNumber?: string;
   orderHistory?: Cart[];
   initiateDetails: (inputs: any) => void;
   updateShippingAddress: (address: Address) => void;
-  updatePhoneNumber: (phoneNumber: number) => void;
+  updatePhoneNumber: (phoneNumber: string) => void;
   updateOrderHistory: (history: Cart[]) => void;
 };
 
@@ -87,6 +86,8 @@ export interface State {
   updateTotalItemCount: (newTotal: number) => void;
   updateSubtotal: (newSubtotal: number) => void;
   removeFromCart: (productId: string) => void;
+  updateTaxTotal: (newTotal: number) => void;
+  updateTotalCost: (newTotal: number) => void;
   checkout: () => void;
 };
 

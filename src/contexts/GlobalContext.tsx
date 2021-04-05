@@ -53,6 +53,8 @@ const initialState: interfaces.State = {
   updateTotalItemCount: (newTotal: number): void => {},
   updateSubtotal: (newSubtotal: number): void => {},
   removeFromCart: (productName: string): void => {},
+  updateTaxTotal: (newTotal: number): void => {},
+  updateTotalCost: (newTotal: number): void => {},
   checkout: (): void => {},
 };
 
@@ -115,7 +117,7 @@ const GlobalContextProvider: React.FC = ({ children }) => {
     return 'Success';
   }
 
-  // CREATE USER OBJECT (to be added to state)
+  // CREATE USER OBJECT (on login; to be added to state)
   const createUserState = (loginResult: any): any => {
     const authorizedUser: interfaces.User = new User();
 
@@ -131,7 +133,7 @@ const GlobalContextProvider: React.FC = ({ children }) => {
     authorizedUser.initiateDetails(details);
 
     const shippingAddress: interfaces.Address = loginResult.userToken.shipping_address;
-    const phoneNumber: number = loginResult.phone_number;
+    const phoneNumber: string = loginResult.phone_number;
 
     authorizedUser.updateShippingAddress(shippingAddress);
     authorizedUser.updatePhoneNumber(phoneNumber);
@@ -236,6 +238,16 @@ const GlobalContextProvider: React.FC = ({ children }) => {
     dispatch({ type: 'remove_from_cart', payload: productName });
   }
 
+  // UPDATE TOTAL TAX
+  const updateTaxTotal = (newTotal: number): void => {
+    dispatch({ type: 'update_tax_total', payload: newTotal });
+  }
+
+  // UPDATE TOTAL COST
+  const updateTotalCost = (newTotal: number): void => {
+    dispatch({ type: 'update_total_cost', payload: newTotal });
+  }
+
   // CHECKOUT CART
   const checkout = (): void => {
     const date: Date = state.date!;
@@ -261,6 +273,8 @@ const GlobalContextProvider: React.FC = ({ children }) => {
   initialState.updateTotalItemCount = updateTotalItemCount;
   initialState.updateSubtotal = updateSubtotal;
   initialState.removeFromCart = removeFromCart;
+  initialState.updateTaxTotal = updateTaxTotal;
+  initialState.updateTotalCost = updateTotalCost;
   initialState.checkout = checkout;
 
   return (

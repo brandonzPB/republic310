@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
+import { GlobalContext } from '../../../contexts/GlobalContext';
 import { RouteContext } from '../../../contexts/RouteContext';
 import * as actions from '../../../modules/actions';
 
@@ -9,7 +10,7 @@ interface UserData {
   email: string;
   password: string;
   confirmPassword: string;
-  phoneNumber: number;
+  phoneNumber: string;
   street: string;
   city: string;
   zipCode: number;
@@ -18,15 +19,55 @@ interface UserData {
 };
 
 const CreateUser: React.FC = () => {
+  const { login } = useContext(GlobalContext);
+
   const { dest, changeDest } = useContext(RouteContext);
 
   const { register, handleSubmit, errors } = useForm<UserData>();
 
-  const onSubmit = (data: UserData): void => {
+  // HANDLE LOGIN (helper)
+  const handleLogin = async (data: UserData): Promise<any> => {
+    const credentials = { email: data.email, password: data.password };
+    
+    const loginResult: any = await login(credentials);
+
+    if (loginResult === 'Error') return false;
+
+    return true;
+  }
+
+  // HANDLE CREATE USER (helper)
+  const handleCreateUser = async (data: UserData): Promise<any> => {
+    const userObject: UserData = { ... data };
+
+    const createResult: any = await actions.createUser(userObject);
+
+    if (createResult === 'Error') return false;
+
+    return true;
+  }
+
+  // SUBMIT FORM
+  const onSubmit = async (data: UserData): Promise<any> => {
     console.log(data);
+    // at this point: email is available (account can be created)
+
+    // create user
+    const createResult: any = await handleCreateUser(data);
+    if (createResult !== true) {
+      console.log('create error');
+      return;
+    }
+
+    // login (this saves it to state; user doesn't need to do anything extra)
+    const loginResult: any = await handleLogin(data);
+    if (loginResult !== true) {
+      console.log('login error');
+      return;
+    }
 
     changeDest('payment');
-  };
+  }
 
   const isAvailable = async (email: string): Promise<any> => {
     return await actions.emailIsAvailable(email);
@@ -42,6 +83,7 @@ const CreateUser: React.FC = () => {
             id="password-create-input"
             type="password"
             name="password"
+            placeholder="Password"
             ref={register({ required: true })}
           />
 
@@ -148,7 +190,7 @@ const CreateUser: React.FC = () => {
               id="state-input"
               placeholder="State"
               type="text"
-              name="lastName"
+              name="state"
               ref={register({ required: true })}
             />
 

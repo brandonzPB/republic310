@@ -52,17 +52,11 @@ const ProductCartDetails: React.FC<CartProduct> = ({ name, price, quantity, imag
   }
 
   const decrementQuantity = (): void => {
-    setQty({
-      ...qty,
-      amount: qty.amount - 1
-    });
+    setQty({ ...qty, amount: qty.amount - 1 });
   }
 
   const incrementQuantity = (): void => {
-    setQty({
-      ...qty,
-      amount: qty.amount + 1
-    });
+    setQty({ ...qty, amount: qty.amount + 1 });
   }
 
   const getProductDetails = (productName: string): any => {

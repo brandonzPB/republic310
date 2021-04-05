@@ -83,9 +83,26 @@ function globalReducer(state: interfaces.State, action: ActionType): typeof stat
           ]
         }
       };
+    
+    case 'update_tax_total':
+      return {
+        ...state,
+        cart: {
+          ...state.cart,
+          taxes: action.payload
+        }
+      };
+    
+    case 'update_total_cost':
+      return {
+        ...state,
+        cart: {
+          ...state.cart,
+          total: action.payload
+        }
+      };
 
     case 'checkout':
-      state.cart = state.cart.checkout(action.payload);
       return state;
 
     case 'logout':

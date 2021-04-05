@@ -21,52 +21,62 @@ const NavBar: React.FC  = () => {
   const { dest, changeDest } = useContext(RouteContext);
 
   // LOGIN FORM STATE (display purposes)
-  const [loginForm, setLoginForm] = useState(false);
-
-  // EMAIL INPUT STATE (used to check if email exists in database)
-  const [loginInput, setLoginInput] = useState({ email: '' });
+  const [loginForm, setLoginForm] = useState({ loading: false, hidden: false });
 
   // LOGIN FORM
   const { register, handleSubmit, errors } = useForm<UserForm>();
 
   // SHOW LOGIN FORM (triggered by clicking 'Login')
   const showLoginForm = (): void => {
-    if (loginForm) return;
+    if (!loginForm.hidden) return;
 
-    setLoginForm(!loginForm);
+    setLoginForm({ ...loginForm, hidden: false });
   }
 
   // CLOSE LOGIN FORM (triggered by clicking 'Close' button)
   const closeLoginForm = (): void => {
-    if (!loginForm) return;
+    if (loginForm.hidden) return;
 
-    setLoginForm(!loginForm);
+    setLoginForm({ ...loginForm, hidden: true });
+  }
+
+  // HANDLE LOGIN (helper; checks if password is correct)
+  const handleLogin = async (data: UserForm): Promise<any> => {
+    const loginResult: any = await login(data);
+
+    if (!loginResult || loginResult.result !== 'Success') {
+      return false;
+    }
+
+    return true;
   }
 
   // SUBMIT LOGIN FORM
-  const onSubmit = async (data: UserForm): Promise<void> => {}
+  const onSubmit = async (data: UserForm): Promise<any> => {
+    console.log(data);
+    // email is available; attempt login
+
+    setLoginForm({ ...loginForm, loading: true });
+
+    // login attempt
+    const loginResult: any = await handleLogin(data);
+
+    if (!loginResult) {
+      console.log('login error');
+      return;
+    }
+
+    setLoginForm({ ...loginForm, loading: false });
+    closeLoginForm();
+  }
 
   // CHECK IF EMAIL IS AVAILABLE
   const isAvailable = async (email: string): Promise<any> => {
     const emailIsAvailable: any = actions.emailIsAvailable(email);
 
-    if (emailIsAvailable) {
-      setLoginInput({ ...loginInput, email });
-    }
+    if (!emailIsAvailable || emailIsAvailable !== 'Success') return false;
 
-    return emailIsAvailable;
-  }
-
-  // CHECK IF PASSWORD IS CORRECT
-  const correctPassword = async (password: string): Promise<any> => {
-    const credentials: object = {
-      email: loginInput.email,
-      password
-    };
-
-    const loginResult: any = await login(credentials);
-
-    return loginResult === 'Success';
+    return true;
   }
 
   // HANDLE NAVBAR NAVIGATION
@@ -89,31 +99,41 @@ const NavBar: React.FC  = () => {
       <div id="login__container" style={{ backgroundColor: 'transparent' }}>
         <h1 id ="nav-link-text" onClick={showLoginForm}>LOGIN</h1>
 
-        <div id="login-form__container" style={{ display: loginForm ? 'block' : 'none' }}>
-          <span id="close-login-btn" onClick={closeLoginForm}>Close</span>
+        <div id="login-form__container" style={{ display: !loginForm.hidden ? 'block' : 'none' }}>
+          {
+            loginForm.loading
+              ? <div id="loading-login__container">Logging in...</div>
+              : <div id="login-form-child__container">
+                <span id="close-login-btn" onClick={closeLoginForm}>Close</span>
 
-          <span id="no-account-text">Don't have account? No problem, you can easily create one at checkout!</span>
+                <span id="no-account-text">Don't have account? No problem, you can easily create one at checkout!</span>
 
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <input 
-              style={{ backgroundColor: errors.email ? 'pink' : 'white' }}
-              className="login-input"
-              id="email-login-input"
-              placeholder="Email"
-              type="text"
-              name="email"
-              ref={register({ required: true, validate: isAvailable })}
-            />
+                <form onSubmit={handleSubmit(onSubmit)}>
+                  <input 
+                    style={{ backgroundColor: errors.email ? 'pink' : 'white' }}
+                    className="login-input"
+                    id="email-login-input"
+                    placeholder="Email"
+                    type="text"
+                    name="email"
+                    ref={register({ required: true, validate: isAvailable })}
+                  />
 
-            <input 
-              style={{ backgroundColor: errors.password ? 'pink' : 'white' }}
-              className="login-input"
-              id="password-login-input"
-              type="password"
-              name="password"
-              ref={register({ required: true, validate: correctPassword })}
-            />
-          </form>
+                  <input 
+                    style={{ backgroundColor: errors.password ? 'pink' : 'white' }}
+                    className="login-input"
+                    id="password-login-input"
+                    type="password"
+                    name="password"
+                    ref={register({ required: true })}
+                  />
+
+                  {errors.password && <div>Incorrect password</div>}
+
+                  <button id="login-btn">Login</button>
+                </form>
+              </div>
+          }
         </div>
       </div>
 

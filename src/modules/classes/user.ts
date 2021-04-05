@@ -9,11 +9,11 @@ class User implements interfaces.User {
   _id?: string;
   accessToken?: string;
   shippingAddress?: interfaces.Address;
-  phoneNumber?: number;
+  phoneNumber?: string;
   orderHistory?: interfaces.Cart[];
   initiateDetails: (inputs: any) => void; 
   updateShippingAddress: (address: interfaces.Address) => void;
-  updatePhoneNumber: (phoneNumber: number) => void;
+  updatePhoneNumber: (phoneNumber: string) => void;
   updateOrderHistory: (history: interfaces.Cart[]) => void;
 
   constructor() {
@@ -32,7 +32,7 @@ class User implements interfaces.User {
       this.shippingAddress = address;
     }
 
-    this.updatePhoneNumber = function(phoneNumber: number): void {
+    this.updatePhoneNumber = function(phoneNumber: string): void {
       this.phoneNumber = phoneNumber;
     }
 

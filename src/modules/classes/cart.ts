@@ -5,12 +5,11 @@ class Cart implements interfaces.Cart {
   totalItemCount: number;
   date?: Date;
   subtotal: number;
-  taxes?: number;
-  total?: number;
+  taxes: number;
+  total: number;
   calculateSubtotal: (products: interfaces.Product[]) => any;
-  calculateTaxTotal: (products: interfaces.Product[]) => any;
-  calculateTotal: (products: interfaces.Product[]) => any;
-  checkout: (date: Date) => any;
+  calculateTaxTotal: () => any;
+  calculateTotal: () => any;
   
   constructor(products: interfaces.Product[]) {
     this.calculateSubtotal = function(products: interfaces.Product[]): any {
@@ -25,8 +24,10 @@ class Cart implements interfaces.Cart {
     this.totalItemCount = 0;
     this.products = products;
     this.subtotal = this.calculateSubtotal(this.products);
+    this.taxes = 0;
+    this.total = 0;
 
-    this.calculateTaxTotal = function(products: interfaces.Product[]): any {
+    this.calculateTaxTotal = function(): any {
       const subtotal: number = this.calculateSubtotal(this.products);
 
       const taxes: number = subtotal * 0.2225;
@@ -34,16 +35,10 @@ class Cart implements interfaces.Cart {
       return taxes;
     }
 
-    this.calculateTotal = function(products: interfaces.Product[]): any {
-      const total: number = products.reduce((total, product) => total + (product.price * product.quantity * 1.2225), 0);
+    this.calculateTotal = function(): any {
+      const total: number = this.products.reduce((total, product) => total + (product.price * product.quantity * 1.2225), 0);
 
       return total;
-    }
-
-    this.checkout = function(date: Date): any {
-      this.date = date;
-      this.taxes = this.calculateTaxTotal(this.products);
-      this.total = this.calculateTotal(this.products);
     }
   }
 }
