@@ -137,6 +137,7 @@ const GlobalContextProvider: React.FC = ({ children }) => {
 
     authorizedUser.updateShippingAddress(shippingAddress);
     authorizedUser.updatePhoneNumber(phoneNumber);
+    authorizedUser.authorizedUser();
 
     return authorizedUser;
   }

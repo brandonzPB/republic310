@@ -15,6 +15,7 @@ class User implements interfaces.User {
   updateShippingAddress: (address: interfaces.Address) => void;
   updatePhoneNumber: (phoneNumber: string) => void;
   updateOrderHistory: (history: interfaces.Cart[]) => void;
+  authorizedUser: () => void;
 
   constructor() {
     this.isAuthorized = false;
@@ -38,6 +39,10 @@ class User implements interfaces.User {
 
     this.updateOrderHistory = function(history: interfaces.Cart[]): void {
       this.orderHistory = history;
+    }
+
+    this.authorizedUser = function(): void {
+      this.isAuthorized = true;
     }
   }
 }

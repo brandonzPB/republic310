@@ -62,6 +62,7 @@ export interface User {
   updateShippingAddress: (address: Address) => void;
   updatePhoneNumber: (phoneNumber: string) => void;
   updateOrderHistory: (history: Cart[]) => void;
+  authorizedUser: () => void;
 };
 
 /// GLOBAL CONTEXT STATE ///

@@ -15,13 +15,13 @@ interface UserForm {
 
 const NavBar: React.FC  = () => {
   // GLOBAL CONTEXT
-  const { login, cart } = useContext(GlobalContext);
+  const { login, cart, user } = useContext(GlobalContext);
 
   // ROUTE CONTEXT
   const { dest, changeDest } = useContext(RouteContext);
 
   // LOGIN FORM STATE (display purposes)
-  const [loginForm, setLoginForm] = useState({ loading: false, hidden: false });
+  const [loginForm, setLoginForm] = useState({ loading: false, hidden: true });
 
   // LOGIN FORM
   const { register, handleSubmit, errors } = useForm<UserForm>();
@@ -44,11 +44,7 @@ const NavBar: React.FC  = () => {
   const handleLogin = async (data: UserForm): Promise<any> => {
     const loginResult: any = await login(data);
 
-    if (!loginResult || loginResult.result !== 'Success') {
-      return false;
-    }
-
-    return true;
+    return loginResult === 'Success';
   }
 
   // SUBMIT LOGIN FORM
@@ -58,23 +54,25 @@ const NavBar: React.FC  = () => {
 
     setLoginForm({ ...loginForm, loading: true });
 
-    // login attempt
+    // attempt login
     const loginResult: any = await handleLogin(data);
+
+    setLoginForm({ ...loginForm, loading: false });
 
     if (!loginResult) {
       console.log('login error');
       return;
     }
 
-    setLoginForm({ ...loginForm, loading: false });
     closeLoginForm();
   }
 
   // CHECK IF EMAIL IS AVAILABLE
-  const isAvailable = async (email: string): Promise<any> => {
-    const emailIsAvailable: any = actions.emailIsAvailable(email);
+  const emailIsValid = async (email: string): Promise<any> => {
+    const emailIsAvailable: any = await actions.emailIsAvailable(email);
 
-    if (!emailIsAvailable || emailIsAvailable !== 'Success') return false;
+    // email is not occupied
+    if (emailIsAvailable) return false;
 
     return true;
   }
@@ -96,7 +94,9 @@ const NavBar: React.FC  = () => {
 
       <h1 id ="nav-link-text" onClick={() => handleNav('contact')}>CONTACT US</h1>
 
-      <div id="login__container" style={{ backgroundColor: 'transparent' }}>
+      <div id="logout__container" style={{ display: user.isAuthorized ? 'block' : 'none' }}>Logout</div>
+
+      <div id="login__container" style={{ display: user.isAuthorized ? 'none' : 'block', backgroundColor: 'transparent' }}>
         <h1 id ="nav-link-text" onClick={showLoginForm}>LOGIN</h1>
 
         <div id="login-form__container" style={{ display: !loginForm.hidden ? 'block' : 'none' }}>
@@ -116,7 +116,7 @@ const NavBar: React.FC  = () => {
                     placeholder="Email"
                     type="text"
                     name="email"
-                    ref={register({ required: true, validate: isAvailable })}
+                    ref={register({ required: true, validate: emailIsValid })}
                   />
 
                   <input 

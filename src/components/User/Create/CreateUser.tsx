@@ -31,9 +31,7 @@ const CreateUser: React.FC = () => {
     
     const loginResult: any = await login(credentials);
 
-    if (loginResult === 'Error') return false;
-
-    return true;
+    return loginResult === 'Success';
   }
 
   // HANDLE CREATE USER (helper)
@@ -61,7 +59,7 @@ const CreateUser: React.FC = () => {
 
     // login (this saves it to state; user doesn't need to do anything extra)
     const loginResult: any = await handleLogin(data);
-    if (loginResult !== true) {
+    if (!loginResult) {
       console.log('login error');
       return;
     }
