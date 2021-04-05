@@ -5,6 +5,8 @@ import { useForm } from 'react-hook-form';
 import { GlobalContext } from '../../contexts/GlobalContext';
 import { RouteContext } from '../../contexts/RouteContext';
 import Product from './Product';
+import * as interfaces from '../../modules/interfaces';
+import quickSort from '../../modules/quickSort';
 
 import hollywoodSrc from '../../assets/images/products/the_hollywood.jpg';
 import malibuSrc from '../../assets/images/products/the_malibu.jpg';
@@ -21,14 +23,14 @@ const AllProducts: React.FC = () => {
 
   const { dest, changeDest } = useContext(RouteContext);
 
-  const [sort, setSort] = useState({ type: 'bestSelling' });
+  const [sort, setSort] = useState({ type: '' });
 
   const { register, handleSubmit } = useForm();
 
   const onSubmit = (data: any) => {
     console.log(data);
 
-    // setSort({ ...sort, type: data });
+    setSort({ ...sort, type: data.sort });
   }
 
   if (!allProducts || !allProducts.length) {
@@ -105,9 +107,22 @@ const AllProducts: React.FC = () => {
     )
   }
 
-  let sortedProducts = allProducts;
+  let sortedProducts: any = allProducts.slice();
 
-  let ProductComponents: any = allProducts.map((product: any, index: number) => (
+  sortedProducts = sort.type === 'alphaAscend' ?
+      sortedProducts.sort((a: interfaces.DisplayProduct, b: interfaces.DisplayProduct) => {
+        return a.name.localeCompare(b.name);
+      })
+
+    : sort.type === 'alphaDescend' ? 
+      sortedProducts.sort((a: interfaces.DisplayProduct, b: interfaces.DisplayProduct) => {
+        return a.name.localeCompare(b.name);
+      }).reverse()
+    : sort.type === 'priceAscend' ?
+      quickSort(sortedProducts)
+    : quickSort(sortedProducts).reverse();
+
+  const ProductComponents: any = sortedProducts.map((product: interfaces.DisplayProduct, index: number) => (
     <Product 
       key={index}
       name={product.name}
@@ -133,15 +148,18 @@ const AllProducts: React.FC = () => {
         <form onSubmit={handleSubmit(onSubmit)}>
 
           <select name="sort" id="sort-select" ref={register}>
-            <option value="bestSelling">Best Selling</option>
             <option value="alphaAscend">A-Z (ascending alphabetical)</option>
             <option value="alphaDescend">Z-A (descending alphabetical)</option>
+            <option value="priceAscend">Price Ascending</option>
+            <option value="priceDescend">Price Descending</option>
           </select>
 
           <button id="update-sort-btn">Update List</button>
 
         </form>
       </div>
+
+      {ProductComponents}
     </div>
   )
 }
