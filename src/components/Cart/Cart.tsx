@@ -99,6 +99,11 @@ const Cart: React.FC = () => {
     )
   }
 
+  const handleCheckout = (): any => {
+    // update total taxes
+    // update total cost
+  }
+
   const ProductComponents: any = cart.products.map((item: any) => (
     <ProductCartDetails 
       key={item.id}
@@ -124,6 +129,14 @@ const Cart: React.FC = () => {
     <div id="cart__container">
       <div id="cart-products__container">
         {ProductComponents}
+      </div>
+
+      <div id="cart-subtotal__container">
+        <span id="cart-subtotal">Subtotal: ${cart.subtotal}.00</span>
+      </div>
+
+      <div id="checkout-btn__container">
+        <button id="checkout-btn" onClick={handleCheckout}>Proceed to Checkout</button>
       </div>
     </div>
   )

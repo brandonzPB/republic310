@@ -64,6 +64,15 @@ function globalReducer(state: interfaces.State, action: ActionType): typeof stat
         }
       };
 
+    case 'update_subtotal':
+      return {
+        ...state,
+        cart: {
+          ...state.cart,
+          subtotal: action.payload
+        }
+      };
+
     case 'remove_from_cart':
       return {
         ...state,

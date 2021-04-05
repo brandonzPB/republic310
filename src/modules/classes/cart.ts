@@ -4,7 +4,7 @@ class Cart implements interfaces.Cart {
   products: interfaces.Product[];
   totalItemCount: number;
   date?: Date;
-  subtotal?: number;
+  subtotal: number;
   taxes?: number;
   total?: number;
   calculateSubtotal: (products: interfaces.Product[]) => any;
@@ -14,6 +14,8 @@ class Cart implements interfaces.Cart {
   
   constructor(products: interfaces.Product[]) {
     this.calculateSubtotal = function(products: interfaces.Product[]): any {
+      if (!products.length) return 0;
+      
       // without tax
       const subtotal: number = products.reduce((subtotal, product) => subtotal + (product.price * product.quantity), 0);
 

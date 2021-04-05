@@ -8,7 +8,7 @@ import './product.css';
 /// THIS IS THE DISPLAY/CARD COMPONENT OF A PRODUCT ///
 
 const Product: React.FC<types.DisplayProduct> = ({ name, price, imageUrl, alt }: types.DisplayProduct) => {
-  const { allProducts, addToCart, updateQuantity, updateTotalItemCount, cart } = useContext(GlobalContext);
+  const { allProducts, addToCart, updateQuantity, updateTotalItemCount, cart, updateSubtotal } = useContext(GlobalContext);
 
   const { changeDest, changeProduct, product } = useContext(RouteContext);
 
@@ -36,6 +36,12 @@ const Product: React.FC<types.DisplayProduct> = ({ name, price, imageUrl, alt }:
     return updateTotalItemCount(cartItemTotal + 1);
   }
 
+  // UPDATE SUBTOTAL
+  const updateCartSubtotal = (productPrice: number): any => {
+    let cartSubtotal: any = cart.subtotal;
+    return updateSubtotal(cartSubtotal + productPrice);
+  }
+
   // HANDLE CART UPDATE
   const handleCartUpdate = (productName: string): any => {
     // get product from cart (if it exists)
@@ -47,6 +53,8 @@ const Product: React.FC<types.DisplayProduct> = ({ name, price, imageUrl, alt }:
     // product already exists in cart: increment quantity
     if (productInCart) {
       console.log('product already in cart');
+
+      updateCartSubtotal(productInCart.price);
       return updateQuantity(productInCart.name, productInCart.quantity + 1);
     }
 
@@ -55,6 +63,9 @@ const Product: React.FC<types.DisplayProduct> = ({ name, price, imageUrl, alt }:
     // product doesn't exist in cart:
     // add product to cart (new object to be created)
     const productDetails: interfaces.DisplayProduct = getProductDetails(productName);
+
+    // update cart subtotal
+    updateCartSubtotal(productDetails.price);
 
     const productObj: any = {
       name: productDetails.name,

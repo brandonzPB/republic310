@@ -14,7 +14,7 @@ export interface Cart {
   products: Product[];
   totalItemCount: number;
   date?: Date;
-  subtotal?: number;
+  subtotal: number;
   taxes?: number;
   total?: number;
   calculateSubtotal: (products: Product[]) => any;
@@ -85,6 +85,7 @@ export interface State {
   addToCart: (product: any) => void;
   updateQuantity: (productId: string, newQuantity: number) => void;
   updateTotalItemCount: (newTotal: number) => void;
+  updateSubtotal: (newSubtotal: number) => void;
   removeFromCart: (productId: string) => void;
   checkout: () => void;
 };

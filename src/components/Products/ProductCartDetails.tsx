@@ -13,7 +13,7 @@ type CartProduct = {
 };
 
 const ProductCartDetails: React.FC<CartProduct> = ({ name, price, quantity, imageUrl, alt }: CartProduct) => {
-  const { cart, updateTotalItemCount, updateQuantity, removeFromCart, allProducts } = useContext(GlobalContext);
+  const { cart, updateTotalItemCount, updateQuantity, removeFromCart, allProducts, updateSubtotal } = useContext(GlobalContext);
 
   const { dest, changeDest, changeProduct } = useContext(RouteContext);
 
@@ -29,8 +29,20 @@ const ProductCartDetails: React.FC<CartProduct> = ({ name, price, quantity, imag
     updateTotalItemCount(cartItemTotal - quantity + qty.amount);
   }
 
+  const updateCartSubtotal = (productPrice: number): any => {
+    let cartSubtotal: number = cart.subtotal;
+    
+    // decrease subtotal (of previous quantity)
+    cartSubtotal -= productPrice * quantity;
+    
+    // increase subtotal
+    return updateSubtotal(cartSubtotal + (productPrice * qty.amount));
+  }
+
   const handleQuantityUpdate = (): any => {
     updateCartCount();
+
+    updateCartSubtotal(price);
 
     if (qty.amount === 0) {
       return removeFromCart(name);

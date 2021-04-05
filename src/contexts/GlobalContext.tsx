@@ -51,6 +51,7 @@ const initialState: interfaces.State = {
   addToCart: (product: any): any => {},
   updateQuantity: (productName: string, newQuantity: number): void => {},
   updateTotalItemCount: (newTotal: number): void => {},
+  updateSubtotal: (newSubtotal: number): void => {},
   removeFromCart: (productName: string): void => {},
   checkout: (): void => {},
 };
@@ -210,6 +211,11 @@ const GlobalContextProvider: React.FC = ({ children }) => {
     dispatch({ type: 'update_total_item_count', payload: newTotal });
   }
 
+  // UPDATE CART SUBTOTAL
+  const updateSubtotal = (newSubtotal: number): void => {
+    dispatch({ type: 'update_subtotal', payload: newSubtotal });
+  }
+
   // ADD PRODUCT TO CART
   const addToCart = (product: any): any => {
     const newProduct: interfaces.Product = new Product(product.name, 1, product.price);
@@ -253,6 +259,7 @@ const GlobalContextProvider: React.FC = ({ children }) => {
   initialState.addToCart = addToCart;
   initialState.updateQuantity = updateQuantity;
   initialState.updateTotalItemCount = updateTotalItemCount;
+  initialState.updateSubtotal = updateSubtotal;
   initialState.removeFromCart = removeFromCart;
   initialState.checkout = checkout;
 
