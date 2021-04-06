@@ -1,8 +1,13 @@
 import React, { useContext } from 'react';
+import ReactDOM from 'react-dom';
 import { Route, Redirect } from 'react-router-dom';
 import { GlobalContext } from '../../../contexts/GlobalContext';
 import { RouteContext } from '../../../contexts/RouteContext';
 import './paymentInfo.css';
+
+declare const window: any;
+
+const PayPalButton = window.paypal.Buttons.driver("react", { React, ReactDOM });
 
 const PaymentInfo: React.FC = () => {
   const { cart } = useContext(GlobalContext);
@@ -73,9 +78,36 @@ const PaymentInfo: React.FC = () => {
     )
   }
 
+  const createOrder = (data: any, actions: any): any => {
+    console.log('data', data);
+    console.log('actions', actions);
+
+    return actions.order.create({
+      purchase_units: [
+        {
+          amount: {
+            value: "0.01"
+          },
+        },
+      ],
+    });
+  }
+
+  const onApprove = (data: any, actions: any): any => {
+    console.log('data', data);
+    console.log('actions', actions);
+    
+    return actions.order.capture();
+  }
+
   return (
     <div id="payment-info__container">
-      <div id="stripe__container"></div>
+      <div id="paypal__container" style={{ width: '20px' }}>
+        <PayPalButton
+          createOrder={(data: any, actions: any) => createOrder(data, actions)}
+          onApprove={(data: any, actions: any) => onApprove(data, actions)}
+        />
+      </div>
     </div>
   )
 }
