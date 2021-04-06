@@ -18,8 +18,8 @@ interface UserData {
   state: string;
 };
 
-const CreateUser: React.FC = () => {
-  const { login } = useContext(GlobalContext);
+const ShippingForm: React.FC = () => {
+  const { login, user } = useContext(GlobalContext);
 
   const { dest, changeDest } = useContext(RouteContext);
 
@@ -48,7 +48,13 @@ const CreateUser: React.FC = () => {
   // SUBMIT FORM
   const onSubmit = async (data: UserData): Promise<any> => {
     console.log(data);
-    // at this point: email is available (account can be created)
+
+    if (user.isAuthorized) {
+      return changeDest('payment');
+    }
+
+    // at this point: email is available and user is not authorized:
+    // create account -> login
 
     // create user
     const createResult: any = await handleCreateUser(data);
@@ -68,13 +74,19 @@ const CreateUser: React.FC = () => {
   }
 
   const isAvailable = async (email: string): Promise<any> => {
+    if (user.isAuthorized) return true;
+
     return await actions.emailIsAvailable(email);
   }
 
   return (
-    <div id="create-user__container" style={{ width: '100vw', height: '100vh' }}>
+    <div id="shipping-form-parent__container" style={{ width: '100vw', height: '100vh' }}>
+      <div id="verification-text__container" style={{ display: user.isAuthorized ? 'block' : 'none' }}>
+        <span id="verification-text">Please verify that the following information is correct before proceeding to the next page.</span>
+      </div>
+
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div id="password-input__container">
+        <div id="password-input__container" style={{ display: user.isAuthorized ? 'none' : 'block' }}>
           <input 
             style={{ backgroundColor: errors.password ? 'pink' : 'white' }}
             className="create-input"
@@ -85,7 +97,7 @@ const CreateUser: React.FC = () => {
             ref={register({ required: true })}
           />
 
-          {errors.password && <div style={{ color: 'red' }}>Please enter your password</div>}
+          {!user.isAuthorized && errors.password && <div style={{ color: 'red' }}>Please enter your password</div>}
         </div>
 
         <div id="contact-input__container">
@@ -96,14 +108,15 @@ const CreateUser: React.FC = () => {
             type="email"
             name="email"
             placeholder="Email"
+            defaultValue={user.isAuthorized ? user.email : ''}
             ref={register({ required: true, validate: isAvailable })}
           />
 
-          {errors.email && errors.email.type === 'validate' && (
+          {!user.isAuthorized && errors.email && errors.email.type === 'validate' && (
             <div style={{ color: 'red' }}>Email unavailable</div>
           )}
 
-          {errors.email && <div>Email is requred</div>}
+          {!user.isAuthorized && errors.email && <div>Email is requred</div>}
 
           <input 
             style={{ backgroundColor: errors.phoneNumber ? 'pink' : 'white' }}
@@ -112,10 +125,11 @@ const CreateUser: React.FC = () => {
             type="tel"
             name="phoneNumber"
             placeholder="123-456-7890"
+            defaultValue={user.isAuthorized ? user.phoneNumber : ''}
             ref={register({ required: true })}
           />
 
-          {errors.phoneNumber && <div style={{ color: 'red' }}>Phone number is required</div>}
+          {!user.isAuthorized && errors.phoneNumber && <div style={{ color: 'red' }}>Phone number is required</div>}
         </div>
 
         <div id="shipping-input__container">
@@ -127,10 +141,11 @@ const CreateUser: React.FC = () => {
               placeholder="First Name"
               type="text"
               name="firstName"
+              defaultValue={user.isAuthorized ? user.firstName : ''}
               ref={register({ required: true })}
             />
 
-            {errors.firstName && <div>First name is required</div>}
+            {!user.isAuthorized && errors.firstName && <div>First name is required</div>}
 
             <input 
               style={{ backgroundColor: errors.lastName ? 'pink' : 'white' }}
@@ -139,10 +154,11 @@ const CreateUser: React.FC = () => {
               placeholder="Last Name"
               type="text"
               name="lastName"
+              defaultValue={user.isAuthorized ? user.lastName : ''}
               ref={register({ required: true })}
             />
 
-            {errors.lastName && <div>Last name is required</div>}
+            {!user.isAuthorized && errors.lastName && <div>Last name is required</div>}
           </div>
 
           <input 
@@ -152,10 +168,11 @@ const CreateUser: React.FC = () => {
             placeholder="123 React Road APT 1337"
             type="text"
             name="street"
+            defaultValue={user.shippingAddress ? user.shippingAddress.street : ''}
             ref={register({ required: true })}
           />
           
-          {errors.street && <div>Street is required</div>}
+          {!user.isAuthorized && errors.street && <div>Street is required</div>}
 
           <input 
             style={{ backgroundColor: errors.city ? 'pink' : 'white' }}
@@ -164,10 +181,11 @@ const CreateUser: React.FC = () => {
             placeholder="City"
             type="text"
             name="city"
+            defaultValue={user.shippingAddress ? user.shippingAddress.city : ''}
             ref={register({ required: true })}
           />
 
-          {errors.city && <div>City is required</div>}
+          {!user.isAuthorized && errors.city && <div>City is required</div>}
 
           <div id="country-input__container">
             <input 
@@ -177,10 +195,11 @@ const CreateUser: React.FC = () => {
               placeholder="Country"
               type="text"
               name="country"
+              defaultValue={user.shippingAddress ? user.shippingAddress.country : ''}
               ref={register({ required: true })}
             />
 
-            {errors.country && <div>Country is required</div>}
+            {!user.isAuthorized && errors.country && <div>Country is required</div>}
 
             <input 
               style={{ backgroundColor: errors.state ? 'pink' : 'white' }}
@@ -189,22 +208,24 @@ const CreateUser: React.FC = () => {
               placeholder="State"
               type="text"
               name="state"
+              defaultValue={user.shippingAddress ? user.shippingAddress.state : ''}
               ref={register({ required: true })}
             />
 
-            {errors.state && <div>State is required</div>}
+            {!user.isAuthorized && errors.state && <div>State is required</div>}
 
             <input 
               style={{ backgroundColor: errors.zipCode ? 'pink' : 'white' }}
               className="create-input"
               id="zip-input"
               placeholder="Zip Code"
-              type="number"
+              type="text"
               name="zipCode"
+              defaultValue={user.shippingAddress ? user.shippingAddress.zipCode : ''}
               ref={register({ required: true })}
             />
 
-            {errors.zipCode && <div>Zip code is required</div>}
+            {!user.isAuthorized && errors.zipCode && <div>Zip code is required</div>}
           </div>
         </div>
 
@@ -214,4 +235,4 @@ const CreateUser: React.FC = () => {
   )
 }
 
-export default CreateUser;
+export default ShippingForm;

@@ -12,7 +12,7 @@ class User implements interfaces.User {
   phoneNumber?: string;
   orderHistory?: interfaces.Cart[];
   initiateDetails: (inputs: any) => void; 
-  updateShippingAddress: (address: interfaces.Address) => void;
+  updateShippingAddress: (address: any) => void;
   updatePhoneNumber: (phoneNumber: string) => void;
   updateOrderHistory: (history: interfaces.Cart[]) => void;
   authorizedUser: () => void;
@@ -29,8 +29,14 @@ class User implements interfaces.User {
       this.accessToken = inputs.accessToken;
     }
 
-    this.updateShippingAddress = function(address: interfaces.Address): void {
-      this.shippingAddress = address;
+    this.updateShippingAddress = function(address: any): void {
+      this.shippingAddress = {
+        street: address.street,
+        city: address.city,
+        zipCode: address.zip_code,
+        state: address.state,
+        country: address.country,
+      }
     }
 
     this.updatePhoneNumber = function(phoneNumber: string): void {

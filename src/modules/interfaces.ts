@@ -41,7 +41,7 @@ export interface DisplayProduct {
 export interface Address {
   street: string;
   city: string;
-  zipCode: number;
+  zipCode: string;
   state: string;
   country: string;
 };
@@ -59,7 +59,7 @@ export interface User {
   phoneNumber?: string;
   orderHistory?: Cart[];
   initiateDetails: (inputs: any) => void;
-  updateShippingAddress: (address: Address) => void;
+  updateShippingAddress: (address: any) => void;
   updatePhoneNumber: (phoneNumber: string) => void;
   updateOrderHistory: (history: Cart[]) => void;
   authorizedUser: () => void;

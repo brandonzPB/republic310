@@ -118,12 +118,12 @@ const GlobalContextProvider: React.FC = ({ children }) => {
   }
 
   // CREATE USER OBJECT (on login; to be added to state)
-  const createUserState = (loginResult: any): any => {
+  const createAuthorizedUser = (loginResult: any): any => {
     const authorizedUser: interfaces.User = new User();
-
+    
     const details = {
-      firstName: loginResult.userToken.firstName,
-      lastName: loginResult.userToken.lastName,
+      firstName: loginResult.userToken.first_name,
+      lastName: loginResult.userToken.last_name,
       email: loginResult.userToken.email,
       password: loginResult.userToken.password,
       _id: loginResult.userToken._id,
@@ -133,7 +133,7 @@ const GlobalContextProvider: React.FC = ({ children }) => {
     authorizedUser.initiateDetails(details);
 
     const shippingAddress: interfaces.Address = loginResult.userToken.shipping_address;
-    const phoneNumber: string = loginResult.phone_number;
+    const phoneNumber: string = loginResult.userToken.phone_number;
 
     authorizedUser.updateShippingAddress(shippingAddress);
     authorizedUser.updatePhoneNumber(phoneNumber);
@@ -148,7 +148,7 @@ const GlobalContextProvider: React.FC = ({ children }) => {
 
     if (!loginResult || loginResult === 'Error') return 'Error';
 
-    const authorizedUser = createUserState(loginResult);
+    const authorizedUser = createAuthorizedUser(loginResult);
 
     dispatch({ type: 'login', payload: authorizedUser });
 
