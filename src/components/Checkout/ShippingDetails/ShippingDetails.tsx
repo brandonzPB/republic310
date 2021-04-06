@@ -1,9 +1,12 @@
 import React, { useContext } from 'react';
+import ReactDOM from 'react-dom';
 import { Route, Redirect } from 'react-router-dom';
 import { GlobalContext } from '../../../contexts/GlobalContext';
 import { RouteContext } from '../../../contexts/RouteContext';
 import ShippingForm from './ShippingForm';
 import './shippingDetails.css';
+
+const PayPalButton = paypal.Buttons.driver("react", { React, ReactDOM });
 
 const ShippingDetails: React.FC = () => {
   const { cart, user } = useContext(GlobalContext);
@@ -84,6 +87,11 @@ const ShippingDetails: React.FC = () => {
       <h1>Total: ${cart.total.toFixed(2)}</h1>
       <span id="shipping-login-text">Already have an account? Login at the top right and your shipping info will be filled in automatically</span>
       
+      <div id="shipping-paypal__container">
+        <span id="guest-text">Want to check out as a guest?</span>
+
+      </div>
+
       <ShippingForm />
     </div>
   )

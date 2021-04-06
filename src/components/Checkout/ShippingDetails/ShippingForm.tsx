@@ -50,33 +50,35 @@ const ShippingForm: React.FC = () => {
     console.log(data);
 
     if (user.isAuthorized) {
-      return changeDest('payment');
+      changeDest('payment');
+    } else if (!user.isAuthorized) {
+      // at this point: email is available and user is not authorized:
+      // create account -> login
+
+      // create user
+      const createResult: any = await handleCreateUser(data);
+
+      if (createResult !== true) {
+        console.log('create error');
+        return;
+      }
+
+      // login (this saves it to state; user doesn't need to do anything extra)
+      const loginResult: any = await handleLogin(data);
+
+      if (!loginResult) {
+        console.log('login error');
+        return;
+      }
+
+      changeDest('payment');
     }
-
-    // at this point: email is available and user is not authorized:
-    // create account -> login
-
-    // create user
-    const createResult: any = await handleCreateUser(data);
-    if (createResult !== true) {
-      console.log('create error');
-      return;
-    }
-
-    // login (this saves it to state; user doesn't need to do anything extra)
-    const loginResult: any = await handleLogin(data);
-    if (!loginResult) {
-      console.log('login error');
-      return;
-    }
-
-    changeDest('payment');
   }
 
+  // CHECK IF EMAIL IS AVAILABLE
   const isAvailable = async (email: string): Promise<any> => {
-    if (user.isAuthorized) return true;
-
-    return await actions.emailIsAvailable(email);
+    // returns true or false
+    return (user.isAuthorized || await actions.emailIsAvailable(email));
   }
 
   return (
@@ -94,6 +96,7 @@ const ShippingForm: React.FC = () => {
             type="password"
             name="password"
             placeholder="Password"
+            defaultValue={user.isAuthorized ? user.password : '' }
             ref={register({ required: true })}
           />
 
@@ -112,7 +115,7 @@ const ShippingForm: React.FC = () => {
             ref={register({ required: true, validate: isAvailable })}
           />
 
-          {!user.isAuthorized && errors.email && errors.email.type === 'validate' && (
+          {errors.email && errors.email.type === 'validate' && (
             <div style={{ color: 'red' }}>Email unavailable</div>
           )}
 

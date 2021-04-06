@@ -52,6 +52,8 @@ export const emailIsAvailable = async (email: string): Promise<any> => {
 
   const emailResult: any = await userService.checkEmail(emailObj);
 
+  console.log('emailResult', emailResult);
+
   if (!emailResult || emailResult.result === 'Error') return false;
 
   return true;

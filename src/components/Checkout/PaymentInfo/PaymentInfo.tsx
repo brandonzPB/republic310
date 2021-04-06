@@ -5,6 +5,8 @@ import { RouteContext } from '../../../contexts/RouteContext';
 import './paymentInfo.css';
 
 const PaymentInfo: React.FC = () => {
+  const { cart } = useContext(GlobalContext);
+
   const { dest, changeDest } = useContext(RouteContext);
 
   if (dest === 'cart') {
@@ -72,7 +74,9 @@ const PaymentInfo: React.FC = () => {
   }
 
   return (
-    <div id="payment-info__container"></div>
+    <div id="payment-info__container">
+      <div id="stripe__container"></div>
+    </div>
   )
 }
 
