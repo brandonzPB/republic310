@@ -10,7 +10,7 @@ const ShippingDetails: React.FC = () => {
 
   const { dest, changeDest } = useContext(RouteContext);
 
-  if (cart.total === 0) {
+  if (cart.total === 0 || cart.totalItemCount === 0) {
     changeDest('home');
   }
 

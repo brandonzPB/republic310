@@ -14,6 +14,18 @@ const PaymentInfo: React.FC = () => {
 
   const { dest, changeDest } = useContext(RouteContext);
 
+  if (cart.totalItemCount === 0 || cart.products.length === 0) {
+    changeDest('home');
+  }
+
+  if (dest === 'home') {
+    return (
+      <Route exact path="/checkout/payment">
+        <Redirect to="/" />
+      </Route>
+    )
+  }
+
   if (dest === 'cart') {
     return (
       <Route exact path="/checkout/payment">
@@ -66,14 +78,6 @@ const PaymentInfo: React.FC = () => {
     return (
       <Route exact path="/checkout/payment">
         <Redirect to="/about" />
-      </Route>
-    )
-  }
-
-  if (dest === 'home') {
-    return (
-      <Route exact path="/checkout/payment">
-        <Redirect to="/" />
       </Route>
     )
   }
