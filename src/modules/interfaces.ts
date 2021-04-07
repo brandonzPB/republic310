@@ -53,8 +53,8 @@ export interface User {
   lastName?: string;
   email?: string;
   password?: string;
-  _id?: string;
-  accessToken?: string;
+  _id: string;
+  accessToken: string;
   shippingAddress?: Address;
   phoneNumber?: string;
   orderHistory?: Cart[];
@@ -89,7 +89,8 @@ export interface State {
   removeFromCart: (productId: string) => void;
   updateTaxTotal: (newTotal: number) => void;
   updateTotalCost: (newTotal: number) => void;
-  checkout: () => void;
+  addDateToCart: (date: Date) => void;
+  completeOrder: (userId: string, cart: Cart, accessToken: string) => void;
 };
 
 /// PATH CONTEXT ///
@@ -99,4 +100,6 @@ export interface Path {
   product: DisplayProduct;
   changeDest: (dest: string) => void;
   changeProduct: (product: DisplayProduct) => void;
+  orderStatus: 'complete' | 'incomplete';
+  changeOrderStatus: (newStatus: 'complete' | 'incomplete') => void;
 }

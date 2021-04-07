@@ -21,7 +21,9 @@ const initialPath: interfaces.Path = storedPath
         alt: ''
       },
       changeDest: (dest: string): void => {},
-      changeProduct: (product: interfaces.DisplayProduct): void => {}
+      changeProduct: (product: interfaces.DisplayProduct): void => {},
+      orderStatus: 'incomplete',
+      changeOrderStatus: (newStatus: 'complete' | 'incomplete'): void => {},
     };
 
 export const RouteContext = createContext<interfaces.Path>(initialPath);
@@ -47,8 +49,13 @@ const RouteContextProvider: React.FC = ({ children }) => {
     dispatch({ type: 'change_product', payload: product });
   }
 
+  const changeOrderStatus = (newStatus: 'complete' | 'incomplete'): void => {
+    dispatch({ type: 'change_order_status', payload: newStatus });
+  }
+
   initialPath.changeDest = changeDest;
   initialPath.changeProduct = changeProduct;
+  initialPath.changeOrderStatus = changeOrderStatus;
 
   return (
     <RouteContext.Provider value={path}>

@@ -16,7 +16,7 @@
   align-items: center;
   margin-left: 15px;
   border-top: 1px solid #819efc;
-  width: 100%;
+  width: 95%;
   height: auto;
 }
 
@@ -30,7 +30,7 @@
 }
 
 #card-element {
-  width: 100%;
+  width: 95%;
 }
 
 #pay-btn {

@@ -8,9 +8,9 @@ import { RouteContext } from '../../../contexts/RouteContext';
 import './paymentForm.css';
 
 const PaymentForm: React.FC = () => {
-  const { cart, user } = useContext(GlobalContext);
+  const { cart, user, completeOrder, addDateToCart } = useContext(GlobalContext);
 
-  const { dest, changeDest } = useContext(RouteContext);
+  const { dest, changeDest, changeOrderStatus } = useContext(RouteContext);
 
   const [success, setSuccess] = useState(false);
 
@@ -18,74 +18,12 @@ const PaymentForm: React.FC = () => {
 
   const elements: any = useElements();
 
-  /// CSS 15:55 ///
-
-  if (cart.totalItemCount === 0 || cart.products.length === 0) {
-    changeDest('home');
+  const handleOrderDate = (date: Date): any => {
+    return addDateToCart(date);
   }
 
-  if (dest === 'home') {
-    return (
-      <Route exact path="/checkout/payment">
-        <Redirect to="/" />
-      </Route>
-    )
-  }
-
-  if (dest === 'cart') {
-    return (
-      <Route exact path="/checkout/payment">
-        <Redirect to="/cart" />
-      </Route>
-    )
-  }
-
-  if (dest === 'shipping') {
-    return (
-      <Route exact path="/checkout/payment">
-        <Redirect to="/checkout/shipping" />
-      </Route>
-    )
-  }
-
-  if (dest === 'confirmation') {
-    return (
-      <Route exact path="/checkout/payment">
-        <Redirect to="/checkout/confirmation" />
-      </Route>
-    )
-  }
-
-  if (dest === 'contact') {
-    return (
-      <Route exact path="/checkout/payment">
-        <Redirect to="/contact" />
-      </Route>
-    )
-  }
-
-  if (dest === 'productDetails') {
-    return (
-      <Route exact path="/checkout/payment">
-        <Redirect to="/product/details" />
-      </Route>
-    )
-  }
-
-  if (dest === 'products') {
-    return (
-      <Route exact path="/checkout/payment">
-        <Redirect to="/products" />
-      </Route>
-    )
-  }
-
-  if (dest === 'about') {
-    return (
-      <Route exact path="/checkout/payment">
-        <Redirect to="/about" />
-      </Route>
-    )
+  const handleOrderCompletion = async (): Promise<any> => {
+    return completeOrder(user._id, cart, user.accessToken);
   }
 
   const handleSubmit = async (e: any) => {
@@ -110,7 +48,15 @@ const PaymentForm: React.FC = () => {
     
         if (response.success) {
           console.log('Successful payment');
-          setSuccess(true);
+
+          // add date to cart
+          handleOrderDate(response.date);
+
+          // adds order to history
+          handleOrderCompletion();
+
+          // setSuccess(true);
+          // changeOrderStatus('complete');
         }
         
       } catch (error) {
@@ -123,23 +69,14 @@ const PaymentForm: React.FC = () => {
 
   return (
     <div id="payment-info__container">
-      <>
-        {
-          !success
-            ? <form onSubmit={handleSubmit}>
-                <fieldset className="FormGroup">
-                  <div className="FormRow">
-                    <CardElement id="card-element" />
-                  </div>
-                </fieldset>
-                <button id="pay-btn">Pay</button>
-              </form>
-            : <div id="payment-success__container">
-                <span id="payment-text">We hope you enjoy your purchase!</span>
-              </div>
-
-        }
-      </>
+      <form onSubmit={handleSubmit}>
+        <fieldset className="FormGroup">
+          <div className="FormRow">
+            <CardElement id="card-element" />
+          </div>
+        </fieldset>
+        <button id="pay-btn">Pay</button>
+      </form>
     </div>
   )
 }

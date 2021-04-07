@@ -20,7 +20,8 @@ export type ActionType =
   | { type: 'remove_from_cart',           payload: string                      }
   | { type: 'update_tax_total',           payload: number                      }
   | { type: 'update_total_cost',          payload: number                      }
-  | { type: 'checkout',                   payload: Date                        }
+  | { type: 'add_date_to_cart',           payload: Date                        }
+  | { type: 'complete_order', }
 
 const getProductDetailArray = (products: any): any => {
   const productArray: interfaces.DisplayProduct[] = products.map((product: any) => {
@@ -133,4 +134,8 @@ export const addToCart = (): any => {}
 
 export const removeFromCart = (): any => {}
 
-export const checkout = (): any => {}
+export const completeOrder = async (userId: string, cart: interfaces.Cart, token: string): Promise<any> => {
+  const updateResult: any = await userService.postOrder(userId, cart, token);
+
+  return false;
+}

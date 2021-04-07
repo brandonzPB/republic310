@@ -55,7 +55,8 @@ const initialState: interfaces.State = {
   removeFromCart: (productName: string): void => {},
   updateTaxTotal: (newTotal: number): void => {},
   updateTotalCost: (newTotal: number): void => {},
-  checkout: (): void => {},
+  addDateToCart: (date: Date): void => {},
+  completeOrder: (userId: string, cart: interfaces.Cart, accessToken: string): void => {},
 };
 
 export const GlobalContext = createContext<interfaces.State>(initialState);
@@ -249,11 +250,18 @@ const GlobalContextProvider: React.FC = ({ children }) => {
     dispatch({ type: 'update_total_cost', payload: newTotal });
   }
 
-  // CHECKOUT CART
-  const checkout = (): void => {
-    const date: Date = state.date!;
-    
-    dispatch({ type: 'checkout', payload: date });
+  // ADD DATE TO CART (called after order is placed)
+  const addDateToCart = (date: Date): void => {
+    dispatch({ type: 'add_date_to_cart', payload: date });
+  }
+
+  // COMPLETE ORDER
+  const completeOrder = async (userId: string, cart: interfaces.Cart, accessToken: string): Promise<any> => {
+    // add order to user order history
+    const historyUpdateResult: any = await actions.completeOrder(userId, cart, accessToken);
+
+    // clear cart
+    // dispatch({ type: 'complete_order' });
   }
 
   // I've found that doing the following allows for the functions
@@ -276,7 +284,8 @@ const GlobalContextProvider: React.FC = ({ children }) => {
   initialState.removeFromCart = removeFromCart;
   initialState.updateTaxTotal = updateTaxTotal;
   initialState.updateTotalCost = updateTotalCost;
-  initialState.checkout = checkout;
+  initialState.addDateToCart = addDateToCart;
+  initialState.completeOrder = completeOrder;
 
   return (
     <GlobalContext.Provider value={state}>

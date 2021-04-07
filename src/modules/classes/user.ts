@@ -6,8 +6,8 @@ class User implements interfaces.User {
   lastName?: string;
   email?: string;
   password?: string;
-  _id?: string;
-  accessToken?: string;
+  _id: string;
+  accessToken: string;
   shippingAddress?: interfaces.Address;
   phoneNumber?: string;
   orderHistory?: interfaces.Cart[];
@@ -19,6 +19,8 @@ class User implements interfaces.User {
 
   constructor() {
     this.isAuthorized = false;
+    this._id = 'empty';
+    this.accessToken = 'empty';
 
     this.initiateDetails = function(inputs: any): void {
       this.firstName = inputs.firstName;

@@ -1,4 +1,5 @@
 import * as interfaces from '../modules/interfaces';
+import Cart from '../modules/classes/cart';
 import { ActionType } from '../modules/actions';
 
 function globalReducer(state: interfaces.State, action: ActionType): typeof state {
@@ -102,8 +103,20 @@ function globalReducer(state: interfaces.State, action: ActionType): typeof stat
         }
       };
 
-    case 'checkout':
-      return state;
+    case 'add_date_to_cart':
+      return {
+        ...state,
+        cart: {
+          ...state.cart,
+          date: action.payload
+        }
+      };
+
+    case 'complete_order':
+      return {
+        ...state,
+        cart: new Cart([])
+      };
 
     case 'logout':
       state = action.payload;
