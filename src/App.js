@@ -15,7 +15,8 @@ import ProductDetails from './components/Products/ProductDetails';
 
 import Cart from './components/Cart/Cart';
 import ShippingDetails from './components/Checkout/ShippingDetails/ShippingDetails';
-import PaymentInfo from './components/Checkout/PaymentInfo/PaymentInfo';
+import PaymentForm from './components/Checkout/PaymentInfo/PaymentForm';
+import StripeContainer from './components/Checkout/PaymentInfo/StripeContainer';
 import OrderConfirmation from './components/Checkout/OrderConfirmation/OrderConfirmation';
 
 function App() {
@@ -35,7 +36,7 @@ function App() {
 
             <Route exact path="/cart" component={Cart} />
             <Route exact path="/checkout/shipping" component={ShippingDetails} />
-            <Route exact path="/checkout/payment" component={PaymentInfo} />
+            <Route exact path="/checkout/payment" component={StripeContainer} />
             <Route exact path="/checkout/confirmation" component={OrderConfirmation} />
 
             <Footer />

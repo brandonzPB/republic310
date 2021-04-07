@@ -111,6 +111,16 @@ export const getOrderHistory = (userId: string, token: string): any => {
 }
 
 // POST PAYMENT
+export const postPayment = (userId: string, paymentObj: any, token: string): any => {
+  const req = axios.post(`${baseUrl}/${userId}/payment`, paymentObj, {
+    headers: {
+      'Authorization': `Bearer ${token}`
+    }
+  });
+
+  return req.then((res: any) => res.data)
+    .catch((err: any) => console.error(err));
+}
 
 // POST ORDER
 export const postOrder = (userId: string, order: object, token: string): any => {
