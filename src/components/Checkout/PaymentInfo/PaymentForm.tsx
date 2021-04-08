@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import * as userServices from '../../../services/userServices';
+import * as interfaces from '../../../modules/interfaces';
 import { GlobalContext } from '../../../contexts/GlobalContext';
 import { RouteContext } from '../../../contexts/RouteContext';
 
@@ -12,8 +13,6 @@ const PaymentForm: React.FC = () => {
 
   const { dest, changeDest, changeOrderStatus } = useContext(RouteContext);
 
-  const [success, setSuccess] = useState(false);
-
   const stripe: any = useStripe();
 
   const elements: any = useElements();
@@ -22,8 +21,9 @@ const PaymentForm: React.FC = () => {
     return addDateToCart(date);
   }
 
-  const handleOrderCompletion = async (): Promise<any> => {
-    return completeOrder(user._id, cart, user.accessToken);
+  const handleOrderCompletion = async (completeCart: interfaces.CompleteCart): Promise<any> => {
+    // calls method that adds cart to user order history
+    return completeOrder(user._id, completeCart, user.accessToken);
   }
 
   const handleSubmit = async (e: any) => {
@@ -50,13 +50,22 @@ const PaymentForm: React.FC = () => {
           console.log('Successful payment');
 
           // add date to cart
-          handleOrderDate(response.date);
+          await handleOrderDate(response.date);
+
+          // add date to cart object (state doesn't update for next context method call)
+          const completeCartObj: interfaces.CompleteCart = {
+            products: cart.products,
+            totalItemCount: cart.totalItemCount,
+            date: response.date,
+            taxes: cart.taxes,
+            subtotal: cart.subtotal,
+            total: cart.total
+          };
 
           // adds order to history
-          handleOrderCompletion();
+          handleOrderCompletion(completeCartObj);
 
-          // setSuccess(true);
-          // changeOrderStatus('complete');
+          changeOrderStatus('complete');
         }
         
       } catch (error) {

@@ -25,10 +25,6 @@ function globalReducer(state: interfaces.State, action: ActionType): typeof stat
       state.user.shippingAddress = action.payload;
       return state;
 
-    case 'get_orders':
-      state.user.orderHistory = action.payload;
-      return state;
-
     case 'add_to_cart':
       return {
         ...state,
@@ -115,7 +111,11 @@ function globalReducer(state: interfaces.State, action: ActionType): typeof stat
     case 'complete_order':
       return {
         ...state,
-        cart: new Cart([])
+        user: {
+          ...state.user,
+          orderHistory: [action.payload, ...state.user.orderHistory]
+        },
+        cart: new Cart([]),
       };
 
     case 'logout':

@@ -1,11 +1,20 @@
-import React, { useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { GlobalContext } from '../../../contexts/GlobalContext';
 import { RouteContext } from '../../../contexts/RouteContext';
+import * as interfaces from '../../../modules/interfaces';
 import './orderConfirmation.css';
 
 const OrderConfirmation: React.FC = () => {
-  const { dest, changeDest } = useContext(RouteContext);
+  const { user } = useContext(GlobalContext);
+  
+  const { dest, changeDest, orderStatus, changeOrderStatus } = useContext(RouteContext);
+
+  useEffect(() => {
+    if (orderStatus === 'complete') {
+      changeOrderStatus('incomplete');
+    }
+  }, []);
 
   if (dest === 'cart') {
     return (
@@ -70,6 +79,10 @@ const OrderConfirmation: React.FC = () => {
       </Route>
     )
   }
+
+  const completeOrder: interfaces.CompleteCart = user.orderHistory[0];
+
+  console.log('completeOrder', completeOrder);
 
   return (
     <div id="order-confirmation__container"></div>

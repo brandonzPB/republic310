@@ -18,15 +18,17 @@ const StripeContainer = () => {
 
   const { dest, changeDest, orderStatus, changeOrderStatus } = useContext(RouteContext);
 
-  // if (cart.totalItemCount === 0 || cart.products.length === 0) {
-  //   if (orderStatus === 'complete') {
-  //     // proceed to order confirmation page
-  //     changeDest('confirmation');
-  //   }
-
-  //   // order status is incomplete
-  //   changeDest('home');
-  // }
+  if (cart.totalItemCount === 0 || cart.products.length === 0) {
+    setTimeout(() => {
+      if (orderStatus === 'complete') {
+        // proceed to order confirmation page
+        changeDest('confirmation');
+      }
+  
+      // order status is incomplete
+      changeDest('home');
+    }, 600);
+  }
 
   if (dest === 'home') {
     return (

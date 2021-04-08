@@ -10,17 +10,18 @@ class User implements interfaces.User {
   accessToken: string;
   shippingAddress?: interfaces.Address;
   phoneNumber?: string;
-  orderHistory?: interfaces.Cart[];
+  orderHistory: interfaces.CompleteCart[];
   initiateDetails: (inputs: any) => void; 
   updateShippingAddress: (address: any) => void;
   updatePhoneNumber: (phoneNumber: string) => void;
-  updateOrderHistory: (history: interfaces.Cart[]) => void;
+  updateOrderHistory: (history: interfaces.CompleteCart[]) => void;
   authorizedUser: () => void;
 
   constructor() {
     this.isAuthorized = false;
     this._id = 'empty';
     this.accessToken = 'empty';
+    this.orderHistory = [];
 
     this.initiateDetails = function(inputs: any): void {
       this.firstName = inputs.firstName;
@@ -45,7 +46,7 @@ class User implements interfaces.User {
       this.phoneNumber = phoneNumber;
     }
 
-    this.updateOrderHistory = function(history: interfaces.Cart[]): void {
+    this.updateOrderHistory = function(history: interfaces.CompleteCart[]): void {
       this.orderHistory = history;
     }
 

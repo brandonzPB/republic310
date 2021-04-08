@@ -22,6 +22,16 @@ export interface Cart {
   calculateTotal: () => any;
 };
 
+// COMPLETE CART (once order is placed and date is added)
+export interface CompleteCart {
+  products: Product[];
+  date: Date;
+  totalItemCount: number;
+  subtotal: number;
+  taxes: number;
+  total: number;
+};
+
 /// DISPLAY PRODUCT ///
 
 // this is used for display purposes only
@@ -57,11 +67,11 @@ export interface User {
   accessToken: string;
   shippingAddress?: Address;
   phoneNumber?: string;
-  orderHistory?: Cart[];
+  orderHistory: CompleteCart[];
   initiateDetails: (inputs: any) => void;
   updateShippingAddress: (address: any) => void;
   updatePhoneNumber: (phoneNumber: string) => void;
-  updateOrderHistory: (history: Cart[]) => void;
+  updateOrderHistory: (history: CompleteCart[]) => void;
   authorizedUser: () => void;
 };
 
@@ -69,7 +79,6 @@ export interface User {
 
 export interface State {
   user: User;
-  date?: Date;
   cart: Cart;
   allProducts: DisplayProduct[];
   resetToken: string;
@@ -81,7 +90,6 @@ export interface State {
   logout: () => void;
   updateUser: (update: object) => any;
   updateShippingAddress: (address: Address) => any;
-  getOrders: () => any;
   addToCart: (product: any) => void;
   updateQuantity: (productId: string, newQuantity: number) => void;
   updateTotalItemCount: (newTotal: number) => void;
@@ -90,7 +98,7 @@ export interface State {
   updateTaxTotal: (newTotal: number) => void;
   updateTotalCost: (newTotal: number) => void;
   addDateToCart: (date: Date) => void;
-  completeOrder: (userId: string, cart: Cart, accessToken: string) => void;
+  completeOrder: (userId: string, cart: CompleteCart, accessToken: string) => void;
 };
 
 /// PATH CONTEXT ///

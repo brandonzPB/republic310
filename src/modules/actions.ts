@@ -12,7 +12,6 @@ export type ActionType =
   | { type: 'logout',                     payload: interfaces.State            }
   | { type: 'update_user',                payload: any                         }
   | { type: 'update_shipping',            payload: interfaces.Address          }
-  | { type: 'get_orders',                 payload: interfaces.Cart[]           }
   | { type: 'add_to_cart',                payload: interfaces.Product          }
   | { type: 'update_product_quantity',    payload: any                         }
   | { type: 'update_total_item_count',    payload: number                      }
@@ -21,7 +20,7 @@ export type ActionType =
   | { type: 'update_tax_total',           payload: number                      }
   | { type: 'update_total_cost',          payload: number                      }
   | { type: 'add_date_to_cart',           payload: Date                        }
-  | { type: 'complete_order', }
+  | { type: 'complete_order',             payload: interfaces.CompleteCart     }
 
 const getProductDetailArray = (products: any): any => {
   const productArray: interfaces.DisplayProduct[] = products.map((product: any) => {
@@ -122,20 +121,14 @@ export const updateShipping = async (user: object, userId: string, token: string
   return 'Success';
 }
 
-export const getOrders = async (userId: string, token: string): Promise<any> => {
-  const axiosResult: any = await userService.getOrderHistory(userId, token);
-
-  if (!axiosResult || axiosResult.result !== 'Success') return 'Error';
-
-  return axiosResult;
-}
-
 export const addToCart = (): any => {}
 
 export const removeFromCart = (): any => {}
 
-export const completeOrder = async (userId: string, cart: interfaces.Cart, token: string): Promise<any> => {
+export const completeOrder = async (userId: string, cart: interfaces.CompleteCart, token: string): Promise<any> => {
   const updateResult: any = await userService.postOrder(userId, cart, token);
 
-  return false;
+  if (!updateResult || updateResult.result !== 'Success') return 'Error';
+
+  return 'Success';
 }

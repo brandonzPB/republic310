@@ -35,7 +35,6 @@ const storedState = localStorage.getItem(LOCAL_STORAGE_KEY);
 
 const initialState: interfaces.State = {
   user: new User(),
-  date: undefined,
   cart: new Cart([]),
   allProducts: [],
   resetToken: '',
@@ -47,7 +46,6 @@ const initialState: interfaces.State = {
   logout: (): void => {},
   updateUser: (update: object): any => {},
   updateShippingAddress: (address: interfaces.Address): any => {},
-  getOrders: (): any => {},
   addToCart: (product: any): any => {},
   updateQuantity: (productName: string, newQuantity: number): void => {},
   updateTotalItemCount: (newTotal: number): void => {},
@@ -56,7 +54,7 @@ const initialState: interfaces.State = {
   updateTaxTotal: (newTotal: number): void => {},
   updateTotalCost: (newTotal: number): void => {},
   addDateToCart: (date: Date): void => {},
-  completeOrder: (userId: string, cart: interfaces.Cart, accessToken: string): void => {},
+  completeOrder: (userId: string, cart: interfaces.CompleteCart, accessToken: string): void => {},
 };
 
 export const GlobalContext = createContext<interfaces.State>(initialState);
@@ -135,9 +133,11 @@ const GlobalContextProvider: React.FC = ({ children }) => {
 
     const shippingAddress: interfaces.Address = loginResult.userToken.shipping_address;
     const phoneNumber: string = loginResult.userToken.phone_number;
+    const orderHistory: interfaces.CompleteCart[] = loginResult.userToken.order_history;
 
     authorizedUser.updateShippingAddress(shippingAddress);
     authorizedUser.updatePhoneNumber(phoneNumber);
+    authorizedUser.updateOrderHistory(orderHistory);
     authorizedUser.authorizedUser();
 
     return authorizedUser;
@@ -198,18 +198,6 @@ const GlobalContextProvider: React.FC = ({ children }) => {
     dispatch({ type: 'update_shipping', payload: address });
   }
 
-  // GET ORDER HISTORY
-  const getOrders = async (): Promise<any> => {
-    const userId: string = state.user._id!;
-    const accessToken: string = state.user.accessToken!;
-
-    const axiosResult: any = await actions.getOrders(userId, accessToken);
-
-    if (axiosResult === 'Error') return 'Error';
-
-    dispatch({ type: 'get_orders', payload: axiosResult.orders });
-  }
-
   // UPDATE TOTAL ITEM COUNT (in cart)
   const updateTotalItemCount = (newTotal: number): void => {
     dispatch({ type: 'update_total_item_count', payload: newTotal });
@@ -256,12 +244,15 @@ const GlobalContextProvider: React.FC = ({ children }) => {
   }
 
   // COMPLETE ORDER
-  const completeOrder = async (userId: string, cart: interfaces.Cart, accessToken: string): Promise<any> => {
-    // add order to user order history
+  const completeOrder = async (userId: string, cart: interfaces.CompleteCart, accessToken: string): Promise<any> => {
+    console.log('cart', cart);
+    // adds order to user order history
     const historyUpdateResult: any = await actions.completeOrder(userId, cart, accessToken);
 
-    // clear cart
-    // dispatch({ type: 'complete_order' });
+    if (!historyUpdateResult || historyUpdateResult === 'Error') return 'Error';
+
+    // add to user orderHistory and clear cart
+    dispatch({ type: 'complete_order', payload: cart });
   }
 
   // I've found that doing the following allows for the functions
@@ -276,7 +267,6 @@ const GlobalContextProvider: React.FC = ({ children }) => {
   initialState.logout = logout;
   initialState.updateUser = updateUser;
   initialState.updateShippingAddress = updateShippingAddress;
-  initialState.getOrders = getOrders;
   initialState.addToCart = addToCart;
   initialState.updateQuantity = updateQuantity;
   initialState.updateTotalItemCount = updateTotalItemCount;
