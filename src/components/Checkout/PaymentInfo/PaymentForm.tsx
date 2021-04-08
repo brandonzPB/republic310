@@ -1,6 +1,6 @@
-import React, { useState, useContext } from 'react';
-import { Route, Redirect } from 'react-router-dom';
+import React, { useContext } from 'react';
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
+import { v4 as uuidv4 } from 'uuid';
 import * as userServices from '../../../services/userServices';
 import * as interfaces from '../../../modules/interfaces';
 import { GlobalContext } from '../../../contexts/GlobalContext';
@@ -11,7 +11,7 @@ import './paymentForm.css';
 const PaymentForm: React.FC = () => {
   const { cart, user, completeOrder, addDateToCart } = useContext(GlobalContext);
 
-  const { dest, changeDest, changeOrderStatus } = useContext(RouteContext);
+  const { changeOrderStatus } = useContext(RouteContext);
 
   const stripe: any = useStripe();
 
@@ -49,6 +49,8 @@ const PaymentForm: React.FC = () => {
         if (response.success) {
           console.log('Successful payment');
 
+          changeOrderStatus('complete');
+
           // add date to cart
           await handleOrderDate(response.date);
 
@@ -59,13 +61,12 @@ const PaymentForm: React.FC = () => {
             date: response.date,
             taxes: cart.taxes,
             subtotal: cart.subtotal,
-            total: cart.total
+            total: cart.total,
+            id: uuidv4()
           };
 
           // adds order to history
           handleOrderCompletion(completeCartObj);
-
-          changeOrderStatus('complete');
         }
         
       } catch (error) {

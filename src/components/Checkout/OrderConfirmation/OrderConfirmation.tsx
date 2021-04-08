@@ -1,8 +1,10 @@
 import React, { useEffect, useContext } from 'react';
 import { Route, Redirect } from 'react-router-dom';
+import { v4 as uuidv4 } from 'uuid';
 import { GlobalContext } from '../../../contexts/GlobalContext';
 import { RouteContext } from '../../../contexts/RouteContext';
 import * as interfaces from '../../../modules/interfaces';
+import getMonthName from '../../../modules/getMonthName';
 import './orderConfirmation.css';
 
 const OrderConfirmation: React.FC = () => {
@@ -12,9 +14,21 @@ const OrderConfirmation: React.FC = () => {
 
   useEffect(() => {
     if (orderStatus === 'complete') {
-      changeOrderStatus('incomplete');
+      return changeOrderStatus('incomplete');
     }
   }, []);
+
+  if (!user.isAuthorized) {
+    changeDest('home');
+  }
+
+  if (dest === 'home') {
+    return (
+      <Route exact path="/checkout/confirmation">
+        <Redirect to="/" />
+      </Route>
+    )
+  }
 
   if (dest === 'cart') {
     return (
@@ -72,20 +86,28 @@ const OrderConfirmation: React.FC = () => {
     )
   }
 
-  if (dest === 'home') {
-    return (
-      <Route exact path="/checkout/confirmation">
-        <Redirect to="/" />
-      </Route>
-    )
-  }
-
   const completeOrder: interfaces.CompleteCart = user.orderHistory[0];
 
   console.log('completeOrder', completeOrder);
+  console.log('randomId', uuidv4());
+
+  const orderDateString: string = completeOrder.date.toString();
+
+  const orderDate = {
+    year: orderDateString.slice(0,4),
+    month: getMonthName(orderDateString.slice(5, 7)),
+    day: orderDateString.slice(8,10)
+  };
 
   return (
-    <div id="order-confirmation__container"></div>
+    <div id="order-confirmation__container">
+      <span id="confirmation-header">We hope you enjoy your purchase!</span>
+      
+      <div id="confirmation-details__container">
+        <span id="confirmation-date-text">Your order was placed on {orderDate.day} {orderDate.month} {orderDate.year}</span>
+        <span id="confirmation-order-number-text"></span>
+      </div>
+    </div>
   )
 }
 

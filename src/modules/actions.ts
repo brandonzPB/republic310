@@ -1,7 +1,4 @@
 import * as interfaces from './interfaces';
-import User from './classes/user';
-import Product from './classes/product';
-import Cart from './classes/cart';
 import * as userService from '../services/userServices';
 import * as productService from '../services/productServices';
 
@@ -52,10 +49,10 @@ export const emailIsAvailable = async (email: string): Promise<any> => {
 
   const emailResult: any = await userService.checkEmail(emailObj);
 
-  console.log('emailResult', emailResult);
-
+  // email is not available
   if (!emailResult || emailResult.result === 'Error') return false;
 
+  // email is available
   return true;
 }
 

@@ -245,7 +245,6 @@ const GlobalContextProvider: React.FC = ({ children }) => {
 
   // COMPLETE ORDER
   const completeOrder = async (userId: string, cart: interfaces.CompleteCart, accessToken: string): Promise<any> => {
-    console.log('cart', cart);
     // adds order to user order history
     const historyUpdateResult: any = await actions.completeOrder(userId, cart, accessToken);
 

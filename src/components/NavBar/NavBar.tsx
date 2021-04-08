@@ -71,7 +71,7 @@ const NavBar: React.FC  = () => {
   const emailIsValid = async (email: string): Promise<any> => {
     const emailIsAvailable: any = await actions.emailIsAvailable(email);
 
-    // email is not occupied
+    // email is unavailable
     if (emailIsAvailable) return false;
 
     return true;
@@ -118,6 +118,8 @@ const NavBar: React.FC  = () => {
                     name="email"
                     ref={register({ required: true, validate: emailIsValid })}
                   />
+
+                  {errors.email && <div>Email not found</div>}
 
                   <input 
                     style={{ backgroundColor: errors.password ? 'pink' : 'white' }}

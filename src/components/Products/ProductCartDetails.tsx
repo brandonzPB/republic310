@@ -87,7 +87,7 @@ const ProductCartDetails: React.FC<CartProduct> = ({ name, price, quantity, imag
       </div>
 
       <div id="product-thumbnail-price__container">
-        <span id="product-thumbnail-price">{price}</span>
+        <span id="product-thumbnail-price">${price}.00</span>
       </div>
 
       <div id="product-thumbnail-quantity__container">

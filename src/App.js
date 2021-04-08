@@ -15,7 +15,6 @@ import ProductDetails from './components/Products/ProductDetails';
 
 import Cart from './components/Cart/Cart';
 import ShippingDetails from './components/Checkout/ShippingDetails/ShippingDetails';
-import PaymentForm from './components/Checkout/PaymentInfo/PaymentForm';
 import StripeContainer from './components/Checkout/PaymentInfo/StripeContainer';
 import OrderConfirmation from './components/Checkout/OrderConfirmation/OrderConfirmation';
 

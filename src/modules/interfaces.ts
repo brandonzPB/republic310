@@ -30,6 +30,7 @@ export interface CompleteCart {
   subtotal: number;
   taxes: number;
   total: number;
+  id: string;
 };
 
 /// DISPLAY PRODUCT ///

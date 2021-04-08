@@ -22,7 +22,7 @@ const StripeContainer = () => {
     setTimeout(() => {
       if (orderStatus === 'complete') {
         // proceed to order confirmation page
-        changeDest('confirmation');
+        return changeDest('confirmation');
       }
   
       // order status is incomplete
@@ -34,6 +34,14 @@ const StripeContainer = () => {
     return (
       <Route exact path="/checkout/payment">
         <Redirect to="/" />
+      </Route>
+    )
+  }
+
+  if (dest === 'confirmation') {
+    return (
+      <Route exact path="/checkout/payment">
+        <Redirect to="/checkout/confirmation" />
       </Route>
     )
   }
@@ -50,14 +58,6 @@ const StripeContainer = () => {
     return (
       <Route exact path="/checkout/payment">
         <Redirect to="/checkout/shipping" />
-      </Route>
-    )
-  }
-
-  if (dest === 'confirmation') {
-    return (
-      <Route exact path="/checkout/payment">
-        <Redirect to="/checkout/confirmation" />
       </Route>
     )
   }
