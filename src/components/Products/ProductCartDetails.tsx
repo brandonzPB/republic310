@@ -10,9 +10,10 @@ type CartProduct = {
   quantity: number;
   imageUrl: string;
   alt: string;
+  inCart: boolean;
 };
 
-const ProductCartDetails: React.FC<CartProduct> = ({ name, price, quantity, imageUrl, alt }: CartProduct) => {
+const ProductCartDetails: React.FC<CartProduct> = ({ name, price, quantity, imageUrl, alt, inCart }: CartProduct) => {
   const { cart, updateTotalItemCount, updateQuantity, removeFromCart, allProducts, updateSubtotal } = useContext(GlobalContext);
 
   const { dest, changeDest, changeProduct } = useContext(RouteContext);
@@ -90,16 +91,20 @@ const ProductCartDetails: React.FC<CartProduct> = ({ name, price, quantity, imag
         <span id="product-thumbnail-price">${price}.00</span>
       </div>
 
-      <div id="product-thumbnail-quantity__container">
+      <div id="product-thumbnail-quantity-change__container" style={{ display: inCart ? 'block' : 'none' }}>
         <div id="product-quantity-change__container">
           <button id="decrement-quantity-btn" onClick={decrementQuantity}>-</button>
-          <span id="product-thumbnail-quantity">{qty.amount}</span>
+          <span className="product-thumbnail-quantity">{qty.amount}</span>
           <button id="increment-quantity-btn" onClick={incrementQuantity}>+</button>
         </div>
 
         <div id="product-quantity-update__container" style={{ display: (quantity !== qty.amount) ? 'block' : 'none' }}>
           <button id="product-quantity-update-btn" onClick={handleQuantityUpdate}>Update Quantity</button>
         </div>
+      </div>
+
+      <div id="product-thumbnail-quantity-display__container" style={{ display: inCart ? 'none' : 'block' }}>
+        <span className="product-thumbnail-quantity">Quantity: {quantity}</span>
       </div>
     </div>
   )

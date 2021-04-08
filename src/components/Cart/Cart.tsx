@@ -141,6 +141,7 @@ const Cart: React.FC = () => {
       price={item.price}
       quantity={item.quantity}
       alt={item.name}
+      inCart={true}
     />
   ));
   
