@@ -133,3 +133,15 @@ export const postOrder = (userId: string, order: object, token: string): any => 
   return req.then((res: any) => res.data)
     .catch((err: any) => console.error(err));
 }
+
+// EMAIL CONFIRMATION TO USER
+export const emailConfirmationToUser = (userObj: any, token: string): any => {
+  const req = axios.post(`${baseUrl}/${userObj._id}/confirmation`, userObj, {
+    headers: {
+      'Authorization': `Bearer ${token}`
+    }
+  });
+
+  return req.then((res: any) => res.data)
+    .catch((err: any) => console.error(err));
+}

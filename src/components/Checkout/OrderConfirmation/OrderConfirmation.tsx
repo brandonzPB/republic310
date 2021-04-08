@@ -31,6 +31,7 @@ const OrderConfirmation: React.FC = () => {
   }, []);
 
   if (!user.isAuthorized) {
+    console.log('User not authorized');
     changeDest('home');
   }
 

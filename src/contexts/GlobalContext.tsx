@@ -54,7 +54,8 @@ const initialState: interfaces.State = {
   updateTaxTotal: (newTotal: number): void => {},
   updateTotalCost: (newTotal: number): void => {},
   addDateToCart: (date: Date): void => {},
-  completeOrder: (userId: string, cart: interfaces.CompleteCart, accessToken: string): void => {},
+  completeOrder: (userId: string, cart: interfaces.CompleteCart, accessToken: string): any => {},
+  emailConfirmationToUser: (name: string, id: string, email: string, token: string, cart: interfaces.CompleteCart): any => {},
 };
 
 export const GlobalContext = createContext<interfaces.State>(initialState);
@@ -254,6 +255,18 @@ const GlobalContextProvider: React.FC = ({ children }) => {
     dispatch({ type: 'complete_order', payload: cart });
   }
 
+  // EMAIL CONFIRMATION TO USER
+  const emailConfirmationToUser = async (
+    userFirstName: string,  
+    userId: string,
+    userEmail: string, 
+    token: string,
+    cart: interfaces.CompleteCart): Promise<any> => {
+      const emailResult: any = await actions.emailConfirmationToUser(userFirstName, userId, userEmail, cart, token);
+
+      return emailResult;
+    }
+
   // I've found that doing the following allows for the functions
   // defined within GlobalContextProvider to be consumed globally (and correctly).
   // I've yet to find a better way to go about this...
@@ -275,6 +288,7 @@ const GlobalContextProvider: React.FC = ({ children }) => {
   initialState.updateTotalCost = updateTotalCost;
   initialState.addDateToCart = addDateToCart;
   initialState.completeOrder = completeOrder;
+  initialState.emailConfirmationToUser = emailConfirmationToUser;
 
   return (
     <GlobalContext.Provider value={state}>

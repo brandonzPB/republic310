@@ -5,7 +5,7 @@ import Header from './Header/Header';
 import Body from './Body/Body'
 
 const Index: React.FC = () => {
-  const { dest, changeDest } = useContext(RouteContext);
+  const { dest, changeDest, orderStatus } = useContext(RouteContext);
 
   if (dest === 'cart') {
     return (
