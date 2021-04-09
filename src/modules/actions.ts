@@ -134,8 +134,8 @@ export const emailConfirmationToUser = async (
   userFirstName: string,  
   userId: string,
   userEmail: string, 
-  cart: interfaces.CompleteCart, 
-  token: string): Promise<any> => {
+  token: string,
+  cart: interfaces.CompleteCart): Promise<any> => {
     const userObj = {
       firstName: userFirstName,
       _id: userId,

@@ -262,7 +262,7 @@ const GlobalContextProvider: React.FC = ({ children }) => {
     userEmail: string, 
     token: string,
     cart: interfaces.CompleteCart): Promise<any> => {
-      const emailResult: any = await actions.emailConfirmationToUser(userFirstName, userId, userEmail, cart, token);
+      const emailResult: any = await actions.emailConfirmationToUser(userFirstName, userId, userEmail, token, cart);
 
       return emailResult;
     }

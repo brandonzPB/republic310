@@ -20,12 +20,20 @@ import bearSrc from '../../../assets/images/products/the_bear.jpg';
 import surferSrc from '../../../assets/images/products/the_surfer.jpg';
 
 const OrderConfirmation: React.FC = () => {
-  const { user } = useContext(GlobalContext);
+  const { user, emailConfirmationToUser } = useContext(GlobalContext);
   
   const { dest, changeDest, orderStatus, changeOrderStatus } = useContext(RouteContext);
 
+  const completeOrder: interfaces.CompleteCart = user.orderHistory[0];
+
   useEffect(() => {
     if (orderStatus === 'complete') {
+      const userName: string = user.firstName!;
+      const email: string = user.email!;
+      const accessToken: string = user.accessToken!;
+      const userId: string = user._id;
+
+      emailConfirmationToUser(userName, userId, email, accessToken, completeOrder);
       return changeOrderStatus('incomplete');
     }
   }, []);
@@ -98,10 +106,6 @@ const OrderConfirmation: React.FC = () => {
       </Route>
     )
   }
-
-  const completeOrder: interfaces.CompleteCart = user.orderHistory[0];
-
-  console.log('completeOrder', completeOrder);
 
   const ProductComponents: any = completeOrder.products.map((item: any) => (
     <ProductCartDetails 
