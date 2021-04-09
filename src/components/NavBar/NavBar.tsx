@@ -94,7 +94,9 @@ const NavBar: React.FC  = () => {
 
       <h1 id ="nav-link-text" onClick={() => handleNav('contact')}>CONTACT US</h1>
 
-      <div id="logout__container" style={{ display: user.isAuthorized ? 'block' : 'none' }}>Logout</div>
+      <div id="logout__container" style={{ display: user.isAuthorized ? 'block' : 'none' }}>
+        <span id="user-info-link" onClick={() => changeDest('userInfo')}>Your Account</span>
+      </div>
 
       <div id="login__container" style={{ display: user.isAuthorized ? 'none' : 'block', backgroundColor: 'transparent' }}>
         <h1 id ="nav-link-text" onClick={showLoginForm}>LOGIN</h1>

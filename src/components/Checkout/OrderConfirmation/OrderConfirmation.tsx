@@ -1,30 +1,15 @@
 import React, { useEffect, useContext } from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import { v4 as uuidv4 } from 'uuid';
 import { GlobalContext } from '../../../contexts/GlobalContext';
 import { RouteContext } from '../../../contexts/RouteContext';
 import * as interfaces from '../../../modules/interfaces';
-import getMonthName from '../../../modules/getMonthName';
-import getOrderNumber from '../../../modules/getOrderNumber';
-import ProductCartDetails from '../../Products/ProductCartDetails';
+import Order from '../../User/Order/Order';
 import './orderConfirmation.css';
 
-import hollywoodSrc from '../../../assets/images/products/the_hollywood.jpg';
-import malibuSrc from '../../../assets/images/products/the_malibu.jpg';
-import sanAndreasSrc from '../../../assets/images/products/the_san_andreas.jpg';
-import mudslideSrc from '../../../assets/images/products/the_mudslide.jpg';
-import bruinSrc from '../../../assets/images/products/the_bruins.jpg';
-import goldenGateSrc from '../../../assets/images/products/the_golden_gate.jpg';
-import smogSrc from '../../../assets/images/products/the_smog.png';
-import bearSrc from '../../../assets/images/products/the_bear.jpg';
-import surferSrc from '../../../assets/images/products/the_surfer.jpg';
-
 const OrderConfirmation: React.FC = () => {
-  const { user, emailConfirmationToUser } = useContext(GlobalContext);
+  const { user, emailConfirmationToUser, allProducts } = useContext(GlobalContext);
   
   const { dest, changeDest, orderStatus, changeOrderStatus } = useContext(RouteContext);
-
-  const completeOrder: interfaces.CompleteCart = user.orderHistory[0];
 
   useEffect(() => {
     if (orderStatus === 'complete') {
@@ -32,15 +17,17 @@ const OrderConfirmation: React.FC = () => {
       const email: string = user.email!;
       const accessToken: string = user.accessToken!;
       const userId: string = user._id;
+      const completeOrder: interfaces.CompleteCart = user.orderHistory[0];
 
       emailConfirmationToUser(userName, userId, email, accessToken, completeOrder);
+
       return changeOrderStatus('incomplete');
     }
   }, []);
 
-  if (!user.isAuthorized) {
+  if (!allProducts.length || !user.isAuthorized) {
     console.log('User not authorized');
-    changeDest('home');
+    setTimeout(() => { changeDest('home') }, 700);
   }
 
   if (dest === 'home') {
@@ -107,78 +94,27 @@ const OrderConfirmation: React.FC = () => {
     )
   }
 
-  const ProductComponents: any = completeOrder.products.map((item: any) => (
-    <ProductCartDetails 
-      key={item.id}
-      name={item.name}
-      imageUrl={
-        item.name === 'The Hollywood' ? hollywoodSrc
-          : item.name === 'The Malibu' ? malibuSrc
-          : item.name === 'The Surfer' ? surferSrc
-          : item.name === 'The Mudslide' ? mudslideSrc
-          : item.name === 'The Bruins' ? bruinSrc
-          : item.name === 'The San Andreas' ? sanAndreasSrc
-          : item.name === 'The Golden Gate' ? goldenGateSrc
-          : item.name === 'The Bear' ? bearSrc
-          : smogSrc
-      }
-      price={item.price}
-      quantity={item.quantity}
-      alt={item.name}
-      inCart={false}
-    />
-  ))
+  if (!user.isAuthorized) {
+    return (
+      <div id="confirmation-error__container">
+        <span id="confirmation-error-text">Redirecting to index...</span>
+      </div>
+    )
+  }
 
-  const orderDateString: string = completeOrder.date.toString();
-
-  const orderDate = {
-    year: orderDateString.slice(0,4),
-    month: getMonthName(orderDateString.slice(5, 7)),
-    day: orderDateString.slice(8,10)
-  };
-
-  const orderNumber: string = getOrderNumber(completeOrder.id);
-
-  const userShippingDetails: interfaces.Address = user.shippingAddress!;
+  const completeOrder: interfaces.CompleteCart = user.orderHistory[0];
 
   return (
     <div id="order-confirmation__container">
-      <span id="confirmation-header">We hope you enjoy your purchase, {user.firstName}</span>
-      
-      <div id="confirmation-details__container">
-        <span id="confirmation-date-text">Your order was placed on {orderDate.day} {orderDate.month} {orderDate.year}</span>
-        <span id="confirmation-order-number-text">Order number: {orderNumber}</span>
-      </div>
-
-      <div id="confirmation-contact__container">
-        <span id="confirmation-details-header">Your Contact Details</span>
-
-        <span id="confirmation-name">{user.firstName} {user.lastName}</span>
-        <span id="confirmation-email">A copy of this confirmation was sent to {user.email}</span>
-        <span id="confirmation-phone">{user.phoneNumber}</span>
-      </div>
-        
-      <div id="confirmation-shipping__container">
-        <span id="confirmation-eta">Estimated delivery date: </span>
-
-        <span id="confirmation-address-header">Delivery to: </span>
-
-        <span id="confirmation-address-street">{userShippingDetails.street}</span>
-        <span id="confirmation-address-city">{userShippingDetails.city}</span>
-        <span id="confirmation-address-zipCode">{userShippingDetails.zipCode}</span>
-
-        <span 
-          id="confirmation-address-state" 
-          style={{ display: userShippingDetails.state !== 'none' ? 'none' : 'block' }}>
-            {userShippingDetails.state}
-        </span>
-        <span id="confirmation-address-country">{userShippingDetails.country}</span>
-      </div>
-
-      <div id="confirmation-items__container">
-        <span id="confirmation-items-text">Items you purchased</span>
-        {ProductComponents}
-      </div>
+      <Order 
+        date={completeOrder.date}
+        id={completeOrder.id}
+        products={completeOrder.products}
+        totalItemCount={completeOrder.totalItemCount}
+        subtotal={completeOrder.subtotal}
+        taxes={completeOrder.taxes}
+        total={completeOrder.total}
+      />
     </div>
   )
 }

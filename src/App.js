@@ -18,6 +18,10 @@ import ShippingDetails from './components/Checkout/ShippingDetails/ShippingDetai
 import StripeContainer from './components/Checkout/PaymentInfo/StripeContainer';
 import OrderConfirmation from './components/Checkout/OrderConfirmation/OrderConfirmation';
 
+import UserInfo from './components/User/Info/UserInfo';
+import OrderHistory from './components/User/OrderHistory/OrderHistory';
+import UpdateUser from './components/User/Update/UpdateUser';
+
 function App() {
   return (
     <BrowserRouter>
@@ -37,6 +41,10 @@ function App() {
             <Route exact path="/checkout/shipping" component={ShippingDetails} />
             <Route exact path="/checkout/payment" component={StripeContainer} />
             <Route exact path="/checkout/confirmation" component={OrderConfirmation} />
+
+            <Route exact path="/user/info" component={UserInfo} />
+            <Route exact path="/order_history" component={OrderHistory} />
+            <Route exact path="/user/update" component={UpdateUser} />
 
             <Footer />
           </RouteContextProvider>
