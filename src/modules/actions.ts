@@ -8,6 +8,7 @@ export type ActionType =
   | { type: 'login',                      payload: interfaces.User             }
   | { type: 'logout',                     payload: interfaces.State            }
   | { type: 'update_user',                payload: any                         }
+  | { type: 'update_password',            payload: string                      }
   | { type: 'update_shipping',            payload: interfaces.Address          }
   | { type: 'add_to_cart',                payload: interfaces.Product          }
   | { type: 'update_product_quantity',    payload: any                         }
@@ -110,8 +111,16 @@ export const updateUser = async (user: object, userId: string, token: string): P
   return 'Success';
 }
 
-export const updateShipping = async (user: object, userId: string, token: string): Promise<any> => {
-  const updateResult: any = await userService.updateUserShippingDetails(user, userId, token);
+export const updateUserPassword = async (user: object, userId: string, token: string): Promise<any> => {
+  const updateResult: any = await userService.updateUserPassword(user, userId, token);
+
+  if (!updateResult || updateResult.result !== 'Success') return 'Error';
+
+  return 'Success';
+}
+
+export const updateShipping = async (shippingObj: interfaces.Address, userId: string, token: string): Promise<any> => {
+  const updateResult: any = await userService.updateUserShippingDetails(shippingObj, userId, token);
 
   if (!updateResult || updateResult.result !== 'Success') return 'Error';
 

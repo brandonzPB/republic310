@@ -8,7 +8,6 @@ import './updateUser.css';
 interface UpdateForm {
   email: string;
   password: string;
-  confirmPassword: string;
   street: string;
   city: string;
   zipCode: string;
@@ -17,21 +16,93 @@ interface UpdateForm {
 };
 
 const UpdateUser: React.FC = () => {
-  const { user } = useContext(GlobalContext);
+  const { user, updateUser, updateShippingAddress } = useContext(GlobalContext);
 
   const { dest, changeDest } = useContext(RouteContext);
 
   const { register, handleSubmit, errors } = useForm<UpdateForm>();
+
+  if (dest === 'cart') {
+    return (
+      <Route exact path="/user/update/details">
+        <Redirect to="/cart" />
+      </Route>
+    )
+  }
+
+  if (dest === 'updatePassword') {
+    return (
+      <Route exact path="/user/update/details">
+        <Redirect to="/user/update/password" />
+      </Route>
+    )
+  }
+
+  if (dest === 'contact') {
+    return (
+      <Route exact path="/user/update/details">
+        <Redirect to="/contact" />
+      </Route>
+    )
+  }
+
+  if (dest === 'products') {
+    return (
+      <Route exact path="/user/update/details">
+        <Redirect to="/products" />
+      </Route>
+    )
+  }
+
+  if (dest === 'about') {
+    return (
+      <Route exact path="/user/update/details">
+        <Redirect to="/about" />
+      </Route>
+    )
+  }
+
+  if (dest === 'home' || dest !== 'userUpdate') {
+    return (
+      <Route exact path="/user/update/details">
+        <Redirect to="/" />
+      </Route>
+    )
+  }
   
   // CHECK IF EMAIL IS AVAILABLE
   const isAvailable = async (): Promise<any> => {}
-  
-  // UPDATE STATE
+
+  // HANDLE SHIPPING UPDATE
+  const handleShippingUpdate = async (data: any): Promise<any> => {
+    const street: string = data.street;
+    const city: string = data.city;
+    const zipCode: string = data.zipCode;
+    const state: string = data.state;
+    const country: string = data.country;
+
+    const updateResult: string = await updateShippingAddress(street, city, zipCode, state, country);
+    return updateResult === 'Success';
+  }
+
+  // HANDLE USER UPDATE (everything except shipping)
+  const handleUserUpdate = async (data: any): Promise<any> => {
+    const email: string = data.email;
+    const phoneNumber: string = data.phoneNumber;
+
+    const updateResult: string = await updateUser(email, phoneNumber);
+    return updateResult === 'Success';
+  }
 
   // SUBMIT UPDATE FORM
   const onSubmit = async (data: any): Promise<any> => {
     console.log('data', data);
   }
+
+  // CHECK IF PASSWORD IS CORRECT
+  const isCorrectPassword = (password: string) => {
+    return password === user.password;
+  } 
 
   return (
     <div id="user-update__container">
@@ -51,11 +122,69 @@ const UpdateUser: React.FC = () => {
         )}
 
         <input 
-          id="update-password-input"
+          className="update-input update-password-input"
           type="password"
           name="password"
-          
+          ref={register({ required: true, validate: isCorrectPassword })}
         />
+
+        {errors.password && errors.password.type === 'validate' && (
+          <div>Incorrect password</div>
+        )}
+        
+        {errors.password && <div>Please enter your password</div>}
+
+        <input 
+          className="update-input"
+          id="update-street-input"
+          type="text"
+          name="street"
+          defaultValue={ user.shippingAddress ? user.shippingAddress.street : '' }
+          placeholder="Street"
+          ref={register({ required: false })}
+        />
+        
+        <input 
+          className="update-input"
+          id="update-city-input"
+          type="text"
+          name="city"
+          defaultValue={ user.shippingAddress ? user.shippingAddress.city : '' }
+          placeholder="City"
+          ref={register({ required: false })}
+        />
+
+        <input 
+          className="update-input"
+          id="update-zipCode-input"
+          type="text"
+          name="zipCode"
+          defaultValue={ user.shippingAddress ? user.shippingAddress.zipCode : '' }
+          placeholder="zipCode"
+          ref={register({ required: false })}
+        />
+
+        <input 
+          className="update-input"
+          id="update-state-input"
+          type="text"
+          name="state"
+          defaultValue={ user.shippingAddress ? user.shippingAddress.state : '' }
+          placeholder="State"
+          ref={register({ required: false })}
+        />
+
+        <input 
+          className="update-input"
+          id="update-country-input"
+          type="text"
+          name="country"
+          defaultValue={ user.shippingAddress ? user.shippingAddress.country : '' }
+          placeholder="Country"
+          ref={register({ required: false })}
+        />
+
+        <button id="submit-update-btn">Update Account</button>
       </form>
     </div>
   )

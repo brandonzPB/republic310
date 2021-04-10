@@ -72,7 +72,7 @@ export const readUser = (userId: string, token: string): any => {
     .catch((err: any) => console.error(err));
 }
 
-// UPDATE USER DETAILS (not just password; excluding shipping details)
+// UPDATE USER DETAILS (excluding shipping details and password)
 export const updateUserDetails = (user: object, userId: string, token: string): any => {
   const req: any = axios.put(`${baseUrl}/${userId}/details`, user, {
     headers: {
@@ -84,9 +84,21 @@ export const updateUserDetails = (user: object, userId: string, token: string): 
     .catch((err: any) => console.error(err));
 }
 
+// UPDATE USER PASSWORD
+export const updateUserPassword = (user: object, userId: string, token: string): any => {
+  const req: any = axios.put(`${baseUrl}/${userId}/password`, user, {
+    headers: {
+      'Authorization': `Bearer ${token}`
+    }
+  });
+
+  return req.then((res: any) => res.data)
+    .catch((err: any) => console.error(err));
+}
+
 // UPDATE USER SHIPPING DETAILS
-export const updateUserShippingDetails = (user: object, userId: string, token: string): any => {
-  const req: any = axios.put(`${baseUrl}/${userId}/shipping_details`, user, {
+export const updateUserShippingDetails = (shippingObj: object, userId: string, token: string): any => {
+  const req: any = axios.put(`${baseUrl}/${userId}/shipping_details`, shippingObj, {
     headers: {
       'Authorization': `Bearer ${token}`
     }

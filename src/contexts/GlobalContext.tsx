@@ -44,8 +44,9 @@ const initialState: interfaces.State = {
   resetPassword: (password: string): any => {},
   login: (user: object): any => {},
   logout: (): void => {},
-  updateUser: (update: object): any => {},
-  updateShippingAddress: (address: interfaces.Address): any => {},
+  updateUser: (email: string, phoneNumber: string): any => {},
+  updateUserPassword: (password: string): any => {},
+  updateShippingAddress: (street: string, city: string, zipCode: string, addressState: string, country: string): any => {},
   addToCart: (product: any): any => {},
   updateQuantity: (productName: string, newQuantity: number): void => {},
   updateTotalItemCount: (newTotal: number): void => {},
@@ -163,40 +164,44 @@ const GlobalContextProvider: React.FC = ({ children }) => {
   }
 
   // UPDATE USER DETAILS (excluding shipping)
-  const updateUser = async (update: any): Promise<any> => {
+  const updateUser = async (email: string, phoneNumber: string): Promise<any> => {
     if (state.user === undefined) return;
 
-    const user = {
-      firstName: update.firstName.trim() || state.user.firstName,
-      lastName: update.lastName.trim() || state.user.lastName,
-      email: update.email.trim() || state.user.email,
-      password: update.password.trim() || state.user.password,
-      phoneNumber: update.phoneNumber.trim() || state.user.phoneNumber,
-      updatePassword: !!update.password.trim()
-    };
+    const userUpdateObj = { email, phoneNumber, };
 
     const userId: string = state.user._id!;
     const accessToken: string = state.user.accessToken!;
 
-    const updateResult: any = await actions.updateUser(user, userId, accessToken);
+    const updateResult: any = await actions.updateUser(userUpdateObj, userId, accessToken);
 
     if (updateResult === 'Error') return 'Error';
 
-    dispatch({ type: 'update_user', payload: user });
+    dispatch({ type: 'update_user', payload: userUpdateObj });
   }
 
+  // UPDATE USER PASSWORD
+  const updateUserPassword = async (password: string): Promise<any> => {}
+
   // UPDATE SHIPPING DETAILS
-  const updateShippingAddress = async (address: interfaces.Address): Promise<any> => {
+  const updateShippingAddress = async (street: string, city: string, zipCode: string, addressState: string, country: string): Promise<any> => {
     const userId: string = state.user._id!;
     const accessToken: string = state.user.accessToken!;
 
-    const user: object = { shippingAddress: address };
+    const shippingUpdateObj: any = {
+      street,
+      city,
+      zipCode,
+      state: addressState,
+      country,
+    };
 
-    const updateResult: any = await actions.updateShipping(user, userId, accessToken);
+    const updateResult: any = await actions.updateShipping(shippingUpdateObj, userId, accessToken);
 
     if (updateResult === 'Error') return 'Error';
 
-    dispatch({ type: 'update_shipping', payload: address });
+    dispatch({ type: 'update_shipping', payload: shippingUpdateObj });
+
+    return 'Success';
   }
 
   // UPDATE TOTAL ITEM COUNT (in cart)
@@ -278,6 +283,7 @@ const GlobalContextProvider: React.FC = ({ children }) => {
   initialState.login = login;
   initialState.logout = logout;
   initialState.updateUser = updateUser;
+  initialState.updateUserPassword = updateUserPassword;
   initialState.updateShippingAddress = updateShippingAddress;
   initialState.addToCart = addToCart;
   initialState.updateQuantity = updateQuantity;
