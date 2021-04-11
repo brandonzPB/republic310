@@ -13,14 +13,6 @@ const About: React.FC = () => {
     )
   }
 
-  if (dest === 'shipping') {
-    return (
-      <Route exact path="/about">
-        <Redirect to="/checkout/shipping" />
-      </Route>
-    )
-  }
-
   if (dest === 'cart') {
     return (
       <Route exact path="/about">

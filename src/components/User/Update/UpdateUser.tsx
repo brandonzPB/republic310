@@ -33,7 +33,7 @@ const UpdateUser: React.FC = () => {
 
   if (dest === 'cart') {
     return (
-      <Route exact path="/user/update/details">
+      <Route exact path="/user/update">
         <Redirect to="/cart" />
       </Route>
     )
@@ -41,7 +41,7 @@ const UpdateUser: React.FC = () => {
 
   if (dest === 'contact') {
     return (
-      <Route exact path="/user/update/details">
+      <Route exact path="/user/update">
         <Redirect to="/contact" />
       </Route>
     )
@@ -49,7 +49,7 @@ const UpdateUser: React.FC = () => {
 
   if (dest === 'products') {
     return (
-      <Route exact path="/user/update/details">
+      <Route exact path="/user/update">
         <Redirect to="/products" />
       </Route>
     )
@@ -57,7 +57,7 @@ const UpdateUser: React.FC = () => {
 
   if (dest === 'about') {
     return (
-      <Route exact path="/user/update/details">
+      <Route exact path="/user/update">
         <Redirect to="/about" />
       </Route>
     )
@@ -65,7 +65,7 @@ const UpdateUser: React.FC = () => {
 
   if (dest === 'index' || dest !== 'userUpdate') {
     return (
-      <Route exact path="/user/update/details">
+      <Route exact path="/user/update">
         <Redirect to="/" />
       </Route>
     )

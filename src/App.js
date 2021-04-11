@@ -46,7 +46,7 @@ function App() {
             <Route exact path="/checkout/confirmation" component={OrderConfirmation} />
 
             <Route exact path="/user/info" component={UserInfo} />
-            <Route exact path="/user/update/details" component={UpdateUser} />
+            <Route exact path="/user/update" component={UpdateUser} />
             <Route exact path="/user/update/password" component={PasswordUpdate} />
 
             <Route exact path="/order/history" component={OrderHistory} />
