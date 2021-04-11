@@ -1,13 +1,15 @@
 import React, { useContext } from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import { RouteContext } from '../../contexts/RouteContext';
+import { GlobalContext } from '../../../contexts/GlobalContext';
+import { RouteContext } from '../../../contexts/RouteContext';
+import './cancelOrder.css';
 
-const Contact: React.FC = () => {
+const CancelOrder: React.FC = () => {
   const { dest, changeDest } = useContext(RouteContext);
 
   if (dest === 'userInfo') {
     return (
-      <Route exact path="/contact">
+      <Route exact path="/order/cancel">
         <Redirect to="/user/info" />
       </Route>
     )
@@ -15,23 +17,23 @@ const Contact: React.FC = () => {
 
   if (dest === 'cart') {
     return (
-      <Route exact path="/contact">
+      <Route exact path="/order/cancel">
         <Redirect to="/cart" />
       </Route>
     )
   }
 
-  if (dest === 'shipping') {
+  if (dest === 'contact') {
     return (
-      <Route exact path="/contact">
-        <Redirect to="/checkout/shipping" />
+      <Route exact path="/order/cancel">
+        <Redirect to="/contact" />
       </Route>
     )
   }
 
   if (dest === 'products') {
     return (
-      <Route exact path="/contact">
+      <Route exact path="/order/cancel">
         <Redirect to="/products" />
       </Route>
     )
@@ -39,23 +41,22 @@ const Contact: React.FC = () => {
 
   if (dest === 'about') {
     return (
-      <Route exact path="/contact">
+      <Route exact path="/order/cancel">
         <Redirect to="/about" />
       </Route>
     )
   }
-
-  if (dest === 'index' || dest !== 'contact') {
+  if (dest === 'home' || dest !== 'orderCancel') {
     return (
-      <Route exact path="/contact">
+      <Route exact path="/order/cancel">
         <Redirect to="/" />
       </Route>
     )
   }
 
   return (
-    <div id="contact__container"></div>
+    <div id="cancel-order__container"></div>
   )
 }
 
-export default Contact;
+export default CancelOrder;

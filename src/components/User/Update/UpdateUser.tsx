@@ -8,6 +8,7 @@ import './updateUser.css';
 interface UpdateForm {
   email: string;
   password: string;
+  phoneNumber: string;
   street: string;
   city: string;
   zipCode: string;
@@ -22,18 +23,18 @@ const UpdateUser: React.FC = () => {
 
   const { register, handleSubmit, errors } = useForm<UpdateForm>();
 
-  if (dest === 'cart') {
+  if (dest === 'userInfo') {
     return (
-      <Route exact path="/user/update/details">
-        <Redirect to="/cart" />
+      <Route exact path="/user/update">
+        <Redirect to="/user/info" />
       </Route>
     )
   }
 
-  if (dest === 'updatePassword') {
+  if (dest === 'cart') {
     return (
       <Route exact path="/user/update/details">
-        <Redirect to="/user/update/password" />
+        <Redirect to="/cart" />
       </Route>
     )
   }
@@ -62,7 +63,7 @@ const UpdateUser: React.FC = () => {
     )
   }
 
-  if (dest === 'home' || dest !== 'userUpdate') {
+  if (dest === 'index' || dest !== 'userUpdate') {
     return (
       <Route exact path="/user/update/details">
         <Redirect to="/" />
@@ -120,6 +121,18 @@ const UpdateUser: React.FC = () => {
         {errors.email && errors.email.type === 'validate' && (
           <div style={{ color: 'red' }}>Email is already in use</div>
         )}
+
+        <input 
+          style={{ backgroundColor: errors.phoneNumber ? 'pink' : 'white' }}
+          className="update-input"
+          id="update-phone-input"
+          type="tel"
+          name="phoneNumber"
+          defaultValue={ user.phoneNumber ? user.phoneNumber : '' }
+          ref={register({ required: false })}
+        />
+
+        {errors.phoneNumber && <div>Please enter a valid phone number</div>}
 
         <input 
           className="update-input update-password-input"

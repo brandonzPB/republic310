@@ -5,18 +5,10 @@ import { RouteContext } from '../../contexts/RouteContext';
 const About: React.FC = () => {
   const { dest, changeDest } = useContext(RouteContext);
 
-  if (dest === 'payment') {
+  if (dest === 'userInfo') {
     return (
       <Route exact path="/about">
-        <Redirect to="/checkout/payment" />
-      </Route>
-    )
-  }
-
-  if (dest === 'confirmation') {
-    return (
-      <Route exact path="/about">
-        <Redirect to="/checkout/confirmation" />
+        <Redirect to="/user/info" />
       </Route>
     )
   }
@@ -37,22 +29,6 @@ const About: React.FC = () => {
     )
   }
 
-  if (dest === 'productDetails') {
-    return (
-      <Route exact path="/about">
-        <Redirect to="/product/details" />
-      </Route>
-    )
-  }
-
-  if (dest === 'home') {
-    return (
-      <Route exact path="/about">
-        <Redirect to="/" />
-      </Route>
-    )
-  }
-
   if (dest === 'products') {
     return (
       <Route exact path="/about">
@@ -65,6 +41,14 @@ const About: React.FC = () => {
     return (
       <Route exact path="/about">
         <Redirect to="/contact" />
+      </Route>
+    )
+  }
+
+  if (dest === 'index' || dest !== 'about') {
+    return (
+      <Route exact path="/about">
+        <Redirect to="/" />
       </Route>
     )
   }

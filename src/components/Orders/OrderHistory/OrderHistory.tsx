@@ -10,58 +10,42 @@ const OrderHistory: React.FC = () => {
   const { user } = useContext(GlobalContext);
 
   const { dest, changeDest } = useContext(RouteContext);
-
-  if (dest === 'home') {
+  
+  if (dest === 'userInfo') {
     return (
-      <Route exact path="/order_history">
-        <Redirect to="/" />
+      <Route exact path="/order/history">
+        <Redirect to="/user/info" />
+      </Route>
+    )
+  }
+
+  if (dest === 'orderCancel') {
+    return (
+      <Route exact path="/order/history">
+        <Redirect to="/order/cancel" />
       </Route>
     )
   }
 
   if (dest === 'cart') {
     return (
-      <Route exact path="/order_history">
+      <Route exact path="/order/history">
         <Redirect to="/cart" />
-      </Route>
-    )
-  }
-
-  if (dest === 'shipping') {
-    return (
-      <Route exact path="/order_history">
-        <Redirect to="/checkout/shipping" />
-      </Route>
-    )
-  }
-
-  if (dest === 'payment') {
-    return (
-      <Route exact path="/order_history">
-        <Redirect to="/checkout/payment" />
       </Route>
     )
   }
 
   if (dest === 'contact') {
     return (
-      <Route exact path="/order_history">
+      <Route exact path="/order/history">
         <Redirect to="/contact" />
-      </Route>
-    )
-  }
-
-  if (dest === 'productDetails') {
-    return (
-      <Route exact path="/order_history">
-        <Redirect to="/product/details" />
       </Route>
     )
   }
 
   if (dest === 'products') {
     return (
-      <Route exact path="/order_history">
+      <Route exact path="/order/history">
         <Redirect to="/products" />
       </Route>
     )
@@ -69,8 +53,15 @@ const OrderHistory: React.FC = () => {
 
   if (dest === 'about') {
     return (
-      <Route exact path="/order_history">
+      <Route exact path="/order/history">
         <Redirect to="/about" />
+      </Route>
+    )
+  }
+  if (dest === 'home' || dest !== 'orderHistory') {
+    return (
+      <Route exact path="/order/history">
+        <Redirect to="/" />
       </Route>
     )
   }

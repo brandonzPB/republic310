@@ -3,7 +3,7 @@ import { Route, Redirect } from 'react-router-dom';
 import { GlobalContext } from '../../../contexts/GlobalContext';
 import { RouteContext } from '../../../contexts/RouteContext';
 import * as interfaces from '../../../modules/interfaces';
-import Order from '../../User/Order/Order';
+import Order from '../../Orders/Order/Order';
 import './orderConfirmation.css';
 
 const OrderConfirmation: React.FC = () => {
@@ -27,13 +27,13 @@ const OrderConfirmation: React.FC = () => {
 
   if (!allProducts.length || !user.isAuthorized) {
     console.log('User not authorized');
-    setTimeout(() => { changeDest('home') }, 700);
+    setTimeout(() => { changeDest('index') }, 700);
   }
 
-  if (dest === 'home') {
+  if (dest === 'userInfo') {
     return (
       <Route exact path="/checkout/confirmation">
-        <Redirect to="/" />
+        <Redirect to="/user/info" />
       </Route>
     )
   }
@@ -42,22 +42,6 @@ const OrderConfirmation: React.FC = () => {
     return (
       <Route exact path="/checkout/confirmation">
         <Redirect to="/cart" />
-      </Route>
-    )
-  }
-
-  if (dest === 'shipping') {
-    return (
-      <Route exact path="/checkout/confirmation">
-        <Redirect to="/checkout/shipping" />
-      </Route>
-    )
-  }
-
-  if (dest === 'payment') {
-    return (
-      <Route exact path="/checkout/confirmation">
-        <Redirect to="/checkout/payment" />
       </Route>
     )
   }
@@ -90,6 +74,14 @@ const OrderConfirmation: React.FC = () => {
     return (
       <Route exact path="/checkout/confirmation">
         <Redirect to="/about" />
+      </Route>
+    )
+  }
+
+  if (dest === 'index' || dest !== 'confirmation') {
+    return (
+      <Route exact path="/checkout/confirmation">
+        <Redirect to="/" />
       </Route>
     )
   }

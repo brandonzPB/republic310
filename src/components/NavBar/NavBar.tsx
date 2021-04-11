@@ -90,7 +90,7 @@ const NavBar: React.FC  = () => {
 
       <h1 id ="nav-link-text" onClick={() => handleNav('about')}>ABOUT US</h1>
 
-      <img id="logo" src={logoSrc} onClick={() => handleNav('home')} alt="Logo of The Republic 310" style={{ cursor: 'pointer' }} />
+      <img id="logo" src={logoSrc} onClick={() => handleNav('index')} alt="Logo of The Republic 310" style={{ cursor: 'pointer' }} />
 
       <h1 id ="nav-link-text" onClick={() => handleNav('contact')}>CONTACT US</h1>
 

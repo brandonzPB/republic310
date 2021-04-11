@@ -19,9 +19,11 @@ import StripeContainer from './components/Checkout/PaymentInfo/StripeContainer';
 import OrderConfirmation from './components/Checkout/OrderConfirmation/OrderConfirmation';
 
 import UserInfo from './components/User/Info/UserInfo';
-import OrderHistory from './components/User/OrderHistory/OrderHistory';
 import UpdateUser from './components/User/Update/UpdateUser';
 import PasswordUpdate from './components/User/Update/PasswordUpdate';
+
+import OrderHistory from './components/Orders/OrderHistory/OrderHistory';
+import CancelOrder from './components/Orders/CancelOrder/CancelOrder.tsx';
 
 function App() {
   return (
@@ -44,9 +46,11 @@ function App() {
             <Route exact path="/checkout/confirmation" component={OrderConfirmation} />
 
             <Route exact path="/user/info" component={UserInfo} />
-            <Route exact path="/order_history" component={OrderHistory} />
             <Route exact path="/user/update/details" component={UpdateUser} />
             <Route exact path="/user/update/password" component={PasswordUpdate} />
+
+            <Route exact path="/order/history" component={OrderHistory} />
+            <Route exact path="/order/cancel" component={CancelOrder} />
 
             <Footer />
           </RouteContextProvider>

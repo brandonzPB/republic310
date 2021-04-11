@@ -18,6 +18,14 @@ const PasswordUpdate = () => {
 
   const { register, errors, handleSubmit } = useForm<PasswordForm>();
 
+  if (dest === 'userInfo') {
+    return (
+      <Route exact path="/user/update/password">
+        <Redirect to="/user/info" />
+      </Route>
+    )
+  }
+
   if (dest === 'cart') {
     return (
       <Route exact path="/user/update/password">
@@ -50,7 +58,7 @@ const PasswordUpdate = () => {
     )
   }
 
-  if (dest === 'home' || dest !== 'updatePassword') {
+  if (dest === 'index' || dest !== 'passwordUpdate') {
     return (
       <Route exact path="/user/update/password">
         <Redirect to="/" />

@@ -26,13 +26,13 @@ const Cart: React.FC = () => {
   }
 
   if (allProducts === undefined) {
-    changeDest('home');
+    changeDest('index');
   }
 
-  if (dest === 'home') {
+  if (dest === 'userInfo') {
     return (
       <Route exact path="/cart">
-        <Redirect to="/" />
+        <Redirect to="/user/info" />
       </Route>
     )
   }
@@ -69,26 +69,18 @@ const Cart: React.FC = () => {
     )
   }
 
-  if (dest === 'payment') {
-    return (
-      <Route exact path="/cart">
-        <Redirect to="/checkout/payment" />
-      </Route>
-    )
-  }
-
-  if (dest === 'confirmation') {
-    return (
-      <Route exact path="/cart">
-        <Redirect to="/checkout/confirmation" />
-      </Route>
-    )
-  }
-
   if (dest === 'shipping') {
     return (
       <Route exact path="/cart">
         <Redirect to="/checkout/shipping" />
+      </Route>
+    )
+  }
+
+  if (dest === 'index' || dest !== 'cart') {
+    return (
+      <Route exact path="/cart">
+        <Redirect to="/" />
       </Route>
     )
   }

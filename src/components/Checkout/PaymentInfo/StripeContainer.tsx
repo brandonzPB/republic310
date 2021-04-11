@@ -26,14 +26,14 @@ const StripeContainer = () => {
       }
   
       // order status is incomplete
-      changeDest('home');
+      changeDest('index');
     }, 600);
   }
 
-  if (dest === 'home') {
+  if (dest === 'userInfo') {
     return (
       <Route exact path="/checkout/payment">
-        <Redirect to="/" />
+        <Redirect to="/user/info" />
       </Route>
     )
   }
@@ -90,6 +90,14 @@ const StripeContainer = () => {
     return (
       <Route exact path="/checkout/payment">
         <Redirect to="/about" />
+      </Route>
+    )
+  }
+
+  if (dest === 'index' || dest !== 'payment') {
+    return (
+      <Route exact path="/checkout/payment">
+        <Redirect to="/" />
       </Route>
     )
   }

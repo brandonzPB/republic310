@@ -1,7 +1,5 @@
-import React, { useContext } from 'react';
-import { Route, Redirect } from 'react-router-dom';
+import React, { useState, useContext } from 'react';
 import { GlobalContext } from '../../../contexts/GlobalContext';
-import { RouteContext } from '../../../contexts/RouteContext';
 import * as interfaces from '../../../modules/interfaces';
 import getMonthName from '../../../modules/getMonthName';
 import getOrderNumber from '../../../modules/getOrderNumber';
@@ -31,7 +29,7 @@ type OrderProps = {
 const Order: React.FC<OrderProps> = ({ date, id, products, totalItemCount, subtotal, taxes, total }: OrderProps) => {
   const { user } = useContext(GlobalContext);
 
-  const { changeDest } = useContext(RouteContext);
+  const [displayProducts, setDisplayProducts] = useState(false);
 
   const orderDateString: string = date.toString();
 
@@ -66,6 +64,10 @@ const Order: React.FC<OrderProps> = ({ date, id, products, totalItemCount, subto
       inCart={false}
     />
   ));
+
+  const toggleProductDisplay = (): void => {
+    setDisplayProducts(!displayProducts);
+  }
 
   return (
     <div id="order__container">
@@ -103,7 +105,11 @@ const Order: React.FC<OrderProps> = ({ date, id, products, totalItemCount, subto
 
       <div id="order-items__container">
         <span id="order-items-text">Items you purchased</span>
-        {ProductComponents}
+        <button id="view-purchased-products-btn" onClick={toggleProductDisplay}>View Products</button>
+        
+        <div id="purchased-products__container" style={{ display: displayProducts ? 'block' : 'none' }}>
+          {ProductComponents}
+        </div>
       </div>
     </div>
   )

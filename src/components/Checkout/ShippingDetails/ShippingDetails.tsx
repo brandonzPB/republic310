@@ -11,21 +11,21 @@ const ShippingDetails: React.FC = () => {
   const { dest, changeDest } = useContext(RouteContext);
 
   if (cart.total === 0 || cart.totalItemCount === 0) {
-    changeDest('home');
+    changeDest('index');
+  }
+
+  if (dest === 'userInfo') {
+    return (
+      <Route exact path="/checkout/shipping">
+        <Redirect to="/user/info" />
+      </Route>
+    )
   }
 
   if (dest === 'cart') {
     return (
       <Route exact path="/checkout/shipping">
         <Redirect to="/cart" />
-      </Route>
-    )
-  }
-
-  if (dest === 'confirmation') {
-    return (
-      <Route exact path="/checkout/shipping">
-        <Redirect to="/checkout/confirmation" />
       </Route>
     )
   }
@@ -70,7 +70,7 @@ const ShippingDetails: React.FC = () => {
     )
   }
 
-  if (dest === 'home') {
+  if (dest === 'index' || dest !== 'shipping') {
     return (
       <Route exact path="/checkout/shipping">
         <Redirect to="/" />

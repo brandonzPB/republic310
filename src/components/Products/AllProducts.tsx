@@ -29,16 +29,23 @@ const AllProducts: React.FC = () => {
 
   const onSubmit = (data: any) => {
     console.log(data);
-
     setSort({ ...sort, type: data.sort });
   }
 
   if (!allProducts || !allProducts.length) {
-    changeDest('home');
+    changeDest('index');
 
     return (
       <Route exact path="/products">
         <Redirect to="/" />
+      </Route>
+    )
+  }
+
+  if (dest === 'userInfo') {
+    return (
+      <Route exact path="/products">
+        <Redirect to="/user/info" />
       </Route>
     )
   }
@@ -51,42 +58,10 @@ const AllProducts: React.FC = () => {
     )
   }
 
-  if (dest === 'shipping') {
-    return (
-      <Route exact path="/products">
-        <Redirect to="/checkout/shipping" />
-      </Route>
-    )
-  }
-
-  if (dest === 'payment') {
-    return (
-      <Route exact path="/products">
-        <Redirect to="/checkout/payment" />
-      </Route>
-    )
-  }
-
-  if (dest === 'confirmation') {
-    return (
-      <Route exact path="/products">
-        <Redirect to="/checkout/confirmation" />
-      </Route>
-    )
-  }
-
   if (dest === 'productDetails') {
     return (
       <Route exact path="/products">
         <Redirect to="/product/details" />
-      </Route>
-    )
-  }
-
-  if (dest === 'home') {
-    return (
-      <Route exact path="/products">
-        <Redirect to="/" />
       </Route>
     )
   }
@@ -103,6 +78,14 @@ const AllProducts: React.FC = () => {
     return (
       <Route exact path="/products">
         <Redirect to="/contact" />
+      </Route>
+    )
+  }
+
+  if (dest === 'index' || dest !== 'products') {
+    return (
+      <Route exact path="/products">
+        <Redirect to="/" />
       </Route>
     )
   }
