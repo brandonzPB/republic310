@@ -25,6 +25,10 @@ import PasswordUpdate from './components/User/Update/PasswordUpdate';
 import OrderHistory from './components/Orders/OrderHistory/OrderHistory';
 import CancelOrder from './components/Orders/CancelOrder/CancelOrder.tsx';
 
+import RequestResetCode from './components/User/ForgotPassword/Request/RequestResetCode';
+import PostResetCode from './components/User/ForgotPassword/PostResetCode/PostResetCode';
+import ResetPassword from './components/User/ForgotPassword/ResetPassword/ResetPassword';
+
 function App() {
   return (
     <BrowserRouter>
@@ -51,6 +55,10 @@ function App() {
 
             <Route exact path="/order/history" component={OrderHistory} />
             <Route exact path="/order/cancel" component={CancelOrder} />
+
+            <Route exact path="/reset/request" component={RequestResetCode} />
+            <Route exact path="/reset/code" component={PostResetCode} />
+            <Route exact path="/reset/password" component={ResetPassword} />
 
             <Footer />
           </RouteContextProvider>
