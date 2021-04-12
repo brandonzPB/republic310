@@ -4,7 +4,8 @@ import * as productService from '../services/productServices';
 
 export type ActionType = 
   | { type: 'get_all_products',           payload: interfaces.DisplayProduct[] }
-  | { type: 'get_reset_token',            payload: string                      }
+  | { type: 'get_reset_token',            payload: any                         }
+  | { type: 'reset_password',             payload: string                      }
   | { type: 'login',                      payload: interfaces.User             }
   | { type: 'logout',                     payload: interfaces.State            }
   | { type: 'update_user',                payload: any                         }
@@ -75,20 +76,10 @@ export const requestReset = async (email: string): Promise<any> => {
   return requestResult;
 }
 
-export const postResetCode = async (code: string, token: string): Promise<any> => {
-  const codeObj: object = { code };
+export const resetPassword = async (password: string, resetCode: string, token: string): Promise<any> => {
+  const userObj: object = { resetCode, password };
 
-  const resetResult: any = await userService.postResetCode(codeObj, token);
-
-  if (!resetResult || resetResult.result !== 'Success') return 'Error';
-
-  return 'Success';
-}
-
-export const resetPassword = async (password: string, token: string): Promise<any> => {
-  const passwordObj: object = { password };
-
-  const resetResult: any = await userService.resetPassword(passwordObj, token);
+  const resetResult: any = await userService.resetPassword(userObj, token);
 
   if (!resetResult || resetResult.result !== 'Success') return 'Error';
 

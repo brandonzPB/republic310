@@ -8,7 +8,24 @@ function globalReducer(state: interfaces.State, action: ActionType): typeof stat
       return { ...state, allProducts: action.payload };
 
     case 'get_reset_token':
-      return { ...state, resetToken: action.payload };
+      return {
+        ...state,
+        resetToken: action.payload.resetToken,
+        user: {
+          ...state.user,
+          resetCode: action.payload.resetCode
+        }
+      };
+
+    case 'reset_password':
+      return {
+        ...state,
+        resetToken: '',
+        user: {
+          ...state.user,
+          password: action.payload
+        }
+      };
 
     case 'login':
       return { ...state, resetToken: '', user: action.payload };

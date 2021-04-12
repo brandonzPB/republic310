@@ -84,6 +84,12 @@ const NavBar: React.FC  = () => {
     changeDest(path);
   }
 
+  // HANDLE RESET REQUEST (forgot password button)
+  const handleResetRequest = (): void => {
+    closeLoginForm();
+    changeDest('resetRequest');
+  }
+
   return (
     <div id="nav__container">
       <h1 id ="nav-link-text" onClick={() => handleNav('products')}>SHOP</h1>
@@ -135,6 +141,8 @@ const NavBar: React.FC  = () => {
                   {errors.password && <div>Incorrect password</div>}
 
                   <button id="login-btn">Login</button>
+
+                  <button id="forgot-password-btn" onClick={handleResetRequest}>Forgot password</button>
                 </form>
               </div>
           }

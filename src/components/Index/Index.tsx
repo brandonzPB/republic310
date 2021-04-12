@@ -6,6 +6,14 @@ import Body from './Body/Body'
 
 const Index: React.FC = () => {
   const { dest, changeDest, orderStatus } = useContext(RouteContext);
+
+  if (dest === 'resetRequest') {
+    return (
+      <Route exact path="/">
+        <Redirect to="/reset/request" />
+      </Route>
+    )
+  }
   
   if (dest === 'userInfo') {
     return (

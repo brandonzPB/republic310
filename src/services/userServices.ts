@@ -28,21 +28,9 @@ export const postResetRequest = (email: object): any => {
     .catch((err: any) => console.error(err));
 }
 
-// POST RESET CODE (after successful request)
-export const postResetCode = (code: object, token: string): any => {
-  const req: any = axios.post(`${baseUrl}/reset/code`, code, {
-    headers: {
-      'Authorization': `Bearer ${token}`
-    }
-  });
-
-  return req.then((res: any) => res.data)
-    .catch((err: any) => console.error(err));
-}
-
 // RESET PASSWORD (after inputting correct code)
-export const resetPassword = (password: object, token: string): any => {
-  const req: any = axios.put(`${baseUrl}/reset/password`, password, {
+export const resetPassword = (userObj: object, token: string): any => {
+  const req: any = axios.put(`${baseUrl}/reset/password`, userObj, {
     headers: {
       'Authorization': `Bearer ${token}`
     }

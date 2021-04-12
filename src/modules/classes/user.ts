@@ -8,6 +8,7 @@ class User implements interfaces.User {
   password?: string;
   _id: string;
   accessToken: string;
+  resetCode: string;
   shippingAddress?: interfaces.Address;
   phoneNumber?: string;
   orderHistory: interfaces.CompleteCart[];
@@ -21,6 +22,7 @@ class User implements interfaces.User {
     this.isAuthorized = false;
     this._id = 'empty';
     this.accessToken = 'empty';
+    this.resetCode = '';
     this.orderHistory = [];
 
     this.initiateDetails = function(inputs: any): void {

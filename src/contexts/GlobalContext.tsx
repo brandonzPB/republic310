@@ -40,8 +40,7 @@ const initialState: interfaces.State = {
   resetToken: '',
   createUser: actions.createUser,
   requestReset: (email: string): any => {},
-  postResetCode: (code: string): void => {},
-  resetPassword: (password: string): any => {},
+  resetPassword: (password: string, resetCode: string, resetToken: string): any => {},
   login: (user: object): any => {},
   logout: (): void => {},
   updateUser: (email: string, phoneNumber: string): any => {},
@@ -100,22 +99,22 @@ const GlobalContextProvider: React.FC = ({ children }) => {
 
     if (!requestResult || requestResult === 'Error') return 'Error';
 
-    dispatch({ type: 'get_reset_token', payload: requestResult.result.reset_token });
-  }
+    const resetToken: string = requestResult.reset_token;
+    const resetCode: string = requestResult.reset_code;
 
-  // POST RESET CODE (if request is successful)
-  const postResetCode = (code: string): void => {
-    // pass in token from state to actions.postResetCode
-    actions.postResetCode(code, state.resetToken);
+    dispatch({ type: 'get_reset_token', payload: {
+      resetToken,
+      resetCode
+    }});
   }
 
   // RESET PASSWORD (if reset code is correct)
-  const resetPassword = async (password: string): Promise<any> => {
-    const resetResult: any = await actions.resetPassword(password, state.resetToken);
+  const resetPassword = async (password: string, resetCode: string, resetToken: string): Promise<any> => {
+    const resetResult: any = await actions.resetPassword(password, resetCode, resetToken);
 
     if (!resetResult || resetResult === 'Error') return 'Error';
 
-    return 'Success';
+    dispatch({ type: 'reset_password', payload: password });
   }
 
   // CREATE USER OBJECT (on login; to be added to state)
@@ -278,7 +277,6 @@ const GlobalContextProvider: React.FC = ({ children }) => {
   // (once I do, the following area will be improved upon)
 
   initialState.requestReset = requestReset;
-  initialState.postResetCode = postResetCode;
   initialState.resetPassword = resetPassword;
   initialState.login = login;
   initialState.logout = logout;

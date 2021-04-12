@@ -66,6 +66,7 @@ export interface User {
   password?: string;
   _id: string;
   accessToken: string;
+  resetCode: string;
   shippingAddress?: Address;
   phoneNumber?: string;
   orderHistory: CompleteCart[];
@@ -85,8 +86,7 @@ export interface State {
   resetToken: string;
   createUser: (user: object) => any;
   requestReset: (email: string) => any;
-  postResetCode: (code: string) => void;
-  resetPassword: (password: string) => any;
+  resetPassword: (password: string, resetCode: string, resetToken: string) => any;
   login: (user: object) => any;
   logout: () => void;
   updateUser: (email: string, phoneNumber: string) => any;
