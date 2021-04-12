@@ -12,7 +12,7 @@
   justify-content: space-around;
 }
 
-#nav-link-text {
+.nav-link-text {
   font-size: 1.5rem;
   font-weight: 600;
   color: white;
@@ -23,7 +23,7 @@
   cursor: pointer;
 }
 
-#nav-link-text:hover {
+.nav-link-text:hover {
   color: #ffe4b5;
 }
 

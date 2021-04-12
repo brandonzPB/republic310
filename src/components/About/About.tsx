@@ -5,48 +5,52 @@ import { RouteContext } from '../../contexts/RouteContext';
 const About: React.FC = () => {
   const { dest, changeDest } = useContext(RouteContext);
 
-  if (dest === 'userInfo') {
-    return (
-      <Route exact path="/about">
-        <Redirect to="/user/info" />
-      </Route>
-    )
-  }
+  // if (dest === 'cart') {
+  //   return (
+  //     <Route exact path="/about">
+  //       <Redirect to="/cart" />
+  //     </Route>
+  //   )
+  // }
 
-  if (dest === 'cart') {
-    return (
-      <Route exact path="/about">
-        <Redirect to="/cart" />
-      </Route>
-    )
-  }
+  // if (dest === 'products') {
+  //   return (
+  //     <Route exact path="/about">
+  //       <Redirect to="/products" />
+  //     </Route>
+  //   )
+  // }
 
-  if (dest === 'products') {
-    return (
-      <Route exact path="/about">
-        <Redirect to="/products" />
-      </Route>
-    )
-  }
+  // if (dest === 'contact') {
+  //   return (
+  //     <Route exact path="/about">
+  //       <Redirect to="/contact" />
+  //     </Route>
+  //   )
+  // }
 
-  if (dest === 'contact') {
-    return (
-      <Route exact path="/about">
-        <Redirect to="/contact" />
-      </Route>
-    )
-  }
-
-  if (dest === 'index' || dest !== 'about') {
-    return (
-      <Route exact path="/about">
-        <Redirect to="/" />
-      </Route>
-    )
-  }
+  // if (dest === '/index' || dest !== '/about') {
+  //   return (
+  //     <Route exact path="/about">
+  //       <Redirect to="/" />
+  //     </Route>
+  //   )
+  // }
 
   return (
-    <div id="about__container"></div>
+    <>
+      {
+        dest === '/about'
+          ? <div id="about__container"></div>
+          : !dest
+          ? <Route exact path="/about">
+            <Redirect to="/" />
+          </Route>
+          : <Route exact path="/about">
+            <Redirect to={dest} />
+          </Route>
+      }
+    </>
   )
 }
 

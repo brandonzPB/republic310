@@ -41,7 +41,7 @@ const ResetPassword: React.FC = () => {
     const resetCode: string = user.resetCode;
 
     resetPassword(data.newPassword, resetCode, resetToken);
-    // changeDest('index');
+    changeDest('index');
   }
 
   return (

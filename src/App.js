@@ -18,7 +18,6 @@ import ShippingDetails from './components/Checkout/ShippingDetails/ShippingDetai
 import StripeContainer from './components/Checkout/PaymentInfo/StripeContainer';
 import OrderConfirmation from './components/Checkout/OrderConfirmation/OrderConfirmation';
 
-import UserInfo from './components/User/Info/UserInfo';
 import UpdateUser from './components/User/Update/UpdateUser';
 import PasswordUpdate from './components/User/Update/PasswordUpdate';
 
@@ -49,7 +48,6 @@ function App() {
             <Route exact path="/checkout/payment" component={StripeContainer} />
             <Route exact path="/checkout/confirmation" component={OrderConfirmation} />
 
-            <Route exact path="/user/info" component={UserInfo} />
             <Route exact path="/user/update" component={UpdateUser} />
             <Route exact path="/user/update/password" component={PasswordUpdate} />
 
