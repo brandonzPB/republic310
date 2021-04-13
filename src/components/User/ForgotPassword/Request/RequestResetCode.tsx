@@ -53,7 +53,7 @@ const RequestResetCode: React.FC = () => {
   return (
     <>
       {
-        dest === '/reset/code'
+        dest === '/reset/request'
           ? <div id="request-reset-code__container">
             <div id="loading__container" style={{ display: loading ? 'block' : 'none' }}>
               <span id="sending-code-text">Sending code...</span>
@@ -72,10 +72,10 @@ const RequestResetCode: React.FC = () => {
             </form>
           </div>
           : !dest
-            ? <Route exact path="/reset/code">
+            ? <Route exact path="/reset/request">
               <Redirect to="/" />
             </Route>
-            : <Route exact path="/reset/code">
+            : <Route exact path="/reset/request">
               <Redirect to={dest} />
             </Route>
       }

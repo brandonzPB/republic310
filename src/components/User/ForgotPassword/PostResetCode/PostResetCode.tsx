@@ -20,7 +20,7 @@ const PostResetCode: React.FC = () => {
   const onSubmit = (data: any): void => {
     console.log('data', data);
 
-    changeDest('resetPassword');
+    changeDest('/reset/password');
   }
 
   // CHECKS IF CODE MATCHES RESET TOKEN
@@ -31,7 +31,7 @@ const PostResetCode: React.FC = () => {
   return (
     <>
       {
-        dest === '/reset/request'
+        dest === '/reset/code'
           ? <div id="post-reset-code__container">
             <form onSubmit={handleSubmit(onSubmit)}>
               <input 
@@ -43,17 +43,17 @@ const PostResetCode: React.FC = () => {
               {errors.code && <div>Code is incorrect. Please try again</div>}
       
               {errors.code && (
-                <button id="return-to-request-btn" onClick={() => changeDest('resetRequest')}>Click here to resend code</button>
+                <button id="return-to-request-btn" onClick={() => changeDest('/reset/request')}>Click here to resend code</button>
               )}
       
               <button id="submit-code-btn">Submit Code</button>
             </form>
           </div>
           : !dest
-            ? <Route exact path="/reset/request">
+            ? <Route exact path="/reset/code">
               <Redirect to="/" />
             </Route>
-            : <Route exact path="/reset/request">
+            : <Route exact path="/reset/code">
               <Redirect to={dest} />
             </Route>
       }

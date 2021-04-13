@@ -72,7 +72,7 @@ const NavBar: React.FC  = () => {
 
       <h1 className="nav-link-text" onClick={() => handleNav('/contact')}>CONTACT US</h1>
 
-      <div id="logout__container" style={{ display: user.isAuthorized ? 'block' : 'none' }}>
+      <div id="logout__container" style={{ display: user.isAuthorized ? 'block' : 'none', backgroundColor: 'transparent' }}>
         <span 
           className="nav-link-text" 
           onMouseOver={showAccountOptions}
