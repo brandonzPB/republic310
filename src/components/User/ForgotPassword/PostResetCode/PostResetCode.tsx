@@ -38,6 +38,7 @@ const PostResetCode: React.FC = () => {
                 id="reset-input-code"
                 type="text"
                 name="code"
+                placeholder="Reset Code"
                 ref={register({ required: true, validate: matchesToken })}
               />
               {errors.code && <div>Code is incorrect. Please try again</div>}

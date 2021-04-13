@@ -68,20 +68,33 @@ const NavBar: React.FC  = () => {
 
       <h1 className="nav-link-text" onClick={() => handleNav('/about')}>ABOUT US</h1>
 
-      <img id="logo" src={logoSrc} onClick={() => handleNav('/')} alt="Logo of The Republic 310" style={{ cursor: 'pointer' }} />
+      <img 
+        id="logo" 
+        src={logoSrc} 
+        onClick={() => handleNav('/')} 
+        alt="Logo of The Republic 310" 
+        style={{ cursor: 'pointer' }} 
+      />
 
       <h1 className="nav-link-text" onClick={() => handleNav('/contact')}>CONTACT US</h1>
 
-      <div id="logout__container" style={{ display: user.isAuthorized ? 'block' : 'none', backgroundColor: 'transparent' }}>
+      <div 
+        id="logout__container" 
+        onMouseOver={showAccountOptions}
+        style={{ display: user.isAuthorized ? 'block' : 'none', backgroundColor: 'transparent' }}
+      >
         <span 
           className="nav-link-text" 
-          onMouseOver={showAccountOptions}
-          onMouseOut={hideAccountOptions}
+          
         >
           ACCOUNT
         </span>
 
-        <div id="account-options__container" style={{ display: options.display ? 'block' : 'none' }}>
+        <div 
+          id="account-options__container" 
+          onMouseOut={hideAccountOptions}
+          style={{ display: options.display ? 'block' : 'none' }} 
+        >
           <UserInfoTab />
         </div>
       </div>

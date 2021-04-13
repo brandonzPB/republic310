@@ -102,8 +102,10 @@ export const updateUser = async (user: object, userId: string, token: string): P
   return 'Success';
 }
 
-export const updateUserPassword = async (user: object, userId: string, token: string): Promise<any> => {
-  const updateResult: any = await userService.updateUserPassword(user, userId, token);
+export const updateUserPassword = async (password: string, userId: string, token: string): Promise<any> => {
+  const userObj: object = { password };
+
+  const updateResult: any = await userService.updateUserPassword(userObj, userId, token);
 
   if (!updateResult || updateResult.result !== 'Success') return 'Error';
 

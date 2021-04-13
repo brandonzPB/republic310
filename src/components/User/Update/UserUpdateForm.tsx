@@ -63,6 +63,7 @@ const UserUpdateForm: React.FC<UpdateFormProps> = ({
           id="update-email-input"
           type="email"
           name="email"
+          placeholder="Email"
           defaultValue={ user.email ? user.email : '' }
           ref={register({ required: false, validate: emailIsAvailable })}
         />
@@ -77,6 +78,7 @@ const UserUpdateForm: React.FC<UpdateFormProps> = ({
           id="update-phone-input"
           type="tel"
           name="phoneNumber"
+          placeholder="123-456-7890"
           defaultValue={ user.phoneNumber ? user.phoneNumber : '' }
           ref={register({ required: false })}
         />
@@ -87,6 +89,7 @@ const UserUpdateForm: React.FC<UpdateFormProps> = ({
           className="update-input update-password-input"
           type="password"
           name="password"
+          placeholder="Current Password"
           ref={register({ required: true, validate: isCorrectPassword })}
         />
 
@@ -101,8 +104,8 @@ const UserUpdateForm: React.FC<UpdateFormProps> = ({
           id="update-street-input"
           type="text"
           name="street"
-          defaultValue={ user.shippingAddress ? user.shippingAddress.street : '' }
           placeholder="Street"
+          defaultValue={ user.shippingAddress ? user.shippingAddress.street : '' }
           ref={register({ required: false })}
         />
         

@@ -48,6 +48,7 @@ const PasswordUpdate = () => {
               className="update-input"
               type="password"
               name="currentPassword"
+              placeholder="Current Password"
               ref={register({ required: true, validate: isCorrectPassword })}
             />
             {errors.currentPassword && <div>Please enter your current password</div>}
@@ -56,6 +57,7 @@ const PasswordUpdate = () => {
               className="update-input"
               type="password"
               name="newPassword"
+              placeholder="New Password"
               ref={register({ required: true })}
             />
       
@@ -65,6 +67,7 @@ const PasswordUpdate = () => {
               className="update-input"
               type="password"
               name="confirmNewPassword"
+              placeholder="Confirm New Password"
               ref={register({ required: true })}
             />
       

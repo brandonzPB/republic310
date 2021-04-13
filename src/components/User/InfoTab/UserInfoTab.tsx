@@ -8,6 +8,11 @@ const UserInfoTab: React.FC = () => {
 
   const { changeDest } = useContext(RouteContext);
 
+  const handleLogout = (): void => {
+    logout();
+    changeDest('/');
+  }
+
   return (
     <div id="user-info__container">
       <ul id="user-info-list">
@@ -24,7 +29,7 @@ const UserInfoTab: React.FC = () => {
         </li>
 
         <li className="user-info-list-item">
-          <span className="user-info-text-link" onClick={logout}>Log out</span>
+          <span className="user-info-text-link" onClick={handleLogout}>Log out</span>
         </li>
       </ul>
     </div>

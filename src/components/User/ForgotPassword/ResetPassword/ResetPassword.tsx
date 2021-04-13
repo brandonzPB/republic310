@@ -46,6 +46,7 @@ const ResetPassword: React.FC = () => {
                 className="reset-input-password"
                 name="newPassword"
                 type="password"
+                placeholder="New Password"
                 ref={register({ required: true })}
               />
               {errors.newPassword && <div>Please enter a password</div>}
@@ -54,6 +55,7 @@ const ResetPassword: React.FC = () => {
                 className="reset-input-password"
                 name="confirmNewPassword"
                 type="password"
+                placeholder="Confirm Password"
                 ref={register({ required: true })}
               />
               {error && <div>Passwords don't match</div>}

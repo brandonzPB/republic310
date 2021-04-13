@@ -64,6 +64,7 @@ const RequestResetCode: React.FC = () => {
                 id="reset-input-email"
                 type="email"
                 name="email"
+                placeholder="Email"
                 ref={register({ required: true, validate: isValid })}
               />
               {errors.email && <div>Email does not exist in database</div>}

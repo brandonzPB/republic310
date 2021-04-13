@@ -179,10 +179,26 @@ const GlobalContextProvider: React.FC = ({ children }) => {
   }
 
   // UPDATE USER PASSWORD
-  const updateUserPassword = async (password: string): Promise<any> => {}
+  const updateUserPassword = async (password: string): Promise<any> => {
+    const userId: string = state.user._id!;
+    const accessToken: string = state.user.accessToken!;
+
+    const updateResult: string = await actions.updateUserPassword(password, userId, accessToken);
+
+    if (updateResult === 'Error') return false;
+
+    dispatch({ type: 'reset_password', payload: password });
+  }
 
   // UPDATE SHIPPING DETAILS
-  const updateShippingAddress = async (street: string, city: string, zipCode: string, addressState: string, country: string): Promise<any> => {
+  const updateShippingAddress = async (
+    street: string, 
+    city: string, 
+    zipCode: string, 
+    addressState: string, 
+    country: string
+  ): Promise<any> => {
+    
     const userId: string = state.user._id!;
     const accessToken: string = state.user.accessToken!;
 

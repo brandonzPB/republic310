@@ -31,16 +31,23 @@ function globalReducer(state: interfaces.State, action: ActionType): typeof stat
       return { ...state, resetToken: '', user: action.payload };
 
     case 'update_user':
-      state.user.firstName = action.payload.firstName;
-      state.user.lastName = action.payload.lastName;
-      state.user.email = action.payload.email;
-      state.user.password = action.payload.password;
-      state.user.phoneNumber = action.payload.phoneNumber;
-      return state;
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          email: action.payload.email,
+          phoneNumber: action.payload.phoneNumber
+        }
+      };
 
     case 'update_shipping':
-      state.user.shippingAddress = action.payload;
-      return state;
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          shippingAddress: action.payload
+        }
+      };
 
     case 'add_to_cart':
       return {
@@ -136,10 +143,10 @@ function globalReducer(state: interfaces.State, action: ActionType): typeof stat
       };
 
     case 'logout':
-      state = action.payload;
-      return state;
+      return action.payload;
 
     default:
+      console.warn('Invalid action type');
       return state;
   }
 }
