@@ -60,6 +60,18 @@ export const readUser = (userId: string, token: string): any => {
     .catch((err: any) => console.error(err));
 }
 
+// COMPARE PASSWORDS
+export const comparePasswords = (userObj: object, userId: string, token: string): any => {
+  const req: any = axios.post(`${baseUrl}/${userId}/password`, userObj, {
+    headers: {
+      'Authorization': `Bearer ${token}`
+    }
+  });
+
+  return req.then((res: any) => res.data)
+    .catch((err: any) => console.error(err));
+}
+
 // UPDATE USER DETAILS (excluding shipping details and password)
 export const updateUserDetails = (user: object, userId: string, token: string): any => {
   const req: any = axios.put(`${baseUrl}/${userId}/details`, user, {

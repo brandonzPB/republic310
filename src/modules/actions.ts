@@ -102,6 +102,16 @@ export const updateUser = async (user: object, userId: string, token: string): P
   return 'Success';
 }
 
+export const comparePasswords = async (password: string, userId: string, token: string): Promise<any> => {
+  const userObj: object = { password };
+
+  const checkResult: any = await userService.comparePasswords(userObj, userId, token);
+
+  if (!checkResult || checkResult.result !== 'Success') return 'Error';
+
+  return 'Success';
+}
+
 export const updateUserPassword = async (password: string, userId: string, token: string): Promise<any> => {
   const userObj: object = { password };
 
