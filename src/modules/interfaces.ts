@@ -89,9 +89,9 @@ export interface State {
   resetPassword: (password: string, resetCode: string, resetToken: string) => any;
   login: (user: object) => any;
   logout: () => void;
-  updateUser: (email: string, phoneNumber: string) => any;
-  updateUserPassword: (password: string) => any;
-  updateShippingAddress: (street: string, city: string, zipCode: string, addressState: string, country: string) => any;
+  updateUser: (email: string, phoneNumber: string, userId: string, token: string) => any;
+  updateUserPassword: (password: string, userId: string, token: string) => any;
+  updateShippingAddress: (shippingObj: Address, userId: string, token: string) => any;
   addToCart: (product: any) => void;
   updateQuantity: (productId: string, newQuantity: number) => void;
   updateTotalItemCount: (newTotal: number) => void;

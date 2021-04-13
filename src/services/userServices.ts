@@ -98,6 +98,10 @@ export const updateUserPassword = (user: object, userId: string, token: string):
 
 // UPDATE USER SHIPPING DETAILS
 export const updateUserShippingDetails = (shippingObj: object, userId: string, token: string): any => {
+  console.log('shippingObj', shippingObj);
+  console.log('userId', userId);
+  console.log('token', token);
+  
   const req: any = axios.put(`${baseUrl}/${userId}/shipping_details`, shippingObj, {
     headers: {
       'Authorization': `Bearer ${token}`

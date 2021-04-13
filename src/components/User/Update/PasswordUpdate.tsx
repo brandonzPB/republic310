@@ -32,8 +32,11 @@ const PasswordUpdate = () => {
       setError(true);
       return false;
     }
+
+    const userId: string = user._id!;
+    const token: string = user.accessToken!;
     
-    updateUserPassword(data.password);
+    updateUserPassword(data.password, userId, token);
     setLoading(true);
 
     setTimeout(() => { changeDest('/') }, 1000);

@@ -43,9 +43,9 @@ const initialState: interfaces.State = {
   resetPassword: (password: string, resetCode: string, resetToken: string): any => {},
   login: (user: object): any => {},
   logout: (): void => {},
-  updateUser: (email: string, phoneNumber: string): any => {},
-  updateUserPassword: (password: string): any => {},
-  updateShippingAddress: (street: string, city: string, zipCode: string, addressState: string, country: string): any => {},
+  updateUser: (email: string, phoneNumber: string, userId: string, token: string): any => {},
+  updateUserPassword: (password: string, userId: string, token: string): any => {},
+  updateShippingAddress: (shippingObj: interfaces.Address, userId: string, token: string): any => {},
   addToCart: (product: any): any => {},
   updateQuantity: (productName: string, newQuantity: number): void => {},
   updateTotalItemCount: (newTotal: number): void => {},
@@ -162,59 +162,37 @@ const GlobalContextProvider: React.FC = ({ children }) => {
     dispatch({ type: 'logout', payload: initialState });
   }
 
-  // UPDATE USER DETAILS (excluding shipping)
-  const updateUser = async (email: string, phoneNumber: string): Promise<any> => {
+  // UPDATE USER DETAILS (excluding shipping) (returns 'Error' or 'Success')
+  const updateUser = async (email: string, phoneNumber: string, userId: string, token: string): Promise<any> => {
     if (state.user === undefined) return;
 
     const userUpdateObj = { email, phoneNumber, };
 
-    const userId: string = state.user._id!;
-    const accessToken: string = state.user.accessToken!;
-
-    const updateResult: any = await actions.updateUser(userUpdateObj, userId, accessToken);
+    const updateResult: any = await actions.updateUser(userUpdateObj, userId, token);
 
     if (updateResult === 'Error') return 'Error';
 
     dispatch({ type: 'update_user', payload: userUpdateObj });
+
+    return 'Success';
   }
 
-  // UPDATE USER PASSWORD
-  const updateUserPassword = async (password: string): Promise<any> => {
-    const userId: string = state.user._id!;
-    const accessToken: string = state.user.accessToken!;
-
-    const updateResult: string = await actions.updateUserPassword(password, userId, accessToken);
+  // UPDATE USER PASSWORD (returns boolean)
+  const updateUserPassword = async (password: string, userId: string, token: string): Promise<any> => {
+    const updateResult: string = await actions.updateUserPassword(password, userId, token);
 
     if (updateResult === 'Error') return false;
 
     dispatch({ type: 'reset_password', payload: password });
   }
 
-  // UPDATE SHIPPING DETAILS
-  const updateShippingAddress = async (
-    street: string, 
-    city: string, 
-    zipCode: string, 
-    addressState: string, 
-    country: string
-  ): Promise<any> => {
-    
-    const userId: string = state.user._id!;
-    const accessToken: string = state.user.accessToken!;
-
-    const shippingUpdateObj: any = {
-      street,
-      city,
-      zipCode,
-      state: addressState,
-      country,
-    };
-
-    const updateResult: any = await actions.updateShipping(shippingUpdateObj, userId, accessToken);
+  // UPDATE SHIPPING DETAILS (returns 'Error' or 'Success')
+  const updateShippingAddress = async (shippingObj: interfaces.Address, userId: string, token: string): Promise<any> => {
+    const updateResult: any = await actions.updateShipping(shippingObj, userId, token);
 
     if (updateResult === 'Error') return 'Error';
 
-    dispatch({ type: 'update_shipping', payload: shippingUpdateObj });
+    dispatch({ type: 'update_shipping', payload: shippingObj });
 
     return 'Success';
   }

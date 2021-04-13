@@ -103,13 +103,15 @@ export const updateUser = async (user: object, userId: string, token: string): P
 }
 
 export const comparePasswords = async (password: string, userId: string, token: string): Promise<any> => {
+  // returns false if passwords don't match
+
   const userObj: object = { password };
 
   const checkResult: any = await userService.comparePasswords(userObj, userId, token);
 
-  if (!checkResult || checkResult.result !== 'Success') return 'Error';
+  if (!checkResult || checkResult.result !== 'Success') return false;
 
-  return 'Success';
+  return true;
 }
 
 export const updateUserPassword = async (password: string, userId: string, token: string): Promise<any> => {

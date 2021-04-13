@@ -20,13 +20,15 @@ interface UpdateFormProps {
   emailIsAvailable: (email: string) => any;
   handleShippingUpdate: (data: any) => any;
   handleUserUpdate: (data: any) => any;
+  setLoading: (flag: boolean) => void;
 };
 
 const UserUpdateForm: React.FC<UpdateFormProps> = ({ 
     isCorrectPassword, 
     emailIsAvailable, 
     handleShippingUpdate, 
-    handleUserUpdate 
+    handleUserUpdate,
+    setLoading,
   }: UpdateFormProps) => {
 
   const { user } = useContext(GlobalContext);
@@ -52,6 +54,11 @@ const UserUpdateForm: React.FC<UpdateFormProps> = ({
       console.log('User update error');
       return false;
     }
+
+    console.log('Successfully updated user');
+
+    setLoading(true);
+    setTimeout(() => { changeDest('/') }, 700);
   }
 
   return (
@@ -93,11 +100,9 @@ const UserUpdateForm: React.FC<UpdateFormProps> = ({
           ref={register({ required: true, validate: isCorrectPassword })}
         />
 
-        {errors.password && errors.password.type === 'validate' && (
-          <div>Incorrect password</div>
-        )}
+        {errors.password && errors.password.type === 'validate' && <div>Incorrect password</div>}
         
-        {errors.password && <div>Please enter your password</div>}
+        {errors.password && errors.password.type !== 'validate' && <div>Please enter your password</div>}
 
         <input 
           className="update-input"
