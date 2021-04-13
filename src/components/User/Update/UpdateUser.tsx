@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { GlobalContext } from '../../../contexts/GlobalContext';
 import { RouteContext } from '../../../contexts/RouteContext';
+import * as actions from '../../../modules/actions';
 import UserUpdateForm from './UserUpdateForm';
 import './updateUser.css';
 
@@ -11,7 +12,9 @@ const UpdateUser: React.FC = () => {
   const { dest } = useContext(RouteContext);
   
   // CHECK IF EMAIL IS AVAILABLE
-  const emailIsAvailable = async (): Promise<any> => {}
+  const emailIsAvailable = async (email: string): Promise<any> => {
+    return await actions.emailIsAvailable(email);
+  }
 
   // HANDLE SHIPPING UPDATE
   const handleShippingUpdate = async (data: any): Promise<any> => {

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { GlobalContext } from '../../../contexts/GlobalContext';
@@ -14,13 +14,24 @@ interface PasswordForm {
 const PasswordUpdate = () => {
   const { user, updateUserPassword } = useContext(GlobalContext);
 
-  const { dest, changeDest } = useContext(RouteContext);
+  const { dest } = useContext(RouteContext);
+
+  const [error, setError] = useState(false);
 
   const { register, errors, handleSubmit } = useForm<PasswordForm>();
 
   // SUBMIT UPDATE FORM
   const onSubmit = async (data: any): Promise<any> => {
     console.log('data', data);
+
+    setError(false);
+
+    if (data.newPassword !== data.confirmNewPassword) {
+      setError(true);
+      return false;
+    }
+    
+    updateUserPassword(data.password);
   }
 
   // CHECKS IF PASSWORD IS CORRECT
@@ -57,9 +68,7 @@ const PasswordUpdate = () => {
               ref={register({ required: true })}
             />
       
-            {errors.confirmNewPassword && errors.confirmNewPassword.type === 'validate' && (
-              <div>Passwords don't match</div>
-            )}
+            {error && <div>Passwords don't match</div>}
       
             <button id="update-password-btn">Update Password</button>
           </form>

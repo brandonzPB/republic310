@@ -38,6 +38,20 @@ const UserUpdateForm: React.FC<UpdateFormProps> = ({
   // SUBMIT UPDATE FORM
   const onSubmit = async (data: any): Promise<any> => {
     console.log('data', data);
+
+    const shippingUpdateResult: boolean = await handleShippingUpdate(data);
+
+    if (shippingUpdateResult === false) {
+      console.log('Shipping update error');
+      return false;
+    }
+
+    const userUpdateResult: boolean = await handleUserUpdate(data);
+
+    if (userUpdateResult === false) {
+      console.log('User update error');
+      return false;
+    }
   }
 
   return (
