@@ -19,22 +19,6 @@ const RequestResetCode: React.FC = () => {
 
   const [loading, setLoading] = useState(false);
 
-  if (dest === 'resetCode') {
-    return (
-      <Route exact path="/reset/request">
-        <Redirect to="/reset/code" />
-      </Route>
-    )
-  }
-
-  if (dest === 'index' || dest !== 'resetRequest') {
-    return (
-      <Route exact path="/reset/request">
-        <Redirect to="/" />
-      </Route>
-    )
-  }
-
   // HANDLE SUBMIT
   const onSubmit = async (data: any): Promise<any> => {
     console.log('data', data);
@@ -48,7 +32,7 @@ const RequestResetCode: React.FC = () => {
     }
 
     setLoading(false);
-    changeDest('resetCode');
+    changeDest('/reset/code');
   }
 
   // CHECKS IF EMAIL IS VALID
@@ -67,23 +51,35 @@ const RequestResetCode: React.FC = () => {
   }
 
   return (
-    <div id="request-reset-code__container">
-      <div id="loading__container" style={{ display: loading ? 'block' : 'none' }}>
-        <span id="sending-code-text">Sending code...</span>
-      </div>
-
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <input 
-          id="reset-input-email"
-          type="email"
-          name="email"
-          ref={register({ required: true, validate: isValid })}
-        />
-        {errors.email && <div>Email does not exist in database</div>}
-
-        <button id="submit-reset-email-btn">Send reset code</button>
-      </form>
-    </div>
+    <>
+      {
+        dest === '/reset/code'
+          ? <div id="request-reset-code__container">
+            <div id="loading__container" style={{ display: loading ? 'block' : 'none' }}>
+              <span id="sending-code-text">Sending code...</span>
+            </div>
+      
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <input 
+                id="reset-input-email"
+                type="email"
+                name="email"
+                ref={register({ required: true, validate: isValid })}
+              />
+              {errors.email && <div>Email does not exist in database</div>}
+      
+              <button id="submit-reset-email-btn">Send reset code</button>
+            </form>
+          </div>
+          : !dest
+            ? <Route exact path="/reset/code">
+              <Redirect to="/" />
+            </Route>
+            : <Route exact path="/reset/code">
+              <Redirect to={dest} />
+            </Route>
+      }
+    </>
   )
 }
 

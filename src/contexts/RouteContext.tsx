@@ -9,7 +9,7 @@ const storedPath = localStorage.getItem(LOCAL_STORAGE_KEY_PATH);
 const initialPath: interfaces.Path = storedPath
   ? JSON.parse(storedPath)
   : {
-      dest: 'test',
+      dest: '/',
       product: {
         name: '',
         description: '',

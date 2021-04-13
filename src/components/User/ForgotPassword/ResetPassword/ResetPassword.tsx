@@ -20,14 +20,6 @@ const ResetPassword: React.FC = () => {
 
   const { register, errors, handleSubmit } = useForm<PasswordForm>();
 
-  if (dest === 'index' || dest !== 'resetPassword') {
-    return (
-      <Route exact path="/reset/password">
-        <Redirect to="/" />
-      </Route>
-    )
-  }
-
   // HANDLE SUBMIT
   const onSubmit = async (data: any): Promise<any> => {
     console.log('data', data);
@@ -41,31 +33,43 @@ const ResetPassword: React.FC = () => {
     const resetCode: string = user.resetCode;
 
     resetPassword(data.newPassword, resetCode, resetToken);
-    changeDest('index');
+    changeDest('/');
   }
 
   return (
-    <div id="reset-password__container">
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <input 
-          className="reset-input-password"
-          name="newPassword"
-          type="password"
-          ref={register({ required: true })}
-        />
-        {errors.newPassword && <div>Please enter a password</div>}
-
-        <input 
-          className="reset-input-password"
-          name="confirmNewPassword"
-          type="password"
-          ref={register({ required: true })}
-        />
-        {error && <div>Passwords don't match</div>}
-
-        <button id="reset-password-btn">Set New Password</button>
-      </form>
-    </div>
+    <>
+      {
+        dest === '/reset/password'
+          ? <div id="reset-password__container">
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <input 
+                className="reset-input-password"
+                name="newPassword"
+                type="password"
+                ref={register({ required: true })}
+              />
+              {errors.newPassword && <div>Please enter a password</div>}
+      
+              <input 
+                className="reset-input-password"
+                name="confirmNewPassword"
+                type="password"
+                ref={register({ required: true })}
+              />
+              {error && <div>Passwords don't match</div>}
+      
+              <button id="reset-password-btn">Set New Password</button>
+            </form>
+          </div>
+          : !dest
+            ? <Route exact path="/reset/password">
+              <Redirect to="/" />
+            </Route>
+            : <Route exact path="/reset/password">
+              <Redirect to={dest} />
+            </Route>
+      }
+    </>
   )
 }
 

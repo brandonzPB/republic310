@@ -16,30 +16,6 @@ const PostResetCode: React.FC = () => {
 
   const { register, errors, handleSubmit } = useForm<CodeForm>();
 
-  if (dest === 'resetRequest') {
-    return (
-      <Route exact path="/reset/code">
-        <Redirect to="/reset/request" />
-      </Route>
-    )
-  }
-
-  if (dest === 'resetPassword') {
-    return (
-      <Route exact path="/reset/code">
-        <Redirect to="/reset/password" />
-      </Route>
-    )
-  }
-
-  if (dest === 'index' || dest !== 'resetCode') {
-    return (
-      <Route exact path="/reset/code">
-        <Redirect to="/" />
-      </Route>
-    )
-  }
-
   // HANDLE SUBMIT
   const onSubmit = (data: any): void => {
     console.log('data', data);
@@ -53,23 +29,35 @@ const PostResetCode: React.FC = () => {
   }
 
   return (
-    <div id="post-reset-code__container">
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <input 
-          id="reset-input-code"
-          type="text"
-          name="code"
-          ref={register({ required: true, validate: matchesToken })}
-        />
-        {errors.code && <div>Code is incorrect. Please try again</div>}
-
-        {errors.code && (
-          <button id="return-to-request-btn" onClick={() => changeDest('resetRequest')}>Click here to resend code</button>
-        )}
-
-        <button id="submit-code-btn">Submit Code</button>
-      </form>
-    </div>
+    <>
+      {
+        dest === '/reset/request'
+          ? <div id="post-reset-code__container">
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <input 
+                id="reset-input-code"
+                type="text"
+                name="code"
+                ref={register({ required: true, validate: matchesToken })}
+              />
+              {errors.code && <div>Code is incorrect. Please try again</div>}
+      
+              {errors.code && (
+                <button id="return-to-request-btn" onClick={() => changeDest('resetRequest')}>Click here to resend code</button>
+              )}
+      
+              <button id="submit-code-btn">Submit Code</button>
+            </form>
+          </div>
+          : !dest
+            ? <Route exact path="/reset/request">
+              <Redirect to="/" />
+            </Route>
+            : <Route exact path="/reset/request">
+              <Redirect to={dest} />
+            </Route>
+      }
+    </>
   )
 }
 

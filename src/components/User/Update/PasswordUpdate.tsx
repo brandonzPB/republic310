@@ -18,58 +18,9 @@ const PasswordUpdate = () => {
 
   const { register, errors, handleSubmit } = useForm<PasswordForm>();
 
-  if (dest === 'userInfo') {
-    return (
-      <Route exact path="/user/update/password">
-        <Redirect to="/user/info" />
-      </Route>
-    )
-  }
-
-  if (dest === 'cart') {
-    return (
-      <Route exact path="/user/update/password">
-        <Redirect to="/cart" />
-      </Route>
-    )
-  }
-
-  if (dest === 'contact') {
-    return (
-      <Route exact path="/user/update/password">
-        <Redirect to="/contact" />
-      </Route>
-    )
-  }
-
-  if (dest === 'products') {
-    return (
-      <Route exact path="/user/update/password">
-        <Redirect to="/products" />
-      </Route>
-    )
-  }
-
-  if (dest === 'about') {
-    return (
-      <Route exact path="/user/update/password">
-        <Redirect to="/about" />
-      </Route>
-    )
-  }
-
-  if (dest === 'index' || dest !== 'passwordUpdate') {
-    return (
-      <Route exact path="/user/update/password">
-        <Redirect to="/" />
-      </Route>
-    )
-  }
-
   // SUBMIT UPDATE FORM
   const onSubmit = async (data: any): Promise<any> => {
     console.log('data', data);
-    console.log('register', register);
   }
 
   // CHECKS IF PASSWORD IS CORRECT
@@ -78,37 +29,49 @@ const PasswordUpdate = () => {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <input 
-        className="update-input"
-        type="password"
-        name="currentPassword"
-        ref={register({ required: true, validate: isCorrectPassword })}
-      />
-      {errors.currentPassword && <div>Please enter your current password</div>}
-
-      <input 
-        className="update-input"
-        type="password"
-        name="newPassword"
-        ref={register({ required: true })}
-      />
-
-      {errors.newPassword && <div>Please enter a new password</div>}
-
-      <input 
-        className="update-input"
-        type="password"
-        name="confirmNewPassword"
-        ref={register({ required: true })}
-      />
-
-      {errors.confirmNewPassword && errors.confirmNewPassword.type === 'validate' && (
-        <div>Passwords don't match</div>
-      )}
-
-      <button id="update-password-btn">Update Password</button>
-    </form>
+    <>
+      {
+        dest === '/user/update/password'
+          ? <form onSubmit={handleSubmit(onSubmit)}>
+            <input 
+              className="update-input"
+              type="password"
+              name="currentPassword"
+              ref={register({ required: true, validate: isCorrectPassword })}
+            />
+            {errors.currentPassword && <div>Please enter your current password</div>}
+      
+            <input 
+              className="update-input"
+              type="password"
+              name="newPassword"
+              ref={register({ required: true })}
+            />
+      
+            {errors.newPassword && <div>Please enter a new password</div>}
+      
+            <input 
+              className="update-input"
+              type="password"
+              name="confirmNewPassword"
+              ref={register({ required: true })}
+            />
+      
+            {errors.confirmNewPassword && errors.confirmNewPassword.type === 'validate' && (
+              <div>Passwords don't match</div>
+            )}
+      
+            <button id="update-password-btn">Update Password</button>
+          </form>
+          : !dest
+            ? <Route exact path="/user/update/password">
+              <Redirect to="/" />
+            </Route>
+            : <Route exact path="/user/update/password">
+              <Redirect to={dest} />
+            </Route>
+      }
+    </>
   )
 }
 

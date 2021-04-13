@@ -5,38 +5,6 @@ import { RouteContext } from '../../contexts/RouteContext';
 const About: React.FC = () => {
   const { dest, changeDest } = useContext(RouteContext);
 
-  // if (dest === 'cart') {
-  //   return (
-  //     <Route exact path="/about">
-  //       <Redirect to="/cart" />
-  //     </Route>
-  //   )
-  // }
-
-  // if (dest === 'products') {
-  //   return (
-  //     <Route exact path="/about">
-  //       <Redirect to="/products" />
-  //     </Route>
-  //   )
-  // }
-
-  // if (dest === 'contact') {
-  //   return (
-  //     <Route exact path="/about">
-  //       <Redirect to="/contact" />
-  //     </Route>
-  //   )
-  // }
-
-  // if (dest === '/index' || dest !== '/about') {
-  //   return (
-  //     <Route exact path="/about">
-  //       <Redirect to="/" />
-  //     </Route>
-  //   )
-  // }
-
   return (
     <>
       {

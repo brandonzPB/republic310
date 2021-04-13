@@ -22,73 +22,11 @@ const Cart: React.FC = () => {
   const { dest, changeDest, product } = useContext(RouteContext);
 
   if (cart.totalItemCount === 0 || cart.products.length === 0) {
-    setTimeout(() => { changeDest('home') }, 700);
+    setTimeout(() => { changeDest('/') }, 700);
   }
 
   if (allProducts === undefined) {
-    changeDest('index');
-  }
-
-  if (dest === 'userInfo') {
-    return (
-      <Route exact path="/cart">
-        <Redirect to="/user/info" />
-      </Route>
-    )
-  }
-
-  if (dest === 'contact') {
-    return (
-      <Route exact path="/cart">
-        <Redirect to="/contact" />
-      </Route>
-    )
-  }
-
-  if (dest === 'about') {
-    return (
-      <Route exact path="/cart">
-        <Redirect to="/about" />
-      </Route>
-    )
-  }
-
-  if (dest === 'products') {
-    return (
-      <Route exact path="/cart">
-        <Redirect to="/products" />
-      </Route>
-    )
-  }
-
-  if (dest === 'productDetails') {
-    return (
-      <Route exact path="/cart">
-        <Redirect to="/product/details" />
-      </Route>
-    )
-  }
-
-  if (dest === 'shipping') {
-    return (
-      <Route exact path="/cart">
-        <Redirect to="/checkout/shipping" />
-      </Route>
-    )
-  }
-
-  if (dest === 'index' || dest !== 'cart') {
-    return (
-      <Route exact path="/cart">
-        <Redirect to="/" />
-      </Route>
-    )
-  }
-
-  if (!allProducts || !cart.totalItemCount) {
-    return (
-      <div id="empty-cart__container"></div>
-    )
+    changeDest('/');
   }
 
   // UPDATE TOTAL TAX (helper)
@@ -138,27 +76,39 @@ const Cart: React.FC = () => {
   ));
   
   return (
-    <div id="cart__container">
+    <>
       {
-        cart.products.length === 0
-          ? <div id="empty-cart__container">
-              <span id="empty-cart-text">Your cart is empty. Returning to home page...</span>
-            </div>
-          : <div id="cart-display__container">
-            <div id="cart-products__container">
-              {ProductComponents}
-            </div>
-
-            <div id="cart-subtotal__container">
-              <span id="cart-subtotal">Subtotal: ${cart.subtotal}.00</span>
-            </div>
-
-            <div id="checkout-btn__container">
-              <button id="checkout-btn" onClick={handleCheckout}>Proceed to Checkout</button>
-            </div>
+        dest === '/cart'
+          ? <div id="cart__container">
+            {
+              cart.products.length === 0
+                ? <div id="empty-cart__container">
+                    <span id="empty-cart-text">Your cart is empty. Returning to home page...</span>
+                  </div>
+                : <div id="cart-display__container">
+                  <div id="cart-products__container">
+                    {ProductComponents}
+                  </div>
+      
+                  <div id="cart-subtotal__container">
+                    <span id="cart-subtotal">Subtotal: ${cart.subtotal}.00</span>
+                  </div>
+      
+                  <div id="checkout-btn__container">
+                    <button id="checkout-btn" onClick={handleCheckout}>Proceed to Checkout</button>
+                  </div>
+                </div>
+            }
           </div>
+          : !dest
+            ? <Route exact path="/cart">
+              <Redirect to="/" />
+            </Route>
+            : <Route exact path="/cart">
+              <Redirect to={dest} />
+            </Route>
       }
-    </div>
+    </>
   )
 }
 

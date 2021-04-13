@@ -64,7 +64,7 @@ const LoginTabForm: React.FC<LoginFormProps> = ({ closeLoginForm, setLoading, st
   // HANDLE RESET REQUEST (forgot password button)
   const handleResetRequest = (): void => {
     closeLoginForm();
-    changeDest('resetRequest');
+    changeDest('/reset/request');
   }
 
   return (

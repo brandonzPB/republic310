@@ -27,63 +27,7 @@ const OrderConfirmation: React.FC = () => {
 
   if (!allProducts.length || !user.isAuthorized) {
     console.log('User not authorized');
-    setTimeout(() => { changeDest('index') }, 700);
-  }
-
-  if (dest === 'userInfo') {
-    return (
-      <Route exact path="/checkout/confirmation">
-        <Redirect to="/user/info" />
-      </Route>
-    )
-  }
-
-  if (dest === 'cart') {
-    return (
-      <Route exact path="/checkout/confirmation">
-        <Redirect to="/cart" />
-      </Route>
-    )
-  }
-
-  if (dest === 'contact') {
-    return (
-      <Route exact path="/checkout/confirmation">
-        <Redirect to="/contact" />
-      </Route>
-    )
-  }
-
-  if (dest === 'productDetails') {
-    return (
-      <Route exact path="/checkout/confirmation">
-        <Redirect to="/product/details" />
-      </Route>
-    )
-  }
-
-  if (dest === 'products') {
-    return (
-      <Route exact path="/checkout/confirmation">
-        <Redirect to="/products" />
-      </Route>
-    )
-  }
-
-  if (dest === 'about') {
-    return (
-      <Route exact path="/checkout/confirmation">
-        <Redirect to="/about" />
-      </Route>
-    )
-  }
-
-  if (dest === 'index' || dest !== 'confirmation') {
-    return (
-      <Route exact path="/checkout/confirmation">
-        <Redirect to="/" />
-      </Route>
-    )
+    setTimeout(() => { changeDest('/') }, 700);
   }
 
   if (!user.isAuthorized) {
@@ -97,17 +41,29 @@ const OrderConfirmation: React.FC = () => {
   const completeOrder: interfaces.CompleteCart = user.orderHistory[0];
 
   return (
-    <div id="order-confirmation__container">
-      <Order 
-        date={completeOrder.date}
-        id={completeOrder.id}
-        products={completeOrder.products}
-        totalItemCount={completeOrder.totalItemCount}
-        subtotal={completeOrder.subtotal}
-        taxes={completeOrder.taxes}
-        total={completeOrder.total}
-      />
-    </div>
+    <>
+      {
+        dest === '/checkout/confirmation'
+          ? <div id="order-confirmation__container">
+            <Order 
+              date={completeOrder.date}
+              id={completeOrder.id}
+              products={completeOrder.products}
+              totalItemCount={completeOrder.totalItemCount}
+              subtotal={completeOrder.subtotal}
+              taxes={completeOrder.taxes}
+              total={completeOrder.total}
+            />
+          </div>
+          : !dest
+            ? <Route exact path="/checkout/confirmation">
+              <Redirect to="/" />
+            </Route>
+            : <Route exact path="/checkout/confirmation">
+              <Redirect to={dest} />
+            </Route>
+      }
+    </>
   )
 }
 

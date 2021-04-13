@@ -33,56 +33,8 @@ const AllProducts: React.FC = () => {
   }
 
   if (!allProducts || !allProducts.length) {
-    changeDest('index');
+    changeDest('/');
 
-    return (
-      <Route exact path="/products">
-        <Redirect to="/" />
-      </Route>
-    )
-  }
-
-  if (dest === 'userInfo') {
-    return (
-      <Route exact path="/products">
-        <Redirect to="/user/info" />
-      </Route>
-    )
-  }
-
-  if (dest === 'cart') {
-    return (
-      <Route exact path="/products">
-        <Redirect to="/cart" />
-      </Route>
-    )
-  }
-
-  if (dest === 'productDetails') {
-    return (
-      <Route exact path="/products">
-        <Redirect to="/product/details" />
-      </Route>
-    )
-  }
-
-  if (dest === 'about') {
-    return (
-      <Route exact path="/products">
-        <Redirect to="/about" />
-      </Route>
-    )
-  }
-
-  if (dest === 'contact') {
-    return (
-      <Route exact path="/products">
-        <Redirect to="/contact" />
-      </Route>
-    )
-  }
-
-  if (dest === 'index' || dest !== 'products') {
     return (
       <Route exact path="/products">
         <Redirect to="/" />
@@ -126,24 +78,36 @@ const AllProducts: React.FC = () => {
   ));
 
   return (
-    <div id="all-products__container">
-      <div id="sort-form__container">
-        <form onSubmit={handleSubmit(onSubmit)}>
-
-          <select name="sort" id="sort-select" ref={register}>
-            <option value="alphaAscend">A-Z (ascending alphabetical)</option>
-            <option value="alphaDescend">Z-A (descending alphabetical)</option>
-            <option value="priceAscend">Price Ascending</option>
-            <option value="priceDescend">Price Descending</option>
-          </select>
-
-          <button id="update-sort-btn">Update List</button>
-
-        </form>
-      </div>
-
-      {ProductComponents}
-    </div>
+    <>
+      {
+        dest === '/products'
+          ? <div id="all-products__container">
+            <div id="sort-form__container">
+              <form onSubmit={handleSubmit(onSubmit)}>
+      
+                <select name="sort" id="sort-select" ref={register}>
+                  <option value="alphaAscend">A-Z (ascending alphabetical)</option>
+                  <option value="alphaDescend">Z-A (descending alphabetical)</option>
+                  <option value="priceAscend">Price Ascending</option>
+                  <option value="priceDescend">Price Descending</option>
+                </select>
+      
+                <button id="update-sort-btn">Update List</button>
+      
+              </form>
+            </div>
+      
+            {ProductComponents}
+          </div>
+          : !dest
+            ? <Route exact path="/products">
+              <Redirect to="/" />
+            </Route>
+            : <Route exact path="/products">
+              <Redirect to={dest} />
+            </Route>
+      }
+    </>
   )
 }
 

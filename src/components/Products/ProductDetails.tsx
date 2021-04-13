@@ -24,61 +24,13 @@ const ProductDetails: React.FC = () => {
   }, []);
 
   if (product.price === 0) {
-    changeDest('index');
+    changeDest('/');
 
-    return (
-      <Route exact path="/product/details">
-        <Redirect to="/" />
-      </Route>
-    )
-  }
-
-  if (dest === 'userInfo') {
-    return (
-      <Route exact path="/product/details">
-        <Redirect to="/user/info" />
-      </Route>
-    )
-  }
-
-  if (dest === 'cart') {
-    return (
-      <Route exact path="/product/details">
-        <Redirect to="/cart" />
-      </Route>
-    )
-  }
-
-  if (dest === 'contact') {
-    return (
-      <Route exact path="/product/details">
-        <Redirect to="/contact" />
-      </Route>
-    )
-  }
-
-  if (dest === 'about') {
-    return (
-      <Route exact path="/product/details">
-        <Redirect to="/about" />
-      </Route>
-    )
-  }
-
-  if (dest === 'products') {
-    return (
-      <Route exact path="/product/details">
-        <Redirect to="/products" />
-      </Route>
-    )
-  }
-
-  if (dest === 'index' || dest !== 'productDetails') {
-    return (
-      <Route exact path="/product/details">
-        <Redirect to="/" />
-      </Route>
-    )
+    // return (
+    //   <Route exact path="/product/details">
+    //     <Redirect to="/" />
+    //   </Route>
+    // )
   }
 
   // GET PRODUCT DETAILS (helper)
@@ -134,45 +86,57 @@ const ProductDetails: React.FC = () => {
   }
 
   return (
-    <div id="product-details__container">
-      <div id="left-col__container">
-        <img alt={product.description} id="product-details-img"
-          src={
-            product.name === 'The Hollywood' ? hollywoodSrc
-              : product.name === 'The Malibu' ? malibuSrc
-              : product.name === 'The Surfer' ? surferSrc
-              : product.name === 'The Mudslide' ? mudslideSrc
-              : product.name === 'The Bruins' ? bruinSrc
-              : product.name === 'The San Andreas' ? sanAndreasSrc
-              : product.name === 'The Golden Gate' ? goldenGateSrc
-              : product.name === 'The Bear' ? bearSrc
-              : smogSrc
-          } 
-        />
-      </div>
-
-      <div id="right-col__container">
-        <div id="product-details-name__container">
-          <span id="product-details-name">{product.name}</span>
-        </div>
-
-        <div id="product-details-price__container">
-          <span id="product-details-price">{product.price}</span>
-        </div>
-
-        <div id="product-details-description__container">
-          <span id="product-details-description">{product.description}</span>
-        </div>
-
-        <div id="product-details-add-btn__container">
-          <button id="add-to-cart-btn" onClick={() => handleCartUpdate(product.name)}>Add to Cart</button>
-        </div>
-      </div>
-
-      <div id="suggested-products__container"></div>
-
-      <div id="certifications__container"></div>
-    </div>
+    <>
+      {
+        dest === '/product/details'
+          ? <div id="product-details__container">
+            <div id="left-col__container">
+              <img alt={product.description} id="product-details-img"
+                src={
+                  product.name === 'The Hollywood' ? hollywoodSrc
+                    : product.name === 'The Malibu' ? malibuSrc
+                    : product.name === 'The Surfer' ? surferSrc
+                    : product.name === 'The Mudslide' ? mudslideSrc
+                    : product.name === 'The Bruins' ? bruinSrc
+                    : product.name === 'The San Andreas' ? sanAndreasSrc
+                    : product.name === 'The Golden Gate' ? goldenGateSrc
+                    : product.name === 'The Bear' ? bearSrc
+                    : smogSrc
+                } 
+              />
+            </div>
+      
+            <div id="right-col__container">
+              <div id="product-details-name__container">
+                <span id="product-details-name">{product.name}</span>
+              </div>
+      
+              <div id="product-details-price__container">
+                <span id="product-details-price">{product.price}</span>
+              </div>
+      
+              <div id="product-details-description__container">
+                <span id="product-details-description">{product.description}</span>
+              </div>
+      
+              <div id="product-details-add-btn__container">
+                <button id="add-to-cart-btn" onClick={() => handleCartUpdate(product.name)}>Add to Cart</button>
+              </div>
+            </div>
+      
+            <div id="suggested-products__container"></div>
+      
+            <div id="certifications__container"></div>
+          </div>
+          : !dest
+            ? <Route exact path="/product/details">
+              <Redirect to="/" />
+            </Route>
+            : <Route exact path="/product/details">
+              <Redirect to={dest} />
+            </Route>
+      }
+    </>
   )
 }
 

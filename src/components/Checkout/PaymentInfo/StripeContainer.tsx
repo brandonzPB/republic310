@@ -22,92 +22,32 @@ const StripeContainer = () => {
     setTimeout(() => {
       if (orderStatus === 'complete') {
         // proceed to order confirmation page
-        return changeDest('confirmation');
+        return changeDest('/checkout/confirmation');
       }
   
       // order status is incomplete
-      changeDest('index');
+      changeDest('/');
     }, 600);
-  }
-
-  if (dest === 'userInfo') {
-    return (
-      <Route exact path="/checkout/payment">
-        <Redirect to="/user/info" />
-      </Route>
-    )
-  }
-
-  if (dest === 'confirmation') {
-    return (
-      <Route exact path="/checkout/payment">
-        <Redirect to="/checkout/confirmation" />
-      </Route>
-    )
-  }
-
-  if (dest === 'cart') {
-    return (
-      <Route exact path="/checkout/payment">
-        <Redirect to="/cart" />
-      </Route>
-    )
-  }
-
-  if (dest === 'shipping') {
-    return (
-      <Route exact path="/checkout/payment">
-        <Redirect to="/checkout/shipping" />
-      </Route>
-    )
-  }
-
-  if (dest === 'contact') {
-    return (
-      <Route exact path="/checkout/payment">
-        <Redirect to="/contact" />
-      </Route>
-    )
-  }
-
-  if (dest === 'productDetails') {
-    return (
-      <Route exact path="/checkout/payment">
-        <Redirect to="/product/details" />
-      </Route>
-    )
-  }
-
-  if (dest === 'products') {
-    return (
-      <Route exact path="/checkout/payment">
-        <Redirect to="/products" />
-      </Route>
-    )
-  }
-
-  if (dest === 'about') {
-    return (
-      <Route exact path="/checkout/payment">
-        <Redirect to="/about" />
-      </Route>
-    )
-  }
-
-  if (dest === 'index' || dest !== 'payment') {
-    return (
-      <Route exact path="/checkout/payment">
-        <Redirect to="/" />
-      </Route>
-    )
   }
   
   return (
-    <div id="stripe__container">
-      <Elements stripe={stripeTestPromise}>
-        <PaymentForm />
-      </Elements>
-    </div>
+    <>
+      {
+        dest === '/checkout/payment'
+          ? <div id="stripe__container">
+            <Elements stripe={stripeTestPromise}>
+              <PaymentForm />
+            </Elements>
+          </div>
+          : !dest
+            ? <Route exact path="/checkout/payment">
+              <Redirect to="/" />
+            </Route>
+            : <Route exact path="/checkout/payment">
+              <Redirect to={dest} />
+            </Route>
+      }
+    </>
   )
 }
 
