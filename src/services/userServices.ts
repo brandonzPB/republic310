@@ -44,7 +44,10 @@ export const resetPassword = (userObj: object, token: string): any => {
 export const login = (credentials: object): any => {
   const req: any = axios.post(`${baseUrl}/login`, credentials);
 
-  return req.then((res: any) => res.data)
+  return req.then((res: any) => {
+    console.log('res.data', res.data);
+    return res.data;
+  })
     .catch((err: any) => console.error(err));
 }
 

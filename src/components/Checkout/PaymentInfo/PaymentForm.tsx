@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import { v4 as uuidv4 } from 'uuid';
 import * as userServices from '../../../services/userServices';
@@ -7,6 +7,7 @@ import * as actions from '../../../modules/actions';
 import * as interfaces from '../../../modules/interfaces';
 import { GlobalContext } from '../../../contexts/GlobalContext';
 import { RouteContext } from '../../../contexts/RouteContext';
+import LoginModal from '../LoginModal/LoginModal';
 
 import './paymentForm.css';
 import { updateProductSales } from '../../../services/productServices';
@@ -16,9 +17,15 @@ const PaymentForm: React.FC = () => {
 
   const { changeOrderStatus } = useContext(RouteContext);
 
+  const [modalDisplay, setModalDisplay] = useState({ show: true });
+
   const stripe: any = useStripe();
 
   const elements: any = useElements();
+
+  const hideModal = (): void => {
+    setModalDisplay({ ... modalDisplay, show: false });
+  }
 
   const handleOrderDate = (date: Date): any => {
     return addDateToCart(date);
@@ -55,6 +62,8 @@ const PaymentForm: React.FC = () => {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
+
+    if (!user.isAuthorized) return;
 
     const { error, paymentMethod } = await stripe.createPaymentMethod({
       type: "card",
@@ -115,6 +124,12 @@ const PaymentForm: React.FC = () => {
 
   return (
     <div id="payment-info__container">
+      {
+        modalDisplay.show
+          ? <LoginModal hideModal={hideModal} />
+          : <></>
+      }
+      
       <form onSubmit={handleSubmit}>
         <fieldset className="FormGroup">
           <div className="FormRow">

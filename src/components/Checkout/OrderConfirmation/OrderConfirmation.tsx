@@ -25,17 +25,8 @@ const OrderConfirmation: React.FC = () => {
     }
   }, []);
 
-  if (!allProducts.length || !user.isAuthorized) {
-    console.log('User not authorized');
+  if (!allProducts.length) {
     setTimeout(() => { changeDest('/') }, 700);
-  }
-
-  if (!user.isAuthorized) {
-    return (
-      <div id="confirmation-error__container">
-        <span id="confirmation-error-text">Redirecting to index...</span>
-      </div>
-    )
   }
 
   const completeOrder: interfaces.CompleteCart = user.orderHistory[0];

@@ -19,20 +19,11 @@ interface UserData {
 };
 
 const ShippingForm: React.FC = () => {
-  const { login, user } = useContext(GlobalContext);
+  const { user } = useContext(GlobalContext);
 
   const { dest, changeDest } = useContext(RouteContext);
 
   const { register, handleSubmit, errors } = useForm<UserData>();
-
-  // HANDLE LOGIN (helper)
-  const handleLogin = async (data: UserData): Promise<any> => {
-    const credentials = { email: data.email, password: data.password };
-    
-    const loginResult: any = await login(credentials);
-
-    return loginResult === 'Success';
-  }
 
   // HANDLE CREATE USER (helper)
   const handleCreateUser = async (data: UserData): Promise<any> => {
@@ -51,23 +42,15 @@ const ShippingForm: React.FC = () => {
 
     if (user.isAuthorized) {
       changeDest('/checkout/payment');
+
     } else if (!user.isAuthorized) {
       // at this point: email is available and user is not authorized:
-      // create account -> login
 
       // create user
       const createResult: any = await handleCreateUser(data);
 
       if (createResult !== true) {
         console.log('create error');
-        return;
-      }
-
-      // login (this saves it to state; user doesn't need to do anything extra)
-      const loginResult: any = await handleLogin(data);
-
-      if (!loginResult) {
-        console.log('login error');
         return;
       }
 
