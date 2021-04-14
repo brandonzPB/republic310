@@ -57,9 +57,9 @@ const AllProducts: React.FC = () => {
       quickSort(sortedProducts)
     : quickSort(sortedProducts).reverse();
 
-  const ProductComponents: any = sortedProducts.map((product: interfaces.DisplayProduct, index: number) => (
+  const ProductComponents: any = sortedProducts.map((product: interfaces.DisplayProduct) => (
     <Product 
-      key={index}
+      key={product.id}
       name={product.name}
       price={product.price}
       imageUrl={

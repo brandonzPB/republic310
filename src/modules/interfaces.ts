@@ -1,7 +1,16 @@
-/// CART INTERFACES ///
+/// DISPLAY PRODUCT ///
+// this is used for display purposes only
+export interface DisplayProduct {
+  name: string;
+  price: number;
+  id: string;
+  description: string;
+  qtySold: number;
+  imageUrl?: string;
+  alt?: string;
+}
 
-import { ShorthandPropertyAssignment } from "typescript";
-
+// PRODUCT
 // product object is created when adding to cart
 export interface Product {
   id: string;
@@ -9,6 +18,8 @@ export interface Product {
   quantity: number;
   price: number;
 };
+
+/// CART INTERFACES ///
 
 export interface Cart {
   products: Product[];
@@ -32,20 +43,6 @@ export interface CompleteCart {
   total: number;
   id: string;
 };
-
-/// DISPLAY PRODUCT ///
-
-// this is used for display purposes only
-export interface DisplayProduct {
-  name: string;
-  price: number;
-  id: string;
-  _id: string;
-  description: string;
-  stock: number;
-  imageUrl: string;
-  alt?: string;
-}
 
 /// USER INTERFACES ///
 

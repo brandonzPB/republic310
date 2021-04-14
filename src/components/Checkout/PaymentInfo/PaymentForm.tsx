@@ -2,11 +2,14 @@ import React, { useContext } from 'react';
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import { v4 as uuidv4 } from 'uuid';
 import * as userServices from '../../../services/userServices';
+import * as productServices from '../../../services/productServices';
+import * as actions from '../../../modules/actions';
 import * as interfaces from '../../../modules/interfaces';
 import { GlobalContext } from '../../../contexts/GlobalContext';
 import { RouteContext } from '../../../contexts/RouteContext';
 
 import './paymentForm.css';
+import { updateProductSales } from '../../../services/productServices';
 
 const PaymentForm: React.FC = () => {
   const { cart, user, completeOrder, addDateToCart } = useContext(GlobalContext);
@@ -26,6 +29,30 @@ const PaymentForm: React.FC = () => {
     return completeOrder(user._id, completeCart, user.accessToken);
   }
 
+  const handleProductSalesUpdate = async (): Promise<any> => {
+    const accessToken: string = user.accessToken;
+
+    let updates = 0;
+
+    // for each product, update product sales
+    for (let i = 0; i < cart.products.length; i++) {
+      const product: interfaces.Product = cart.products[i];
+
+      const updater = async function(this: interfaces.Product, token: string) {
+        const id: string = this.id;
+        const quantity: number = this.quantity;
+
+        await actions.updateProductSales(id, quantity, token);
+
+        updates++;
+      }.bind(product, accessToken);
+
+      updater();
+    }
+
+    return updates === cart.products.length;
+  }
+
   const handleSubmit = async (e: any) => {
     e.preventDefault();
 
@@ -41,15 +68,24 @@ const PaymentForm: React.FC = () => {
 
         const paymentObj = { id, amount };
 
-        const userId: string = user._id!;
-        const accessToken: string = user.accessToken!;
+        const userId: string = user._id;
+        const accessToken: string = user.accessToken;
     
         const response: any = await userServices.postPayment(userId, paymentObj, accessToken);
     
         if (response.success) {
           console.log('Successful payment');
 
+          // for routing purposes:
           changeOrderStatus('complete');
+
+          // update products sales
+          const updateResult: boolean = await handleProductSalesUpdate();
+
+          if (updateResult === false) {
+            console.log('Error updating product sales');
+            return false;
+          }
 
           // add date to cart
           await handleOrderDate(response.date);

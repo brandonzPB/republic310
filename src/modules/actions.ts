@@ -22,14 +22,13 @@ export type ActionType =
   | { type: 'complete_order',             payload: interfaces.CompleteCart     }
 
 const getProductDetailArray = (products: any): any => {
-  const productArray: interfaces.DisplayProduct[] = products.map((product: any) => {
+  const productArray: interfaces.DisplayProduct[] = products.map((product: interfaces.DisplayProduct) => {
     return {
       name: product.name,
       description: product.description,
       price: product.price,
-      stock: product.stock,
+      qtySold: product.qtySold,
       id: product.id,
-      _id: product._id,
     }
   });
 
@@ -160,6 +159,16 @@ export const emailConfirmationToUser = async (
     const emailResult: any = await userService.emailConfirmationToUser(userObj, token);
 
     if (!emailResult || emailResult.result === 'Error') return 'Error';
+
+    return 'Success';
+  }
+
+  export const updateProductSales = async (productId: string, productQty: number, token: string): Promise<any> => {
+    const product: any = { _id: productId, qty: productQty };
+
+    const updateResult: any = await productService.updateProductSales(product, token);
+
+    if (!updateResult || updateResult.result !== 'Success') return 'Error';
 
     return 'Success';
   }

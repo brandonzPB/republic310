@@ -67,12 +67,7 @@ const Product: React.FC<types.DisplayProduct> = ({ name, price, imageUrl, alt }:
     // update cart subtotal
     updateCartSubtotal(productDetails.price);
 
-    const productObj: any = {
-      name: productDetails.name,
-      price: productDetails.price,
-    };
-
-    return addToCart(productObj);
+    return addToCart(productDetails);
   }
 
   // UPDATE PRODUCT (variable in RouteContext state)

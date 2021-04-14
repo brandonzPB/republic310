@@ -10,7 +10,7 @@ export const topProducts: TopProduct[] = [
     name: 'The Hollywood',
     price: 150,
     imageUrl: 'the_hollywood.jpg',
-    alt: 'A tincture bottle'
+    alt: 'A tincture bottle',
   },
   {
     name: 'The San Andreas',

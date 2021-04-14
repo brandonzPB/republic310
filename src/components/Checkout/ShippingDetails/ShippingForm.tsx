@@ -50,7 +50,7 @@ const ShippingForm: React.FC = () => {
     console.log(data);
 
     if (user.isAuthorized) {
-      changeDest('payment');
+      changeDest('/checkout/payment');
     } else if (!user.isAuthorized) {
       // at this point: email is available and user is not authorized:
       // create account -> login
@@ -71,7 +71,7 @@ const ShippingForm: React.FC = () => {
         return;
       }
 
-      changeDest('payment');
+      changeDest('/checkout/payment');
     }
   }
 

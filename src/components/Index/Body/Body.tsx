@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
-import { InterfaceTypeWithDeclaredMembers } from 'typescript';
 import { GlobalContext } from '../../../contexts/GlobalContext';
 import { RouteContext } from '../../../contexts/RouteContext';
 import { topProducts } from '../../../modules/topProducts';
+import * as interfaces from '../../../modules/interfaces';
 import Product from '../../Products/Product';
 import './body.css';
 

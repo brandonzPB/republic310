@@ -50,7 +50,7 @@ const Cart: React.FC = () => {
     handleTotalCostUpdate();
 
     // redirect to shipping details input
-    changeDest('shipping');
+    changeDest('/checkout/shipping');
   }
 
   const ProductComponents: any = cart.products.map((item: any) => (

@@ -7,11 +7,11 @@ class Product implements interfaces.Product {
   quantity: number;
   price: number;
 
-  constructor(name: string, quantity: number, price: number) {
-    this.id = uuidv4();
+  constructor(name: string, quantity: number, price: number, id: string) {
     this.name = name;
     this.quantity = quantity;
     this.price = price;
+    this.id = id;
   }
 }
 
