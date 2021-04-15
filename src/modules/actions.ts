@@ -4,6 +4,7 @@ import * as productService from '../services/productServices';
 
 export type ActionType = 
   | { type: 'get_all_products',           payload: interfaces.DisplayProduct[] }
+  | { type: 'update_temp_email',          payload: string                      }
   | { type: 'get_reset_token',            payload: any                         }
   | { type: 'reset_password',             payload: string                      }
   | { type: 'login',                      payload: interfaces.User             }
@@ -22,13 +23,13 @@ export type ActionType =
   | { type: 'complete_order',             payload: interfaces.CompleteCart     }
 
 const getProductDetailArray = (products: any): any => {
-  const productArray: interfaces.DisplayProduct[] = products.map((product: interfaces.DisplayProduct) => {
+  const productArray: interfaces.DisplayProduct[] = products.map((product: any) => {
     return {
       name: product.name,
       description: product.description,
       price: product.price,
       qtySold: product.qtySold,
-      id: product.id,
+      id: product._id,
     }
   });
 
@@ -103,7 +104,6 @@ export const updateUser = async (user: object, userId: string, token: string): P
 
 export const comparePasswords = async (password: string, userId: string, token: string): Promise<any> => {
   // returns false if passwords don't match
-
   const userObj: object = { password };
 
   const checkResult: any = await userService.comparePasswords(userObj, userId, token);
@@ -163,10 +163,8 @@ export const emailConfirmationToUser = async (
     return 'Success';
   }
 
-  export const updateProductSales = async (productId: string, productQty: number, token: string): Promise<any> => {
-    const product: any = { _id: productId, qty: productQty };
-
-    const updateResult: any = await productService.updateProductSales(product, token);
+  export const updateProductSales = async (productObj: any, productId: string, token: string): Promise<any> => {
+    const updateResult: any = await productService.updateProductSales(productObj, productId, token);
 
     if (!updateResult || updateResult.result !== 'Success') return 'Error';
 

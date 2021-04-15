@@ -7,6 +7,9 @@ function globalReducer(state: interfaces.State, action: ActionType): typeof stat
     case 'get_all_products':
       return { ...state, allProducts: action.payload };
 
+    case 'update_temp_email':
+      return { ...state, tempEmail: action.payload };
+
     case 'get_reset_token':
       return {
         ...state,

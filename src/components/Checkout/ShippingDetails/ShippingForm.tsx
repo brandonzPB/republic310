@@ -19,7 +19,7 @@ interface UserData {
 };
 
 const ShippingForm: React.FC = () => {
-  const { user } = useContext(GlobalContext);
+  const { user, updateTempEmail } = useContext(GlobalContext);
 
   const { dest, changeDest } = useContext(RouteContext);
 
@@ -53,6 +53,8 @@ const ShippingForm: React.FC = () => {
         console.log('create error');
         return;
       }
+
+      updateTempEmail(data.email);
 
       changeDest('/checkout/payment');
     }
@@ -98,8 +100,8 @@ const ShippingForm: React.FC = () => {
             ref={register({ required: true, validate: isAvailable })}
           />
 
-          {errors.email && errors.email.type === 'validate' && (
-            <div style={{ color: 'red' }}>Email unavailable</div>
+          {errors.email && errors.email.type === 'validate' && !user.isAuthorized && (
+            <div style={{ color: 'red' }}>Email in use. Please log in if this is your email. Otherwise, enter a different one.</div>
           )}
 
           {!user.isAuthorized && errors.email && <div>Email is requred</div>}

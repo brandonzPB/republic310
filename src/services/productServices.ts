@@ -1,5 +1,4 @@
 import axios from 'axios';
-import * as interfaces from '../modules/interfaces';
 
 const baseUrl = '/catalog/';
 
@@ -20,8 +19,8 @@ export const getProductDetails = (productId: string): any => {
 }
 
 // UPDATE PRODUCT SALES
-export const updateProductSales = (productObj: any, token: string): any => {
-  const req = axios.put(`${baseUrl}/product/${productObj._id}/update_sales`, productObj, {
+export const updateProductSales = (productObj: any, productId: string, token: string): any => {
+  const req = axios.put(`${baseUrl}/product/${productId}/update_sales`, productObj, {
     headers: {
       'Authorization': `Bearer ${token}`
     }

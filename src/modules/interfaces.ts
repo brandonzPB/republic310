@@ -81,10 +81,12 @@ export interface State {
   cart: Cart;
   allProducts: DisplayProduct[];
   resetToken: string;
+  tempEmail: string;
+  updateTempEmail: (email: string) => void;
   createUser: (user: object) => any;
   requestReset: (email: string) => any;
   resetPassword: (password: string, resetCode: string, resetToken: string) => any;
-  login: (user: object) => any;
+  login: (user: any) => any;
   logout: () => void;
   updateUser: (email: string, phoneNumber: string, userId: string, token: string) => any;
   updateUserPassword: (password: string, userId: string, token: string) => any;

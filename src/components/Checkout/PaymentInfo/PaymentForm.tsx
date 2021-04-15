@@ -17,14 +17,14 @@ const PaymentForm: React.FC = () => {
 
   const { changeOrderStatus } = useContext(RouteContext);
 
-  const [modalDisplay, setModalDisplay] = useState({ show: true });
+  const [modalDisplay, setModalDisplay] = useState({ show: true, error: false });
 
   const stripe: any = useStripe();
 
   const elements: any = useElements();
 
   const hideModal = (): void => {
-    setModalDisplay({ ... modalDisplay, show: false });
+    setModalDisplay({ ... modalDisplay, show: false, error: false });
   }
 
   const handleOrderDate = (date: Date): any => {
@@ -36,34 +36,38 @@ const PaymentForm: React.FC = () => {
     return completeOrder(user._id, completeCart, user.accessToken);
   }
 
+  // UPDATE PRODUCT SALES
   const handleProductSalesUpdate = async (): Promise<any> => {
     const accessToken: string = user.accessToken;
 
-    let updates = 0;
-
     // for each product, update product sales
     for (let i = 0; i < cart.products.length; i++) {
+
       const product: interfaces.Product = cart.products[i];
 
       const updater = async function(this: interfaces.Product, token: string) {
         const id: string = this.id;
         const quantity: number = this.quantity;
+        const name: string = this.name;
 
-        await actions.updateProductSales(id, quantity, token);
+        const productObj: any = { name, quantity };
 
-        updates++;
+        await actions.updateProductSales(productObj, id, token);
       }.bind(product, accessToken);
 
       updater();
+
     }
 
-    return updates === cart.products.length;
+    return true;
   }
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
 
-    if (!user.isAuthorized) return;
+    if (!user.isAuthorized || modalDisplay.show) {
+      return setModalDisplay({ ...modalDisplay, error: true });
+    }
 
     const { error, paymentMethod } = await stripe.createPaymentMethod({
       type: "card",
@@ -96,6 +100,8 @@ const PaymentForm: React.FC = () => {
             return false;
           }
 
+          debugger;
+
           // add date to cart
           await handleOrderDate(response.date);
 
@@ -126,7 +132,7 @@ const PaymentForm: React.FC = () => {
     <div id="payment-info__container">
       {
         modalDisplay.show
-          ? <LoginModal hideModal={hideModal} />
+          ? <LoginModal hideModal={hideModal} modalDisplay={modalDisplay} />
           : <></>
       }
       

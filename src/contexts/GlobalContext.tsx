@@ -38,10 +38,12 @@ const initialState: interfaces.State = {
   cart: new Cart([]),
   allProducts: [],
   resetToken: '',
+  tempEmail: '',
+  updateTempEmail: (email: string): void => {},
   createUser: actions.createUser,
   requestReset: (email: string): any => {},
   resetPassword: (password: string, resetCode: string, resetToken: string): any => {},
-  login: (user: object): any => {},
+  login: (user: any): any => {},
   logout: (): void => {},
   updateUser: (email: string, phoneNumber: string, userId: string, token: string): any => {},
   updateUserPassword: (password: string, userId: string, token: string): any => {},
@@ -93,6 +95,11 @@ const GlobalContextProvider: React.FC = ({ children }) => {
   //   initialState.resetToken = state.resetToken;
   // }, [state]);
 
+  // UPDATE TEMP EMAIL
+  const updateTempEmail = (email: string): void => {
+    dispatch({ type: 'update_temp_email', payload: email });
+  }
+
   // REQUEST RESET
   const requestReset = async (email: string): Promise<any> => {
     const requestResult: any = await actions.requestReset(email);
@@ -117,15 +124,15 @@ const GlobalContextProvider: React.FC = ({ children }) => {
     dispatch({ type: 'reset_password', payload: password });
   }
 
-  // CREATE USER OBJECT (on login; to be added to state)
-  const createAuthorizedUser = (loginResult: any): any => {
+  // CREATE USER OBJECT (helper called on login; to be added to state)
+  const createAuthorizedUser = (password: string, loginResult: any): any => {
     const authorizedUser: interfaces.User = new User();
     
     const details = {
       firstName: loginResult.userToken.first_name,
       lastName: loginResult.userToken.last_name,
       email: loginResult.userToken.email,
-      password: loginResult.userToken.password,
+      password,
       _id: loginResult.userToken._id,
       accessToken: loginResult.accessToken
     };
@@ -145,12 +152,12 @@ const GlobalContextProvider: React.FC = ({ children }) => {
   }
 
   // LOGIN
-  const login = async (credentials: object): Promise<any> => { 
+  const login = async (credentials: any): Promise<any> => { 
     const loginResult: any = await actions.login(credentials);
 
     if (!loginResult || loginResult === 'Error') return 'Error';
 
-    const authorizedUser = createAuthorizedUser(loginResult);
+    const authorizedUser = createAuthorizedUser(credentials.password, loginResult);
 
     dispatch({ type: 'login', payload: authorizedUser });
 
@@ -271,6 +278,7 @@ const GlobalContextProvider: React.FC = ({ children }) => {
   // I've yet to find a better way to go about this...
   // (once I do, the following area will be improved upon)
 
+  initialState.updateTempEmail = updateTempEmail;
   initialState.requestReset = requestReset;
   initialState.resetPassword = resetPassword;
   initialState.login = login;
