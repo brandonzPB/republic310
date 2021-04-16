@@ -167,7 +167,7 @@ export const emailConfirmationToUser = (userObj: any, token: string): any => {
 
 // VERIFY ADMIN
 export const verifyAdmin = (credentials: any, token: string): any => {
-  const req: any = axios.post(`${baseUrl}/${credentials.id}/verify_admin`, credentials, {
+  const req: any = axios.post(`${baseUrl}/${credentials.userId}/verify_admin`, credentials, {
     headers: {
       'Authorization': `Bearer ${token}`
     }

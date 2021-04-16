@@ -6,7 +6,7 @@ import { GlobalContext } from '../../contexts/GlobalContext';
 import { RouteContext } from '../../contexts/RouteContext';
 import Product from './Product';
 import * as interfaces from '../../modules/interfaces';
-import quickSort from '../../modules/quickSort';
+import quickSortProducts from '../../modules/quickSortProducts';
 
 import hollywoodSrc from '../../assets/images/products/the_hollywood.jpg';
 import malibuSrc from '../../assets/images/products/the_malibu.jpg';
@@ -54,8 +54,8 @@ const AllProducts: React.FC = () => {
         return a.name.localeCompare(b.name);
       }).reverse()
     : sort.type === 'priceAscend' ?
-      quickSort(sortedProducts)
-    : quickSort(sortedProducts).reverse();
+      quickSortProducts(sortedProducts, 'price')
+    : quickSortProducts(sortedProducts, 'price').reverse();
 
   const ProductComponents: any = sortedProducts.map((product: interfaces.DisplayProduct) => (
     <Product 

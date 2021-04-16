@@ -9,7 +9,6 @@ import './adminForm.css'
 interface AdminFormProps {
   email: string;
   password: string;
-  adminCode: string;
 };
 
 const AdminForm: React.FC = () => {
@@ -38,7 +37,7 @@ const AdminForm: React.FC = () => {
   const onSubmit = async (data: any): Promise<any> => {
     console.log('data', data);
 
-    const verificationResult: any = handleVerification(data);
+    const verificationResult: any = await handleVerification(data);
 
     if (!verificationResult) {
       console.log('User not authorized');
@@ -69,14 +68,6 @@ const AdminForm: React.FC = () => {
                     type="password"
                     name="password"
                     placeholder="Password"
-                    ref={register({ required: true })}
-                  />
-      
-                  <input 
-                    className="admin-input"
-                    type="password"
-                    name="adminCode"
-                    placeholder="Admin Code"
                     ref={register({ required: true })}
                   />
       
