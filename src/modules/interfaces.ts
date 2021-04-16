@@ -67,6 +67,8 @@ export interface User {
   shippingAddress?: Address;
   phoneNumber?: string;
   orderHistory: CompleteCart[];
+  isAdmin: boolean;
+  adminCode: string;
   initiateDetails: (inputs: any) => void;
   updateShippingAddress: (address: any) => void;
   updatePhoneNumber: (phoneNumber: string) => void;

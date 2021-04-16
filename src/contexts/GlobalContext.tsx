@@ -134,7 +134,9 @@ const GlobalContextProvider: React.FC = ({ children }) => {
       email: loginResult.userToken.email,
       password,
       _id: loginResult.userToken._id,
-      accessToken: loginResult.accessToken
+      accessToken: loginResult.accessToken,
+      isAdmin: loginResult.userToken.is_admin,
+      admin_code: loginResult.userToken.admin_code,
     };
 
     authorizedUser.initiateDetails(details);

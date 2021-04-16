@@ -28,6 +28,9 @@ import RequestResetCode from './components/User/ForgotPassword/Request/RequestRe
 import PostResetCode from './components/User/ForgotPassword/PostResetCode/PostResetCode';
 import ResetPassword from './components/User/ForgotPassword/ResetPassword/ResetPassword';
 
+import AdminForm from './components/Admin/Verification/AdminForm';
+import StatsContainer from './components/Admin/StatsContainer/StatsContainer';
+
 function App() {
   return (
     <BrowserRouter>
@@ -57,6 +60,9 @@ function App() {
             <Route exact path="/reset/request" component={RequestResetCode} />
             <Route exact path="/reset/code" component={PostResetCode} />
             <Route exact path="/reset/password" component={ResetPassword} />
+
+            <Route exact path="/stats" component={AdminForm} />
+            <Route exact path="/stats/verified" component={StatsContainer} />
 
             <Footer />
           </RouteContextProvider>

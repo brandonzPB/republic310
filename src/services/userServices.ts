@@ -164,3 +164,15 @@ export const emailConfirmationToUser = (userObj: any, token: string): any => {
   return req.then((res: any) => res.data)
     .catch((err: any) => console.error(err));
 }
+
+// VERIFY ADMIN
+export const verifyAdmin = (credentials: any, token: string): any => {
+  const req: any = axios.post(`${baseUrl}/${credentials.id}/verify_admin`, credentials, {
+    headers: {
+      'Authorization': `Bearer ${token}`
+    }
+  });
+
+  return req.then((res: any) => res.data)
+    .catch((err: any) => console.error(err));
+}

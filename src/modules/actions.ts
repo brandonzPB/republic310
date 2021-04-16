@@ -161,12 +161,20 @@ export const emailConfirmationToUser = async (
     if (!emailResult || emailResult.result === 'Error') return 'Error';
 
     return 'Success';
-  }
+}
 
-  export const updateProductSales = async (productObj: any, productId: string, token: string): Promise<any> => {
-    const updateResult: any = await productService.updateProductSales(productObj, productId, token);
+export const updateProductSales = async (productObj: any, productId: string, token: string): Promise<any> => {
+  const updateResult: any = await productService.updateProductSales(productObj, productId, token);
 
-    if (!updateResult || updateResult.result !== 'Success') return 'Error';
+  if (!updateResult || updateResult.result !== 'Success') return 'Error';
 
-    return 'Success';
-  }
+  return 'Success';
+}
+
+export const verifyAdmin = async (credentials: any, token: string): Promise<any> => {
+  const verificationResult: any = await userService.verifyAdmin(credentials, token);
+
+  if (!verificationResult || verificationResult.result !== 'Success') return 'Error';
+
+  return 'Success';
+}

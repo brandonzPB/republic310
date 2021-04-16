@@ -31,6 +31,10 @@ const UserInfoTab: React.FC = () => {
         <li className="user-info-list-item">
           <span className="user-info-text-link" onClick={handleLogout}>Log out</span>
         </li>
+
+        <li className="user-info-list-item" style={{ display: user.isAdmin ? 'block' : 'none' }}>
+          <span className="user-info-text-link" onClick={() => changeDest('/stats')}>View Sales Stats</span>
+        </li>
       </ul>
     </div>
   )

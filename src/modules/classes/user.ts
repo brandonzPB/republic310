@@ -12,6 +12,8 @@ class User implements interfaces.User {
   shippingAddress?: interfaces.Address;
   phoneNumber?: string;
   orderHistory: interfaces.CompleteCart[];
+  isAdmin: boolean;
+  adminCode: string;
   initiateDetails: (inputs: any) => void; 
   updateShippingAddress: (address: any) => void;
   updatePhoneNumber: (phoneNumber: string) => void;
@@ -24,6 +26,8 @@ class User implements interfaces.User {
     this.accessToken = 'empty';
     this.resetCode = '';
     this.orderHistory = [];
+    this.isAdmin = false;
+    this.adminCode = 'none';
 
     this.initiateDetails = function(inputs: any): void {
       this.firstName = inputs.firstName;
@@ -32,6 +36,8 @@ class User implements interfaces.User {
       this.password = inputs.password;
       this._id = inputs._id;
       this.accessToken = inputs.accessToken;
+      this.isAdmin = inputs.isAdmin;
+      this.adminCode = inputs.adminCode;
     }
 
     this.updateShippingAddress = function(address: any): void {
