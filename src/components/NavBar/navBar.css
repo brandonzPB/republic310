@@ -1,5 +1,46 @@
 #nav__container {
-  width: 100vw;
+  width: 100%;
+  z-index: 1;
+  height: 10rem;
+  background-color: #ef3b24;
+  opacity: 1;
+  display: block;
+}
+
+#nav-mobile__container {
+  display: none;
+}
+
+#nav-web__container {
+  width: 100%;
+  z-index: 1;
+  height: 10rem;
+  background-color: #ef3b24;
+  opacity: 1;
+  display: flex;
+  flex: 1;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+
+#nav-left__container {
+  width: 33%;
+  z-index: 1;
+  height: 10rem;
+  background-color: #ef3b24;
+  opacity: 1;
+  display: flex;
+  flex: 1;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+
+#nav-right__container {
+  width: 33%;
   z-index: 1;
   height: 10rem;
   background-color: #ef3b24;
@@ -35,6 +76,36 @@
   z-index: 2;
 }
 
+#nav-cart__container {
+  width: auto;
+  background-color: transparent;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: white;
+  background: none;
+  margin: 0 auto;
+  text-align: center;
+  cursor: pointer;
+}
+
+/* #cart-qty__container {
+  background-color: transparent;
+  text-align: center;
+} */
+
+#cart-qty {
+  background-color: transparent;
+  background: none;
+  color: white;
+  font-weight: 600;
+  font-size: 1.5rem;
+  position: relative;
+  bottom: 0.75rem;
+  left: 0.5rem;
+}
+
+/* LOGIN TAB FORM */
+
 #login__container {}
 
 #login-form__container {}
@@ -47,8 +118,14 @@
 
 #password-login-input {}
 
-#nav-cart__container {}
+/* USER INFO TAB */
 
-#cart-qty-container {}
+#account-options__container {}
 
-#cart-qty {}
+#user-info__container {}
+
+#user-info-list {}
+
+.user-info-list-item {}
+
+.user-info-text-link {}

@@ -31,8 +31,9 @@ const Body: React.FC = () => {
   
   return (
     <div id="body__container">
+      <span id="hot-text">What's Hot</span>
+
       <div id="hot-products__container">
-        <span id="hot-text">What's Hot</span>
         {ProductComponents}
       </div>
 
