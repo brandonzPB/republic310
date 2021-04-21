@@ -1,11 +1,11 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useContext } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { RouteContext } from '../../contexts/RouteContext';
 import Header from './Header/Header';
 import Body from './Body/Body'
 
 const Index: React.FC = () => {
-  const { dest, changeDest, orderStatus } = useContext(RouteContext); 
+  const { dest } = useContext(RouteContext); 
 
   return (
     <>

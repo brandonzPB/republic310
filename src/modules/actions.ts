@@ -28,7 +28,7 @@ const getProductDetailArray = (products: any): any => {
       name: product.name,
       description: product.description,
       price: product.price,
-      qtySold: product.qtySold,
+      qtySold: product.qty_sold,
       id: product._id,
     }
   });

@@ -23,18 +23,20 @@ const Stats: React.FC = () => {
       return;
     }
 
-    setSort({ ...sort, type: data.type });
+    console.log('Sorting products...');
+    setSort({ ...sort, type: data.sort });
   }
 
-  let sortedProducts: any = allProducts.slice();
+  let productArrCopy: interfaces.DisplayProduct[] = allProducts.slice();
 
-  const totalRevenue: number = sortedProducts.reduce((total: number, item: interfaces.DisplayProduct) => {
-    return total += (item.price * item.qtySold);
+  const totalRevenue: number = productArrCopy.reduce((total: number, item: interfaces.DisplayProduct) => {
+    return total + (item.price * item.qtySold);
   }, 0);
 
-  sortedProducts = sortedProducts.map((item: interfaces.DisplayProduct) => {
+  // add revenue and revenue percentage to each product in array
+  let updateProductArr: any = productArrCopy.map((item: interfaces.DisplayProduct) => {
     const revenue: number = (item.price * item.qtySold);
-    const revenuePercent: string = (revenue / totalRevenue).toFixed(2);
+    const revenuePercent: number = +((revenue / totalRevenue).toFixed(2)) * 100;
 
     return {
       ...item,
@@ -43,21 +45,23 @@ const Stats: React.FC = () => {
     };
   });
 
-  sortedProducts = sort.type === 'revenuePercentAscend' ?
-      quickSortProducts(sortedProducts, 'revenuePercent')
+  // sort products based on sort type
+  const sortedProducts: any = sort.type === 'revenuePercentAscend' ?
+      quickSortProducts(updateProductArr, 'revenuePercent')
     : sort.type === 'revenuePercentDescend' ?
-      quickSortProducts(sortedProducts, 'revenuePercent').reverse()
+      quickSortProducts(updateProductArr, 'revenuePercent').reverse()
     : sort.type === 'revenueDescend' ?
-      quickSortProducts(sortedProducts, 'revenue').reverse()
-    : quickSortProducts(sortedProducts, 'revenue');
+      quickSortProducts(updateProductArr, 'revenue').reverse()
+    : quickSortProducts(updateProductArr, 'revenue');
 
   const ProductComponents = sortedProducts.map((product: any) => {
     return (
       <ul className="product-analysis-list">
+        <li className="product-analysis-list-item">Product: {product.name}</li>
         <li className="product-analysis-list-item">Quantity Sold: {product.qtySold}</li>
         <li className="product-analysis-list-item">Price: ${product.price}.00</li>
         <li className="product-analysis-list-item">Revenue generated (USD): ${product.revenue}</li>
-        <li className="product-analysis-list-item">Revenue generated (% of total): {product.revenuePercent}%</li>
+        <li className="product-analysis-list-item">Revenue generated (% of total): {product.revenuePercent.toFixed(2)}%</li>
       </ul>
     );
   });
@@ -71,15 +75,16 @@ const Stats: React.FC = () => {
 
               <select name="sort" id="select-analysis-sort" ref={register}>
                 <option value="revenueAscend">Revenue (ascending)</option>
-                <option value="revenueAscend">Revenue (descending)</option>
+                <option value="revenueDescend">Revenue (descending)</option>
                 <option value="revenuePercentAscend">Percent of Revenue (ascending)</option>
-                <option value="revenuePercentDescend">Percent of Revenue (ascending)</option>
+                <option value="revenuePercentDescend">Percent of Revenue (descending)</option>
               </select>
 
               <button id="sort-analysis-btn">Update List</button>
 
             </form>
 
+            <span id="revenue-text">Total Revenue: ${totalRevenue}</span>
             {ProductComponents}
           </div>
           : <></>

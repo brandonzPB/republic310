@@ -100,8 +100,6 @@ const PaymentForm: React.FC = () => {
             return false;
           }
 
-          debugger;
-
           // add date to cart
           await handleOrderDate(response.date);
 

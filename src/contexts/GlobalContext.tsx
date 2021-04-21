@@ -78,7 +78,7 @@ const GlobalContextProvider: React.FC = ({ children }) => {
     }
 
     getAllProducts();
-  }, []);
+  }, [state]);
 
   // SHOW CHANGES TO STATE
   useEffect(() => {
