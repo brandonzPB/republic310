@@ -26,7 +26,16 @@ const OrderConfirmation: React.FC = () => {
 
       const completeOrder: interfaces.CompleteCart = user.orderHistory[0];
 
-      emailConfirmationToUser(userName, phoneNumber, userId, email, accessToken, completeOrder);
+      const userObj = {
+        name: userName,
+        phoneNumber,
+        email,
+        id: userId,
+        shippingAddress: user.shippingAddress,
+        cart: completeOrder
+      };
+
+      emailConfirmationToUser(userObj, accessToken);
 
       return changeOrderStatus('incomplete');
     }

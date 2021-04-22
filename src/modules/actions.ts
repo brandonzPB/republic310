@@ -143,21 +143,7 @@ export const completeOrder = async (userId: string, cart: interfaces.CompleteCar
   return 'Success';
 }
 
-export const emailConfirmationToUser = async (
-  userName: string,  
-  phoneNumber: string,
-  userId: string,
-  userEmail: string, 
-  token: string,
-  cart: interfaces.CompleteCart): Promise<any> => {
-    const userObj = {
-      name: userName,
-      phoneNumber,
-      _id: userId,
-      email: userEmail,
-      cart,
-    };
-
+export const emailConfirmationToUser = async (userObj: any, token: string): Promise<any> => {
     const emailResult: any = await userService.emailConfirmationToUser(userObj, token);
 
     if (!emailResult || emailResult.result === 'Error') return 'Error';

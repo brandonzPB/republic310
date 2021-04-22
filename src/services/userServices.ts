@@ -155,7 +155,7 @@ export const postOrder = (userId: string, order: object, token: string): any => 
 
 // EMAIL CONFIRMATION TO USER
 export const emailConfirmationToUser = (userObj: any, token: string): any => {
-  const req = axios.post(`${baseUrl}/${userObj._id}/confirmation`, userObj, {
+  const req = axios.post(`${baseUrl}/${userObj.id}/confirmation`, userObj, {
     headers: {
       'Authorization': `Bearer ${token}`
     }
