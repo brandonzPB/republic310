@@ -72,7 +72,7 @@ const ProductCartDetails: React.FC<CartProduct> = ({ name, price, quantity, imag
     
     changeProduct(productDetails);
 
-    changeDest('productDetails');
+    changeDest('/product/details');
   }
 
   return (

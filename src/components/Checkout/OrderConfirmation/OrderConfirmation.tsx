@@ -16,8 +16,7 @@ const OrderConfirmation: React.FC = () => {
 
   useEffect(() => {
     if (orderStatus === 'complete') {
-      let userName: string = user.firstName!;
-        userName += ' ' + user.lastName!;
+      let userName: string = `${user.firstName} ${user.lastName}`;
 
       const phoneNumber: string = user.phoneNumber!;
       const email: string = user.email!;

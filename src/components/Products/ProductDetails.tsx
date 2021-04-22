@@ -4,6 +4,7 @@ import { Helmet } from 'react-helmet';
 import { GlobalContext } from '../../contexts/GlobalContext';
 import { RouteContext } from '../../contexts/RouteContext';
 import * as interfaces from '../../modules/interfaces';
+import * as productMethods from '../../modules/productMethods';
 
 import hollywoodSrc from '../../assets/images/products/the_hollywood.jpg';
 import malibuSrc from '../../assets/images/products/the_malibu.jpg';
@@ -16,7 +17,7 @@ import bearSrc from '../../assets/images/products/the_bear.jpg';
 import surferSrc from '../../assets/images/products/the_surfer.jpg';
 
 const ProductDetails: React.FC = () => {
-  const { allProducts, cart, updateTotalItemCount, updateQuantity, addToCart } = useContext(GlobalContext);
+  const { allProducts, cart, updateTotalItemCount, updateSubtotal, updateQuantity, addToCart } = useContext(GlobalContext);
 
   const { dest, changeDest, product, changeProduct } = useContext(RouteContext);
 
@@ -36,56 +37,57 @@ const ProductDetails: React.FC = () => {
     // )
   }
 
-  // GET PRODUCT DETAILS (helper)
-  const getProductDetails = (productName: string): any => {
-    const productDetails: interfaces.DisplayProduct = allProducts
-      .find((product: interfaces.DisplayProduct) => product.name === productName)!;
-
-    return productDetails;
-  }
-
-  // GET PRODUCT IN CART (helper)
-  const getProductInCart = (productName: string): any => {
-    return cart.products.find((item: interfaces.Product) => item.name === productName);
-  }
-
-  // GET CART ITEM COUNT (helper)
-  const getCartItemTotal = (): any => {
-    return cart.products.reduce((count, item) => { return count + item.quantity }, 0);
-  }
-
   // UPDATE CART ITEM COUNT
   const updateCartCount = (): any => {
-    const cartItemTotal: number = getCartItemTotal();
+    const cartItemTotal: number = productMethods.getCartItemTotal(cart);
     return updateTotalItemCount(cartItemTotal + 1);
   }
 
-  // HANDLE CART UPDATE
-  const handleCartUpdate = (productName: string): any => {
-    // get product from cart (if it exists)
-    const productInCart: interfaces.Product = getProductInCart(productName);
+  // UPDATE SUBTOTAL
+  const updateCartSubtotal = (productPrice: number): any => {
+    const cartSubtotal: any = cart.subtotal;
+    return updateSubtotal(cartSubtotal + productPrice);
+  }
 
-    // increment cart item count
-    updateCartCount();
-    
+  // HANDLE ADD PRODUCT TO CART
+  const handleAddProductToCart = (productName: string): any => {
+    // get product from cart (if it exists)
+    const productInCart: interfaces.Product = productMethods.getProductInCart(productName, cart);
+
     // product already exists in cart: increment quantity
     if (productInCart) {
-      console.log('product already in cart');
+      updateCartSubtotal(productInCart.price);
       return updateQuantity(productInCart.name, productInCart.quantity + 1);
     }
 
-    console.log('product not yet in cart');
-
     // product doesn't exist in cart:
     // add product to cart (new object to be created)
-    const productDetails: interfaces.DisplayProduct = getProductDetails(productName);
+    const productDetails: interfaces.DisplayProduct = productMethods.getProductDetails(productName, allProducts);
 
-    const productObj: any = {
-      name: productDetails.name,
-      price: productDetails.price,
-    };
+    updateCartSubtotal(productDetails.price);
+    return addToCart(productDetails);
+  }
 
-    return addToCart(productObj);
+  // HANDLE CART UPDATE
+  const handleCartUpdate = (productName: string): void => {
+    // increment cart item count
+    updateCartCount();
+
+    handleAddProductToCart(productName);
+  }
+
+  // UPDATE PRODUCT (variable in RouteContext state)
+  const updateProductNav = (productDetails: interfaces.DisplayProduct): any => {
+    return changeProduct(productDetails);
+  }
+
+  // HANDLE PRODUCT NAVIGATION
+  const handleNav = (productName: string): void => {
+    const productDetails: interfaces.DisplayProduct = productMethods.getProductDetails(productName, allProducts);
+
+    updateProductNav(productDetails);
+
+    changeDest('/product/details');
   }
 
   return (

@@ -3,71 +3,54 @@ import { RouteContext } from '../../contexts/RouteContext';
 import { GlobalContext } from '../../contexts/GlobalContext';
 import * as interfaces from '../../modules/interfaces';
 import * as types from '../../modules/types';
+import * as productMethods from '../../modules/productMethods';
 import './product.css';
+import ProductDetails from './ProductDetails';
 
 /// THIS IS THE DISPLAY/CARD COMPONENT OF A PRODUCT ///
 
 const Product: React.FC<types.DisplayProduct> = ({ name, price, imageUrl, alt }: types.DisplayProduct) => {
-  const { allProducts, addToCart, updateQuantity, updateTotalItemCount, cart, updateSubtotal } = useContext(GlobalContext);
+  const { cart, allProducts, addToCart, updateQuantity, updateTotalItemCount, updateSubtotal } = useContext(GlobalContext);
 
   const { changeDest, changeProduct, product } = useContext(RouteContext);
 
-  // GET PRODUCT DETAILS (helper)
-  const getProductDetails = (productName: string): any => {
-    const productDetails: interfaces.DisplayProduct = allProducts
-      .find((product: interfaces.DisplayProduct) => product.name === productName)!;
-
-    return productDetails;
-  }
-
-  // GET PRODUCT IN CART (helper)
-  const getProductInCart = (productName: string): any => {
-    return cart.products.find((item: interfaces.Product) => item.name === productName);
-  }
-
-  // GET CART ITEM COUNT (helper)
-  const getCartItemTotal = (): any => {
-    return cart.products.reduce((count, item) => { return count + item.quantity }, 0);
-  }
-
   // UPDATE CART ITEM COUNT
   const updateCartCount = (): any => {
-    const cartItemTotal: number = getCartItemTotal();
+    const cartItemTotal: number = productMethods.getCartItemTotal(cart);
     return updateTotalItemCount(cartItemTotal + 1);
   }
 
   // UPDATE SUBTOTAL
   const updateCartSubtotal = (productPrice: number): any => {
-    let cartSubtotal: any = cart.subtotal;
+    const cartSubtotal: any = cart.subtotal;
     return updateSubtotal(cartSubtotal + productPrice);
   }
 
-  // HANDLE CART UPDATE
-  const handleCartUpdate = (productName: string): any => {
+  // HANDLE ADD PRODUCT TO CART
+  const handleAddProductToCart = (productName: string): any => {
     // get product from cart (if it exists)
-    const productInCart: interfaces.Product = getProductInCart(productName);
+    const productInCart: interfaces.Product = productMethods.getProductInCart(productName, cart);
 
-    // increment cart item count
-    updateCartCount();
-    
     // product already exists in cart: increment quantity
     if (productInCart) {
-      console.log('product already in cart');
-
       updateCartSubtotal(productInCart.price);
       return updateQuantity(productInCart.name, productInCart.quantity + 1);
     }
 
-    console.log('product not yet in cart');
-
     // product doesn't exist in cart:
     // add product to cart (new object to be created)
-    const productDetails: interfaces.DisplayProduct = getProductDetails(productName);
+    const productDetails: interfaces.DisplayProduct = productMethods.getProductDetails(productName, allProducts);
 
-    // update cart subtotal
     updateCartSubtotal(productDetails.price);
-
     return addToCart(productDetails);
+  }
+
+  // HANDLE CART UPDATE
+  const handleCartUpdate = (productName: string): void => {
+    // increment cart item count
+    updateCartCount();
+
+    handleAddProductToCart(productName);
   }
 
   // UPDATE PRODUCT (variable in RouteContext state)
@@ -77,11 +60,11 @@ const Product: React.FC<types.DisplayProduct> = ({ name, price, imageUrl, alt }:
 
   // HANDLE PRODUCT NAVIGATION
   const handleNav = (productName: string): void => {
-    const productDetails: interfaces.DisplayProduct = getProductDetails(productName);
+    const productDetails: interfaces.DisplayProduct = productMethods.getProductDetails(productName, allProducts);
 
     updateProductNav(productDetails);
 
-    changeDest('productDetails');
+    changeDest('/product/details');
   }
   
   return (
