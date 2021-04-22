@@ -144,13 +144,15 @@ export const completeOrder = async (userId: string, cart: interfaces.CompleteCar
 }
 
 export const emailConfirmationToUser = async (
-  userFirstName: string,  
+  userName: string,  
+  phoneNumber: string,
   userId: string,
   userEmail: string, 
   token: string,
   cart: interfaces.CompleteCart): Promise<any> => {
     const userObj = {
-      firstName: userFirstName,
+      name: userName,
+      phoneNumber,
       _id: userId,
       email: userEmail,
       cart,

@@ -102,7 +102,7 @@ export interface State {
   updateTotalCost: (newTotal: number) => void;
   addDateToCart: (date: Date) => void;
   completeOrder: (userId: string, cart: CompleteCart, accessToken: string) => any;
-  emailConfirmationToUser: (name: string, id: string, email: string, token: string, cart: CompleteCart) => any;
+  emailConfirmationToUser: (name: string, number: string, id: string, email: string, token: string, cart: CompleteCart) => any;
 };
 
 /// PATH CONTEXT ///

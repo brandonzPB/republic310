@@ -16,13 +16,17 @@ const OrderConfirmation: React.FC = () => {
 
   useEffect(() => {
     if (orderStatus === 'complete') {
-      const userName: string = user.firstName!;
+      let userName: string = user.firstName!;
+        userName += ' ' + user.lastName!;
+
+      const phoneNumber: string = user.phoneNumber!;
       const email: string = user.email!;
       const accessToken: string = user.accessToken!;
       const userId: string = user._id;
+
       const completeOrder: interfaces.CompleteCart = user.orderHistory[0];
 
-      emailConfirmationToUser(userName, userId, email, accessToken, completeOrder);
+      emailConfirmationToUser(userName, phoneNumber, userId, email, accessToken, completeOrder);
 
       return changeOrderStatus('incomplete');
     }

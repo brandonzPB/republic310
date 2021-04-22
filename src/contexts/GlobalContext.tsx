@@ -57,7 +57,7 @@ const initialState: interfaces.State = {
   updateTotalCost: (newTotal: number): void => {},
   addDateToCart: (date: Date): void => {},
   completeOrder: (userId: string, cart: interfaces.CompleteCart, accessToken: string): any => {},
-  emailConfirmationToUser: (name: string, id: string, email: string, token: string, cart: interfaces.CompleteCart): any => {},
+  emailConfirmationToUser: (name: string, number: string, id: string, email: string, token: string, cart: interfaces.CompleteCart): any => {},
 };
 
 export const GlobalContext = createContext<interfaces.State>(initialState);
@@ -266,11 +266,12 @@ const GlobalContextProvider: React.FC = ({ children }) => {
   // EMAIL CONFIRMATION TO USER
   const emailConfirmationToUser = async (
     userFirstName: string,  
+    phoneNumber: string,
     userId: string,
     userEmail: string, 
     token: string,
     cart: interfaces.CompleteCart): Promise<any> => {
-      const emailResult: any = await actions.emailConfirmationToUser(userFirstName, userId, userEmail, token, cart);
+      const emailResult: any = await actions.emailConfirmationToUser(userFirstName, phoneNumber, userId, userEmail, token, cart);
 
       return emailResult;
     }
