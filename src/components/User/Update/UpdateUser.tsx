@@ -94,33 +94,33 @@ const UpdateUser: React.FC = () => {
       <Helmet>
         <title>Update Your Account | The Republic 310</title>
         <meta name="description" content={content} />
-
-        {
-          dest === '/user/update'
-            ? <>
-              {
-                loading
-                  ? <div id="user-update-loading__container">
-                    <span id="user-update-loading-text">Success! Returning to index...</span>
-                  </div>
-                  : <UserUpdateForm 
-                    isCorrectPassword={isCorrectPassword}
-                    emailIsAvailable={emailIsAvailable}
-                    handleShippingUpdate={handleShippingUpdate}
-                    handleUserUpdate={handleUserUpdate}
-                    setLoading={setLoading}
-                  />
-              }
-            </>
-            : !dest
-              ? <Route exact path="/user/update">
-                <Redirect to="/" />
-              </Route>
-              : <Route exact path="/user/update">
-                <Redirect to={dest} />
-              </Route>
-        }
       </Helmet>
+
+      {
+        dest === '/user/update'
+          ? <>
+            {
+              loading
+                ? <div id="user-update-loading__container">
+                  <span id="user-update-loading-text">Success! Returning to index...</span>
+                </div>
+                : <UserUpdateForm 
+                  isCorrectPassword={isCorrectPassword}
+                  emailIsAvailable={emailIsAvailable}
+                  handleShippingUpdate={handleShippingUpdate}
+                  handleUserUpdate={handleUserUpdate}
+                  setLoading={setLoading}
+                />
+            }
+          </>
+          : !dest
+            ? <Route exact path="/user/update">
+              <Redirect to="/" />
+            </Route>
+            : <Route exact path="/user/update">
+              <Redirect to={dest} />
+            </Route>
+      }
     </>
   )
 }

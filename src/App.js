@@ -42,6 +42,7 @@ function App() {
         <Helmet>
           <title>The Republic 310 | Hemp Re-imagined</title>
           <meta name="description" content={content} />
+        </Helmet>
 
           <GlobalContextProvider>
             <RouteContextProvider>
@@ -75,7 +76,6 @@ function App() {
               <Footer />
             </RouteContextProvider>
           </GlobalContextProvider>
-        </Helmet>
       </div>
     </BrowserRouter>
   );

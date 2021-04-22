@@ -22,25 +22,25 @@ const ShippingDetails: React.FC = () => {
       <Helmet>
         <title>Shipping and Contact Info | The Republic 310</title>
         <meta name="description" content={content} />
-
-        {
-          dest === '/checkout/shipping'
-            ? <div id="shipping-details__container">
-              <h1>Taxes: ${cart.taxes.toFixed(2)}</h1>
-              <h1>Total: ${cart.total.toFixed(2)}</h1>
-              <span id="shipping-login-text">Already have an account? Login at the top right and your shipping info will be filled in automatically</span>
-        
-              <ShippingForm />
-            </div>
-            : !dest
-              ? <Route exact path="/checkout/shipping">
-                <Redirect to="/" />
-              </Route>
-              : <Route exact path="/checkout/shipping">
-                <Redirect to={dest} />
-              </Route>
-        }
       </Helmet>
+
+      {
+        dest === '/checkout/shipping'
+          ? <div id="shipping-details__container">
+            <h1>Taxes: ${cart.taxes.toFixed(2)}</h1>
+            <h1>Total: ${cart.total.toFixed(2)}</h1>
+            <span id="shipping-login-text">Already have an account? Login at the top right and your shipping info will be filled in automatically</span>
+      
+            <ShippingForm />
+          </div>
+          : !dest
+            ? <Route exact path="/checkout/shipping">
+              <Redirect to="/" />
+            </Route>
+            : <Route exact path="/checkout/shipping">
+              <Redirect to={dest} />
+            </Route>
+      }
     </>
   )
 }

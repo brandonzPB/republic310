@@ -38,23 +38,23 @@ const StripeContainer = () => {
       <Helmet>
         <title>Payment Info | The Republic 310</title>
         <meta name="description" content={content} />
-
-        {
-          dest === '/checkout/payment'
-            ? <div id="stripe__container">
-              <Elements stripe={stripeTestPromise}>
-                <PaymentForm />
-              </Elements>
-            </div>
-            : !dest
-              ? <Route exact path="/checkout/payment">
-                <Redirect to="/" />
-              </Route>
-              : <Route exact path="/checkout/payment">
-                <Redirect to={dest} />
-              </Route>
-        }
       </Helmet>
+
+      {
+        dest === '/checkout/payment'
+          ? <div id="stripe__container">
+            <Elements stripe={stripeTestPromise}>
+              <PaymentForm />
+            </Elements>
+          </div>
+          : !dest
+            ? <Route exact path="/checkout/payment">
+              <Redirect to="/" />
+            </Route>
+            : <Route exact path="/checkout/payment">
+              <Redirect to={dest} />
+            </Route>
+      }
     </>
   )
 }

@@ -58,36 +58,36 @@ const RequestResetCode: React.FC = () => {
       <Helmet>
         <title>Update Your Account | The Republic 310</title>
         <meta name="description" content={content} />
-
-        {
-          dest === '/reset/request'
-            ? <div id="request-reset-code__container">
-              <div id="loading__container" style={{ display: loading ? 'block' : 'none' }}>
-                <span id="sending-code-text">Sending code...</span>
-              </div>
-        
-              <form onSubmit={handleSubmit(onSubmit)}>
-                <input 
-                  id="reset-input-email"
-                  type="email"
-                  name="email"
-                  placeholder="Email"
-                  ref={register({ required: true, validate: isValid })}
-                />
-                {errors.email && <div>Email does not exist in database</div>}
-        
-                <button id="submit-reset-email-btn">Send reset code</button>
-              </form>
-            </div>
-            : !dest
-              ? <Route exact path="/reset/request">
-                <Redirect to="/" />
-              </Route>
-              : <Route exact path="/reset/request">
-                <Redirect to={dest} />
-              </Route>
-        }
       </Helmet>
+
+      {
+        dest === '/reset/request'
+          ? <div id="request-reset-code__container">
+            <div id="loading__container" style={{ display: loading ? 'block' : 'none' }}>
+              <span id="sending-code-text">Sending code...</span>
+            </div>
+      
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <input 
+                id="reset-input-email"
+                type="email"
+                name="email"
+                placeholder="Email"
+                ref={register({ required: true, validate: isValid })}
+              />
+              {errors.email && <div>Email does not exist in database</div>}
+      
+              <button id="submit-reset-email-btn">Send reset code</button>
+            </form>
+          </div>
+          : !dest
+            ? <Route exact path="/reset/request">
+              <Redirect to="/" />
+            </Route>
+            : <Route exact path="/reset/request">
+              <Redirect to={dest} />
+            </Route>
+      }
     </>
   )
 }

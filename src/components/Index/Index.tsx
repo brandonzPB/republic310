@@ -15,22 +15,22 @@ const Index: React.FC = () => {
       <Helmet>
         <title>The Republic 310 | Hemp Re-imagined</title>
         <meta name="description" content={content} />
-
-        {
-          dest === '/'
-            ? <div id="index__container">
-              <Header />
-              <Body />
-            </div>
-            : !dest
-              ? <Route exact path="/">
-                <Redirect to="/" />
-              </Route>
-              : <Route exact path="/">
-                <Redirect to={dest} />
-              </Route>
-        }
       </Helmet>
+      
+      {
+        dest === '/'
+          ? <div id="index__container">
+            <Header />
+            <Body />
+          </div>
+          : !dest
+            ? <Route exact path="/">
+              <Redirect to="/" />
+            </Route>
+            : <Route exact path="/">
+              <Redirect to={dest} />
+            </Route>
+      }
     </>
   )
 }

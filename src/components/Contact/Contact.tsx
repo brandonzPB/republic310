@@ -13,19 +13,19 @@ const Contact: React.FC = () => {
       <Helmet>
         <title>Contact Us | The Republic 310</title>
         <meta name="description" content={content} />
-
-        {
-          dest === '/contact'
-            ? <div id="contact__container"></div>
-            : !dest
-              ? <Route exact path="/contact">
-                <Redirect to="/" />
-              </Route>
-              : <Route exact path="/contact">
-                <Redirect to={dest} />
-              </Route>
-        }
       </Helmet>
+
+      {
+        dest === '/contact'
+          ? <div id="contact__container"></div>
+          : !dest
+            ? <Route exact path="/contact">
+              <Redirect to="/" />
+            </Route>
+            : <Route exact path="/contact">
+              <Redirect to={dest} />
+            </Route>
+      }
     </>
   )
 }

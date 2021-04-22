@@ -79,11 +79,6 @@ const GlobalContextProvider: React.FC = ({ children }) => {
 
     getAllProducts();
   }, [state]);
-
-  // SHOW CHANGES TO STATE
-  useEffect(() => {
-    console.log('state', state);
-  }, [state]);
   
   // useEffect(() => {
   //   console.log(`state`, state);

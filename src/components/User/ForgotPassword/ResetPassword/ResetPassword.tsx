@@ -44,41 +44,41 @@ const ResetPassword: React.FC = () => {
       <Helmet>
         <title>Update Your Account | The Republic 310</title>
         <meta name="description" content={content} />
-
-        {
-          dest === '/reset/password'
-            ? <div id="reset-password__container">
-              <form onSubmit={handleSubmit(onSubmit)}>
-                <input 
-                  className="reset-input-password"
-                  name="newPassword"
-                  type="password"
-                  placeholder="New Password"
-                  ref={register({ required: true })}
-                />
-                {errors.newPassword && <div>Please enter a password</div>}
-        
-                <input 
-                  className="reset-input-password"
-                  name="confirmNewPassword"
-                  type="password"
-                  placeholder="Confirm Password"
-                  ref={register({ required: true })}
-                />
-                {error && <div>Passwords don't match</div>}
-        
-                <button id="reset-password-btn">Set New Password</button>
-              </form>
-            </div>
-            : !dest
-              ? <Route exact path="/reset/password">
-                <Redirect to="/" />
-              </Route>
-              : <Route exact path="/reset/password">
-                <Redirect to={dest} />
-              </Route>
-        }
       </Helmet>
+
+      {
+        dest === '/reset/password'
+          ? <div id="reset-password__container">
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <input 
+                className="reset-input-password"
+                name="newPassword"
+                type="password"
+                placeholder="New Password"
+                ref={register({ required: true })}
+              />
+              {errors.newPassword && <div>Please enter a password</div>}
+      
+              <input 
+                className="reset-input-password"
+                name="confirmNewPassword"
+                type="password"
+                placeholder="Confirm Password"
+                ref={register({ required: true })}
+              />
+              {error && <div>Passwords don't match</div>}
+      
+              <button id="reset-password-btn">Set New Password</button>
+            </form>
+          </div>
+          : !dest
+            ? <Route exact path="/reset/password">
+              <Redirect to="/" />
+            </Route>
+            : <Route exact path="/reset/password">
+              <Redirect to={dest} />
+            </Route>
+      }
     </>
   )
 }

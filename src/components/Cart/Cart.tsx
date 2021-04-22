@@ -82,39 +82,39 @@ const Cart: React.FC = () => {
       <Helmet>
         <title>Your Cart | The Republic 310</title>
         <meta name="description" content={content} />
-
-          {
-            dest === '/cart'
-              ? <div id="cart__container">
-                {
-                  cart.products.length === 0
-                    ? <div id="empty-cart__container">
-                        <span id="empty-cart-text">Your cart is empty. Returning to home page...</span>
-                      </div>
-                    : <div id="cart-display__container">
-                      <div id="cart-products__container">
-                        {ProductComponents}
-                      </div>
-          
-                      <div id="cart-subtotal__container">
-                        <span id="cart-subtotal">Subtotal: ${cart.subtotal}.00</span>
-                      </div>
-          
-                      <div id="checkout-btn__container">
-                        <button id="checkout-btn" onClick={handleCheckout}>Proceed to Checkout</button>
-                      </div>
-                    </div>
-                }
-              </div>
-              : !dest
-                ? <Route exact path="/cart">
-                  <Redirect to="/" />
-                </Route>
-                : <Route exact path="/cart">
-                  <Redirect to={dest} />
-                </Route>
-          }
       </Helmet>
+
+      {
+        dest === '/cart'
+          ? <div id="cart__container">
+            {
+              cart.products.length === 0
+                ? <div id="empty-cart__container">
+                    <span id="empty-cart-text">Your cart is empty. Returning to home page...</span>
+                  </div>
+                : <div id="cart-display__container">
+                  <div id="cart-products__container">
+                    {ProductComponents}
+                  </div>
+      
+                  <div id="cart-subtotal__container">
+                    <span id="cart-subtotal">Subtotal: ${cart.subtotal}.00</span>
+                  </div>
+      
+                  <div id="checkout-btn__container">
+                    <button id="checkout-btn" onClick={handleCheckout}>Proceed to Checkout</button>
+                  </div>
+                </div>
+            }
+          </div>
+          : !dest
+            ? <Route exact path="/cart">
+              <Redirect to="/" />
+            </Route>
+            : <Route exact path="/cart">
+              <Redirect to={dest} />
+            </Route>
+      }
     </>
   )
 }

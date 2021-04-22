@@ -52,29 +52,29 @@ const OrderConfirmation: React.FC = () => {
       <Helmet>
         <title>Your Order Confirmation | The Republic 310</title>
         <meta name="description" content={content} />
-
-        {
-          dest === '/checkout/confirmation'
-            ? <div id="order-confirmation__container">
-              <Order 
-                date={completeOrder.date}
-                id={completeOrder.id}
-                products={completeOrder.products}
-                totalItemCount={completeOrder.totalItemCount}
-                subtotal={completeOrder.subtotal}
-                taxes={completeOrder.taxes}
-                total={completeOrder.total}
-              />
-            </div>
-            : !dest
-              ? <Route exact path="/checkout/confirmation">
-                <Redirect to="/" />
-              </Route>
-              : <Route exact path="/checkout/confirmation">
-                <Redirect to={dest} />
-              </Route>
-        }
       </Helmet>
+
+      {
+        dest === '/checkout/confirmation'
+          ? <div id="order-confirmation__container">
+            <Order 
+              date={completeOrder.date}
+              id={completeOrder.id}
+              products={completeOrder.products}
+              totalItemCount={completeOrder.totalItemCount}
+              subtotal={completeOrder.subtotal}
+              taxes={completeOrder.taxes}
+              total={completeOrder.total}
+            />
+          </div>
+          : !dest
+            ? <Route exact path="/checkout/confirmation">
+              <Redirect to="/" />
+            </Route>
+            : <Route exact path="/checkout/confirmation">
+              <Redirect to={dest} />
+            </Route>
+      }
     </>
   )
 }

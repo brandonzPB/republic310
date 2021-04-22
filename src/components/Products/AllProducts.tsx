@@ -85,36 +85,36 @@ const AllProducts: React.FC = () => {
       <Helmet>
         <title>The Finest Hemp Products | The Republic 310</title>
         <meta name="description" content={content} />
-
-        {
-          dest === '/products'
-            ? <div id="all-products__container">
-              <div id="sort-form__container">
-                <form onSubmit={handleSubmit(onSubmit)}>
-        
-                  <select name="sort" id="sort-select" ref={register}>
-                    <option value="alphaAscend">A-Z (ascending alphabetical)</option>
-                    <option value="alphaDescend">Z-A (descending alphabetical)</option>
-                    <option value="priceAscend">Price Ascending</option>
-                    <option value="priceDescend">Price Descending</option>
-                  </select>
-        
-                  <button id="update-sort-btn">Update List</button>
-        
-                </form>
-              </div>
-        
-              {ProductComponents}
-            </div>
-            : !dest
-              ? <Route exact path="/products">
-                <Redirect to="/" />
-              </Route>
-              : <Route exact path="/products">
-                <Redirect to={dest} />
-              </Route>
-        }
       </Helmet>
+
+      {
+        dest === '/products'
+          ? <div id="all-products__container">
+            <div id="sort-form__container">
+              <form onSubmit={handleSubmit(onSubmit)}>
+      
+                <select name="sort" id="sort-select" ref={register}>
+                  <option value="alphaAscend">A-Z (ascending alphabetical)</option>
+                  <option value="alphaDescend">Z-A (descending alphabetical)</option>
+                  <option value="priceAscend">Price Ascending</option>
+                  <option value="priceDescend">Price Descending</option>
+                </select>
+      
+                <button id="update-sort-btn">Update List</button>
+      
+              </form>
+            </div>
+      
+            {ProductComponents}
+          </div>
+          : !dest
+            ? <Route exact path="/products">
+              <Redirect to="/" />
+            </Route>
+            : <Route exact path="/products">
+              <Redirect to={dest} />
+            </Route>
+      }
     </>
   )
 }

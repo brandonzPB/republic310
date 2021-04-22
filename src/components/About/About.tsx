@@ -13,18 +13,19 @@ const About: React.FC = () => {
       <Helmet>
         <title>About Us | The Republic 310</title>
         <meta name="description" content={content} />
-        {
-          dest === '/about'
-            ? <div id="about__container"></div>
-            : !dest
-            ? <Route exact path="/about">
-              <Redirect to="/" />
-            </Route>
-            : <Route exact path="/about">
-              <Redirect to={dest} />
-            </Route>
-        }
       </Helmet>
+
+      {
+        dest === '/about'
+          ? <div id="about__container"></div>
+          : !dest
+          ? <Route exact path="/about">
+            <Redirect to="/" />
+          </Route>
+          : <Route exact path="/about">
+            <Redirect to={dest} />
+          </Route>
+      }
     </>
   )
 }
