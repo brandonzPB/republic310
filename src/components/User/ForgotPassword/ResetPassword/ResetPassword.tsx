@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { Route, Redirect } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 import { useForm } from 'react-hook-form';
 import { GlobalContext } from '../../../../contexts/GlobalContext';
 import { RouteContext } from '../../../../contexts/RouteContext';
@@ -17,6 +18,8 @@ const ResetPassword: React.FC = () => {
   const { dest, changeDest } = useContext(RouteContext);
 
   const [error, setError] = useState(false);
+
+  const content: string = 'We\'ll help you out with your account details | The Republic 310';
 
   const { register, errors, handleSubmit } = useForm<PasswordForm>();
 
@@ -38,39 +41,44 @@ const ResetPassword: React.FC = () => {
 
   return (
     <>
-      {
-        dest === '/reset/password'
-          ? <div id="reset-password__container">
-            <form onSubmit={handleSubmit(onSubmit)}>
-              <input 
-                className="reset-input-password"
-                name="newPassword"
-                type="password"
-                placeholder="New Password"
-                ref={register({ required: true })}
-              />
-              {errors.newPassword && <div>Please enter a password</div>}
-      
-              <input 
-                className="reset-input-password"
-                name="confirmNewPassword"
-                type="password"
-                placeholder="Confirm Password"
-                ref={register({ required: true })}
-              />
-              {error && <div>Passwords don't match</div>}
-      
-              <button id="reset-password-btn">Set New Password</button>
-            </form>
-          </div>
-          : !dest
-            ? <Route exact path="/reset/password">
-              <Redirect to="/" />
-            </Route>
-            : <Route exact path="/reset/password">
-              <Redirect to={dest} />
-            </Route>
-      }
+      <Helmet>
+        <title>Update Your Account | The Republic 310</title>
+        <meta name="description" content={content} />
+
+        {
+          dest === '/reset/password'
+            ? <div id="reset-password__container">
+              <form onSubmit={handleSubmit(onSubmit)}>
+                <input 
+                  className="reset-input-password"
+                  name="newPassword"
+                  type="password"
+                  placeholder="New Password"
+                  ref={register({ required: true })}
+                />
+                {errors.newPassword && <div>Please enter a password</div>}
+        
+                <input 
+                  className="reset-input-password"
+                  name="confirmNewPassword"
+                  type="password"
+                  placeholder="Confirm Password"
+                  ref={register({ required: true })}
+                />
+                {error && <div>Passwords don't match</div>}
+        
+                <button id="reset-password-btn">Set New Password</button>
+              </form>
+            </div>
+            : !dest
+              ? <Route exact path="/reset/password">
+                <Redirect to="/" />
+              </Route>
+              : <Route exact path="/reset/password">
+                <Redirect to={dest} />
+              </Route>
+        }
+      </Helmet>
     </>
   )
 }

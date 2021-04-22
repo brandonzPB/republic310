@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { Route, Redirect } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import { RouteContext } from '../../../contexts/RouteContext';
@@ -18,6 +19,8 @@ const StripeContainer = () => {
 
   const { dest, changeDest, orderStatus, changeOrderStatus } = useContext(RouteContext);
 
+  const content: string = 'Please input your payment information via Stripe\'s secure input';
+
   if (cart.totalItemCount === 0 || cart.products.length === 0) {
     setTimeout(() => {
       if (orderStatus === 'complete') {
@@ -32,21 +35,26 @@ const StripeContainer = () => {
   
   return (
     <>
-      {
-        dest === '/checkout/payment'
-          ? <div id="stripe__container">
-            <Elements stripe={stripeTestPromise}>
-              <PaymentForm />
-            </Elements>
-          </div>
-          : !dest
-            ? <Route exact path="/checkout/payment">
-              <Redirect to="/" />
-            </Route>
-            : <Route exact path="/checkout/payment">
-              <Redirect to={dest} />
-            </Route>
-      }
+      <Helmet>
+        <title>Payment Info | The Republic 310</title>
+        <meta name="description" content={content} />
+
+        {
+          dest === '/checkout/payment'
+            ? <div id="stripe__container">
+              <Elements stripe={stripeTestPromise}>
+                <PaymentForm />
+              </Elements>
+            </div>
+            : !dest
+              ? <Route exact path="/checkout/payment">
+                <Redirect to="/" />
+              </Route>
+              : <Route exact path="/checkout/payment">
+                <Redirect to={dest} />
+              </Route>
+        }
+      </Helmet>
     </>
   )
 }

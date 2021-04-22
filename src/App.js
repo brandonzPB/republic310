@@ -1,5 +1,7 @@
 import React from 'react';
 import { BrowserRouter, HashRouter, Route } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
+
 import GlobalContextProvider from './contexts/GlobalContext';
 import RouteContextProvider from './contexts/RouteContext';
 
@@ -32,41 +34,48 @@ import AdminForm from './components/Admin/Verification/AdminForm';
 import StatsContainer from './components/Admin/StatsContainer/StatsContainer';
 
 function App() {
+  const content = 'The Republic 310 | Born and Raised in LA. Free of pesticides and preservatives';
+
   return (
     <BrowserRouter>
       <div className="App">
-        <GlobalContextProvider>
-          <RouteContextProvider>
-            <NavBar />
+        <Helmet>
+          <title>The Republic 310 | Hemp Re-imagined</title>
+          <meta name="description" content={content} />
 
-            <Route exact path="/" component={Index} />
-            <Route exact path="/about" component={About} />
-            <Route exact path="/contact" component={Contact} />
+          <GlobalContextProvider>
+            <RouteContextProvider>
+              <NavBar />
 
-            <Route exact path="/products" component={AllProducts} />
-            <Route exact path="/product/details" component={ProductDetails} />
+              <Route exact path="/" component={Index} />
+              <Route exact path="/about" component={About} />
+              <Route exact path="/contact" component={Contact} />
 
-            <Route exact path="/cart" component={Cart} />
-            <Route exact path="/checkout/shipping" component={ShippingDetails} />
-            <Route exact path="/checkout/payment" component={StripeContainer} />
-            <Route exact path="/checkout/confirmation" component={OrderConfirmation} />
+              <Route exact path="/products" component={AllProducts} />
+              <Route exact path="/product/details" component={ProductDetails} />
 
-            <Route exact path="/user/update" component={UpdateUser} />
-            <Route exact path="/user/update/password" component={PasswordUpdate} />
+              <Route exact path="/cart" component={Cart} />
+              <Route exact path="/checkout/shipping" component={ShippingDetails} />
+              <Route exact path="/checkout/payment" component={StripeContainer} />
+              <Route exact path="/checkout/confirmation" component={OrderConfirmation} />
 
-            <Route exact path="/order/history" component={OrderHistory} />
-            <Route exact path="/order/cancel" component={CancelOrder} />
+              <Route exact path="/user/update" component={UpdateUser} />
+              <Route exact path="/user/update/password" component={PasswordUpdate} />
 
-            <Route exact path="/reset/request" component={RequestResetCode} />
-            <Route exact path="/reset/code" component={PostResetCode} />
-            <Route exact path="/reset/password" component={ResetPassword} />
+              <Route exact path="/order/history" component={OrderHistory} />
+              <Route exact path="/order/cancel" component={CancelOrder} />
 
-            <Route exact path="/stats" component={AdminForm} />
-            <Route exact path="/stats/verified" component={StatsContainer} />
+              <Route exact path="/reset/request" component={RequestResetCode} />
+              <Route exact path="/reset/code" component={PostResetCode} />
+              <Route exact path="/reset/password" component={ResetPassword} />
 
-            <Footer />
-          </RouteContextProvider>
-        </GlobalContextProvider>
+              <Route exact path="/stats" component={AdminForm} />
+              <Route exact path="/stats/verified" component={StatsContainer} />
+
+              <Footer />
+            </RouteContextProvider>
+          </GlobalContextProvider>
+        </Helmet>
       </div>
     </BrowserRouter>
   );

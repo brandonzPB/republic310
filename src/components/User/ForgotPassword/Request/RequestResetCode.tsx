@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { Route, Redirect } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 import { useForm } from 'react-hook-form';
 import { GlobalContext } from '../../../../contexts/GlobalContext';
 import { RouteContext } from '../../../../contexts/RouteContext';
@@ -14,6 +15,8 @@ const RequestResetCode: React.FC = () => {
   const { user, requestReset } = useContext(GlobalContext);
 
   const { dest, changeDest } = useContext(RouteContext);
+
+  const content: string = 'We\'ll help you out with your account details | The Republic 310';
 
   const { register, errors, handleSubmit } = useForm<EmailInput>();
 
@@ -52,34 +55,39 @@ const RequestResetCode: React.FC = () => {
 
   return (
     <>
-      {
-        dest === '/reset/request'
-          ? <div id="request-reset-code__container">
-            <div id="loading__container" style={{ display: loading ? 'block' : 'none' }}>
-              <span id="sending-code-text">Sending code...</span>
+      <Helmet>
+        <title>Update Your Account | The Republic 310</title>
+        <meta name="description" content={content} />
+
+        {
+          dest === '/reset/request'
+            ? <div id="request-reset-code__container">
+              <div id="loading__container" style={{ display: loading ? 'block' : 'none' }}>
+                <span id="sending-code-text">Sending code...</span>
+              </div>
+        
+              <form onSubmit={handleSubmit(onSubmit)}>
+                <input 
+                  id="reset-input-email"
+                  type="email"
+                  name="email"
+                  placeholder="Email"
+                  ref={register({ required: true, validate: isValid })}
+                />
+                {errors.email && <div>Email does not exist in database</div>}
+        
+                <button id="submit-reset-email-btn">Send reset code</button>
+              </form>
             </div>
-      
-            <form onSubmit={handleSubmit(onSubmit)}>
-              <input 
-                id="reset-input-email"
-                type="email"
-                name="email"
-                placeholder="Email"
-                ref={register({ required: true, validate: isValid })}
-              />
-              {errors.email && <div>Email does not exist in database</div>}
-      
-              <button id="submit-reset-email-btn">Send reset code</button>
-            </form>
-          </div>
-          : !dest
-            ? <Route exact path="/reset/request">
-              <Redirect to="/" />
-            </Route>
-            : <Route exact path="/reset/request">
-              <Redirect to={dest} />
-            </Route>
-      }
+            : !dest
+              ? <Route exact path="/reset/request">
+                <Redirect to="/" />
+              </Route>
+              : <Route exact path="/reset/request">
+                <Redirect to={dest} />
+              </Route>
+        }
+      </Helmet>
     </>
   )
 }

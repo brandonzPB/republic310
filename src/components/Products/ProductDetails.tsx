@@ -1,5 +1,6 @@
 import React, { useEffect, useContext } from 'react';
 import { Route, Redirect } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 import { GlobalContext } from '../../contexts/GlobalContext';
 import { RouteContext } from '../../contexts/RouteContext';
 import * as interfaces from '../../modules/interfaces';
@@ -18,6 +19,8 @@ const ProductDetails: React.FC = () => {
   const { allProducts, cart, updateTotalItemCount, updateQuantity, addToCart } = useContext(GlobalContext);
 
   const { dest, changeDest, product, changeProduct } = useContext(RouteContext);
+
+  const content: string = 'Learn more about our fine hemp products at The Republic 310';
 
   useEffect(() => {
     console.log(product);
@@ -87,55 +90,60 @@ const ProductDetails: React.FC = () => {
 
   return (
     <>
-      {
-        dest === '/product/details'
-          ? <div id="product-details__container">
-            <div id="left-col__container">
-              <img alt={product.description} id="product-details-img"
-                src={
-                  product.name === 'The Hollywood' ? hollywoodSrc
-                    : product.name === 'The Malibu' ? malibuSrc
-                    : product.name === 'The Surfer' ? surferSrc
-                    : product.name === 'The Mudslide' ? mudslideSrc
-                    : product.name === 'The Bruins' ? bruinSrc
-                    : product.name === 'The San Andreas' ? sanAndreasSrc
-                    : product.name === 'The Golden Gate' ? goldenGateSrc
-                    : product.name === 'The Bear' ? bearSrc
-                    : smogSrc
-                } 
-              />
+      <Helmet>
+        <title>Product Info | The Republic 310</title>
+        <meta name="description" content={content} />
+
+        {
+          dest === '/product/details'
+            ? <div id="product-details__container">
+              <div id="left-col__container">
+                <img alt={product.description} id="product-details-img"
+                  src={
+                    product.name === 'The Hollywood' ? hollywoodSrc
+                      : product.name === 'The Malibu' ? malibuSrc
+                      : product.name === 'The Surfer' ? surferSrc
+                      : product.name === 'The Mudslide' ? mudslideSrc
+                      : product.name === 'The Bruins' ? bruinSrc
+                      : product.name === 'The San Andreas' ? sanAndreasSrc
+                      : product.name === 'The Golden Gate' ? goldenGateSrc
+                      : product.name === 'The Bear' ? bearSrc
+                      : smogSrc
+                  } 
+                />
+              </div>
+        
+              <div id="right-col__container">
+                <div id="product-details-name__container">
+                  <span id="product-details-name">{product.name}</span>
+                </div>
+        
+                <div id="product-details-price__container">
+                  <span id="product-details-price">{product.price}</span>
+                </div>
+        
+                <div id="product-details-description__container">
+                  <span id="product-details-description">{product.description}</span>
+                </div>
+        
+                <div id="product-details-add-btn__container">
+                  <button id="add-to-cart-btn" onClick={() => handleCartUpdate(product.name)}>Add to Cart</button>
+                </div>
+              </div>
+        
+              <div id="suggested-products__container"></div>
+        
+              <div id="certifications__container"></div>
             </div>
-      
-            <div id="right-col__container">
-              <div id="product-details-name__container">
-                <span id="product-details-name">{product.name}</span>
-              </div>
-      
-              <div id="product-details-price__container">
-                <span id="product-details-price">{product.price}</span>
-              </div>
-      
-              <div id="product-details-description__container">
-                <span id="product-details-description">{product.description}</span>
-              </div>
-      
-              <div id="product-details-add-btn__container">
-                <button id="add-to-cart-btn" onClick={() => handleCartUpdate(product.name)}>Add to Cart</button>
-              </div>
-            </div>
-      
-            <div id="suggested-products__container"></div>
-      
-            <div id="certifications__container"></div>
-          </div>
-          : !dest
-            ? <Route exact path="/product/details">
-              <Redirect to="/" />
-            </Route>
-            : <Route exact path="/product/details">
-              <Redirect to={dest} />
-            </Route>
-      }
+            : !dest
+              ? <Route exact path="/product/details">
+                <Redirect to="/" />
+              </Route>
+              : <Route exact path="/product/details">
+                <Redirect to={dest} />
+              </Route>
+        }
+      </Helmet>
     </>
   )
 }

@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { Route, Redirect } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 import { GlobalContext } from '../../../contexts/GlobalContext';
 import { RouteContext } from '../../../contexts/RouteContext';
 import * as actions from '../../../modules/actions';
@@ -13,6 +14,8 @@ const UpdateUser: React.FC = () => {
   const { dest } = useContext(RouteContext);
 
   const [loading, setLoading] = useState(false);
+
+  const content: string = 'We\'ll help you out with your account details | The Republic 310';
 
   // HANDLE SHIPPING UPDATE
   const handleShippingUpdate = async (data: any): Promise<any> => {
@@ -88,31 +91,36 @@ const UpdateUser: React.FC = () => {
 
   return (
     <>
-      {
-        dest === '/user/update'
-          ? <>
-            {
-              loading
-                ? <div id="user-update-loading__container">
-                  <span id="user-update-loading-text">Success! Returning to index...</span>
-                </div>
-                : <UserUpdateForm 
-                  isCorrectPassword={isCorrectPassword}
-                  emailIsAvailable={emailIsAvailable}
-                  handleShippingUpdate={handleShippingUpdate}
-                  handleUserUpdate={handleUserUpdate}
-                  setLoading={setLoading}
-                />
-            }
-          </>
-          : !dest
-            ? <Route exact path="/user/update">
-              <Redirect to="/" />
-            </Route>
-            : <Route exact path="/user/update">
-              <Redirect to={dest} />
-            </Route>
-      }
+      <Helmet>
+        <title>Update Your Account | The Republic 310</title>
+        <meta name="description" content={content} />
+
+        {
+          dest === '/user/update'
+            ? <>
+              {
+                loading
+                  ? <div id="user-update-loading__container">
+                    <span id="user-update-loading-text">Success! Returning to index...</span>
+                  </div>
+                  : <UserUpdateForm 
+                    isCorrectPassword={isCorrectPassword}
+                    emailIsAvailable={emailIsAvailable}
+                    handleShippingUpdate={handleShippingUpdate}
+                    handleUserUpdate={handleUserUpdate}
+                    setLoading={setLoading}
+                  />
+              }
+            </>
+            : !dest
+              ? <Route exact path="/user/update">
+                <Redirect to="/" />
+              </Route>
+              : <Route exact path="/user/update">
+                <Redirect to={dest} />
+              </Route>
+        }
+      </Helmet>
     </>
   )
 }

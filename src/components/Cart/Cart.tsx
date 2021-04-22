@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import * as interfaces from '../../modules/interfaces';
+import { Helmet } from 'react-helmet';
 import { GlobalContext } from '../../contexts/GlobalContext';
 import { RouteContext } from '../../contexts/RouteContext';
 import ProductCartDetails from '../Products/ProductCartDetails';
@@ -20,6 +20,8 @@ const Cart: React.FC = () => {
   const { cart, allProducts, updateTaxTotal, updateTotalCost } = useContext(GlobalContext);
 
   const { dest, changeDest, product } = useContext(RouteContext);
+
+  const content: string = 'Add some items to your cart';
 
   if (cart.totalItemCount === 0 || cart.products.length === 0) {
     setTimeout(() => { changeDest('/') }, 700);
@@ -77,37 +79,42 @@ const Cart: React.FC = () => {
   
   return (
     <>
-      {
-        dest === '/cart'
-          ? <div id="cart__container">
-            {
-              cart.products.length === 0
-                ? <div id="empty-cart__container">
-                    <span id="empty-cart-text">Your cart is empty. Returning to home page...</span>
-                  </div>
-                : <div id="cart-display__container">
-                  <div id="cart-products__container">
-                    {ProductComponents}
-                  </div>
-      
-                  <div id="cart-subtotal__container">
-                    <span id="cart-subtotal">Subtotal: ${cart.subtotal}.00</span>
-                  </div>
-      
-                  <div id="checkout-btn__container">
-                    <button id="checkout-btn" onClick={handleCheckout}>Proceed to Checkout</button>
-                  </div>
-                </div>
-            }
-          </div>
-          : !dest
-            ? <Route exact path="/cart">
-              <Redirect to="/" />
-            </Route>
-            : <Route exact path="/cart">
-              <Redirect to={dest} />
-            </Route>
-      }
+      <Helmet>
+        <title>Your Cart | The Republic 310</title>
+        <meta name="description" content={content} />
+
+          {
+            dest === '/cart'
+              ? <div id="cart__container">
+                {
+                  cart.products.length === 0
+                    ? <div id="empty-cart__container">
+                        <span id="empty-cart-text">Your cart is empty. Returning to home page...</span>
+                      </div>
+                    : <div id="cart-display__container">
+                      <div id="cart-products__container">
+                        {ProductComponents}
+                      </div>
+          
+                      <div id="cart-subtotal__container">
+                        <span id="cart-subtotal">Subtotal: ${cart.subtotal}.00</span>
+                      </div>
+          
+                      <div id="checkout-btn__container">
+                        <button id="checkout-btn" onClick={handleCheckout}>Proceed to Checkout</button>
+                      </div>
+                    </div>
+                }
+              </div>
+              : !dest
+                ? <Route exact path="/cart">
+                  <Redirect to="/" />
+                </Route>
+                : <Route exact path="/cart">
+                  <Redirect to={dest} />
+                </Route>
+          }
+      </Helmet>
     </>
   )
 }
