@@ -214,7 +214,7 @@ const GlobalContextProvider: React.FC = ({ children }) => {
   // ADD PRODUCT TO CART
   const addToCart = (product: interfaces.DisplayProduct): any => {
     // creates a product object to be added to our cart
-    const newProduct: interfaces.Product = new Product(product.name, 1, product.price, product.id);
+    const newProduct: interfaces.Product = new Product(product.name, 1, product.price, product.id, product.imageUrl);
 
     return dispatch({ type: 'add_to_cart', payload: newProduct });
   }

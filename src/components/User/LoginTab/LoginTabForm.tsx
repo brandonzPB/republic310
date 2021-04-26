@@ -1,3 +1,4 @@
+import { spawnSync } from 'node:child_process';
 import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { GlobalContext } from '../../../contexts/GlobalContext';
@@ -17,7 +18,7 @@ interface LoginFormProps {
 };
 
 const LoginTabForm: React.FC<LoginFormProps> = ({ closeLoginForm, setLoading, stopLoading }: LoginFormProps) => {
-  const { login } = useContext(GlobalContext);
+  const { user, login } = useContext(GlobalContext);
 
   const { changeDest } = useContext(RouteContext);
 
@@ -69,38 +70,41 @@ const LoginTabForm: React.FC<LoginFormProps> = ({ closeLoginForm, setLoading, st
 
   return (
     <div id="login-form__container">
-      <span id="no-account-text">Don't have account? No problem, you can easily create one at checkout!</span>
+      <span id="no-account-text">Don't have account? No worries, you can easily create one at checkout!</span>
 
-      <span id="close-login-btn" onClick={closeLoginForm}>Close Login</span>
+      <span id="close-login-btn" onClick={closeLoginForm}>Hide Tab</span>
 
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <input 
-          style={{ backgroundColor: errors.email ? 'pink' : 'white' }}
-          className="login-input"
-          id="email-login-input"
-          placeholder="Email"
-          type="text"
-          name="email"
-          ref={register({ required: true, validate: emailIsValid })}
-        />
+      <form onSubmit={handleSubmit(onSubmit)} id="login-form">
+        <div id="login-input__container">
+          <input 
+            style={{ backgroundColor: errors.email ? 'pink' : 'white' }}
+            className="login-input"
+            id="email-login-input"
+            placeholder="Email"
+            type="text"
+            name="email"
+            ref={register({ required: true, validate: emailIsValid })}
+          />
 
-        {errors.email && <div>Email not found</div>}
+          {errors.email && <div>Email not found</div>}
 
-        <input 
-          style={{ backgroundColor: errors.password ? 'pink' : 'white' }}
-          className="login-input"
-          id="password-login-input"
-          type="password"
-          name="password"
-          ref={register({ required: true })}
-        />
+          <input 
+            style={{ backgroundColor: errors.password ? 'pink' : 'white' }}
+            className="login-input"
+            id="password-login-input"
+            type="password"
+            name="password"
+            placeholder="Password"
+            ref={register({ required: true })}
+          />
 
-        {errors.password && <div>Incorrect password</div>}
+          {errors.password && <div>Incorrect password</div>}
+        </div>
 
         <button id="login-btn">Login</button>
-
-        <button id="forgot-password-btn" onClick={handleResetRequest}>Forgot password</button>
       </form>
+
+      <span id="forgot-password-btn" onClick={handleResetRequest}>Forgot password?</span>
     </div>
   )
 }

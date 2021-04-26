@@ -106,9 +106,17 @@
 
 /* LOGIN TAB FORM */
 
-#login__container {}
+#login__container {
+  max-height: 5rem;
+}
 
-#login-form__container {}
+#login-tab__container {
+  border-radius: 10px;
+  width: 80%;
+  background: transparent;
+  margin: 0 auto;
+  position: relative;
+}
 
 #close-login-btn {}
 

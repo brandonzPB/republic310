@@ -104,7 +104,7 @@ const NavBar: React.FC  = () => {
           <div id="login__container" style={{ display: user.isAuthorized ? 'none' : 'block', backgroundColor: 'transparent' }}>
             <h1 className="nav-link-text" onClick={showLoginForm}>LOGIN</h1>
 
-            <div id="login-form__container" style={{ display: !loginForm.hidden ? 'block' : 'none' }}>
+            <div id="login-tab__container" style={{ display: !loginForm.hidden ? 'block' : 'none' }}>
               {
                 loginForm.loading
                   ? <div id="loading-login__container">Logging in...</div>
