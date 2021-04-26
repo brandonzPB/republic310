@@ -9,16 +9,6 @@ import Product from './Product';
 import * as interfaces from '../../modules/interfaces';
 import quickSortProducts from '../../modules/quickSortProducts';
 
-import hollywoodSrc from '../../assets/images/products/the_hollywood.jpg';
-import malibuSrc from '../../assets/images/products/the_malibu.jpg';
-import sanAndreasSrc from '../../assets/images/products/the_san_andreas.jpg';
-import mudslideSrc from '../../assets/images/products/the_mudslide.jpg';
-import bruinSrc from '../../assets/images/products/the_bruins.jpg';
-import goldenGateSrc from '../../assets/images/products/the_golden_gate.jpg';
-import smogSrc from '../../assets/images/products/the_smog.png';
-import bearSrc from '../../assets/images/products/the_bear.jpg';
-import surferSrc from '../../assets/images/products/the_surfer.jpg';
-
 const AllProducts: React.FC = () => {
   const { allProducts } = useContext(GlobalContext);
 
@@ -65,17 +55,7 @@ const AllProducts: React.FC = () => {
       key={product.id}
       name={product.name}
       price={product.price}
-      imageUrl={
-        product.name === 'The Hollywood' ? hollywoodSrc
-          : product.name === 'The Malibu' ? malibuSrc
-          : product.name === 'The Surfer' ? surferSrc
-          : product.name === 'The Mudslide' ? mudslideSrc
-          : product.name === 'The Bruins' ? bruinSrc
-          : product.name === 'The San Andreas' ? sanAndreasSrc
-          : product.name === 'The Golden Gate' ? goldenGateSrc
-          : product.name === 'The Bear' ? bearSrc
-          : smogSrc
-      }
+      imageUrl={product.imageUrl}
       alt={product.description}
     />
   ));

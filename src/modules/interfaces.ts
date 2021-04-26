@@ -6,7 +6,7 @@ export interface DisplayProduct {
   id: string;
   description: string;
   qtySold: number;
-  imageUrl?: string;
+  imageUrl: string;
   alt?: string;
 }
 
@@ -17,6 +17,7 @@ export interface Product {
   name: string;
   quantity: number;
   price: number;
+  imageUrl: string;
 };
 
 /// CART INTERFACES ///

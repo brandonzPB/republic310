@@ -5,7 +5,6 @@ import * as interfaces from '../../modules/interfaces';
 import * as types from '../../modules/types';
 import * as productMethods from '../../modules/productMethods';
 import './product.css';
-import ProductDetails from './ProductDetails';
 
 /// THIS IS THE DISPLAY/CARD COMPONENT OF A PRODUCT ///
 

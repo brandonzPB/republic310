@@ -1,7 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { GlobalContext } from '../../contexts/GlobalContext';
 import { RouteContext } from '../../contexts/RouteContext';
-import * as types from '../../modules/types';
 import * as interfaces from '../../modules/interfaces';
 
 type CartProduct = {

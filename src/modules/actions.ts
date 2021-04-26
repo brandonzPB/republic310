@@ -30,6 +30,7 @@ const getProductDetailArray = (products: any): any => {
       price: product.price,
       qtySold: product.qty_sold,
       id: product._id,
+      imageUrl: product.image_url,
     }
   });
 
