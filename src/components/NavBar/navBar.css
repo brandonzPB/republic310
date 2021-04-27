@@ -74,6 +74,15 @@
   border-radius: 50%;
   margin: 0 auto;
   z-index: 2;
+  transition: transform 0.2s;
+}
+
+#logo:hover {
+  transform: scale(1.05);
+}
+
+#logo:active {
+  transform: scale(0.95);
 }
 
 #nav-cart__container {
@@ -86,6 +95,14 @@
   margin: 0 auto;
   text-align: center;
   cursor: pointer;
+}
+
+#nav-cart-icon:hover {
+  transform: scale(1.05);
+}
+
+#nav-cart-icon:active {
+  transform: scale(0.95);
 }
 
 /* #cart-qty__container {

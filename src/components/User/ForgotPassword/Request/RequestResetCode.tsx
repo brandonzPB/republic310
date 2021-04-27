@@ -69,7 +69,7 @@ const RequestResetCode: React.FC = () => {
       
             <form onSubmit={handleSubmit(onSubmit)}>
               <input 
-                id="reset-input-email"
+                id="reset-email-input"
                 type="email"
                 name="email"
                 placeholder="Email"

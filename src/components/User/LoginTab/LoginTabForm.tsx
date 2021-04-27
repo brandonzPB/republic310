@@ -1,5 +1,4 @@
-import { spawnSync } from 'node:child_process';
-import React, { useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { GlobalContext } from '../../../contexts/GlobalContext';
 import { RouteContext } from '../../../contexts/RouteContext';
@@ -22,6 +21,8 @@ const LoginTabForm: React.FC<LoginFormProps> = ({ closeLoginForm, setLoading, st
 
   const { changeDest } = useContext(RouteContext);
 
+  const [passwordError, setPasswordError] = useState(false);
+
   // LOGIN FORM
   const { register, handleSubmit, errors } = useForm<UserForm>();
 
@@ -37,6 +38,7 @@ const LoginTabForm: React.FC<LoginFormProps> = ({ closeLoginForm, setLoading, st
     console.log(data);
     // email is available; attempt login
 
+    setPasswordError(false);
     setLoading();
 
     // attempt login
@@ -46,7 +48,7 @@ const LoginTabForm: React.FC<LoginFormProps> = ({ closeLoginForm, setLoading, st
 
     if (!loginResult) {
       console.log('login error');
-      return;
+      return setPasswordError(true);
     }
 
     closeLoginForm();
@@ -86,7 +88,7 @@ const LoginTabForm: React.FC<LoginFormProps> = ({ closeLoginForm, setLoading, st
             ref={register({ required: true, validate: emailIsValid })}
           />
 
-          {errors.email && <div>Email not found</div>}
+          {errors.email && <div style={{ color: 'red', margin: '0.5rem auto' }}>Email not found</div>}
 
           <input 
             style={{ backgroundColor: errors.password ? 'pink' : 'white' }}
@@ -98,7 +100,7 @@ const LoginTabForm: React.FC<LoginFormProps> = ({ closeLoginForm, setLoading, st
             ref={register({ required: true })}
           />
 
-          {errors.password && <div>Incorrect password</div>}
+          {passwordError && <div style={{ color: 'red', margin: '0.5rem auto' }}>Incorrect password</div>}
         </div>
 
         <button id="login-btn">Login</button>

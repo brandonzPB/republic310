@@ -1,0 +1,23 @@
+#cart__container {}
+
+#empty-cart__container {
+  margin: 10rem auto 0 auto;
+  text-align: center;
+  height: 50vh;
+}
+
+#empty-cart-text {
+  font-size: 4rem;
+}
+
+#cart-display__container {}
+
+#cart-products__container {}
+
+#cart-subtotal__container {}
+
+#cart-subtotal {}
+
+#checkout-btn__container {}
+
+#checkout-btn {}

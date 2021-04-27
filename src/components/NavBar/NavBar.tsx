@@ -117,9 +117,16 @@ const NavBar: React.FC  = () => {
             </div>
           </div>
 
-          <IconContext.Provider value={{ style: { fontSize: '2.5rem', backgroundColor: '#ef3b24', cursor: 'pointer' }}}>
+          <IconContext.Provider 
+            value={{ style: {
+              fontSize: '2.5rem', 
+              backgroundColor: '#ef3b24', 
+              cursor: 'pointer',
+              transition: 'transform 0.2s',
+            }}}
+          >
             <div id="nav-cart__container" onClick={() => handleNav('/cart')}>              
-              <RiShoppingCart2Line  />
+              <RiShoppingCart2Line id="nav-cart-icon" />
 
               <span id="cart-qty">{cart.totalItemCount}</span>
             </div>

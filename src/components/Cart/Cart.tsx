@@ -6,16 +6,6 @@ import { RouteContext } from '../../contexts/RouteContext';
 import ProductCartDetails from '../Products/ProductCartDetails';
 import './cart.css';
 
-import hollywoodSrc from '../../assets/images/products/the_hollywood.jpg';
-import malibuSrc from '../../assets/images/products/the_malibu.jpg';
-import sanAndreasSrc from '../../assets/images/products/the_san_andreas.jpg';
-import mudslideSrc from '../../assets/images/products/the_mudslide.jpg';
-import bruinSrc from '../../assets/images/products/the_bruins.jpg';
-import goldenGateSrc from '../../assets/images/products/the_golden_gate.jpg';
-import smogSrc from '../../assets/images/products/the_smog.png';
-import bearSrc from '../../assets/images/products/the_bear.jpg';
-import surferSrc from '../../assets/images/products/the_surfer.jpg';
-
 const Cart: React.FC = () => {
   const { cart, allProducts, updateTaxTotal, updateTotalCost } = useContext(GlobalContext);
 
@@ -59,17 +49,7 @@ const Cart: React.FC = () => {
     <ProductCartDetails 
       key={item.id}
       name={item.name}
-      imageUrl={
-        item.name === 'The Hollywood' ? hollywoodSrc
-          : item.name === 'The Malibu' ? malibuSrc
-          : item.name === 'The Surfer' ? surferSrc
-          : item.name === 'The Mudslide' ? mudslideSrc
-          : item.name === 'The Bruins' ? bruinSrc
-          : item.name === 'The San Andreas' ? sanAndreasSrc
-          : item.name === 'The Golden Gate' ? goldenGateSrc
-          : item.name === 'The Bear' ? bearSrc
-          : smogSrc
-      }
+      imageUrl={item.imageUrl}
       price={item.price}
       quantity={item.quantity}
       alt={item.name}
