@@ -72,7 +72,7 @@ const LoginTabForm: React.FC<LoginFormProps> = ({ closeLoginForm, setLoading, st
     <div id="login-form__container">
       <span id="no-account-text">Don't have account? No worries, you can easily create one at checkout!</span>
 
-      <span id="close-login-btn" onClick={closeLoginForm}>Hide Tab</span>
+      <button id="close-login-btn" onClick={closeLoginForm}>Hide Tab</button>
 
       <form onSubmit={handleSubmit(onSubmit)} id="login-form">
         <div id="login-input__container">
