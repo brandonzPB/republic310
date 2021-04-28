@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { GlobalContext } from '../../../contexts/GlobalContext';
 import { RouteContext } from '../../../contexts/RouteContext';
@@ -10,18 +10,31 @@ interface UserForm {
   password: string;
 }
 
+interface LoginStateProps {
+  loading: boolean;
+  hidden: boolean;
+  error: boolean;
+};
+
 interface LoginFormProps {
   closeLoginForm: () => void;
   setLoading: () => void;
   stopLoading: () => void;
+  loginForm: LoginStateProps;
+  toggleError: (flag: boolean) => void;
 };
 
-const LoginTabForm: React.FC<LoginFormProps> = ({ closeLoginForm, setLoading, stopLoading }: LoginFormProps) => {
+const LoginTabForm: React.FC<LoginFormProps> = ({
+  closeLoginForm, 
+  setLoading, 
+  stopLoading, 
+  loginForm, 
+  toggleError, 
+}: LoginFormProps) => {
+
   const { user, login } = useContext(GlobalContext);
 
   const { changeDest } = useContext(RouteContext);
-
-  const [passwordError, setPasswordError] = useState(false);
 
   // LOGIN FORM
   const { register, handleSubmit, errors } = useForm<UserForm>();
@@ -38,7 +51,7 @@ const LoginTabForm: React.FC<LoginFormProps> = ({ closeLoginForm, setLoading, st
     console.log(data);
     // email is available; attempt login
 
-    setPasswordError(false);
+    toggleError(false);
     setLoading();
 
     // attempt login
@@ -48,7 +61,9 @@ const LoginTabForm: React.FC<LoginFormProps> = ({ closeLoginForm, setLoading, st
 
     if (!loginResult) {
       console.log('login error');
-      return setPasswordError(true);
+      
+      // most likely the password is incorrect
+      return toggleError(true);
     }
 
     closeLoginForm();
@@ -91,7 +106,7 @@ const LoginTabForm: React.FC<LoginFormProps> = ({ closeLoginForm, setLoading, st
           {errors.email && <div style={{ color: 'red', margin: '0.5rem auto' }}>Email not found</div>}
 
           <input 
-            style={{ backgroundColor: errors.password ? 'pink' : 'white' }}
+            style={{ backgroundColor: loginForm.error ? 'pink' : 'white' }}
             className="login-input"
             id="password-login-input"
             type="password"
@@ -100,7 +115,11 @@ const LoginTabForm: React.FC<LoginFormProps> = ({ closeLoginForm, setLoading, st
             ref={register({ required: true })}
           />
 
-          {passwordError && <div style={{ color: 'red', margin: '0.5rem auto' }}>Incorrect password</div>}
+          {
+            loginForm.error === true
+              ? <div style={{ color: 'red', margin: '0.5rem auto' }}>Incorrect password</div>
+              : <></>
+          }
         </div>
 
         <button id="login-btn">Login</button>

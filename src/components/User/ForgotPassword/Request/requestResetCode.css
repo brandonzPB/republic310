@@ -1,9 +1,50 @@
-#request-reset-code__container {}
+#request-reset-code__container {
+  margin: 0 auto;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 70vh;
+  background-image: linear-gradient(25deg,
+  rgba(106,172,162, 0.7),
+  rgba(126, 189, 179, 0.6),
+  rgba(161, 212, 205, 0.5)),
+    url('../../../../assets/images/hero_3.jpg');
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+}
 
 #loading__container {}
 
 #sending-code-text {}
 
-#reset-email-input {}
+#request-header-text {
+  font-size: 2.5rem;
+  margin: 0 auto 5rem auto;
+  background: transparent;
+  color: white;
+  font-weight: 600;
+}
 
-#submit-reset-email-btn {}
+#request-form {
+  background: transparent;
+}
+
+#reset-email-input {
+  font-size: 2rem;
+  display: block;
+  margin: 2rem auto 4rem auto;
+  padding: 0.5rem;
+}
+
+#submit-reset-email-btn {
+  background-color: #ffcd76;
+  color: white;
+  height: 6rem;
+  width: 18rem;
+  font-size: 2rem;
+  border-radius: 4px;
+}

@@ -156,3 +156,48 @@
 .user-info-list-item {}
 
 .user-info-text-link {}
+
+@media (max-width: 550px) {
+  #nav-mobile__container {
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 10rem;
+    opacity: 1;
+    background-color: #ef3b24;
+  }
+
+  #nav-web__container {
+    display: none;
+  }
+
+  #nav-hamburger__container {
+    background: none;
+    margin-left: auto;
+  }
+
+  #nav-hamburger-icon {}
+
+  #logo {
+    width: 40%;
+    height: auto;
+    border-radius: 50%;
+    margin: 0 auto;
+    text-align: center;
+    z-index: 2;
+  }
+
+  #nav-cart__container {
+    width: auto;
+    background-color: transparent;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: white;
+    background: none;
+    margin-right: auto;
+    text-align: center;
+  }
+}

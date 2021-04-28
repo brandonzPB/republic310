@@ -66,8 +66,10 @@ const RequestResetCode: React.FC = () => {
             <div id="loading__container" style={{ display: loading ? 'block' : 'none' }}>
               <span id="sending-code-text">Sending code...</span>
             </div>
+
+            <span id="request-header-text">Please enter your email below</span>
       
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form onSubmit={handleSubmit(onSubmit)} id="request-form">
               <input 
                 id="reset-email-input"
                 type="email"

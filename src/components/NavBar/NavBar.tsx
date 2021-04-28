@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { RiShoppingCart2Line } from 'react-icons/ri';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { IconContext } from 'react-icons';
@@ -17,10 +17,18 @@ const NavBar: React.FC  = () => {
   const { changeDest } = useContext(RouteContext);
 
   // LOGIN FORM STATE (display purposes)
-  const [loginForm, setLoginForm] = useState({ loading: false, hidden: true });
+  const [loginForm, setLoginForm] = useState({
+    loading: false, 
+    hidden: true, 
+    error: false,
+  });
 
   // ACCOUNT OPTIONS STATE (display purposes)
   const [options, setOptions] = useState({ display: false });
+
+  useEffect(() => {
+    console.log('loginForm', loginForm);
+  }, [loginForm]);
 
   // SHOW LOGIN FORM (triggered by clicking 'Login')
   const showLoginForm = (): void => {
@@ -61,6 +69,11 @@ const NavBar: React.FC  = () => {
   // HIDE ACCOUNT OPTIONS DISPLAY
   const hideAccountOptions = (): void => {
     setOptions({ ...options, display: false });
+  }
+
+  // TOGGLE ERROR
+  const toggleError = (flag: boolean): void => {
+    setLoginForm({ ...loginForm, error: flag });
   }
 
   const showMobileMenu = (): void => {}
@@ -111,7 +124,9 @@ const NavBar: React.FC  = () => {
                   : <LoginTabForm 
                     closeLoginForm={closeLoginForm} 
                     setLoading={setLoading} 
-                    stopLoading={stopLoading} 
+                    stopLoading={stopLoading}
+                    loginForm={loginForm}
+                    toggleError={toggleError}
                   />
               }
             </div>
@@ -135,6 +150,12 @@ const NavBar: React.FC  = () => {
       </div>
 
       <div id="nav-mobile__container">
+        <IconContext.Provider value={{ style: { fontSize: '2.5rem', backgroundColor: '#ef3b24' }}}>
+          <div id="nav-hamburger__container">
+            <GiHamburgerMenu onClick={() => showMobileMenu} id="nav-hamburger-icon" />
+          </div>
+        </IconContext.Provider>
+
         <img 
           id="logo" 
           src={logoSrc} 
@@ -143,9 +164,18 @@ const NavBar: React.FC  = () => {
           style={{ cursor: 'pointer' }} 
         />
 
-        <IconContext.Provider value={{ style: { fontSize: '2.5rem', backgroundColor: '#ef3b24' }}}>
-          <div id="nav-hamburger__container">
-            <GiHamburgerMenu onClick={() => showMobileMenu} />
+        <IconContext.Provider 
+          value={{ style: {
+            fontSize: '2.5rem', 
+            backgroundColor: '#ef3b24', 
+            cursor: 'pointer',
+            transition: 'transform 0.2s',
+          }}}
+        >
+          <div id="nav-cart__container" onClick={() => handleNav('/cart')}>              
+            <RiShoppingCart2Line id="nav-cart-icon" />
+
+            <span id="cart-qty">{cart.totalItemCount}</span>
           </div>
         </IconContext.Provider>
       </div>

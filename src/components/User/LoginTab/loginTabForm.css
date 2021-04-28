@@ -52,6 +52,7 @@
   box-shadow: 0 0 3px black;
   margin: 0.5rem auto 0 auto;
   border-radius: 2px;
+  padding: 0.25rem;
 }
 
 #email-login-input {}
