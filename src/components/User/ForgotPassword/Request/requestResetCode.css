@@ -47,4 +47,15 @@
   width: 18rem;
   font-size: 2rem;
   border-radius: 4px;
+  transition: transform 0.2s ease;
+}
+
+#submit-reset-email-btn:hover {
+  background-color: #facf86;
+  transform: scale(1.05);
+}
+
+#submit-reset-email-btn:active {
+  background-color: #fbc567;
+  transform: scale(0.95);
 }

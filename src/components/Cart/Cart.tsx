@@ -3,6 +3,8 @@ import { Route, Redirect } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { GlobalContext } from '../../contexts/GlobalContext';
 import { RouteContext } from '../../contexts/RouteContext';
+
+import ProgressBar from '../Checkout/ProgressBar/ProgressBar';
 import ProductCartDetails from '../Products/ProductCartDetails';
 import './cart.css';
 
@@ -67,6 +69,8 @@ const Cart: React.FC = () => {
       {
         dest === '/cart'
           ? <div id="cart__container">
+            <ProgressBar spotlight="cart" />
+            
             {
               cart.products.length === 0
                 ? <div id="empty-cart__container">

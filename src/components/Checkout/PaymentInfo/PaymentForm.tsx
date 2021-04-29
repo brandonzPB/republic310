@@ -127,7 +127,7 @@ const PaymentForm: React.FC = () => {
   }
 
   return (
-    <div id="payment-info__container">
+    <div id="payment-form__container">
       {
         modalDisplay.show
           ? <LoginModal hideModal={hideModal} modalDisplay={modalDisplay} />

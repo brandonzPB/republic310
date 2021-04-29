@@ -3,6 +3,9 @@ import { Route, Redirect } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { GlobalContext } from '../../../contexts/GlobalContext';
 import { RouteContext } from '../../../contexts/RouteContext';
+
+import ProgressBar from '../ProgressBar/ProgressBar';
+import OrderSummary from '../OrderSummary/OrderSummary';
 import ShippingForm from './ShippingForm';
 import './shippingDetails.css';
 
@@ -27,11 +30,13 @@ const ShippingDetails: React.FC = () => {
       {
         dest === '/checkout/shipping'
           ? <div id="shipping-details__container">
-            <h1>Taxes: ${cart.taxes.toFixed(2)}</h1>
-            <h1>Total: ${cart.total.toFixed(2)}</h1>
+            <ProgressBar spotlight="shipping" />
+            
+            <button id="return-to-cart-btn" onClick={() => changeDest('/cart')}>Return to Cart</button>
+            
             <span id="shipping-login-text">Already have an account? Login at the top right and your shipping info will be filled in automatically</span>
-      
             <ShippingForm />
+            <OrderSummary />
           </div>
           : !dest
             ? <Route exact path="/checkout/shipping">
