@@ -68,29 +68,32 @@ const Cart: React.FC = () => {
 
       {
         dest === '/cart'
-          ? <div id="cart__container">
-            <ProgressBar spotlight="cart" />
-            
-            {
+          ? <> {
               cart.products.length === 0
                 ? <div id="empty-cart__container">
-                    <span id="empty-cart-text">Your cart is empty. Returning to home page...</span>
+                  <span id="empty-cart-text">Your cart is empty. Returning to home page...</span>
+                </div>
+                : <div id="cart__container">
+                  <div id="cart-left__container">
+                    <span id="cart-left-header">Your Products</span>
+                    <div id="cart-products__container">
+                      {ProductComponents}
+                    </div>
                   </div>
-                : <div id="cart-display__container">
-                  <div id="cart-products__container">
-                    {ProductComponents}
-                  </div>
-      
-                  <div id="cart-subtotal__container">
-                    <span id="cart-subtotal">Subtotal: ${cart.subtotal}.00</span>
-                  </div>
-      
-                  <div id="checkout-btn__container">
-                    <button id="checkout-btn" onClick={handleCheckout}>Proceed to Checkout</button>
+
+                  <div id="cart-right__container">
+                    <ProgressBar spotlight="cart" />
+
+                    <div id="cart-subtotal__container">
+                      <span id="cart-subtotal">Subtotal: ${cart.subtotal}.00</span>
+                    </div>
+        
+                    <div id="checkout-btn__container">
+                      <button id="checkout-btn" onClick={handleCheckout}>Proceed to Checkout</button>
+                    </div>
                   </div>
                 </div>
-            }
-          </div>
+          } </>
           : !dest
             ? <Route exact path="/cart">
               <Redirect to="/" />

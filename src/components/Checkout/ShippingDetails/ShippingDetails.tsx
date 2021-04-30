@@ -30,13 +30,19 @@ const ShippingDetails: React.FC = () => {
       {
         dest === '/checkout/shipping'
           ? <div id="shipping-details__container">
-            <ProgressBar spotlight="shipping" />
-            
-            <button id="return-to-cart-btn" onClick={() => changeDest('/cart')}>Return to Cart</button>
-            
-            <span id="shipping-login-text">Already have an account? Login at the top right and your shipping info will be filled in automatically</span>
-            <ShippingForm />
-            <OrderSummary />
+            <div id="shipping-left__container">
+              <ProgressBar spotlight="shipping" />
+              
+              <button id="return-to-cart-btn" onClick={() => changeDest('/cart')}>Return to Cart</button>
+              
+              <span className="shipping-login-text">Already have an account?</span>
+              <span className="shipping-login-text">Login at the top right and your shipping info will be filled in automatically.</span>
+              <ShippingForm />
+            </div>
+
+            <div id="shipping-right__container">
+              <OrderSummary />
+            </div>
           </div>
           : !dest
             ? <Route exact path="/checkout/shipping">

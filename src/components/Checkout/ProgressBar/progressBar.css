@@ -1,0 +1,14 @@
+#progress-bar__container {
+  margin: 2rem auto;
+  text-align: center;
+}
+
+.progress-text {
+  font-size: 2rem;
+}
+
+.arrow-icon {
+  color: #6DABA3;
+  margin: 0 0.5rem;
+  font-size: 1rem;
+}

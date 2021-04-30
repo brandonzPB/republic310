@@ -44,38 +44,38 @@ function App() {
           <meta name="description" content={content} />
         </Helmet>
 
-          <GlobalContextProvider>
-            <RouteContextProvider>
-              <NavBar />
+        <GlobalContextProvider>
+          <RouteContextProvider>
+            <NavBar />
 
-              <Route exact path="/" component={Index} />
-              <Route exact path="/about" component={About} />
-              <Route exact path="/contact" component={Contact} />
+            <Route exact path="/" component={Index} />
+            <Route exact path="/about" component={About} />
+            <Route exact path="/contact" component={Contact} />
 
-              <Route exact path="/products" component={AllProducts} />
-              <Route exact path="/product/details" component={ProductDetails} />
+            <Route exact path="/products" component={AllProducts} />
+            <Route exact path="/product/details" component={ProductDetails} />
 
-              <Route exact path="/cart" component={Cart} />
-              <Route exact path="/checkout/shipping" component={ShippingDetails} />
-              <Route exact path="/checkout/payment" component={PaymentContainer} />
-              <Route exact path="/checkout/confirmation" component={OrderConfirmation} />
+            <Route exact path="/cart" component={Cart} />
+            <Route exact path="/checkout/shipping" component={ShippingDetails} />
+            <Route exact path="/checkout/payment" component={PaymentContainer} />
+            <Route exact path="/checkout/confirmation" component={OrderConfirmation} />
 
-              <Route exact path="/user/update" component={UpdateUser} />
-              <Route exact path="/user/update/password" component={PasswordUpdate} />
+            <Route exact path="/user/update" component={UpdateUser} />
+            <Route exact path="/user/update/password" component={PasswordUpdate} />
 
-              <Route exact path="/order/history" component={OrderHistory} />
-              <Route exact path="/order/cancel" component={CancelOrder} />
+            <Route exact path="/order/history" component={OrderHistory} />
+            <Route exact path="/order/cancel" component={CancelOrder} />
 
-              <Route exact path="/reset/request" component={RequestResetCode} />
-              <Route exact path="/reset/code" component={PostResetCode} />
-              <Route exact path="/reset/password" component={ResetPassword} />
+            <Route exact path="/reset/request" component={RequestResetCode} />
+            <Route exact path="/reset/code" component={PostResetCode} />
+            <Route exact path="/reset/password" component={ResetPassword} />
 
-              <Route exact path="/stats" component={AdminForm} />
-              <Route exact path="/stats/verified" component={StatsContainer} />
+            <Route exact path="/stats" component={AdminForm} />
+            <Route exact path="/stats/verified" component={StatsContainer} />
 
-              <Footer />
-            </RouteContextProvider>
-          </GlobalContextProvider>
+            <Footer />
+          </RouteContextProvider>
+        </GlobalContextProvider>
       </div>
     </BrowserRouter>
   );

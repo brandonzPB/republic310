@@ -1,0 +1,95 @@
+#shipping-form-parent__container {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+#verification-text__container {
+  margin: 1rem auto;
+}
+
+#verification-text {
+  color: #F36E33;
+  text-align: center;
+  font-weight: 600;
+  font-size: 1.08rem;
+}
+
+#shipping-form {
+  text-align: center;
+  margin: 0 auto;
+  width: auto;
+  border: 2px solid black;
+}
+
+.shipping-form-label {
+  font-size: 1.5rem;
+  display: block;
+  text-align: center;
+  margin: 2rem auto 1rem auto;
+}
+
+.create-input {
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 0 3px black;
+  padding: 0.25rem 1rem;
+  font-size: 1.5rem;
+}
+
+#contact-input__container {
+}
+
+#create-email-input {
+  margin: 0 auto;
+}
+
+#create-phone-input {
+  margin: 0 auto;
+}
+
+#password-input__container {}
+
+#create-password-input {}
+
+#name-input__container {}
+
+#create-firstName-input {}
+
+#create-lastName-input {}
+
+#address-input__container {}
+
+#create-street-input {}
+
+#create-city-input {}
+
+#create-zipCode-input {}
+
+#create-state-input {}
+
+#create-country-input {}
+
+#create-user-btn {
+  background-color: #fdca77;
+  border: none;
+  border-radius: 10px;
+  transition: transform 0.2s ease;
+  width: 18rem;
+  height: 7rem;
+  font-size: 1.5rem;
+  margin: 2rem auto;
+}
+
+#create-user-btn:hover {
+  background-color: #fbcc80;
+  transform: scale(1.05);
+}
+
+#create-user-btn:active {
+  background-color: #ffc86f;
+  transform: scale(0.95);
+}

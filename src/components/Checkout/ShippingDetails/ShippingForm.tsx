@@ -4,6 +4,8 @@ import { GlobalContext } from '../../../contexts/GlobalContext';
 import { RouteContext } from '../../../contexts/RouteContext';
 import * as actions from '../../../modules/actions';
 
+import './shippingForm.css';
+
 interface UserData {
   firstName: string;
   lastName: string;
@@ -14,7 +16,7 @@ interface UserData {
   street: string;
   city: string;
   zipCode: number;
-  country: string;
+  // country: string;
   state: string;
 };
 
@@ -27,7 +29,7 @@ const ShippingForm: React.FC = () => {
 
   // HANDLE CREATE USER (helper)
   const handleCreateUser = async (data: UserData): Promise<any> => {
-    const userObject: UserData = { ... data };
+    const userObject = { ... data, country: 'United States' };
 
     const createResult: any = await actions.createUser(userObject);
 
@@ -67,32 +69,19 @@ const ShippingForm: React.FC = () => {
   }
 
   return (
-    <div id="shipping-form-parent__container" style={{ width: '100vw', height: '100vh' }}>
+    <div id="shipping-form-parent__container">
       <div id="verification-text__container" style={{ display: user.isAuthorized ? 'block' : 'none' }}>
         <span id="verification-text">Please verify that the following information is correct before proceeding to the next page.</span>
       </div>
 
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div id="password-input__container" style={{ display: user.isAuthorized ? 'none' : 'block' }}>
-          <input 
-            style={{ backgroundColor: errors.password ? 'pink' : 'white' }}
-            className="create-input"
-            id="password-create-input"
-            type="password"
-            name="password"
-            placeholder="Password"
-            defaultValue={user.isAuthorized ? user.password : '' }
-            ref={register({ required: true })}
-          />
-
-          {!user.isAuthorized && errors.password && <div style={{ color: 'red' }}>Please enter your password</div>}
-        </div>
-
+      <form onSubmit={handleSubmit(onSubmit)} id="shipping-form">
         <div id="contact-input__container">
+
+          <span className="shipping-form-label">Contact Information</span>
           <input 
             style={{ backgroundColor: errors.email ? 'pink' : 'white' }}
             className="create-input"
-            id="email-create-input"
+            id="create-email-input"
             type="email"
             name="email"
             placeholder="Email"
@@ -109,7 +98,7 @@ const ShippingForm: React.FC = () => {
           <input 
             style={{ backgroundColor: errors.phoneNumber ? 'pink' : 'white' }}
             className="create-input"
-            id="phone-create-input"
+            id="create-phone-input"
             type="tel"
             name="phoneNumber"
             placeholder="123-456-7890"
@@ -120,39 +109,57 @@ const ShippingForm: React.FC = () => {
           {!user.isAuthorized && errors.phoneNumber && <div style={{ color: 'red' }}>Phone number is required</div>}
         </div>
 
-        <div id="shipping-input__container">
-          <div id="name-input__container">
-            <input 
-              style={{ backgroundColor: errors.firstName ? 'pink' : 'white' }}
-              className="create-input"
-              id="firstname-create-input"
-              placeholder="First Name"
-              type="text"
-              name="firstName"
-              defaultValue={user.isAuthorized ? user.firstName : ''}
-              ref={register({ required: true })}
-            />
+        <div id="password-input__container" style={{ display: user.isAuthorized ? 'none' : 'block' }}>
+          <span className="shipping-form-label">Password</span>
+          <input 
+            style={{ backgroundColor: errors.password ? 'pink' : 'white' }}
+            className="create-input"
+            id="create-password-input"
+            type="password"
+            name="password"
+            placeholder="Password"
+            defaultValue={user.isAuthorized ? user.password : '' }
+            ref={register({ required: true })}
+          />
 
-            {!user.isAuthorized && errors.firstName && <div>First name is required</div>}
+          {!user.isAuthorized && errors.password && <div style={{ color: 'red' }}>Please enter your password</div>}
+        </div>
 
-            <input 
-              style={{ backgroundColor: errors.lastName ? 'pink' : 'white' }}
-              className="create-input"
-              id="lastname-create-input"
-              placeholder="Last Name"
-              type="text"
-              name="lastName"
-              defaultValue={user.isAuthorized ? user.lastName : ''}
-              ref={register({ required: true })}
-            />
+        <div id="name-input__container">
+          <span className="shipping-form-label">Name</span>
+          <input 
+            style={{ backgroundColor: errors.firstName ? 'pink' : 'white' }}
+            className="create-input"
+            id="create-firstName-input"
+            placeholder="First Name"
+            type="text"
+            name="firstName"
+            defaultValue={user.isAuthorized ? user.firstName : ''}
+            ref={register({ required: true })}
+          />
 
-            {!user.isAuthorized && errors.lastName && <div>Last name is required</div>}
-          </div>
+          {!user.isAuthorized && errors.firstName && <div>First name is required</div>}
 
+          <input 
+            style={{ backgroundColor: errors.lastName ? 'pink' : 'white' }}
+            className="create-input"
+            id="create-lastName-input"
+            placeholder="Last Name"
+            type="text"
+            name="lastName"
+            defaultValue={user.isAuthorized ? user.lastName : ''}
+            ref={register({ required: true })}
+          />
+
+          {!user.isAuthorized && errors.lastName && <div>Last name is required</div>}
+        </div>
+
+        <div id="address-input__container">
+          <span className="shipping-form-label">Shipping Address</span>
           <input 
             style={{ backgroundColor: errors.street ? 'pink' : 'white' }}
             className="create-input"
-            id="street-input"
+            id="create-street-input"
             placeholder="123 React Road APT 1337"
             type="text"
             name="street"
@@ -165,7 +172,7 @@ const ShippingForm: React.FC = () => {
           <input 
             style={{ backgroundColor: errors.city ? 'pink' : 'white' }}
             className="create-input"
-            id="city-input"
+            id="create-city-input"
             placeholder="City"
             type="text"
             name="city"
@@ -175,46 +182,44 @@ const ShippingForm: React.FC = () => {
 
           {!user.isAuthorized && errors.city && <div>City is required</div>}
 
-          <div id="country-input__container">
-            <input 
-              style={{ backgroundColor: errors.country ? 'pink' : 'white' }}
-              className="create-input"
-              id="country-input"
-              placeholder="Country"
-              type="text"
-              name="country"
-              defaultValue={user.shippingAddress ? user.shippingAddress.country : ''}
-              ref={register({ required: true })}
-            />
+          <input 
+            style={{ backgroundColor: errors.zipCode ? 'pink' : 'white' }}
+            className="create-input"
+            id="create-zipCode-input"
+            placeholder="Zip Code"
+            type="text"
+            name="zipCode"
+            defaultValue={user.shippingAddress ? user.shippingAddress.zipCode : ''}
+            ref={register({ required: true })}
+          />
 
-            {!user.isAuthorized && errors.country && <div>Country is required</div>}
+          {!user.isAuthorized && errors.zipCode && <div>Zip code is required</div>}
 
-            <input 
-              style={{ backgroundColor: errors.state ? 'pink' : 'white' }}
-              className="create-input"
-              id="state-input"
-              placeholder="State"
-              type="text"
-              name="state"
-              defaultValue={user.shippingAddress ? user.shippingAddress.state : ''}
-              ref={register({ required: true })}
-            />
+          {/* <input 
+            style={{ backgroundColor: errors.country ? 'pink' : 'white' }}
+            className="create-input"
+            id="create-country-input"
+            placeholder="Country"
+            type="text"
+            name="country"
+            defaultValue={user.shippingAddress ? user.shippingAddress.country : ''}
+            ref={register({ required: true })}
+          />
 
-            {!user.isAuthorized && errors.state && <div>State is required</div>}
+          {!user.isAuthorized && errors.country && <div>Country is required</div>} */}
 
-            <input 
-              style={{ backgroundColor: errors.zipCode ? 'pink' : 'white' }}
-              className="create-input"
-              id="zip-input"
-              placeholder="Zip Code"
-              type="text"
-              name="zipCode"
-              defaultValue={user.shippingAddress ? user.shippingAddress.zipCode : ''}
-              ref={register({ required: true })}
-            />
+          <input 
+            style={{ backgroundColor: errors.state ? 'pink' : 'white' }}
+            className="create-input"
+            id="create-state-input"
+            placeholder="State"
+            type="text"
+            name="state"
+            defaultValue={user.shippingAddress ? user.shippingAddress.state : ''}
+            ref={register({ required: true })}
+          />
 
-            {!user.isAuthorized && errors.zipCode && <div>Zip code is required</div>}
-          </div>
+          {!user.isAuthorized && errors.state && <div>State is required</div>}
         </div>
 
         <button id="create-user-btn">Create Account and Continue to Shipping</button>

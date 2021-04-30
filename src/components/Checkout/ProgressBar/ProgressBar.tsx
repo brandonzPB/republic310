@@ -14,10 +14,9 @@ const ProgressBar: React.FC<ProgressBarProps> = ({ spotlight }: ProgressBarProps
 
   return(
     <div id="progress-bar__container">
-      <span id="progress-text" style={{
+      <span className="progress-text" style={{
         color: spotlight === 'cart' ? '#6DABA3' : '#E0E0E0',
         fontWeight: spotlight === 'cart' ? 600 : 400,
-        fontSize: '2.25rem',
       }}
       >
         Cart
@@ -27,15 +26,13 @@ const ProgressBar: React.FC<ProgressBarProps> = ({ spotlight }: ProgressBarProps
         color: spotlight === 'cart' ? '#6DABA3' : '#E0E0E0',
         fontWeight: spotlight === 'cart' ? 600 : 400,
         opacity: spotlight === 'cart' ? 1 : 0.3,
-        fontSize: '2.25rem'
       } }}>
-        <IoIosArrowForward />
+        <IoIosArrowForward className="arrow-icon" />
       </IconContext.Provider>
 
-      <span id="progress-text" style={{
+      <span className="progress-text" style={{
         color: spotlight === 'shipping' ? '#6DABA3' : '#E0E0E0',
         fontWeight: spotlight === 'shipping' ? 600 : 400,
-        fontSize: '2.25rem',
       }}
       >
         Shipping
@@ -44,16 +41,14 @@ const ProgressBar: React.FC<ProgressBarProps> = ({ spotlight }: ProgressBarProps
       <IconContext.Provider value={{ style: {
         color: spotlight === 'shipping' ? '#6DABA3' : '#E0E0E0',
         fontWeight: spotlight === 'shipping' ? 600 : 400,
-        fontSize: '2.25rem',
         opacity: spotlight === 'shipping' ? 1 : 0.3,
       } }}>
-        <IoIosArrowForward />
+        <IoIosArrowForward className="arrow-icon" />
       </IconContext.Provider>
 
-      <span id="progress-text" style={{
+      <span className="progress-text" style={{
         color: spotlight === 'payment' ? '#6DABA3' : '#E0E0E0',
         fontWeight: spotlight === 'payment' ? 600 : 400,
-        fontSize: '2.25rem',
       }}
       >
         Payment

@@ -41,7 +41,7 @@
 }
 
 #submit-reset-email-btn {
-  background-color: #ffcd76;
+  background-color: #fdca77;
   color: white;
   height: 6rem;
   width: 18rem;
@@ -51,11 +51,11 @@
 }
 
 #submit-reset-email-btn:hover {
-  background-color: #facf86;
+  background-color: rgb(251, 214, 150);
   transform: scale(1.05);
 }
 
 #submit-reset-email-btn:active {
-  background-color: #fbc567;
+  background-color: rgb(250, 190, 85);
   transform: scale(0.95);
 }
