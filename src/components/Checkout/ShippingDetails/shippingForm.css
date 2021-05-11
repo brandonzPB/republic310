@@ -5,6 +5,8 @@
   align-items: center;
   justify-content: center;
   width: 100%;
+  box-shadow: 0 50px 100px -20px rgba(50,50,93,.25),0 30px 60px -30px rgba(0,0,0,.3);
+  border-radius: 10px;
 }
 
 #verification-text__container {
@@ -22,7 +24,6 @@
   text-align: center;
   margin: 0 auto;
   width: auto;
-  border: 2px solid black;
 }
 
 .shipping-form-label {
@@ -40,11 +41,27 @@
   font-size: 1.5rem;
 }
 
+.inputs__container {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  max-width: 40rem;
+}
+
 #contact-input__container {
+  max-width: 40rem;
+  margin: 0 auto;
 }
 
 #create-email-input {
   margin: 0 auto;
+}
+
+.email-error-text {
+  font-size: 1.5rem;
+  display: block;
 }
 
 #create-phone-input {
@@ -55,23 +72,61 @@
 
 #create-password-input {}
 
-#name-input__container {}
+#name-input__container {
+  margin: 0 auto;
+  width: 40rem;
+}
 
-#create-firstName-input {}
+#create-firstName-input {
+  margin: 0 auto;
+}
 
-#create-lastName-input {}
+#create-lastName-input {
+  margin: 0 auto;
+}
 
-#address-input__container {}
+#address-input__container {
+  margin: 0 auto;
+}
 
-#create-street-input {}
+#address-left__container {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 50%;
+}
 
-#create-city-input {}
+#address-right__container {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 50%;
+}
 
-#create-zipCode-input {}
+#create-street-input {
+  margin: 1rem auto;
+}
 
-#create-state-input {}
+#create-city-input {
+  margin: 1rem auto;
+}
 
-#create-country-input {}
+#create-zipCode-input {
+  margin: 1rem auto;
+}
+
+#create-state-input {
+  margin: 1rem auto;
+}
+
+#create-country-input {
+  margin: 1rem auto;
+  border: 2px solid black;
+}
 
 #create-user-btn {
   background-color: #fdca77;
@@ -82,6 +137,7 @@
   height: 7rem;
   font-size: 1.5rem;
   margin: 2rem auto;
+  box-shadow: 0 50px 100px -20px rgba(50,50,93,.25),0 30px 60px -30px rgba(0,0,0,.3);
 }
 
 #create-user-btn:hover {

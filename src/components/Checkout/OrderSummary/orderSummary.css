@@ -1,0 +1,27 @@
+#order-summary__container {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 50%;
+}
+
+#order-summary-header {
+  font-size: 2rem;
+  font-weight: 600;
+  margin: 2rem auto;
+}
+
+#order-summary-details__container {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  margin: 2rem auto;
+}
+
+.order-cost-text {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
