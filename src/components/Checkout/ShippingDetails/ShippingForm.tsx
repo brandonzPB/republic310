@@ -43,6 +43,7 @@ const ShippingForm: React.FC = () => {
   // SUBMIT FORM
   const onSubmit = async (data: UserData): Promise<any> => {
     console.log(data);
+    console.log('errors', errors);
 
     setStateError({ ...stateError, state: false });
 
@@ -108,16 +109,18 @@ const ShippingForm: React.FC = () => {
               defaultValue={user.isAuthorized ? user.phoneNumber : ''}
               ref={register({ required: true })}
             />
+          </div>
 
-            <div className="shipping-errors__container">
-              {errors.email && errors.email.type === 'validate' && !user.isAuthorized && (
-                <div className="email-error-text" style={{ color: 'red' }}>Email in use. Please log in if this is your email. Otherwise, enter a different one.</div>
-              )}
+          <div className="shipping-errors__container">
+            {errors.email && errors.email.type === 'validate' && !user.isAuthorized && (
+              <div className="error-text contact-error" style={{ color: 'red' }}>
+                Email in use. Please log in if this is your email. Otherwise, enter a different one.
+              </div>
+            )}
 
-              {!user.isAuthorized && errors.email && <div className="email-error-text">Email is requred</div>}
+            {!user.isAuthorized && errors.email && errors.email.type !== 'validate' && <div className="error-text contact-error" style={{ color: 'red' }}>Email is requred</div>}
 
-              {!user.isAuthorized && errors.phoneNumber && <div style={{ color: 'red' }}>Phone number is required</div>}
-            </div>
+            {!user.isAuthorized && errors.phoneNumber && <div className="error-text contact-error" style={{ color: 'red' }}>Phone number is required</div>}
           </div>
         </div>
 
@@ -134,11 +137,15 @@ const ShippingForm: React.FC = () => {
             ref={register({ required: true })}
           />
 
-          {!user.isAuthorized && errors.password && <div style={{ color: 'red' }}>Please enter your password</div>}
+          {!user.isAuthorized && errors.password && <div className="error-text password-error" style={{ color: 'red' }}>Please enter your password</div>}
         </div>
 
         <div id="name-input__container">
-          <span className="shipping-form-label">Name</span>
+          <div id="name-labels__container">
+            <span className="shipping-form-label">First Name</span>
+            <span className="shipping-form-label">Last Name</span>
+          </div>
+
           <div className="inputs__container">
             <input 
               style={{ backgroundColor: errors.firstName ? 'pink' : 'white', border: errors.firstName ? 'red' : 'none' }}
@@ -161,31 +168,32 @@ const ShippingForm: React.FC = () => {
               defaultValue={user.isAuthorized ? user.lastName : ''}
               ref={register({ required: true })}
             />
+          </div>
 
-            <div className="shipping-errors__container">
-              {!user.isAuthorized && errors.firstName && <div>First name is required</div>}
-              
-              {!user.isAuthorized && errors.lastName && <div>Last name is required</div>}
-            </div>
+          <div className="shipping-errors__container">
+            {!user.isAuthorized && errors.firstName && <div className="error-text name-error" style={{ color: 'red' }}>First name is required</div>}
+            
+            {!user.isAuthorized && errors.lastName && <div className="error-text name-error" style={{ color: 'red' }}>Last name is required</div>}
           </div>
         </div>
 
         <div id="address-input__container">
-          <span className="shipping-form-label">Shipping Address</span>
           <div id="address-left__container">
+            <span className="shipping-form-label">Street</span>
             <input 
               style={{ backgroundColor: errors.street ? 'pink' : 'white', border: errors.street ? 'red' : 'none' }}
               className="create-input"
               id="create-street-input"
-              placeholder="123 React Road APT 1337"
+              placeholder="Street, APT/Suite/etc"
               type="text"
               name="street"
               defaultValue={user.shippingAddress ? user.shippingAddress.street : ''}
               ref={register({ required: true })}
             />
             
-            {!user.isAuthorized && errors.street && <div>Street is required</div>}
+            {!user.isAuthorized && errors.street && <div className="error-text" style={{ color: 'red' }}>Street is required</div>}
 
+            <span className="shipping-form-label">City</span>
             <input 
               style={{ backgroundColor: errors.city ? 'pink' : 'white', border: errors.city ? 'red' : 'none' }}
               className="create-input"
@@ -197,8 +205,9 @@ const ShippingForm: React.FC = () => {
               ref={register({ required: true })}
             />
 
-            {!user.isAuthorized && errors.city && <div>City is required</div>}
+            {!user.isAuthorized && errors.city && <div className="error-text" style={{ color: 'red' }}>City is required</div>}
 
+            <span className="shipping-form-label">Zip Code</span>
             <input 
               style={{ backgroundColor: errors.zipCode ? 'pink' : 'white', border: errors.zipCode ? 'red' : 'none' }}
               className="create-input"
@@ -210,10 +219,11 @@ const ShippingForm: React.FC = () => {
               ref={register({ required: true })}
             />
 
-            {!user.isAuthorized && errors.zipCode && <div>Zip code is required</div>}
+            {!user.isAuthorized && errors.zipCode && <div className="error-text" style={{ color: 'red' }}>Zip code is required</div>}
           </div>
 
           <div id="address-right__container">
+            <span className="shipping-form-label">Country</span>
             <select {...register('country')} style={{ border: errors.country ? 'red' : 'white' }}>
               <option value="USA">USA</option>
               <option value="none" disabled={true}>More coming soon!</option>
@@ -230,8 +240,9 @@ const ShippingForm: React.FC = () => {
               ref={register({ required: true })}
             /> */}
 
-            {!user.isAuthorized && errors.country && <div>Country is required</div>}
+            {!user.isAuthorized && errors.country && <div className="error-text" style={{ color: 'red' }}>Country is required</div>}
 
+            <span className="shipping-form-label">State (if applicable)</span>
             <input 
               style={{ backgroundColor: errors.state ? 'pink' : 'white', border: errors.state ? 'red' : 'none' }}
               className="create-input"
@@ -243,7 +254,7 @@ const ShippingForm: React.FC = () => {
               ref={register({ required: true })}
             />
 
-            {!user.isAuthorized && stateError.state && <div>State is required</div>}
+            {!user.isAuthorized && stateError.state && <div className="error-text" style={{ color: 'red' }}>State is required</div>}
           </div>
         </div>
 

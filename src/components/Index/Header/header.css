@@ -18,3 +18,26 @@
   width: 100%;
   height: auto;
 }
+
+@media only screen and (max-width: 768px) {
+  #header__container {
+    margin: 0 auto;
+    width: 100%;
+    height: 60rem;
+    display: block;
+    z-index: 5;
+  }
+  
+  #hero-img__container {
+    position: absolute;
+    right: 65rem;
+    width: 100%;
+    display: block;
+  }
+  
+  #hero-img {
+    z-index: 5;
+    width: 350%;
+    height: auto;
+  }
+}

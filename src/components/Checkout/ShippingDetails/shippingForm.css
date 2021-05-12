@@ -7,6 +7,8 @@
   width: 100%;
   box-shadow: 0 50px 100px -20px rgba(50,50,93,.25),0 30px 60px -30px rgba(0,0,0,.3);
   border-radius: 10px;
+  margin: 2rem auto;
+  padding: 2rem 0;
 }
 
 #verification-text__container {
@@ -30,6 +32,7 @@
   font-size: 1.5rem;
   display: block;
   text-align: center;
+  font-weight: 600;
   margin: 2rem auto 1rem auto;
 }
 
@@ -39,6 +42,7 @@
   box-shadow: 0 0 3px black;
   padding: 0.25rem 1rem;
   font-size: 1.5rem;
+  will-change: border;
 }
 
 .inputs__container {
@@ -48,6 +52,7 @@
   align-items: center;
   justify-content: center;
   max-width: 40rem;
+  margin: 2rem auto;
 }
 
 #contact-input__container {
@@ -77,6 +82,14 @@
   width: 40rem;
 }
 
+#name-labels__container {
+  margin: 2rem auto -2rem auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
 #create-firstName-input {
   margin: 0 auto;
 }
@@ -86,7 +99,11 @@
 }
 
 #address-input__container {
-  margin: 0 auto;
+  margin: 2rem auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 }
 
 #address-left__container {
@@ -96,6 +113,7 @@
   align-items: center;
   justify-content: center;
   min-width: 50%;
+  padding-right: 2rem;
 }
 
 #address-right__container {
@@ -105,6 +123,7 @@
   align-items: center;
   justify-content: center;
   min-width: 50%;
+  padding-left: 2rem;
 }
 
 #create-street-input {
@@ -128,6 +147,30 @@
   border: 2px solid black;
 }
 
+.shipping-errors__container {
+  text-align: center;
+  margin: 2rem auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.error-text {
+  text-align: center;
+  margin: 0 auto;
+  background: none;
+}
+
+.contact-error,
+.name-error {
+  margin: -1rem auto 0 auto;
+}
+
+.password-error {
+  margin: 1rem auto 0 auto;
+}
+
 #create-user-btn {
   background-color: #fdca77;
   border: none;
@@ -148,4 +191,191 @@
 #create-user-btn:active {
   background-color: #ffc86f;
   transform: scale(0.95);
+}
+
+@media only screen and (max-width: 767px) {
+  #shipping-form-parent__container {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    box-shadow: 0 50px 100px -20px rgba(50,50,93,.25),0 30px 60px -30px rgba(0,0,0,.3);
+    border-radius: 10px;
+    margin: 2rem auto;
+    padding: 2rem 0;
+  }
+  
+  #verification-text__container {
+    margin: 1rem auto;
+  }
+  
+  #verification-text {
+    color: #F36E33;
+    text-align: center;
+    font-weight: 600;
+    font-size: 1.08rem;
+  }
+  
+  #shipping-form {
+    text-align: center;
+    margin: 0 auto;
+    width: auto;
+  }
+  
+  .shipping-form-label {
+    font-size: 1.5rem;
+    display: block;
+    text-align: center;
+    font-weight: 600;
+    margin: 2rem auto 1rem auto;
+  }
+  
+  .create-input {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 0 3px black;
+    padding: 0.25rem 1rem;
+    font-size: 1.5rem;
+    will-change: border;
+  }
+  
+  .inputs__container {
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    max-width: 40rem;
+    margin: 2rem auto;
+  }
+  
+  #contact-input__container {
+    max-width: 40rem;
+    margin: 0 auto;
+  }
+  
+  #create-email-input {
+    margin: 0 auto;
+  }
+  
+  .email-error-text {
+    font-size: 1.5rem;
+    display: block;
+  }
+  
+  #create-phone-input {
+    margin: 0 auto;
+  }
+  
+  #password-input__container {}
+  
+  #create-password-input {}
+  
+  #name-input__container {
+    margin: 0 auto;
+    width: 40rem;
+  }
+  
+  #name-labels__container {
+    margin: 2rem auto -2rem auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  #create-firstName-input {
+    margin: 0 auto;
+  }
+  
+  #create-lastName-input {
+    margin: 0 auto;
+  }
+  
+  #address-input__container {
+    margin: 2rem auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  #address-left__container {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 50%;
+    padding-right: 2rem;
+  }
+  
+  #address-right__container {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 50%;
+    padding-left: 2rem;
+  }
+  
+  #create-street-input {
+    margin: 1rem auto;
+  }
+  
+  #create-city-input {
+    margin: 1rem auto;
+  }
+  
+  #create-zipCode-input {
+    margin: 1rem auto;
+  }
+  
+  #create-state-input {
+    margin: 1rem auto;
+  }
+  
+  #create-country-input {
+    margin: 1rem auto;
+    border: 2px solid black;
+  }
+  
+  .shipping-errors__container {
+    text-align: center;
+    margin: 2rem auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .error-text {
+    text-align: center;
+    margin: 0 auto;
+    background: none;
+  }
+  
+  .contact-error,
+  .name-error {
+    margin: -1rem auto 0 auto;
+  }
+  
+  .password-error {
+    margin: 1rem auto 0 auto;
+  }
+  
+  #create-user-btn {
+    background-color: #fdca77;
+    border: none;
+    border-radius: 10px;
+    transition: transform 0.2s ease;
+    width: 18rem;
+    height: 7rem;
+    font-size: 1.5rem;
+    margin: 2rem auto;
+    box-shadow: 0 50px 100px -20px rgba(50,50,93,.25),0 30px 60px -30px rgba(0,0,0,.3);
+  }
 }
