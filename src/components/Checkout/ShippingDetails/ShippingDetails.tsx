@@ -36,7 +36,7 @@ const ShippingDetails: React.FC = () => {
               <button id="return-to-cart-btn" onClick={() => changeDest('/cart')}>Return to Cart</button>
               
               <span className="shipping-login-text">Already have an account?</span>
-              <span className="shipping-login-text">Login at the top right and your shipping info will be filled in automatically.</span>
+              <span className="shipping-login-text">Login at the top and your shipping info will be filled in automatically.</span>
               <ShippingForm />
             </div>
 

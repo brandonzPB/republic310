@@ -29,15 +29,16 @@
   }
   
   #hero-img__container {
-    position: absolute;
-    right: 65rem;
     width: 100%;
     display: block;
   }
   
   #hero-img {
-    z-index: 5;
+    z-index: 1;
     width: 350%;
     height: auto;
+    position: absolute;
+    top: 10rem;
+    right: -13rem;
   }
 }

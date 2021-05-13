@@ -195,11 +195,7 @@
 
 @media only screen and (max-width: 767px) {
   #shipping-form-parent__container {
-    display: flex;
-    flex: 1;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    display: block;
     width: 100%;
     box-shadow: 0 50px 100px -20px rgba(50,50,93,.25),0 30px 60px -30px rgba(0,0,0,.3);
     border-radius: 10px;
@@ -221,15 +217,16 @@
   #shipping-form {
     text-align: center;
     margin: 0 auto;
-    width: auto;
+    width: 100%;
   }
   
   .shipping-form-label {
-    font-size: 1.5rem;
+    font-size: 2rem;
     display: block;
     text-align: center;
     font-weight: 600;
-    margin: 2rem auto 1rem auto;
+    margin: 3rem auto 1rem auto;
+    color: #6DABA3;
   }
   
   .create-input {
@@ -237,27 +234,26 @@
     border-radius: 10px;
     box-shadow: 0 0 3px black;
     padding: 0.25rem 1rem;
-    font-size: 1.5rem;
-    will-change: border;
+    font-size: 2rem;
   }
   
   .inputs__container {
     display: flex;
     flex: 1;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    max-width: 40rem;
+    width: 100%;
     margin: 2rem auto;
   }
   
   #contact-input__container {
-    max-width: 40rem;
+    width: 100%;
     margin: 0 auto;
   }
   
   #create-email-input {
-    margin: 0 auto;
+    margin: 2rem auto;
   }
   
   .email-error-text {
@@ -266,16 +262,17 @@
   }
   
   #create-phone-input {
-    margin: 0 auto;
   }
   
   #password-input__container {}
   
-  #create-password-input {}
+  #create-password-input {
+    margin-bottom: 2rem;
+  }
   
   #name-input__container {
     margin: 0 auto;
-    width: 40rem;
+    width: 100%;
   }
   
   #name-labels__container {
@@ -287,7 +284,7 @@
   }
   
   #create-firstName-input {
-    margin: 0 auto;
+    margin: 0 auto 2rem auto;
   }
   
   #create-lastName-input {
@@ -297,7 +294,7 @@
   #address-input__container {
     margin: 2rem auto;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
   }
@@ -308,8 +305,10 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-width: 50%;
-    padding-right: 2rem;
+    width: 100%;
+    padding: 0;
+    text-align: center;
+    margin: 0 auto;
   }
   
   #address-right__container {
@@ -318,8 +317,11 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-width: 50%;
-    padding-left: 2rem;
+    width: 100%;
+    padding: 0;
+    text-align: center;
+    margin: 0 auto;
+
   }
   
   #create-street-input {
@@ -341,6 +343,8 @@
   #create-country-input {
     margin: 1rem auto;
     border: 2px solid black;
+    width: 20rem;
+    font-size: 2rem;
   }
   
   .shipping-errors__container {
@@ -372,10 +376,10 @@
     border: none;
     border-radius: 10px;
     transition: transform 0.2s ease;
-    width: 18rem;
-    height: 7rem;
-    font-size: 1.5rem;
+    width: 22rem;
+    height: 8rem;
+    font-size: 1.75rem;
     margin: 2rem auto;
-    box-shadow: 0 50px 100px -20px rgba(50,50,93,.25),0 30px 60px -30px rgba(0,0,0,.3);
+    box-shadow: none;
   }
 }

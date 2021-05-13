@@ -30,10 +30,10 @@ const OrderSummary: React.FC = () => {
       {ProductComponents}
 
       <div id="order-summary-details__container">
-        <span className="order-cost-text">Subtotal: ${cart.subtotal}</span>
-        <span className="order-cost-text">Taxes: ${cart.taxes}</span>
-        <span className="order-cost-text">Shipping: $</span>
-        <span className="order-cost-text">Total: ${cart.total}</span>
+        <span className="order-cost-text"><strong className="strong-text">Subtotal:</strong> ${cart.subtotal.toFixed(2)}</span>
+        <span className="order-cost-text"><strong className="strong-text">Taxes:</strong> ${cart.taxes.toFixed(2)}</span>
+        <span className="order-cost-text"><strong className="strong-text">Shipping:</strong> $</span>
+        <span className="order-cost-text"><strong className="strong-text">Total:</strong> ${cart.total.toFixed(2)}</span>
       </div>
     </div>
   );

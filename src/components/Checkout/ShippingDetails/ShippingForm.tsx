@@ -141,10 +141,7 @@ const ShippingForm: React.FC = () => {
         </div>
 
         <div id="name-input__container">
-          <div id="name-labels__container">
-            <span className="shipping-form-label">First Name</span>
-            <span className="shipping-form-label">Last Name</span>
-          </div>
+          <span className="shipping-form-label">First and Last Name</span>
 
           <div className="inputs__container">
             <input 
@@ -224,7 +221,8 @@ const ShippingForm: React.FC = () => {
 
           <div id="address-right__container">
             <span className="shipping-form-label">Country</span>
-            <select {...register('country')} style={{ border: errors.country ? 'red' : 'white' }}>
+            
+            <select id="create-country-input" {...register('country')} style={{ border: errors.country ? 'red' : 'white' }}>
               <option value="USA">USA</option>
               <option value="none" disabled={true}>More coming soon!</option>
             </select>
