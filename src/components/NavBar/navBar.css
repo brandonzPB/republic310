@@ -183,7 +183,9 @@
     margin-left: auto;
   }
 
-  #nav-hamburger-icon {}
+  #nav-hamburger-icon {
+    cursor: pointer;
+  }
 
   #logo {
     width: 40%;
@@ -203,5 +205,10 @@
     background: none;
     margin-right: auto;
     text-align: center;
+  }
+
+  #modal__container {
+    width: 100%;
+    height: auto;
   }
 }

@@ -26,16 +26,22 @@
     height: 60rem;
     display: block;
     z-index: 5;
+    background-image: url('../../../assets/images/hero_4.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
   }
   
   #hero-img__container {
     width: 100%;
+    height: auto;
     display: block;
   }
   
   #hero-img {
+    display: none;
     z-index: 1;
-    width: 350%;
+    width: 100%;
     height: auto;
     position: absolute;
     top: 10rem;

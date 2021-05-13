@@ -1,13 +1,17 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { RiShoppingCart2Line } from 'react-icons/ri';
 import { GiHamburgerMenu } from 'react-icons/gi';
+
 import { IconContext } from 'react-icons';
 import { GlobalContext } from '../../contexts/GlobalContext';
 import { RouteContext } from '../../contexts/RouteContext';
+
 import UserInfoTab from '../User/InfoTab/UserInfoTab';
 import LoginTabForm from '../User/LoginTab/LoginTabForm';
-import './navBar.css';
+import MobileModal from '../MobileModal/MobileModal';
 import logoSrc from '../../assets/images/logo.jpg';
+
+import './navBar.css';
 
 const NavBar: React.FC  = () => {
   // GLOBAL CONTEXT
@@ -22,6 +26,9 @@ const NavBar: React.FC  = () => {
     hidden: true, 
     error: false,
   });
+
+  // MOBILE MENU STATE
+  const [mobileMenu, setMobileMenu] = useState({ display: false });
 
   // ACCOUNT OPTIONS STATE (display purposes)
   const [options, setOptions] = useState({ display: false });
@@ -76,7 +83,15 @@ const NavBar: React.FC  = () => {
     setLoginForm({ ...loginForm, error: flag });
   }
 
-  const showMobileMenu = (): void => {}
+  // SHOW MOBILE MENU
+  const showMobileMenu = (): void => {
+    setMobileMenu({ ...mobileMenu, display: true });
+  }
+
+  // HIDE MOBILE MENU
+  const hideMobileMenu = (): void => {
+    setMobileMenu({ ...mobileMenu, display: false });
+  }
 
   return (
     <div id="nav__container">
@@ -178,6 +193,10 @@ const NavBar: React.FC  = () => {
             <span id="cart-qty">{cart.totalItemCount}</span>
           </div>
         </IconContext.Provider>
+      </div>
+
+      <div id="modal__container" style={{ display: mobileMenu.display ? 'block' : 'none' }}>
+        <MobileModal />
       </div>
     </div>
   )

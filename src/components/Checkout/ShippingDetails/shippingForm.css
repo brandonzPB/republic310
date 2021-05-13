@@ -360,15 +360,14 @@
     text-align: center;
     margin: 0 auto;
     background: none;
+    font-size: 1.5rem;
+    display: block;
   }
   
   .contact-error,
-  .name-error {
-    margin: -1rem auto 0 auto;
-  }
-  
+  .name-error,
   .password-error {
-    margin: 1rem auto 0 auto;
+    margin: 0 auto;
   }
   
   #create-user-btn {

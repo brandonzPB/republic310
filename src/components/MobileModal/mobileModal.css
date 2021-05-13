@@ -1,0 +1,15 @@
+#mobile-modal__container {
+  z-index: 50;
+  width: 100vw;
+  height: 100vh;
+  background: #ef3b24;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+@media only screen and (min-width: 768px) {
+  #mobile-modal__container {
+    display: none;
+  }
+}
