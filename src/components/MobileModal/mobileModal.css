@@ -1,11 +1,62 @@
+/* 
+red: EF3B24
+orange: F36E32
+peach: FBAB6E
+sand: FCE5B6
+blue: 6DA99E
+green: 738D39
+*/
+
+@keyframes slidein {
+  from {
+    transform: translateX(-15rem);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+
 #mobile-modal__container {
   z-index: 50;
-  width: 100vw;
-  height: 100vh;
-  background: #ef3b24;
-  position: absolute;
+  width: 100%;
+  height: 95%;
+  background: #F9A96E;
+  position: fixed;
   top: 0;
-  left: 0;
+  left: -3rem;
+  border-radius: 10px;
+  animation: slidein 0.3s ease;
+}
+
+#modal-content {
+  background: none;
+  margin: 4rem auto;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#cross-icon {
+  background: none;
+  color: white;
+  font-size: 3rem;
+}
+
+#modal-login__container {
+  background: none;
+}
+
+#modal-account__container {
+  background: none;
+}
+
+.modal-text {
+  background: none;
+  color: black;
 }
 
 @media only screen and (min-width: 768px) {

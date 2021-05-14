@@ -1,8 +1,10 @@
 import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
+
 import { GlobalContext } from '../../../contexts/GlobalContext';
 import { RouteContext } from '../../../contexts/RouteContext';
 import * as actions from '../../../modules/actions';
+
 import './loginTabForm.css';
 
 interface UserForm {

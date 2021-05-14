@@ -167,7 +167,7 @@ const NavBar: React.FC  = () => {
       <div id="nav-mobile__container">
         <IconContext.Provider value={{ style: { fontSize: '2.5rem', backgroundColor: '#ef3b24' }}}>
           <div id="nav-hamburger__container">
-            <GiHamburgerMenu onClick={() => showMobileMenu} id="nav-hamburger-icon" />
+            <GiHamburgerMenu onClick={showMobileMenu} id="nav-hamburger-icon" />
           </div>
         </IconContext.Provider>
 
@@ -196,7 +196,7 @@ const NavBar: React.FC  = () => {
       </div>
 
       <div id="modal__container" style={{ display: mobileMenu.display ? 'block' : 'none' }}>
-        <MobileModal />
+        <MobileModal hideMobileMenu={hideMobileMenu} />
       </div>
     </div>
   )
