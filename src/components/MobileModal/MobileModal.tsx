@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { ImCross } from 'react-icons/im';
 import { GlobalContext } from '../../contexts/GlobalContext';
+import { RouteContext } from '../../cotnte  '
 import UserInfoTab from '../User/InfoTab/UserInfoTab';
 import LoginTabForm from '../User/LoginTab/LoginTabForm';
 
@@ -11,7 +12,7 @@ interface ModalProps {
 };
 
 const MobileModal: React.FC<ModalProps> = ({ hideMobileMenu }: ModalProps) => {
-  const { user } = useContext(GlobalContext);
+  const { user, cart } = useContext(GlobalContext);
 
   const [loginForm, setLoginForm] = useState({
     hidden: true,
@@ -50,6 +51,13 @@ const MobileModal: React.FC<ModalProps> = ({ hideMobileMenu }: ModalProps) => {
 
   // SHOW ACCOUNT OPTIONS
   const showAccountOptions = (): void => {}
+
+  // HANDLE MODAL NAVIGATION
+  const handleNav = (path: string): any => {
+    if (path === 'cart' && !cart.products.length) return;
+
+    return changeDest(path);
+  }
   
   return (
     <div id="mobile-modal__container">
