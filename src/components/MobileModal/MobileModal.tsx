@@ -23,13 +23,13 @@ const MobileModal: React.FC<ModalProps> = ({ hideMobileMenu }: ModalProps) => {
 
   // SHOW LOGIN
   const showLoginForm = (): any => {
-    if (loginForm.hidden) return;
+    if (!loginForm.hidden) return;
     return setLoginForm({ ...loginForm, hidden: false });
   }
 
   // HIDE LOGIN
   const closeLoginForm = (): any => {
-    if (!loginForm.hidden) return;
+    if (loginForm.hidden) return;
     return setLoginForm({ ...loginForm, hidden: true });
   }
 
@@ -57,15 +57,21 @@ const MobileModal: React.FC<ModalProps> = ({ hideMobileMenu }: ModalProps) => {
         <ImCross onClick={hideMobileMenu} id="cross-icon" />
 
         <div id="modal-login__container" style={{ display: user.isAuthorized ? 'none' : 'block' }}>
-          <span className="modal-text" onClick={showLoginForm}>LOG IN</span>
+          <span className="modal-text modal-login-text" onClick={showLoginForm}>LOG IN</span>
         
-          <LoginTabForm 
-            closeLoginForm={closeLoginForm}
-            setLoading={setLoading}
-            stopLoading={stopLoading}
-            loginForm={loginForm}
-            toggleError={toggleError}
-          />
+          <div id="modal-login-tab" style={{ display: loginForm.hidden ? 'none' : 'block' }}>
+            {
+              loginForm.loading
+                ? <div id="modal-login-loading">Logging in...</div>
+                : <LoginTabForm 
+                closeLoginForm={closeLoginForm}
+                setLoading={setLoading}
+                stopLoading={stopLoading}
+                loginForm={loginForm}
+                toggleError={toggleError}
+              />
+            }
+          </div>
         </div>
 
         <div

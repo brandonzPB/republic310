@@ -48,7 +48,24 @@ green: 738D39
 
 #modal-login__container {
   background: none;
+  margin: 4rem auto;
+  width: 90%;
+  text-align: center;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
+
+.modal-login-text {}
+
+#modal-login-tab {
+  width: 90%;
+  margin: 0 auto;
+}
+
+#modal-login-loading {}
 
 #modal-account__container {
   background: none;
@@ -57,6 +74,10 @@ green: 738D39
 .modal-text {
   background: none;
   color: black;
+  font-size: 3.25rem;
+  font-weight: 600;
+  color: white;
+  margin: 2rem auto;
 }
 
 @media only screen and (min-width: 768px) {

@@ -90,3 +90,88 @@
   color: rgb(94, 94, 246);
   text-decoration: underline;
 }
+
+@media only screen and (max-width: 768px) {
+  #login-form__container {
+    display: flex;
+    flex: 1;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    width: 100%;
+    text-align: center;
+    margin: 1.5rem auto;
+    box-shadow: 0 50px 100px -20px rgba(50,50,93,.25),0 30px 60px -30px rgba(0,0,0,.3);
+  }
+  
+  #no-account-text {
+    display: block;
+    margin: 1.5rem auto;
+    width: 90%;
+    font-size: 1.75rem;
+  }
+  
+  #close-login-btn {
+    display: block;
+    border: 1px solid black;
+    border-radius: 2px;
+    width: 8rem;
+    height: 3.5rem;
+    background-color: rgb(106,172,162);
+    color: white;
+    margin: 0 auto 2rem auto;
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+
+  #login-form {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    flex: 1;
+    align-items: center;
+    justify-content: space-around;
+  }
+  
+  #login-input__container {}
+  
+  .login-input {
+    border: none;
+    box-shadow: 0 0 3px black;
+    margin: 1rem auto;
+    border-radius: 2px;
+    padding: 0.25rem;
+    font-size: 1.75rem;
+  }
+  
+  #email-login-input {}
+  
+  #password-login-input {}
+  
+  #login-btn {
+    border: none;
+    box-shadow: 0 0 3px black;
+    font-size: 1.25rem;
+    background-color: #fdca77;
+    width: 15rem;
+    height: 5rem;
+    display: block;
+    margin: 2rem auto 0 auto;
+    font-size: 2.5rem;
+    font-weight: 600;
+  }
+  
+  #forgot-password-btn {
+    border: none;
+    font-size: 1.5rem;
+    width: 15rem;
+    height: 2.5rem;
+    display: block;
+    background: transparent;
+    color: rgb(113, 113, 246);
+    cursor: pointer;
+    margin: 3rem auto 1rem auto;
+  }
+}
