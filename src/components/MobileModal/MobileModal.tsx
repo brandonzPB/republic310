@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { ImCross } from 'react-icons/im';
 import { GlobalContext } from '../../contexts/GlobalContext';
-import { RouteContext } from '../../cotnte  '
+import { RouteContext } from '../../contexts/RouteContext';
 import UserInfoTab from '../User/InfoTab/UserInfoTab';
 import LoginTabForm from '../User/LoginTab/LoginTabForm';
 
@@ -13,6 +13,8 @@ interface ModalProps {
 
 const MobileModal: React.FC<ModalProps> = ({ hideMobileMenu }: ModalProps) => {
   const { user, cart } = useContext(GlobalContext);
+
+  const { changeDest } = useContext(RouteContext);
 
   const [loginForm, setLoginForm] = useState({
     hidden: true,

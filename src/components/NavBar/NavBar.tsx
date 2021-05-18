@@ -13,12 +13,12 @@ import logoSrc from '../../assets/images/logo.jpg';
 
 import './navBar.css';
 
-const NavBar: React.FC  = () => {
+const NavBar: React.FC = () => {
   // GLOBAL CONTEXT
   const { cart, user } = useContext(GlobalContext);
 
   // ROUTE CONTEXT
-  const { changeDest } = useContext(RouteContext);
+  const { changeDest, history, pushToHistory, traverseHistory } = useContext(RouteContext);
 
   // LOGIN FORM STATE (display purposes)
   const [loginForm, setLoginForm] = useState({
@@ -55,6 +55,7 @@ const NavBar: React.FC  = () => {
   const handleNav = (path: string): void => {
     if (path === 'cart' && cart.products.length === 0) return;
 
+    pushToHistory(path, history);
     changeDest(path);
   }
 
