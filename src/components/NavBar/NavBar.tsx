@@ -18,7 +18,8 @@ const NavBar: React.FC = () => {
   const { cart, user } = useContext(GlobalContext);
 
   // ROUTE CONTEXT
-  const { changeDest, history, pushToHistory, traverseHistory } = useContext(RouteContext);
+  //history, pushToHistory, traverseHistory
+  const { changeDest, } = useContext(RouteContext);
 
   // LOGIN FORM STATE (display purposes)
   const [loginForm, setLoginForm] = useState({
@@ -55,7 +56,7 @@ const NavBar: React.FC = () => {
   const handleNav = (path: string): void => {
     if (path === 'cart' && cart.products.length === 0) return;
 
-    pushToHistory(path, history);
+    // pushToHistory(path, history);
     changeDest(path);
   }
 

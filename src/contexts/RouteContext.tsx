@@ -10,8 +10,8 @@ const initialPath: interfaces.Path = storedPath
   ? JSON.parse(storedPath)
   : {
       dest: '/',
-      history: [],
-      historyIndex: 0,
+      // history: [],
+      // historyIndex: 0,
       product: {
         name: '',
         description: '',
@@ -26,8 +26,8 @@ const initialPath: interfaces.Path = storedPath
       changeProduct: (product: interfaces.DisplayProduct): void => {},
       orderStatus: 'incomplete',
       changeOrderStatus: (newStatus: 'complete' | 'incomplete'): void => {},
-      pushToHistory: (path: string, history: string[]): void => {},
-      traverseHistory: (forward: boolean): void => {},
+      // pushToHistory: (path: string, history: string[]): void => {},
+      // traverseHistory: (forward: boolean): void => {},
     };
 
 export const RouteContext = createContext<interfaces.Path>(initialPath);
@@ -44,8 +44,8 @@ const RouteContextProvider: React.FC = ({ children }) => {
 
     localStorage.setItem(LOCAL_STORAGE_KEY_PATH, JSON.stringify(path));
     initialPath.dest = path.dest;
-    initialPath.history = path.history;
-    initialPath.historyIndex = path.historyIndex;
+    // initialPath.history = path.history;
+    // initialPath.historyIndex = path.historyIndex;
   }, [path, initialPath]);
 
   // CHANGE DESTINATION ROUTE
@@ -63,37 +63,37 @@ const RouteContextProvider: React.FC = ({ children }) => {
     dispatch({ type: 'change_order_status', payload: newStatus });
   }
 
-  // PUSH TO HISTORY
-  const pushToHistory = (path: string, history: string[]): any => {
-    if (history.length) {
-      return dispatch({ type: 'push_to_existing_history', payload: path });
-    }
+  // // PUSH TO HISTORY
+  // const pushToHistory = (path: string, history: string[]): any => {
+  //   if (history.length) {
+  //     return dispatch({ type: 'push_to_existing_history', payload: path });
+  //   }
     
-    return dispatch({ type: 'push_to_empty_history', payload: path });
-  }
+  //   return dispatch({ type: 'push_to_empty_history', payload: path });
+  // }
 
-  // TRAVERSE HISTORY (forward or backward)
-  const traverseHistory = (forward: boolean): any => {
-    if (forward) {
-      // cannot move past last item in history
-      if (initialPath.historyIndex === (initialPath.history.length - 1)) return false;
+  // // TRAVERSE HISTORY (forward or backward)
+  // const traverseHistory = (forward: boolean): any => {
+  //   if (forward) {
+  //     // cannot move past last item in history
+  //     if (initialPath.historyIndex === (initialPath.history.length - 1)) return false;
 
-      return dispatch({ type: 'traverse_history', payload: initialPath.historyIndex + 1 });
-    }
+  //     return dispatch({ type: 'traverse_history', payload: initialPath.historyIndex + 1 });
+  //   }
 
-    // move backward
+  //   // move backward
 
-    // cannot move back past 0
-    if (initialPath.historyIndex === 0) return false;
+  //   // cannot move back past 0
+  //   if (initialPath.historyIndex === 0) return false;
 
-    return dispatch({ type: 'traverse_history', payload: initialPath.historyIndex - 1});
-  }
+  //   return dispatch({ type: 'traverse_history', payload: initialPath.historyIndex - 1});
+  // }
 
   initialPath.changeDest = changeDest;
   initialPath.changeProduct = changeProduct;
   initialPath.changeOrderStatus = changeOrderStatus;
-  initialPath.pushToHistory = pushToHistory;
-  initialPath.traverseHistory = traverseHistory;
+  // initialPath.pushToHistory = pushToHistory;
+  // initialPath.traverseHistory = traverseHistory;
 
   return (
     <RouteContext.Provider value={path}>

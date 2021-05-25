@@ -30,13 +30,18 @@ const PaymentContainer: React.FC = () => {
       {
         dest === '/checkout/payment'
           ? <div id="payment__container">
-            <ProgressBar spotlight="payment" />
+            <div id="payment-left__container">
+              <ProgressBar spotlight="payment" />
 
-            <button id="return-to-cart-btn" onClick={() => changeDest('/cart')}>Return to Cart</button>
-            <button id="return-to-shipping-btn" onClick={() => changeDest('/checkout/shipping')}>Return to Shipping</button>
+              <button id="return-to-shipping-btn" onClick={() => changeDest('/checkout/shipping')}>Return to Shipping</button>
+              <button id="return-to-cart-btn" onClick={() => changeDest('/cart')}>Return to Cart</button>
 
-            <StripeContainer />
-            <OrderSummary />
+              <StripeContainer />
+            </div>
+            
+            <div id="payment-right__container">
+              <OrderSummary />
+            </div>
           </div>
           : !dest
             ? <Route exact path="/checkout/payment">

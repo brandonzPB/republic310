@@ -133,6 +133,8 @@ const PaymentForm: React.FC = () => {
           ? <LoginModal hideModal={hideModal} modalDisplay={modalDisplay} />
           : <></>
       }
+
+      <span id="stripe-text-header">Powered by Stripe</span>
       
       <form onSubmit={handleSubmit}>
         <fieldset className="FormGroup">

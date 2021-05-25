@@ -110,13 +110,13 @@ export interface State {
 
 export interface Path {
   dest: string;
-  history: string[];
-  historyIndex: number;
+  // history: string[];
+  // historyIndex: number;
   product: DisplayProduct;
   changeDest: (dest: string) => void;
   changeProduct: (product: DisplayProduct) => void;
   orderStatus: 'complete' | 'incomplete';
   changeOrderStatus: (newStatus: 'complete' | 'incomplete') => void;
-  pushToHistory: (path: string, history: string[]) => void;
-  traverseHistory: (forward: boolean) => any;
+  // pushToHistory: (path: string, history: string[]) => void;
+  // traverseHistory: (forward: boolean) => any;
 }

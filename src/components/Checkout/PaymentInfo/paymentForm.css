@@ -1,6 +1,6 @@
 .FormGroup {
   margin: 0 15px 20px;
-  padding: 0;
+  padding: 2rem 0;
   height: auto;
   border-style: none;
   background-color: #7795f8;
@@ -12,6 +12,7 @@
 .FormRow {
   display: -ms-flexbox;
   display: flex;
+  flex-direction: column;
   -ms-flex-align: center;
   align-items: center;
   margin-left: 15px;
@@ -30,12 +31,13 @@
 }
 
 #card-element {
+  display: block;
   width: 95%;
 }
 
 #pay-btn {
   display: block;
-  font-size: 16px;
+  font-size: 20px;
   width: calc(100% - 30px);
   height: 40px;
   margin: 40px 15px 0;
@@ -59,4 +61,9 @@
   background-color: #d782d9;
   box-shadow: 0 50px 100px -20px rgba(50,50,93,.25),0 30px 60px -30px rgba(0,0,0,.3);
   transform: scale(0.99);
+}
+
+#stripe-text-header {
+  font-size: 1rem;
+  margin-left: 2rem;
 }
