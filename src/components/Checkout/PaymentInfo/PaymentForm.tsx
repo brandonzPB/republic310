@@ -1,16 +1,20 @@
 import React, { useState, useContext } from 'react';
-import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
+// import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import { v4 as uuidv4 } from 'uuid';
+
 import * as userServices from '../../../services/userServices';
 import * as productServices from '../../../services/productServices';
+
 import * as actions from '../../../modules/actions';
 import * as interfaces from '../../../modules/interfaces';
+
 import { GlobalContext } from '../../../contexts/GlobalContext';
 import { RouteContext } from '../../../contexts/RouteContext';
+
 import LoginModal from '../LoginModal/LoginModal';
+import PayPalContainer from './PayPalContainer';
 
 import './paymentForm.css';
-import { updateProductSales } from '../../../services/productServices';
 
 const PaymentForm: React.FC = () => {
   const { cart, user, completeOrder, addDateToCart } = useContext(GlobalContext);
@@ -19,9 +23,9 @@ const PaymentForm: React.FC = () => {
 
   const [modalDisplay, setModalDisplay] = useState({ show: true, error: false });
 
-  const stripe: any = useStripe();
+  // const stripe: any = useStripe();
 
-  const elements: any = useElements();
+  // const elements: any = useElements();
 
   const hideModal = (): void => {
     setModalDisplay({ ... modalDisplay, show: false, error: false });
@@ -62,69 +66,70 @@ const PaymentForm: React.FC = () => {
     return true;
   }
 
-  const handleSubmit = async (e: any) => {
-    e.preventDefault();
+  // const handleSubmit = async (e: any) => {
+  //   e.preventDefault();
 
-    if (!user.isAuthorized || modalDisplay.show) {
-      return setModalDisplay({ ...modalDisplay, error: true });
-    }
+  //   if (!user.isAuthorized || modalDisplay.show) {
+  //     return setModalDisplay({ ...modalDisplay, error: true });
+  //   }
 
-    const { error, paymentMethod } = await stripe.createPaymentMethod({
-      type: "card",
-      card: elements.getElement(CardElement)
-    });
+  //   // stripe integration
+  //   const { error, paymentMethod } = await stripe.createPaymentMethod({
+  //     type: "card",
+  //     card: elements.getElement(CardElement)
+  //   });
 
-    if (!error) {
-      try {
-        const {id} = paymentMethod;
-        const amount: number = 100;
+  //   if (!error) {
+  //     try {
+  //       const {id} = paymentMethod;
+  //       const amount: number = 100;
 
-        const paymentObj = { id, amount };
+  //       const paymentObj = { id, amount };
 
-        const userId: string = user._id;
-        const accessToken: string = user.accessToken;
+  //       const userId: string = user._id;
+  //       const accessToken: string = user.accessToken;
     
-        const response: any = await userServices.postPayment(userId, paymentObj, accessToken);
+  //       const response: any = await userServices.postPayment(userId, paymentObj, accessToken);
     
-        if (response.success) {
-          console.log('Successful payment');
+  //       if (response.success) {
+  //         console.log('Successful payment');
 
-          // for routing purposes:
-          changeOrderStatus('complete');
+  //         // for routing purposes:
+  //         changeOrderStatus('complete');
 
-          // update products sales
-          const updateResult: boolean = await handleProductSalesUpdate();
+  //         // update products sales
+  //         const updateResult: boolean = await handleProductSalesUpdate();
 
-          if (updateResult === false) {
-            console.log('Error updating product sales');
-            return false;
-          }
+  //         if (updateResult === false) {
+  //           console.log('Error updating product sales');
+  //           return false;
+  //         }
 
-          // add date to cart
-          await handleOrderDate(response.date);
+  //         // add date to cart
+  //         await handleOrderDate(response.date);
 
-          // add date to cart object (state doesn't update for next context method call)
-          const completeCartObj: interfaces.CompleteCart = {
-            products: cart.products,
-            totalItemCount: cart.totalItemCount,
-            date: response.date,
-            taxes: cart.taxes,
-            subtotal: cart.subtotal,
-            total: cart.total,
-            id: uuidv4()
-          };
+  //         // add date to cart object (state doesn't update for next context method call)
+  //         const completeCartObj: interfaces.CompleteCart = {
+  //           products: cart.products,
+  //           totalItemCount: cart.totalItemCount,
+  //           date: response.date,
+  //           taxes: cart.taxes,
+  //           subtotal: cart.subtotal,
+  //           total: cart.total,
+  //           id: uuidv4()
+  //         };
 
-          // adds order to history
-          handleOrderCompletion(completeCartObj);
-        }
+  //         // adds order to history
+  //         handleOrderCompletion(completeCartObj);
+  //       }
         
-      } catch (error) {
-        console.log('Error: ', error);
-      }
-    } else {
-      console.log('Error: ', error);
-    }
-  }
+  //     } catch (error) {
+  //       console.log('Error: ', error);
+  //     }
+  //   } else {
+  //     console.log('Error: ', error);
+  //   }
+  // }
 
   return (
     <div id="payment-form__container">
@@ -134,7 +139,7 @@ const PaymentForm: React.FC = () => {
           : <></>
       }
 
-      <span id="stripe-text-header">Powered by Stripe</span>
+      {/* <span id="stripe-text-header">Powered by Stripe</span>
       
       <form onSubmit={handleSubmit}>
         <fieldset className="FormGroup">
@@ -144,7 +149,15 @@ const PaymentForm: React.FC = () => {
         </fieldset>
         
         <button id="pay-btn">Pay</button>
-      </form>
+      </form> */}
+
+      <PayPalContainer
+        handleOrderCompletion={handleOrderCompletion}
+        handleOrderDate={handleOrderDate}
+        handleProductSalesUpdate={handleProductSalesUpdate}
+        modalDisplay={modalDisplay}
+        setModalDisplay={setModalDisplay}
+      />
     </div>
   )
 }

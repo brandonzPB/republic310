@@ -6,7 +6,7 @@ import { RouteContext } from '../../../contexts/RouteContext';
 import ProgressBar from '../ProgressBar/ProgressBar';
 import OrderSummary from '../OrderSummary/OrderSummary';
 import StripeContainer from './StripeContainer';
-import PayPalContainer from './PayPalContainer';
+import PaymentForm from './PaymentForm';
 import './paymentContainer.css';
 
 const PaymentContainer: React.FC = () => {
@@ -39,7 +39,7 @@ const PaymentContainer: React.FC = () => {
                 <button id="return-to-cart-btn" onClick={() => changeDest('/cart')}>Return to Cart</button>
               </div>
 
-              <PayPalContainer />
+              <PaymentForm />
 
               {/* <StripeContainer /> */}
             </div>
