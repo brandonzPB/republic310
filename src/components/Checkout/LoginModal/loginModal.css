@@ -1,5 +1,5 @@
 #login-modal__container {
-  margin: 4rem auto 1rem auto;
+  margin: 1rem auto 3rem auto;
   display: block;
   text-align: center;
 }
@@ -23,7 +23,7 @@
   font-weight: 600;
   width: 10rem;
   height: 4rem;
-  background-color: #748C3B;
+  background-color: #FBAB6E;
   color: white;
   margin: 0.5rem auto 2rem auto;
 }

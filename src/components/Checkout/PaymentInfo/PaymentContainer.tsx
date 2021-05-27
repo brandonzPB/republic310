@@ -33,8 +33,10 @@ const PaymentContainer: React.FC = () => {
             <div id="payment-left__container">
               <ProgressBar spotlight="payment" />
 
-              <button id="return-to-shipping-btn" onClick={() => changeDest('/checkout/shipping')}>Return to Shipping</button>
-              <button id="return-to-cart-btn" onClick={() => changeDest('/cart')}>Return to Cart</button>
+              <div id="return-btns__container">
+                <button id="return-to-shipping-btn" onClick={() => changeDest('/checkout/shipping')}>Return to Shipping</button>
+                <button id="return-to-cart-btn" onClick={() => changeDest('/cart')}>Return to Cart</button>
+              </div>
 
               <StripeContainer />
             </div>

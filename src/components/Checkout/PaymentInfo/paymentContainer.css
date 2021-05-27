@@ -1,7 +1,16 @@
 #payment__container {
   margin: 5rem auto;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#return-btns__container {
+  display: flex;
+  flex-wrap: wrap;
+  flex: 1;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 }
@@ -16,22 +25,21 @@
   border-radius: 5px;
   box-shadow: 0 50px 100px -20px rgba(50,50,93,.25),0 30px 60px -30px rgba(0,0,0,.3);
   transition: transform 0.2s ease;
-  margin: 1rem auto 1.5rem auto;
+  margin: 1rem auto;
 }
 
-#return-to-shiping-btn:active {
+#return-to-shipping-btn:active {
   transform: scale(0.95);
   background-color: #ffdea4;
 }
 
 #return-to-cart-btn {
   display: block;
-  margin: 0 auto;
 }
 
 #payment-left__container {
-  width: 50%;
-  margin-left: auto;
+  width: 80%;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
@@ -41,8 +49,8 @@
 }
 
 #payment-right__container {
-  width: 50%;
-  margin-right: auto;
+  width: 80%;
+  margin: 0 auto;
   display: flex;
   flex: 1;
   flex-wrap: nowrap;
@@ -60,6 +68,16 @@
     align-items: center;
     justify-content: center;
   }
+
+  #return-btns__container {
+    display: flex;
+    flex-wrap: nowrap;
+    flex: 1;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 22rem;
+  }
   
   #return-to-shipping-btn {
     display: inline-block;
@@ -71,10 +89,10 @@
     border-radius: 5px;
     box-shadow: 0 50px 100px -20px rgba(50,50,93,.25),0 30px 60px -30px rgba(0,0,0,.3);
     transition: transform 0.2s ease;
-    margin: 0 auto 1.5rem auto;
+    margin: 0 auto;
   }
   
-  #return-to-shiping-btn:active {
+  #return-to-shipping-btn:active {
     transform: scale(0.95);
     background-color: #ffdea4;
   }

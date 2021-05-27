@@ -142,6 +142,7 @@ const PaymentForm: React.FC = () => {
             <CardElement id="card-element" />
           </div>
         </fieldset>
+        
         <button id="pay-btn">Pay</button>
       </form>
     </div>
