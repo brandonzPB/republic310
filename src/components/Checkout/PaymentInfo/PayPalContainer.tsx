@@ -40,17 +40,14 @@ const PayPalContainer: React.FC<PayPalProps> = ({
       return setModalDisplay({ ...modalDisplay, error: true });
     }
 
-    console.log('creating order...')
-    console.log('data', data);
-    console.log('actions', actions);
-
     return actions.order.create({
       purchase_units: [{
         amount: {
           currency_code: "USD",
-          value: "0.01"
-        }
+          value: cart.total.toFixed(2)
+        },
       }],
+      items: cart.products.slice(),
     });
   }
   
@@ -59,17 +56,13 @@ const PayPalContainer: React.FC<PayPalProps> = ({
       return setModalDisplay({ ...modalDisplay, error: true });
     }
 
-    console.log('approving order...')
-    console.log('data', data);
-    console.log('actions', actions);
-
     return actions.order.capture()
       .then(async function(details: any) {
-        console.log('details', details);
-        console.log(`Transaction completed by ${details.payer.name.given_name}`);
+        // console.log('details', details);
+        // console.log(`Transaction completed by ${details.payer.name.given_name}`);
 
-        const userId: string = user._id;
-        const accessToken: string = user.accessToken;
+        // const userId: string = user._id;
+        // const accessToken: string = user.accessToken;
 
         const paymentObj = {
           name: details.payer.name,
@@ -77,49 +70,46 @@ const PayPalContainer: React.FC<PayPalProps> = ({
           address: details.payer.address,
           phone: details.payer.phone.phone_number,
           id: data.orderID,
-          amount: details.purchase_units.payments.captures[0].amount.value,
-          currency: details.purchase_units.payments.captures[0].amount.currency_code,
-          create_time: details.purchase_units.payments.captures[0].create_time,
+          amount: details.purchase_units[0].amount.value,
+          currency: details.purchase_units[0].amount.currency_code,
+          create_time: details.purchase_units[0].payments.captures[0].create_time,
+        };
+      
+        // const response: any = await userServices.postPayment(userId, paymentObj, accessToken);
+
+        // for routing purposes:
+        changeOrderStatus('complete');
+
+        // update products sales
+        const updateResult: boolean = await handleProductSalesUpdate();
+
+        if (updateResult === false) {
+          console.log('Error updating product sales');
+          return false;
+        }
+
+        // add date to cart
+        await handleOrderDate(paymentObj.create_time);
+
+        // add date to cart object (state doesn't update for next context method call)
+        const completeCartObj: interfaces.CompleteCart = {
+          products: cart.products,
+          totalItemCount: cart.totalItemCount,
+          date: paymentObj.create_time,
+          taxes: cart.taxes,
+          subtotal: cart.subtotal,
+          total: cart.total,
+          id: uuidv4()
         };
 
-        return;
-      
-        const response: any = await userServices.postPayment(userId, paymentObj, accessToken);
+        // adds order to history
+        handleOrderCompletion(completeCartObj);
+      })
+      .catch((err: any) => console.error(err));
+  }
 
-        return;
-
-        if (response.success) {
-          console.log('Successful payment');
-
-          // for routing purposes:
-          changeOrderStatus('complete');
-
-          // update products sales
-          const updateResult: boolean = await handleProductSalesUpdate();
-
-          if (updateResult === false) {
-            console.log('Error updating product sales');
-            return false;
-          }
-
-          // add date to cart
-          await handleOrderDate(response.date);
-
-          // add date to cart object (state doesn't update for next context method call)
-          const completeCartObj: interfaces.CompleteCart = {
-            products: cart.products,
-            totalItemCount: cart.totalItemCount,
-            date: response.date,
-            taxes: cart.taxes,
-            subtotal: cart.subtotal,
-            total: cart.total,
-            id: uuidv4()
-          };
-
-          // adds order to history
-          handleOrderCompletion(completeCartObj);
-        }
-      });
+  const onError = (err: any): void => {
+    console.error(err);
   }
 
   return (
@@ -133,6 +123,7 @@ const PayPalContainer: React.FC<PayPalProps> = ({
         // amount="0.01"
         createOrder={createOrder}
         onApprove={onApprove}
+        onError={onError}
         // options={{
         //   clientId: "PRODUCTION_CLIENT_ID"
         // }}

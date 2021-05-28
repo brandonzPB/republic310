@@ -75,7 +75,7 @@ const Order: React.FC<OrderProps> = ({ date, id, products, totalItemCount, subto
       
       <div id="order-details__container">
         <span id="order-date-text">Your order was placed on {orderDate.day} {orderDate.month} {orderDate.year}</span>
-        <span id="order-order-number-text">Order number: {orderNumber}</span>
+        <span id="order-number-text">Order number: {orderNumber}</span>
       </div>
 
       <div id="order-contact__container">
