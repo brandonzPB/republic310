@@ -1,4 +1,4 @@
-import React, { useState, useEffect, createContext, useReducer } from 'react';
+import React, { useRef, useEffect, createContext, useReducer } from 'react';
 import * as interfaces from '../modules/interfaces';
 import { routeReducer } from '../reducers/routeReducer';
 
@@ -35,6 +35,12 @@ export const RouteContext = createContext<interfaces.Path>(initialPath);
 // FUNCTIONAL COMPONENT
 const RouteContextProvider: React.FC = ({ children }) => {
   const [path, dispatch] = useReducer(routeReducer, initialPath);
+
+  useEffect(() => {
+    if (path.dest === '/checkout/confirmation') {
+      path.dest = '/';
+    }
+  }, []);
 
   // CONSOLE LOG CHANGES TO STATE (path);
   // UPDATE LOCAL STORAGE

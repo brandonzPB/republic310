@@ -7,6 +7,8 @@ import { RouteContext } from '../../../contexts/RouteContext';
 import * as userServices from '../../../services/userServices';
 import * as interfaces from '../../../modules/interfaces';
 
+import './payPalContainer.css';
+
 interface PayPalProps {
   modalDisplay: {
     show: boolean;
@@ -47,7 +49,6 @@ const PayPalContainer: React.FC<PayPalProps> = ({
           value: cart.total.toFixed(2)
         },
       }],
-      items: cart.products.slice(),
     });
   }
   
@@ -65,14 +66,15 @@ const PayPalContainer: React.FC<PayPalProps> = ({
         // const accessToken: string = user.accessToken;
 
         const paymentObj = {
-          name: details.payer.name,
-          email: details.payer.email_address,
-          address: details.payer.address,
-          phone: details.payer.phone.phone_number,
-          id: data.orderID,
-          amount: details.purchase_units[0].amount.value,
-          currency: details.purchase_units[0].amount.currency_code,
+          // name: details.payer.name,
+          // email: details.payer.email_address,
+          // address: details.payer.address,
+          // phone: details.payer.phone.phone_number,
+          // id: data.orderID,
+          // amount: details.purchase_units[0].amount.value,
+          // currency: details.purchase_units[0].amount.currency_code,
           create_time: details.purchase_units[0].payments.captures[0].create_time,
+          // products: cart.products.slice()
         };
       
         // const response: any = await userServices.postPayment(userId, paymentObj, accessToken);
@@ -93,7 +95,7 @@ const PayPalContainer: React.FC<PayPalProps> = ({
 
         // add date to cart object (state doesn't update for next context method call)
         const completeCartObj: interfaces.CompleteCart = {
-          products: cart.products,
+          products: cart.products.slice(),
           totalItemCount: cart.totalItemCount,
           date: paymentObj.create_time,
           taxes: cart.taxes,

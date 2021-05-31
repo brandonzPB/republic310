@@ -1,4 +1,7 @@
 /// DISPLAY PRODUCT ///
+
+import React, { useRef } from "react";
+
 // this is used for display purposes only
 export interface DisplayProduct {
   name: string;

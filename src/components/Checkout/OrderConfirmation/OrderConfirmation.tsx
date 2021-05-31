@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useContext, useRef } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { GlobalContext } from '../../../contexts/GlobalContext';
@@ -12,7 +12,15 @@ const OrderConfirmation: React.FC = () => {
   
   const { dest, changeDest, orderStatus, changeOrderStatus } = useContext(RouteContext);
 
+  const confirmationRef = useRef(true);
+
   const content: string = 'We hope you enjoy your order from The Republic 310';
+
+  useEffect(() => {
+    if (!confirmationRef.current) {
+      setTimeout(() => { changeDest('/') }, 700);
+    }
+  }, [confirmationRef]);
 
   useEffect(() => {
     if (orderStatus === 'complete') {
@@ -36,7 +44,12 @@ const OrderConfirmation: React.FC = () => {
 
       emailConfirmationToUser(userObj, accessToken);
 
-      return changeOrderStatus('incomplete');
+      changeOrderStatus('incomplete');
+    }
+
+    return () => {
+      confirmationRef.current = false;
+      setTimeout(() => { changeDest('/') }, 700);
     }
   }, []);
 
@@ -45,6 +58,10 @@ const OrderConfirmation: React.FC = () => {
   }
 
   const completeOrder: interfaces.CompleteCart = user.orderHistory[0];
+
+  if (!completeOrder) {
+    setTimeout(() => { changeDest('/') }, 700);
+  }
 
   return (
     <>

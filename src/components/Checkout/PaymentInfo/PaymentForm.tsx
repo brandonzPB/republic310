@@ -1,5 +1,4 @@
 import React, { useState, useContext } from 'react';
-// import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import { v4 as uuidv4 } from 'uuid';
 
 import * as userServices from '../../../services/userServices';
@@ -22,10 +21,6 @@ const PaymentForm: React.FC = () => {
   const { changeOrderStatus } = useContext(RouteContext);
 
   const [modalDisplay, setModalDisplay] = useState({ show: true, error: false });
-
-  // const stripe: any = useStripe();
-
-  // const elements: any = useElements();
 
   const hideModal = (): void => {
     setModalDisplay({ ... modalDisplay, show: false, error: false });
@@ -65,71 +60,6 @@ const PaymentForm: React.FC = () => {
 
     return true;
   }
-
-  // const handleSubmit = async (e: any) => {
-  //   e.preventDefault();
-
-  //   if (!user.isAuthorized || modalDisplay.show) {
-  //     return setModalDisplay({ ...modalDisplay, error: true });
-  //   }
-
-  //   // stripe integration
-  //   const { error, paymentMethod } = await stripe.createPaymentMethod({
-  //     type: "card",
-  //     card: elements.getElement(CardElement)
-  //   });
-
-  //   if (!error) {
-  //     try {
-  //       const {id} = paymentMethod;
-  //       const amount: number = 100;
-
-  //       const paymentObj = { id, amount };
-
-  //       const userId: string = user._id;
-  //       const accessToken: string = user.accessToken;
-    
-  //       const response: any = await userServices.postPayment(userId, paymentObj, accessToken);
-    
-  //       if (response.success) {
-  //         console.log('Successful payment');
-
-  //         // for routing purposes:
-  //         changeOrderStatus('complete');
-
-  //         // update products sales
-  //         const updateResult: boolean = await handleProductSalesUpdate();
-
-  //         if (updateResult === false) {
-  //           console.log('Error updating product sales');
-  //           return false;
-  //         }
-
-  //         // add date to cart
-  //         await handleOrderDate(response.date);
-
-  //         // add date to cart object (state doesn't update for next context method call)
-  //         const completeCartObj: interfaces.CompleteCart = {
-  //           products: cart.products,
-  //           totalItemCount: cart.totalItemCount,
-  //           date: response.date,
-  //           taxes: cart.taxes,
-  //           subtotal: cart.subtotal,
-  //           total: cart.total,
-  //           id: uuidv4()
-  //         };
-
-  //         // adds order to history
-  //         handleOrderCompletion(completeCartObj);
-  //       }
-        
-  //     } catch (error) {
-  //       console.log('Error: ', error);
-  //     }
-  //   } else {
-  //     console.log('Error: ', error);
-  //   }
-  // }
 
   return (
     <div id="payment-form__container">
