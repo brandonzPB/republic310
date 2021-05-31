@@ -1,42 +1,104 @@
-#order__container {}
+#order__container {
+  width: 90%;
+  margin: 0 auto;
+}
 
-#order-header {}
+#order-header {
+  font-size: 3rem;
+  font-weight: 600;
+  color: #F36E33;
+}
 
-#order-details__container {}
+#order-details__container {
+  margin: 2rem auto;
+}
 
-#order-date-text {}
+#order-date-text {
+  font-size: 2rem;
+}
 
-#order-number-text {}
+#order-number-text {
+  display: block;
+  margin: 1.5rem auto;
+  font-size: 2rem;
+}
 
-#order-contact__container {}
+#order-contact__container {
+  margin: 2rem auto;
+}
 
-#order-details-header {}
+#order-details-header {
+  font-size: 2.25rem;
+  font-weight: 600;
+  display: block;
+  color: #F36E33;
+}
 
-#order-name {}
+#order-name {
+  font-size: 2rem;
+  display: block;
+  margin: 1rem auto;
+}
 
-#order-email {}
+#order-email {
+  font-size: 2rem;
+  display: block;
+  margin: 1rem auto;
+}
 
-#order-phone {}
+#order-phone {
+  font-size: 2rem;
+}
 
 #order-shipping__container {}
 
-#order-eta {}
+#order-eta {
+  font-size: 2rem;
+}
 
-#order-address-header {}
+#order-address-header {
+  display: block;
+  font-size: 2.25rem;
+  font-weight: 600;
+  margin: 1rem auto;
+  color: #F36E33;
+}
 
-#order-address-street {}
+#order-address-street {
+  font-size: 2rem;
+  display: block;
+}
 
-#order-address-city {}
+#order-address-city {
+  font-size: 2rem;
+  display: block;
+}
 
-#order-address-zipCode {}
+#order-address-zipCode {
+  font-size: 2rem;
+  display: block;
+}
 
-#order-address-state {}
+#order-address-state {
+  font-size: 2rem;
+  display: block;
+}
 
-#order-address-country {}
+#order-address-country {
+  font-size: 2rem;
+  display: block;
+}
 
-#order-items__container {}
+#order-items__container {
+  margin: 2rem auto;
+}
 
-#order-items-text {}
+#order-items-text {
+  font-size: 2.25rem;
+  font-weight: 600;
+  display: block;
+  color: #F36E33;
+}
 
 #view-purchased-items-btn {}
 
