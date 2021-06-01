@@ -71,44 +71,48 @@ const Order: React.FC<OrderProps> = ({ date, id, products, totalItemCount, subto
 
   return (
     <div id="order__container">
-      <span id="order-header">We hope you enjoy your purchase, {user.firstName}</span>
-      
-      <div id="order-details__container">
-        <span id="order-date-text">Your order was placed on {orderDate.day} {orderDate.month} {orderDate.year}</span>
-        <span id="order-number-text">Order number: {orderNumber}</span>
-      </div>
-
-      <div id="order-contact__container">
-        <span id="order-details-header">Your Contact Details</span>
-
-        <span id="order-name">{user.firstName} {user.lastName}</span>
-        <span id="order-email">A copy of this confirmation was sent to {user.email}</span>
-        <span id="order-phone">{user.phoneNumber}</span>
-      </div>
+      <div id="order-left__container">
+        <span id="order-header">We hope you enjoy your purchase, {user.firstName}</span>
         
-      <div id="order-shipping__container">
-        <span id="order-eta">Estimated delivery date: </span>
+        <div id="order-details__container">
+          <span id="order-date-text">Your order was placed on {orderDate.day} {orderDate.month} {orderDate.year}</span>
+          <span id="order-number-text">Order number: {orderNumber}</span>
+        </div>
 
-        <span id="order-address-header">Delivery to: </span>
+        <div id="order-contact__container">
+          <span id="order-details-header">Your Contact Details</span>
 
-        <span id="order-address-street">{userShippingDetails.street}</span>
-        <span id="order-address-city">{userShippingDetails.city}</span>
-        <span id="order-address-zipCode">{userShippingDetails.zipCode}</span>
+          <span id="order-name">{user.firstName} {user.lastName}</span>
+          <span id="order-email">A copy of this confirmation was sent to {user.email}</span>
+          <span id="order-phone">{user.phoneNumber}</span>
+        </div>
+          
+        <div id="order-shipping__container">
+          <span id="order-eta">Estimated delivery date: </span>
 
-        <span 
-          id="order-address-state" 
-          style={{ display: userShippingDetails.state !== 'none' ? 'none' : 'block' }}>
-            {userShippingDetails.state}
-        </span>
-        <span id="order-address-country">{userShippingDetails.country}</span>
+          <span id="order-address-header">Delivery to: </span>
+
+          <span id="order-address-street">{userShippingDetails.street}</span>
+          <span id="order-address-city">{userShippingDetails.city}</span>
+          <span id="order-address-zipCode">{userShippingDetails.zipCode}</span>
+
+          <span 
+            id="order-address-state" 
+            style={{ display: userShippingDetails.state !== 'none' ? 'none' : 'block' }}>
+              {userShippingDetails.state}
+          </span>
+          <span id="order-address-country">{userShippingDetails.country}</span>
+        </div>
       </div>
 
-      <div id="order-items__container">
-        <span id="order-items-text">Items you purchased</span>
-        <button id="view-purchased-products-btn" onClick={toggleProductDisplay}>View Products</button>
-        
-        <div id="purchased-products__container" style={{ display: displayProducts ? 'block' : 'none' }}>
-          {ProductComponents}
+      <div id="order-right__container">
+        <div id="order-items__container">
+          <span id="order-items-text">Items you purchased</span>
+          <button id="view-purchased-products-btn" onClick={toggleProductDisplay}>View Products</button>
+          
+          <div id="purchased-products__container" style={{ display: displayProducts ? 'block' : 'none' }}>
+            {ProductComponents}
+          </div>
         </div>
       </div>
     </div>

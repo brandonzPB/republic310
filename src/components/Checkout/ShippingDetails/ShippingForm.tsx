@@ -25,7 +25,7 @@ const ShippingForm: React.FC = () => {
 
   const { dest, changeDest } = useContext(RouteContext);
 
-  const [stateError, setStateError] = useState({ state: false });
+  const [locationError, setLocationError] = useState({ state: false, country: false });
 
   const { register, handleSubmit, errors } = useForm<UserData>();
 
@@ -45,10 +45,14 @@ const ShippingForm: React.FC = () => {
     console.log(data);
     console.log('errors', errors);
 
-    setStateError({ ...stateError, state: false });
+    setLocationError({ state: false, country: false });
+
+    if (data.country === undefined) {
+      data.country = 'USa';
+    }
 
     if (data.country === 'USA' && !data.state.trim()) {
-      return setStateError({ ...stateError, state: true });
+      return setLocationError({ ...locationError, state: true });
     }
 
     if (user.isAuthorized) {
@@ -224,19 +228,9 @@ const ShippingForm: React.FC = () => {
             
             <select id="create-country-input" {...register('country')} style={{ border: errors.country ? 'red' : 'white' }}>
               <option value="USA">USA</option>
-              <option value="none" disabled={true}>More coming soon!</option>
             </select>
 
-            {/* <input 
-              style={{ backgroundColor: errors.country ? 'pink' : 'white', border: errors.zipCode ? 'red' : 'none' }}
-              className="create-input"
-              id="create-country-input"
-              placeholder="Country"
-              type="text"
-              name="country"
-              defaultValue={user.shippingAddress ? user.shippingAddress.country : ''}
-              ref={register({ required: true })}
-            /> */}
+            {user.isAuthorized && locationError.country && <div className="error-text" style={{ color: 'red' }}>Country is required</div>}
 
             {!user.isAuthorized && errors.country && <div className="error-text" style={{ color: 'red' }}>Country is required</div>}
 
@@ -252,7 +246,7 @@ const ShippingForm: React.FC = () => {
               ref={register({ required: true })}
             />
 
-            {!user.isAuthorized && stateError.state && <div className="error-text" style={{ color: 'red' }}>State is required</div>}
+            {!user.isAuthorized && locationError.state && <div className="error-text" style={{ color: 'red' }}>State is required</div>}
           </div>
         </div>
 

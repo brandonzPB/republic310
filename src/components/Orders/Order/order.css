@@ -1,12 +1,21 @@
 #order__container {
-  width: 90%;
+  width: 95%;
   margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+#order-left__container {
+  margin-left: auto;
+  width: 48%;
 }
 
 #order-header {
   font-size: 3rem;
   font-weight: 600;
-  color: #F36E33;
+  color: #6DABA3;
 }
 
 #order-details__container {
@@ -31,7 +40,7 @@
   font-size: 2.25rem;
   font-weight: 600;
   display: block;
-  color: #F36E33;
+  color: #6DABA3;
 }
 
 #order-name {
@@ -61,7 +70,7 @@
   font-size: 2.25rem;
   font-weight: 600;
   margin: 1rem auto;
-  color: #F36E33;
+  color: #6DABA3;
 }
 
 #order-address-street {
@@ -89,6 +98,11 @@
   display: block;
 }
 
+#order-right__container {
+  margin-right: auto;
+  width: 50%;
+}
+
 #order-items__container {
   margin: 2rem auto;
 }
@@ -97,9 +111,60 @@
   font-size: 2.25rem;
   font-weight: 600;
   display: block;
-  color: #F36E33;
+  color: #6DABA3;
 }
 
-#view-purchased-items-btn {}
+#view-purchased-products-btn {
+  background-color: #FFE4B5;
+  font-size: 1.5rem;
+  width: 14rem;
+  height: 5rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 50px 100px -20px rgba(50,50,93,.25),0 30px 60px -30px rgba(0,0,0,.3);
+  transition: transform 0.2s ease;
+  margin: 2rem auto;
+}
+
+#view-purchased-products-btn:hover {
+  background-color: #fde7c0;
+}
+
+#view-purchased-products-btn:active {
+  transform: scale(0.95);
+  background-color: #ffdea4;
+}
 
 #purchased-products__container {}
+
+@media only screen and (max-width: 720px) {
+  #order__container {
+    flex-direction: column;
+  }
+
+  #order-left__container {
+    display: block;
+    width: 80%;
+    margin: 2rem auto;
+  }
+
+  #order-right__container {
+    display: block;
+    width: 80%;
+    margin: 0 auto;
+  }
+
+  #view-purchased-products-btn {
+    background-color: #FFE4B5;
+    font-size: 1.75rem;
+    width: 15rem;
+    height: 6rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 50px 100px -20px rgba(50,50,93,.25),0 30px 60px -30px rgba(0,0,0,.3);
+    transition: transform 0.2s ease;
+    margin: 2rem auto;
+  }
+}
