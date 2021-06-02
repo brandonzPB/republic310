@@ -28,9 +28,12 @@ type OrderProps = {
   subtotal: number;
   taxes: number;
   total: number;
+  eta: {
+    date: Date
+  };
 };
 
-const Order: React.FC<OrderProps> = ({ date, id, products, totalItemCount, subtotal, taxes, total }: OrderProps) => {
+const Order: React.FC<OrderProps> = ({ date, id, products, totalItemCount, subtotal, taxes, total, eta }) => {
   const { user } = useContext(GlobalContext);
 
   const [displayProducts, setDisplayProducts] = useState(false);
@@ -46,8 +49,6 @@ const Order: React.FC<OrderProps> = ({ date, id, products, totalItemCount, subto
   const orderNumber: string = getOrderNumber(id);
 
   const userShippingDetails: interfaces.Address = user.shippingAddress!;
-
-  const eta: Date = getETA();
 
   const ProductComponents: any = products.map((item: any) => (
     <ProductCartDetails 
@@ -94,7 +95,7 @@ const Order: React.FC<OrderProps> = ({ date, id, products, totalItemCount, subto
         </div>
           
         <div id="order-shipping__container">
-          <span id="order-eta">Estimated delivery date: {eta}</span>
+          <span id="order-eta">Estimated delivery date: {eta.date}</span>
 
           <span id="order-address-header">Delivery to: </span>
 

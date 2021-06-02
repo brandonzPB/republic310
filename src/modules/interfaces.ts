@@ -1,12 +1,10 @@
 /// DISPLAY PRODUCT ///
 
-import React, { useRef } from "react";
-
 // this is used for display purposes only
 export interface DisplayProduct {
   name: string;
   price: number;
-  id: string;
+  _id: string;
   description: string;
   qtySold: number;
   imageUrl: string;
@@ -46,6 +44,9 @@ export interface CompleteCart {
   taxes: number;
   total: number;
   id: string;
+  eta: {
+    date: Date;
+  };
 };
 
 /// USER INTERFACES ///

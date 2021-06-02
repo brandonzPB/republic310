@@ -1,16 +1,22 @@
-import React, { useEffect, useContext, useRef } from 'react';
+import React, { useState, useEffect, useContext, useRef } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
+
 import { GlobalContext } from '../../../contexts/GlobalContext';
 import { RouteContext } from '../../../contexts/RouteContext';
 import * as interfaces from '../../../modules/interfaces';
+import { getETA } from '../../../modules/getETA';
+
 import Order from '../../Orders/Order/Order';
+
 import './orderConfirmation.css';
 
 const OrderConfirmation: React.FC = () => {
   const { user, emailConfirmationToUser, allProducts } = useContext(GlobalContext);
   
   const { dest, changeDest, orderStatus, changeOrderStatus } = useContext(RouteContext);
+
+  const [eta, setEta] = useState({ date: getETA() });
 
   const confirmationRef = useRef(true);
 
@@ -81,6 +87,7 @@ const OrderConfirmation: React.FC = () => {
               subtotal={completeOrder.subtotal}
               taxes={completeOrder.taxes}
               total={completeOrder.total}
+              eta={eta}
             />
           </div>
           : !dest

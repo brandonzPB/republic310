@@ -2,10 +2,13 @@ import React, { useContext } from 'react';
 import { Helmet } from 'react-helmet';
 import { PayPalButton } from 'react-paypal-button-v2';
 import { v4 as uuidv4 } from 'uuid';
+
 import { GlobalContext } from '../../../contexts/GlobalContext';
 import { RouteContext } from '../../../contexts/RouteContext';
+
 import * as userServices from '../../../services/userServices';
 import * as interfaces from '../../../modules/interfaces';
+import { getETA } from '../../../modules/getETA';
 
 import './payPalContainer.css';
 
@@ -103,7 +106,10 @@ const PayPalContainer: React.FC<PayPalProps> = ({
           taxes: cart.taxes,
           subtotal: cart.subtotal,
           total: cart.total + 2.99,
-          id: uuidv4()
+          id: uuidv4(),
+          eta: {
+            date: getETA()
+          }
         };
 
         // adds order to history

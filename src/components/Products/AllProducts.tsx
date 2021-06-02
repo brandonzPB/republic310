@@ -52,7 +52,7 @@ const AllProducts: React.FC = () => {
 
   const ProductComponents: any = sortedProducts.map((product: interfaces.DisplayProduct) => (
     <Product 
-      key={product.id}
+      key={product._id}
       name={product.name}
       price={product.price}
       imageUrl={product.imageUrl}

@@ -13,25 +13,31 @@ const storedState = localStorage.getItem(LOCAL_STORAGE_KEY);
 // const initialState: interfaces.State = storedState
 //   ? JSON.parse(storedState)
 //   : {
-//       user: new User(),
-//       date: undefined,
-//       cart: new Cart([]),
-//       allProducts: [],
-//       resetToken: '',
-//       createUser: actions.createUser,
-//       requestReset: (email: string): any => {},
-//       postResetCode: (code: string): void => {},
-//       resetPassword: (password: string): any => {},
-//       login: (user: object): any => {},
-//       logout: (): void => {},
-//       updateUser: (update: object): any => {},
-//       updateShippingAddress: (address: interfaces.Address): any => {},
-//       getOrders: (): any => {},
-//       addToCart: (product: any): any => {},
-//       updateQuantity: (productId: string, newQuantity: number): void => {},
-//       removeFromCart: (productId: string): void => {},
-//       checkout: (): void => {},
-//     };
+//     user: new User(),
+//     cart: new Cart([]),
+//     allProducts: [],
+//     resetToken: '',
+//     tempEmail: '',
+//     updateTempEmail: (email: string): void => {},
+//     createUser: actions.createUser,
+//     requestReset: (email: string): any => {},
+//     resetPassword: (password: string, resetCode: string, resetToken: string): any => {},
+//     login: (user: any): any => {},
+//     logout: (): void => {},
+//     updateUser: (email: string, phoneNumber: string, userId: string, token: string): any => {},
+//     updateUserPassword: (password: string, userId: string, token: string): any => {},
+//     updateShippingAddress: (shippingObj: interfaces.Address, userId: string, token: string): any => {},
+//     addToCart: (product: any): any => {},
+//     updateQuantity: (productName: string, newQuantity: number): void => {},
+//     updateTotalItemCount: (newTotal: number): void => {},
+//     updateSubtotal: (newSubtotal: number): void => {},
+//     removeFromCart: (productName: string): void => {},
+//     updateTaxTotal: (newTotal: number): void => {},
+//     updateTotalCost: (newTotal: number): void => {},
+//     addDateToCart: (date: Date): void => {},
+//     completeOrder: (userId: string, cart: interfaces.CompleteCart, accessToken: string): any => {},
+//     emailConfirmationToUser: (userObj: any, token: string): any => {},
+//   };
 
 const initialState: interfaces.State = {
   user: new User(),
@@ -69,6 +75,8 @@ const GlobalContextProvider: React.FC = ({ children }) => {
   useEffect(() => {
     console.log('state', state);
 
+    // localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(state));
+
     if (state.allProducts.length) return;
 
     async function getAllProducts(): Promise<void> {
@@ -79,16 +87,6 @@ const GlobalContextProvider: React.FC = ({ children }) => {
 
     getAllProducts();
   }, [state]);
-  
-  // useEffect(() => {
-  //   console.log(`state`, state);
-  //   localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(state));
-    
-  //   initialState.user = state.user;
-  //   initialState.cart = state.cart;
-  //   initialState.date = state.date;
-  //   initialState.resetToken = state.resetToken;
-  // }, [state]);
 
   // UPDATE TEMP EMAIL
   const updateTempEmail = (email: string): void => {
@@ -214,7 +212,7 @@ const GlobalContextProvider: React.FC = ({ children }) => {
   // ADD PRODUCT TO CART
   const addToCart = (product: interfaces.DisplayProduct): any => {
     // creates a product object to be added to our cart
-    const newProduct: interfaces.Product = new Product(product.name, 1, product.price, product.id, product.imageUrl);
+    const newProduct: interfaces.Product = new Product(product.name, 1, product.price, product._id, product.imageUrl);
 
     return dispatch({ type: 'add_to_cart', payload: newProduct });
   }
