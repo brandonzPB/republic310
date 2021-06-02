@@ -104,7 +104,7 @@
   
   #payment-left__container {
     width: 50%;
-    margin-left: auto;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -115,7 +115,7 @@
   
   #payment-right__container {
     width: 50%;
-    margin-right: auto;
+    margin: 4rem auto;
     display: flex;
     flex: 1;
     flex-wrap: nowrap;

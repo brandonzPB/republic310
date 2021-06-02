@@ -42,11 +42,13 @@ const PayPalContainer: React.FC<PayPalProps> = ({
       return setModalDisplay({ ...modalDisplay, error: true });
     }
 
+    const total = cart.total + 2.99;
+
     return actions.order.create({
       purchase_units: [{
         amount: {
           currency_code: "USD",
-          value: cart.total.toFixed(2)
+          value: total.toFixed(2),
         },
       }],
     });
@@ -100,7 +102,7 @@ const PayPalContainer: React.FC<PayPalProps> = ({
           date: paymentObj.create_time,
           taxes: cart.taxes,
           subtotal: cart.subtotal,
-          total: cart.total,
+          total: cart.total + 2.99,
           id: uuidv4()
         };
 
@@ -115,7 +117,7 @@ const PayPalContainer: React.FC<PayPalProps> = ({
   }
 
   return (
-    <>
+    <div className="paypal__container">
       <Helmet>
         <title>Payment Info | The Republic 310</title>
         <meta name="description" content={content} />
@@ -130,7 +132,7 @@ const PayPalContainer: React.FC<PayPalProps> = ({
         //   clientId: "PRODUCTION_CLIENT_ID"
         // }}
       />
-    </>
+    </div>
   )
 }
 

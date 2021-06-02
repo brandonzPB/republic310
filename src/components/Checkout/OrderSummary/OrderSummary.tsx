@@ -32,8 +32,8 @@ const OrderSummary: React.FC = () => {
       <div id="order-summary-details__container">
         <span className="order-cost-text"><strong className="strong-text">Subtotal:</strong> ${cart.subtotal.toFixed(2)}</span>
         <span className="order-cost-text"><strong className="strong-text">Taxes:</strong> ${cart.taxes.toFixed(2)}</span>
-        <span className="order-cost-text"><strong className="strong-text">Shipping:</strong> $</span>
-        <span className="order-cost-text"><strong className="strong-text">Total:</strong> ${cart.total.toFixed(2)}</span>
+        <span className="order-cost-text"><strong className="strong-text">Shipping:</strong> $2.99</span>
+        <span className="order-cost-text"><strong className="strong-text">Total:</strong> ${(cart.total + 2.99).toFixed(2)}</span>
       </div>
     </div>
   );
