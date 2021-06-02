@@ -1,9 +1,13 @@
 import React, { useState, useContext } from 'react';
+
 import { GlobalContext } from '../../../contexts/GlobalContext';
+
 import * as interfaces from '../../../modules/interfaces';
+import { getETA } from '../../../modules/getETA';
 import getMonthName from '../../../modules/getMonthName';
 import getOrderNumber from '../../../modules/getOrderNumber';
 import ProductCartDetails from '../../Products/ProductCartDetails';
+
 import './order.css';
 
 import hollywoodSrc from '../../../assets/images/products/the_hollywood.jpg';
@@ -42,6 +46,8 @@ const Order: React.FC<OrderProps> = ({ date, id, products, totalItemCount, subto
   const orderNumber: string = getOrderNumber(id);
 
   const userShippingDetails: interfaces.Address = user.shippingAddress!;
+
+  const eta: Date = getETA();
 
   const ProductComponents: any = products.map((item: any) => (
     <ProductCartDetails 
@@ -88,7 +94,7 @@ const Order: React.FC<OrderProps> = ({ date, id, products, totalItemCount, subto
         </div>
           
         <div id="order-shipping__container">
-          <span id="order-eta">Estimated delivery date: </span>
+          <span id="order-eta">Estimated delivery date: {eta}</span>
 
           <span id="order-address-header">Delivery to: </span>
 
