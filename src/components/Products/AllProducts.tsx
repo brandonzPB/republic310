@@ -71,7 +71,7 @@ const AllProducts: React.FC = () => {
         dest === '/products'
           ? <div id="all-products__container">
             <div id="sort-form__container">
-              <form onSubmit={handleSubmit(onSubmit)}>
+              <form onSubmit={handleSubmit(onSubmit)} id="sort-products-form">
       
                 <select name="sort" id="sort-select" ref={register}>
                   <option value="alphaAscend">A-Z (ascending alphabetical)</option>
@@ -85,7 +85,9 @@ const AllProducts: React.FC = () => {
               </form>
             </div>
       
-            {ProductComponents}
+            <div id="all-product-components">
+              {ProductComponents}
+            </div>
           </div>
           : !dest
             ? <Route exact path="/products">

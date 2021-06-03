@@ -1,14 +1,15 @@
 import React, { useContext } from 'react';
-import { GlobalContext } from '../../../contexts/GlobalContext';
+
 import { RouteContext } from '../../../contexts/RouteContext';
 import { topProducts } from '../../../modules/topProducts';
-import * as interfaces from '../../../modules/interfaces';
+
 import Product from '../../Products/Product';
-import './body.css';
 
 import hollywoodSrc from '../../../assets/images/products/the_hollywood.jpg';
 import malibuSrc from '../../../assets/images/products/the_malibu.jpg';
 import sanAndreasSrc from '../../../assets/images/products/the_san_andreas.jpg';
+
+import './body.css';
 
 const Body: React.FC = () => {
   const { changeDest } = useContext(RouteContext);

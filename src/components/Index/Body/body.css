@@ -3,6 +3,7 @@
   width: 100%;
   margin: 0 auto;
   margin-top: -16rem;
+  padding-top: 4rem;
   text-align: center;
 }
 
@@ -11,17 +12,26 @@
   margin: 0 auto;
   display: flex;
   flex: 1;
-  flex-direction: row;
+  flex-direction: column;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-around;
 }
 
 #hot-text {
-  color: black;
+  color: #748B42;
   font-size: 3.5rem;
+  margin: 1rem auto 3rem auto;
+  font-family: 'CooperBlack';
+  font-weight: 400;
 }
 
 #all-products-link {
   cursor: pointer;
+}
+
+@media only screen and (min-width: 900px) {
+  #hot-products__container {
+    flex-direction: row;
+  }
 }

@@ -33,6 +33,8 @@ import ResetPassword from './components/User/ForgotPassword/ResetPassword/ResetP
 import AdminForm from './components/Admin/Verification/AdminForm';
 import StatsContainer from './components/Admin/StatsContainer/StatsContainer';
 
+import './App.css';
+
 function App() {
   const content = 'The Republic 310 | Born and Raised in LA. Free of pesticides and preservatives';
 

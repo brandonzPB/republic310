@@ -1,0 +1,16 @@
+#all-products__container {
+  margin: 5rem auto;
+  border: 2px solid black;
+  width: 90%;
+}
+
+#sort-form__container {}
+
+#sort-products-form {}
+
+#sort-select {}
+
+#update-sort-btn {}
+
+#all-product-components {
+}
