@@ -16,8 +16,6 @@ const OrderConfirmation: React.FC = () => {
   
   const { dest, changeDest, orderStatus, changeOrderStatus } = useContext(RouteContext);
 
-  const [eta, setEta] = useState({ date: getETA() });
-
   const confirmationRef = useRef(true);
 
   const content: string = 'We hope you enjoy your order from The Republic 310';
@@ -45,7 +43,7 @@ const OrderConfirmation: React.FC = () => {
         email,
         id: userId,
         shippingAddress: user.shippingAddress,
-        cart: completeOrder
+        cart: completeOrder,
       };
 
       emailConfirmationToUser(userObj, accessToken);
@@ -62,6 +60,8 @@ const OrderConfirmation: React.FC = () => {
   if (!allProducts.length) {
     setTimeout(() => { changeDest('/') }, 700);
   }
+
+  const eta = getETA();
 
   const completeOrder: interfaces.CompleteCart = user.orderHistory[0];
 

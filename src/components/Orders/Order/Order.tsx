@@ -3,7 +3,6 @@ import React, { useState, useContext } from 'react';
 import { GlobalContext } from '../../../contexts/GlobalContext';
 
 import * as interfaces from '../../../modules/interfaces';
-import { getETA } from '../../../modules/getETA';
 import getMonthName from '../../../modules/getMonthName';
 import getOrderNumber from '../../../modules/getOrderNumber';
 import ProductCartDetails from '../../Products/ProductCartDetails';
@@ -28,9 +27,7 @@ type OrderProps = {
   subtotal: number;
   taxes: number;
   total: number;
-  eta: {
-    date: Date
-  };
+  eta: Date;
 };
 
 const Order: React.FC<OrderProps> = ({ date, id, products, totalItemCount, subtotal, taxes, total, eta }) => {
@@ -40,10 +37,20 @@ const Order: React.FC<OrderProps> = ({ date, id, products, totalItemCount, subto
 
   const orderDateString: string = date.toString();
 
+  console.log(`orderDateString`, orderDateString)
+
   const orderDate = {
     year: orderDateString.slice(0,4),
     month: getMonthName(orderDateString.slice(5, 7)),
     day: orderDateString.slice(8,10)
+  };
+
+  const etaString = eta.toISOString();
+
+  const etaDate = {
+    year: etaString.slice(0,4),
+    month: getMonthName(etaString.slice(5, 7)),
+    day: etaString.slice(8,10)
   };
 
   const orderNumber: string = getOrderNumber(id);
@@ -95,7 +102,7 @@ const Order: React.FC<OrderProps> = ({ date, id, products, totalItemCount, subto
         </div>
           
         <div id="order-shipping__container">
-          <span id="order-eta">Estimated delivery date: {eta.date}</span>
+          <span id="order-eta">Estimated delivery date: {etaDate.day} {etaDate.month} {etaDate.year}</span>
 
           <span id="order-address-header">Delivery to: </span>
 

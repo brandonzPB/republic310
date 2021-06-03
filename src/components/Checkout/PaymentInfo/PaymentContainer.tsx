@@ -17,11 +17,10 @@ const PaymentContainer: React.FC = () => {
     setTimeout(() => {
       if (orderStatus === 'complete') {
         // proceed to order confirmation page
-        return changeDest('/checkout/confirmation');
+        changeDest('/checkout/confirmation');
+      } else if (orderStatus === 'incomplete') {
+        changeDest('/');
       }
-  
-      // order status is incomplete
-      changeDest('/');
     }, 600);
   }
 

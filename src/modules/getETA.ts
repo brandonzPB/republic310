@@ -1,4 +1,4 @@
-export const getETA = (): any => {
+export const getETA = (): Date => {
   const today = new Date();
 
   const date = new Date(today);

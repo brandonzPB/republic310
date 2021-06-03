@@ -44,9 +44,7 @@ export interface CompleteCart {
   taxes: number;
   total: number;
   id: string;
-  eta: {
-    date: Date;
-  };
+  eta: Date;
 };
 
 /// USER INTERFACES ///
