@@ -3,13 +3,13 @@
   width: 100%;
   margin: 0 auto;
   margin-top: -16rem;
-  padding: 4rem 0;
+  padding: 4rem 0 8rem 0;
   text-align: center;
 }
 
 #hot-products__container {
   width: 85%;
-  margin: 0 auto;
+  margin: 2rem auto;
   display: flex;
   flex: 1;
   flex-direction: column;
@@ -32,7 +32,14 @@
   font-family: 'Franklin Gothic Std';
   background: none;
   color: #748B42;
-  transition: transform 0.2s ease 0;
+}
+
+#all-products-link:hover {
+  color: #839954;
+}
+
+#all-products-link:active {
+  color: #6b813a;
 }
 
 @media only screen and (min-width: 900px) {

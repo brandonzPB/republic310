@@ -68,6 +68,7 @@ const MobileModal: React.FC<ModalProps> = ({ hideMobileMenu }: ModalProps) => {
     if (path === 'cart' && !cart.products.length) return;
 
     changeDest(path);
+    hideMobileMenu();
   }
   
   return (

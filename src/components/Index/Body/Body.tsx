@@ -14,8 +14,6 @@ import './body.css';
 const Body: React.FC = () => {
   const { changeDest } = useContext(RouteContext);
 
-  const viewProducts = (): void => {}
-
   const ProductComponents: any = topProducts.map((product: any, index: number) => (
     <Product 
       name={product.name}
@@ -38,7 +36,7 @@ const Body: React.FC = () => {
         {ProductComponents}
       </div>
 
-      <span id="all-products-link" onClick={viewProducts}>View All of Our Products</span>
+      <span id="all-products-link" onClick={() => changeDest('/products')}>View All of Our Products</span>
     </div>
   )
 }

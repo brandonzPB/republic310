@@ -1,16 +1,214 @@
 #all-products__container {
   margin: 5rem auto;
-  border: 2px solid black;
   width: 90%;
+  text-align: center;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-#sort-form__container {}
+#sort-form__container {
+  margin: 0 auto;
+  text-align: center;
+}
 
-#sort-products-form {}
+#sort-products-form {
+  margin: 0 auto;
+  font-family: 'Franklin Gothic Std';
+}
 
-#sort-select {}
+#sort-products-form select {
+  box-shadow: 0 50px 100px -20px rgba(50,50,93,.25),0 30px 60px -30px rgba(0,0,0,.3);
+  font-size: 2rem;
+  padding: 1rem 5rem 1rem 1.5rem;
+  background: #4d5061;
+  color: white;
+  border: 0;
+}
 
-#update-sort-btn {}
+#custom-select {
+  position: relative;
+}
 
-#all-product-components {
+#custom-arrow {
+  display: block;
+  background: #3b3c47;
+  height: 100%;
+  width: 4rem;
+  position: absolute;
+  right: 0;
+  top: 0;
+  pointer-events: none;
+}
+
+#custom-arrow::before,
+#custom-arrow::after {
+  --size: 0.75rem;
+
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0;
+
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#custom-arrow::before {
+  border-left: var(--size) solid transparent;
+  border-right: var(--size) solid transparent;
+  border-bottom: var(--size) solid rgba(255, 255, 255, 0.5);
+
+  top: 37%;
+}
+
+#custom-arrow::after {
+  border-left: var(--size) solid transparent;
+  border-right: var(--size) solid transparent;
+  border-top: var(--size) solid rgba(255, 255, 255, 0.5);
+
+  top: 62%;
+}
+
+option {
+  background: #4d5061;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 600;
+  font-size: 1.5rem;
+}
+
+#update-sort-btn {
+  display: block;
+  border: none;
+  margin: 2rem auto;
+  box-shadow: 0 0 3px black;
+  border-radius: 4px;
+  background: #748B42;
+  color: white;
+  font-family: 'Franklin Gothic Std';
+  font-size: 2rem;
+  width: 14rem;
+  height: 7rem;
+}
+
+#all-product-components {}
+
+@media only screen and (min-width: 920px) {
+  #all-products__container {
+    margin: 8rem auto;
+    width: 90%;
+    text-align: center;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  #sort-form__container {
+    margin: 0;
+    text-align: center;
+  }
+  
+  #sort-products-form {
+    margin: 0 auto;
+    font-family: 'Franklin Gothic Std';
+  }
+  
+  #sort-products-form select {
+    box-shadow: 0 50px 100px -20px rgba(50,50,93,.25),0 30px 60px -30px rgba(0,0,0,.3);
+    font-size: 1.25rem;
+    padding: 1rem 5rem 1rem 1.5rem;
+    background: #4d5061;
+    color: white;
+    border: 0;
+  }
+  
+  #custom-select {
+    position: relative;
+  }
+  
+  #custom-arrow {
+    display: block;
+    background: #3b3c47;
+    height: 100%;
+    width: 4rem;
+    position: absolute;
+    right: 0;
+    top: 0;
+    pointer-events: none;
+  }
+  
+  #custom-arrow::before,
+  #custom-arrow::after {
+    --size: 0.75rem;
+  
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+  
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  #custom-arrow::before {
+    border-left: var(--size) solid transparent;
+    border-right: var(--size) solid transparent;
+    border-bottom: var(--size) solid rgba(255, 255, 255, 0.5);
+  
+    top: 37%;
+  }
+  
+  #custom-arrow::after {
+    border-left: var(--size) solid transparent;
+    border-right: var(--size) solid transparent;
+    border-top: var(--size) solid rgba(255, 255, 255, 0.5);
+  
+    top: 62%;
+  }
+  
+  option {
+    background: #4d5061;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 600;
+    font-size: 1.25rem;
+  }
+  
+  #update-sort-btn {
+    display: block;
+    border: none;
+    margin: 2rem auto;
+    box-shadow: 0 0 3px black;
+    border-radius: 4px;
+    background: #748B42;
+    color: white;
+    font-family: 'Franklin Gothic Std';
+    font-size: 1.25rem;
+    width: 10rem;
+    height: 4rem;
+    transition: transform 0.2s ease 0;
+  }
+
+  #update-sort-btn:hover {
+    background: #839b4f;
+    transform: scale(1.05);
+  }
+
+  #update-sort-btn:active {
+    background: #6c833c;
+    transform: scale(0.95);
+  }
+  
+  #all-product-components {
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    width: 70%;
+    max-width: 80%;
+  }  
 }

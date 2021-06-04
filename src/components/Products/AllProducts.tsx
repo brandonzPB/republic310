@@ -9,6 +9,18 @@ import Product from './Product';
 import * as interfaces from '../../modules/interfaces';
 import quickSortProducts from '../../modules/quickSortProducts';
 
+import bearSrc from '../../assets/images/products/the_bear.jpg';
+import bruinSrc from '../../assets/images/products/the_bruins.jpg';
+import goldenSrc from '../../assets/images/products/the_golden_gate.jpg';
+import hollywoodSrc from '../../assets/images/products/the_hollywood.jpg';
+import malibuSrc from '../../assets/images/products/the_malibu.jpg';
+import mudslideSrc from '../../assets/images/products/the_mudslide.jpg';
+import sanAndreasSrc from '../../assets/images/products/the_san_andreas.jpg';
+import smogSrc from '../../assets/images/products/the_smog.png';
+import surferSrc from '../../assets/images/products/the_surfer.jpg';
+
+import './allProducts.css';
+
 const AllProducts: React.FC = () => {
   const { allProducts } = useContext(GlobalContext);
 
@@ -55,7 +67,17 @@ const AllProducts: React.FC = () => {
       key={product._id}
       name={product.name}
       price={product.price}
-      imageUrl={product.imageUrl}
+      imageUrl={
+        product.name === 'The Smog' ? smogSrc
+          : product.name === 'The Hollywood' ? hollywoodSrc
+          : product.name === 'The Golden Gate' ? goldenSrc
+          : product.name === 'The Bear' ? bearSrc
+          : product.name === 'The Surfer' ? surferSrc
+          : product.name === 'The San Andreas' ? sanAndreasSrc
+          : product.name === 'The Malibu' ? malibuSrc
+          : product.name === 'The Mudslide' ? mudslideSrc
+          : bruinSrc
+      }
       alt={product.description}
     />
   ));
@@ -72,13 +94,16 @@ const AllProducts: React.FC = () => {
           ? <div id="all-products__container">
             <div id="sort-form__container">
               <form onSubmit={handleSubmit(onSubmit)} id="sort-products-form">
-      
-                <select name="sort" id="sort-select" ref={register}>
-                  <option value="alphaAscend">A-Z (ascending alphabetical)</option>
-                  <option value="alphaDescend">Z-A (descending alphabetical)</option>
-                  <option value="priceAscend">Price Ascending</option>
-                  <option value="priceDescend">Price Descending</option>
-                </select>
+
+                <div id="custom-select">
+                  <select name="sort" id="sort-select" ref={register}>
+                    <option value="alphaAscend">A-Z (ascending alphabetical)</option>
+                    <option value="alphaDescend">Z-A (descending alphabetical)</option>
+                    <option value="priceAscend">Price Ascending</option>
+                    <option value="priceDescend">Price Descending</option>
+                  </select>
+                  <span id="custom-arrow"></span>
+                </div>
       
                 <button id="update-sort-btn">Update List</button>
       
