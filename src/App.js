@@ -5,33 +5,30 @@ import { Helmet } from 'react-helmet';
 import GlobalContextProvider from './contexts/GlobalContext';
 import RouteContextProvider from './contexts/RouteContext';
 
-import NavBar from './components/NavBar/NavBar';
-import Footer from './components/Footer/Footer';
-
-import Index from './components/Index/Index';
 import About from './components/About/About';
-import Contact from './components/Contact/Contact';
-
+import AdminForm from './components/Admin/Verification/AdminForm';
 import AllProducts from './components/Products/AllProducts';
-import ProductDetails from './components/Products/ProductDetails';
 
 import Cart from './components/Cart/Cart';
-import ShippingDetails from './components/Checkout/ShippingDetails/ShippingDetails';
-import PaymentContainer from './components/Checkout/PaymentInfo/PaymentContainer';
+import Contact from './components/Contact/Contact';
+import Footer from './components/Footer/Footer';
+import Index from './components/Index/Index';
+
+import NavBar from './components/NavBar/NavBar';
 import OrderConfirmation from './components/Checkout/OrderConfirmation/OrderConfirmation';
-
-import UpdateUser from './components/User/Update/UpdateUser';
-import PasswordUpdate from './components/User/Update/PasswordUpdate';
-
 import OrderHistory from './components/Orders/OrderHistory/OrderHistory';
-import CancelOrder from './components/Orders/CancelOrder/CancelOrder.tsx';
 
-import RequestResetCode from './components/User/ForgotPassword/Request/RequestResetCode';
+import PasswordUpdate from './components/User/Update/PasswordUpdate';
+import PaymentContainer from './components/Checkout/PaymentInfo/PaymentContainer';
 import PostResetCode from './components/User/ForgotPassword/PostResetCode/PostResetCode';
-import ResetPassword from './components/User/ForgotPassword/ResetPassword/ResetPassword';
+import ProductDetails from './components/Products/ProductDetails';
 
-import AdminForm from './components/Admin/Verification/AdminForm';
+import ResetPassword from './components/User/ForgotPassword/ResetPassword/ResetPassword';
+import RequestResetCode from './components/User/ForgotPassword/Request/RequestResetCode';
+import ShippingDetails from './components/Checkout/ShippingDetails/ShippingDetails';
+
 import StatsContainer from './components/Admin/StatsContainer/StatsContainer';
+import UpdateUser from './components/User/Update/UpdateUser';
 
 import './App.css';
 
@@ -66,7 +63,6 @@ function App() {
             <Route exact path="/user/update/password" component={PasswordUpdate} />
 
             <Route exact path="/order/history" component={OrderHistory} />
-            <Route exact path="/order/cancel" component={CancelOrder} />
 
             <Route exact path="/reset/request" component={RequestResetCode} />
             <Route exact path="/reset/code" component={PostResetCode} />

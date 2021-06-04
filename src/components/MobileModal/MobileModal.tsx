@@ -55,10 +55,10 @@ const MobileModal: React.FC<ModalProps> = ({ hideMobileMenu }: ModalProps) => {
   const showAccountOptions = (): void => {}
 
   // HANDLE MODAL NAVIGATION
-  const handleNav = (path: string): any => {
+  const handleNav = (path: string): void => {
     if (path === 'cart' && !cart.products.length) return;
 
-    return changeDest(path);
+    changeDest(path);
   }
   
   return (
@@ -87,9 +87,13 @@ const MobileModal: React.FC<ModalProps> = ({ hideMobileMenu }: ModalProps) => {
         <div
           id="modal-account__container" 
           style={{ display: user.isAuthorized ? 'block' : 'none' }}
-          onClick={showAccountOptions}
         >
-          <span className="modal-text">ACCOUNT</span>
+          <span 
+            className="modal-text"
+            onClick={showAccountOptions}
+          >
+            ACCOUNT
+          </span>
 
           <div
             id="modal-account-options"
@@ -99,11 +103,11 @@ const MobileModal: React.FC<ModalProps> = ({ hideMobileMenu }: ModalProps) => {
           </div>
         </div>
 
-        <span className="modal-text">SHOP</span>
+        <span className="modal-text" onClick={() => handleNav('/products')}>SHOP</span>
 
-        <span className="modal-text">ABOUT US</span>
+        <span className="modal-text" onClick={() => handleNav('/about')}>ABOUT US</span>
 
-        <span className="modal-text">CONTACT US</span>
+        <span className="modal-text" onClick={() => handleNav('/contact')}>CONTACT US</span>
       </div>
     </div>
   )
