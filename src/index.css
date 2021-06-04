@@ -15,7 +15,13 @@ code {
 @font-face {
   font-family: 'CooperBlack';
   src: local('CooperBlack'),
-    url('./assets//fonts/Cooper_Black/Cooper\ Black\ Regular.ttf') format('truetype');
+    url('./assets/fonts/Cooper_Black/Cooper\ Black\ Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Franklin Gothic Std';
+  src: local('Franklin Gothic Std'),
+    url('./assets/fonts/Franklin_Gothic_STD/Franklin\ Gothic\ Std\ Condensed.otf') format('truetype');
 }
 
 .font-face-cooper-black {
