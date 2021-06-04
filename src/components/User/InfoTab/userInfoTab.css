@@ -1,0 +1,35 @@
+#user-info__container {
+  margin: 0 auto;
+  background: none;
+}
+
+#hide-tab-text {
+  display: none;
+  background: none;
+}
+
+#user-info-list {
+  margin: 2rem auto;
+  background: none;
+}
+
+.user-info-list-item {
+  list-style-type: none;
+  margin: 1rem auto;
+  text-align: center;
+  background: none;
+}
+
+.user-info-text-link {
+  font-size: 2.25rem;
+  font-family: 'Franklin Gothic Std';
+  background: none;
+}
+
+@media only screen and (max-width: 720) {
+  #hide-tab-text {
+    display: block;
+    color: black;
+    background: none;
+  }
+}

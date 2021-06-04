@@ -68,38 +68,42 @@ const PasswordUpdate = () => {
                 ? <div id="update-password-loading">
                   <span id="update-password-loading-text">Success! Returning to index...</span>
                 </div>
-                : <form onSubmit={handleSubmit(onSubmit)}>
-                  <input 
-                    className="update-input"
-                    type="password"
-                    name="currentPassword"
-                    placeholder="Current Password"
-                    ref={register({ required: true, validate: isCorrectPassword })}
-                  />
-                  {errors.currentPassword && <div>Please enter your current password</div>}
-            
-                  <input 
-                    className="update-input"
-                    type="password"
-                    name="newPassword"
-                    placeholder="New Password"
-                    ref={register({ required: true })}
-                  />
-            
-                  {errors.newPassword && <div>Please enter a new password</div>}
-            
-                  <input 
-                    className="update-input"
-                    type="password"
-                    name="confirmNewPassword"
-                    placeholder="Confirm New Password"
-                    ref={register({ required: true })}
-                  />
-            
-                  {error && <div>Passwords don't match</div>}
-            
-                  <button id="update-password-btn">Update Password</button>
-                </form>
+                : <div id="update-password__container">
+                  <h1 id="update-password-header">Update Your Password</h1>
+                  
+                  <form onSubmit={handleSubmit(onSubmit)} id="update-password-form">
+                    <input 
+                      className="update-input"
+                      type="password"
+                      name="currentPassword"
+                      placeholder="Current Password"
+                      ref={register({ required: true, validate: isCorrectPassword })}
+                    />
+                    {errors.currentPassword && <div style={{ color: 'red' }}>Please enter your current password</div>}
+              
+                    <input 
+                      className="update-input"
+                      type="password"
+                      name="newPassword"
+                      placeholder="New Password"
+                      ref={register({ required: true })}
+                    />
+              
+                    {errors.newPassword && <div style={{ color: 'red' }}>Please enter a new password</div>}
+              
+                    <input 
+                      className="update-input"
+                      type="password"
+                      name="confirmNewPassword"
+                      placeholder="Confirm New Password"
+                      ref={register({ required: true })}
+                    />
+              
+                    {error && <div style={{ color: 'red' }}>Passwords don't match</div>}
+              
+                    <button id="update-password-btn">Update Password</button>
+                  </form>
+                </div>
             }
           </>
           : !dest

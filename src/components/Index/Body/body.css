@@ -3,7 +3,7 @@
   width: 100%;
   margin: 0 auto;
   margin-top: -16rem;
-  padding-top: 4rem;
+  padding: 4rem 0;
   text-align: center;
 }
 
@@ -28,6 +28,11 @@
 
 #all-products-link {
   cursor: pointer;
+  font-size: 2.5rem;
+  font-family: 'Franklin Gothic Std';
+  background: none;
+  color: #748B42;
+  transition: transform 0.2s ease 0;
 }
 
 @media only screen and (min-width: 900px) {

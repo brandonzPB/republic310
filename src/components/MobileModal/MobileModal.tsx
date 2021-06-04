@@ -1,9 +1,11 @@
 import React, { useState, useContext } from 'react';
 import { ImCross } from 'react-icons/im';
+
 import { GlobalContext } from '../../contexts/GlobalContext';
 import { RouteContext } from '../../contexts/RouteContext';
-import UserInfoTab from '../User/InfoTab/UserInfoTab';
+
 import LoginTabForm from '../User/LoginTab/LoginTabForm';
+import UserInfoTab from '../User/InfoTab/UserInfoTab';
 
 import './mobileModal.css';
 
@@ -52,7 +54,14 @@ const MobileModal: React.FC<ModalProps> = ({ hideMobileMenu }: ModalProps) => {
   }
 
   // SHOW ACCOUNT OPTIONS
-  const showAccountOptions = (): void => {}
+  const showAccountOptions = (): void => {
+    setAccountDisplay({ state: true });
+  }
+
+  // HIDE ACCOUNT OPTIONS
+  const hideAccountOptions = (): void => {
+    setAccountDisplay({ state: false });
+  }
 
   // HANDLE MODAL NAVIGATION
   const handleNav = (path: string): void => {
@@ -99,6 +108,7 @@ const MobileModal: React.FC<ModalProps> = ({ hideMobileMenu }: ModalProps) => {
             id="modal-account-options"
             style={{ display: accountDisplay.state ? 'block' : 'none' }}
           >
+            <span id="hide-tab-text" onClick={hideAccountOptions}>Hide Options</span>
             <UserInfoTab />
           </div>
         </div>

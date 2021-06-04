@@ -21,10 +21,10 @@ green: 738D39
 #mobile-modal__container {
   z-index: 50;
   width: 100%;
-  height: 95%;
+  height: 90%;
   background: #F9A96E;
   position: fixed;
-  top: 0;
+  top: 4rem;
   left: -3rem;
   border-radius: 10px;
   animation: slidein 0.3s ease;
@@ -69,15 +69,26 @@ green: 738D39
 
 #modal-account__container {
   background: none;
+  margin: 5rem auto;
+}
+
+#modal-account-options {
+  background: none;
+}
+
+#hide-tab-text {
+  font-size: 2rem;
+  color: black;
 }
 
 .modal-text {
   background: none;
   color: black;
   font-size: 3.25rem;
-  font-weight: 600;
+  font-weight: 400;
   color: white;
-  margin: 2rem auto;
+  margin: 3rem auto;
+  font-family: 'CooperBlack';
 }
 
 @media only screen and (min-width: 768px) {
