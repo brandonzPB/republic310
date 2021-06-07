@@ -74,7 +74,9 @@ const productsArr = [
 ]
 
 export const getProductDescription = (name: string): any => {
-  return productsArr.find(product => product.name === name);
+  const productDescription = productsArr.find(product => product.name === name)!;
+
+  return productDescription.description;
 }
 
 export const getProductDetails = (productName: string, allProducts: interfaces.DisplayProduct[]): any => {

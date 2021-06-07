@@ -101,7 +101,7 @@ const ProductDetails: React.FC = () => {
             <div id="product-details-content__container">
               <div id="product-details-left">
                 <div id="product-details-image__container">
-                  <img alt={productMethods.getProductDescription(product.name)} id="product-details-img"
+                  <img alt={product.alt} id="product-details-img"
                     src={
                       product.name === 'The Smog' ? smogSrc
                         : product.name === 'The Hollywood' ? hollywoodSrc

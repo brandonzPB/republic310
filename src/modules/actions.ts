@@ -1,6 +1,7 @@
 import * as interfaces from './interfaces';
 import * as userService from '../services/userServices';
 import * as productService from '../services/productServices';
+import { getProductDescription } from './productMethods';
 
 export type ActionType = 
   | { type: 'get_all_products',           payload: interfaces.DisplayProduct[] }
@@ -24,13 +25,16 @@ export type ActionType =
 
 const getProductDetailArray = (products: any): any => {
   const productArray: interfaces.DisplayProduct[] = products.map((product: any) => {
+    const description: string = getProductDescription(product.name);
+
     return {
       name: product.name,
-      description: product.description,
+      description,
       price: product.price,
       qtySold: product.qty_sold,
       _id: product._id,
       imageUrl: product.image_url,
+      alt: product.description
     }
   });
 
