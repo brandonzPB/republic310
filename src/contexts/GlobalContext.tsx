@@ -7,38 +7,7 @@ import Cart from '../modules/classes/cart';
 import User from '../modules/classes/user';
 import Product from '../modules/classes/product';
 
-const LOCAL_STORAGE_KEY: string = 'republic-310-state';
-const storedState = localStorage.getItem(LOCAL_STORAGE_KEY);
-
-// const initialState: interfaces.State = storedState
-//   ? JSON.parse(storedState)
-//   : {
-//     user: new User(),
-//     cart: new Cart([]),
-//     allProducts: [],
-//     resetToken: '',
-//     tempEmail: '',
-//     updateTempEmail: (email: string): void => {},
-//     createUser: actions.createUser,
-//     requestReset: (email: string): any => {},
-//     resetPassword: (password: string, resetCode: string, resetToken: string): any => {},
-//     login: (user: any): any => {},
-//     logout: (): void => {},
-//     updateUser: (email: string, phoneNumber: string, userId: string, token: string): any => {},
-//     updateUserPassword: (password: string, userId: string, token: string): any => {},
-//     updateShippingAddress: (shippingObj: interfaces.Address, userId: string, token: string): any => {},
-//     addToCart: (product: any): any => {},
-//     updateQuantity: (productName: string, newQuantity: number): void => {},
-//     updateTotalItemCount: (newTotal: number): void => {},
-//     updateSubtotal: (newSubtotal: number): void => {},
-//     removeFromCart: (productName: string): void => {},
-//     updateTaxTotal: (newTotal: number): void => {},
-//     updateTotalCost: (newTotal: number): void => {},
-//     addDateToCart: (date: Date): void => {},
-//     completeOrder: (userId: string, cart: interfaces.CompleteCart, accessToken: string): any => {},
-//     emailConfirmationToUser: (userObj: any, token: string): any => {},
-//   };
-
+// INITIAL STATE
 const initialState: interfaces.State = {
   user: new User(),
   cart: new Cart([]),
@@ -74,8 +43,6 @@ const GlobalContextProvider: React.FC = ({ children }) => {
   // GET ALL PRODUCTS FROM DATABASE (only on initial load)
   useEffect(() => {
     console.log('state', state);
-
-    // localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(state));
 
     if (state.allProducts.length) return;
 

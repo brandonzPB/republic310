@@ -3,36 +3,13 @@ import * as interfaces from '../modules/interfaces';
 import { routeReducer } from '../reducers/routeReducer';
 
 // INITIAL STATE
-// const LOCAL_STORAGE_KEY_PATH = 'republic-310-path';
-// const storedPath = localStorage.getItem(LOCAL_STORAGE_KEY_PATH);
-
-// const initialPath: interfaces.Path = storedPath
-//   ? JSON.parse(storedPath)
-//   : {
-//       dest: '/',
-//       product: {
-//         name: '',
-//         description: '',
-//         price: 0,
-//         id: 0,
-//         _id: 0,
-//         stock: 0,
-//         imageUrl: '',
-//         alt: ''
-//       },
-//       changeDest: (dest: string): void => {},
-//       changeProduct: (product: interfaces.DisplayProduct): void => {},
-//       orderStatus: 'incomplete',
-//       changeOrderStatus: (newStatus: 'complete' | 'incomplete'): void => {},
-//     };
-
 const initialPath: interfaces.Path = {
   dest: '/',
   product: {
     name: '',
-    description: '',
     price: 0,
     _id: '',
+    description: '',
     qtySold: 0,
     imageUrl: '',
     alt: ''
@@ -50,13 +27,10 @@ const RouteContextProvider: React.FC = ({ children }) => {
   const [path, dispatch] = useReducer(routeReducer, initialPath);
 
   // CONSOLE LOG CHANGES TO STATE (path);
-  // UPDATE LOCAL STORAGE
   useEffect(() => {
     console.log('path', path);
     console.log('initialPath', initialPath);
 
-    // localStorage.setItem(LOCAL_STORAGE_KEY_PATH, JSON.stringify(path));
-    // initialPath.dest = path.dest;
   }, [path, initialPath]);
 
   // CHANGE DESTINATION ROUTE

@@ -69,6 +69,7 @@
 #product-img {
   width: 67%;
   margin: 0 auto;
+  cursor: pointer;
 }
 
 #product-bottom {
