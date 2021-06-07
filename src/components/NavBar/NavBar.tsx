@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { RiShoppingCart2Line } from 'react-icons/ri';
 import { GiHamburgerMenu } from 'react-icons/gi';
-
 import { IconContext } from 'react-icons';
+
 import { GlobalContext } from '../../contexts/GlobalContext';
 import { RouteContext } from '../../contexts/RouteContext';
 
@@ -33,10 +33,6 @@ const NavBar: React.FC = () => {
 
   // ACCOUNT OPTIONS STATE (display purposes)
   const [options, setOptions] = useState({ display: false });
-
-  useEffect(() => {
-    console.log('loginForm', loginForm);
-  }, [loginForm]);
 
   // SHOW LOGIN FORM (triggered by clicking 'Login')
   const showLoginForm = (): void => {

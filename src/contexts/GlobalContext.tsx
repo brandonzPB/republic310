@@ -1,8 +1,10 @@
-import React, { useEffect, useReducer, createContext } from 'react';
+import React, { useEffect, useRef, useReducer, createContext } from 'react';
+
 import globalReducer from '../reducers/globalReducer';
+
 import * as interfaces from '../modules/interfaces'
 import * as actions from '../modules/actions';
-import * as productServices from '../services/productServices';
+
 import Cart from '../modules/classes/cart';
 import User from '../modules/classes/user';
 import Product from '../modules/classes/product';
@@ -40,11 +42,13 @@ export const GlobalContext = createContext<interfaces.State>(initialState);
 const GlobalContextProvider: React.FC = ({ children }) => {
   const [state, dispatch] = useReducer(globalReducer, initialState);
 
+  const productsRef = useRef(true);
+
   // GET ALL PRODUCTS FROM DATABASE (only on initial load)
   useEffect(() => {
     console.log('state', state);
 
-    if (state.allProducts.length) return;
+    // if (state.allProducts.length) return;
 
     async function getAllProducts(): Promise<void> {
       const allProducts: interfaces.DisplayProduct[] = await actions.getAllProducts();
@@ -52,7 +56,10 @@ const GlobalContextProvider: React.FC = ({ children }) => {
       dispatch({ type: 'get_all_products', payload: allProducts });
     }
 
-    getAllProducts();
+    if (productsRef.current) {
+      getAllProducts();
+      productsRef.current = false;
+    }
   }, [state]);
 
   // UPDATE TEMP EMAIL

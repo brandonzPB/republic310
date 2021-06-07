@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, createContext, useReducer } from 'react';
+import React, { createContext, useReducer } from 'react';
 import * as interfaces from '../modules/interfaces';
 import { routeReducer } from '../reducers/routeReducer';
 
@@ -25,13 +25,6 @@ export const RouteContext = createContext<interfaces.Path>(initialPath);
 // FUNCTIONAL COMPONENT
 const RouteContextProvider: React.FC = ({ children }) => {
   const [path, dispatch] = useReducer(routeReducer, initialPath);
-
-  // CONSOLE LOG CHANGES TO STATE (path);
-  useEffect(() => {
-    console.log('path', path);
-    console.log('initialPath', initialPath);
-
-  }, [path, initialPath]);
 
   // CHANGE DESTINATION ROUTE
   const changeDest = (dest: string): void => {

@@ -4,20 +4,16 @@
   "private": true,
   "proxy": "http://localhost:3008",
   "dependencies": {
-    "@stripe/stripe-js": "^1.13.2",
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",
     "@testing-library/user-event": "^12.8.3",
     "@types/jest": "^26.0.21",
-    "@types/node": "^14.14.35",
-    "@types/react": "^17.0.3",
-    "@types/react-dom": "^17.0.2",
     "@types/react-router-dom": "^5.1.7",
     "@types/uuid": "^8.3.0",
     "axios": "^0.21.1",
-    "dotenv": "^8.2.0",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
+    "check-outdated": "^2.8.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
     "react-helmet": "^6.1.0",
     "react-hook-form": "^6.15.5",
     "react-icons": "^4.2.0",
@@ -25,7 +21,6 @@
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^4.0.3",
-    "typescript": "^4.2.3",
     "uuid": "^8.3.2",
     "web-vitals": "^1.1.1"
   },
@@ -36,7 +31,8 @@
     "eject": "react-scripts eject",
     "deploy": "gh-pages -d build",
     "push": "git branch -M main && git push origin main",
-    "build:deploy": "npm run build && npm run deploy"
+    "build:deploy": "npm run build && npm run deploy",
+    "check:outdated": "check-outdated --ignore-pre-releases --ignore-dev-dependencies --ignore-packages package1,package2 --columns name,type,current,latest,changes"
   },
   "eslintConfig": {
     "extends": [
@@ -60,10 +56,14 @@
     "@babel/core": "^7.12.3",
     "@babel/preset-env": "^7.13.12",
     "@babel/preset-react": "^7.12.13",
+    "@types/node": "^15.12.1",
+    "@types/react": "^17.0.9",
+    "@types/react-dom": "^17.0.6",
     "@types/react-helmet": "^6.1.1",
     "babel-loader": "^8.1.0",
     "file-loader": "^6.1.1",
     "gh-pages": "^3.1.0",
+    "typescript": "^4.3.2",
     "webpack": "^4.44.2",
     "webpack-cli": "^4.5.0"
   }
