@@ -1,6 +1,7 @@
 #all-products__container {
   margin: 5rem auto;
   width: 90%;
+  height: auto;
   text-align: center;
   display: flex;
   flex: 1;
@@ -94,7 +95,11 @@ option {
   height: 7rem;
 }
 
-#all-product-components {}
+#all-product-components {
+  height: auto;
+  margin: 0 auto;
+  text-align: center;
+}
 
 @media only screen and (min-width: 920px) {
   #all-products__container {
@@ -208,7 +213,8 @@ option {
     margin: 0 auto;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    width: 70%;
-    max-width: 80%;
+    width: 95%;
+    max-width: 95%;
+    height: auto;
   }  
 }

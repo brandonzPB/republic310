@@ -68,24 +68,32 @@ const Product: React.FC<types.DisplayProduct> = ({ name, price, imageUrl, alt }:
   
   return (
     <div id="product__container">
-      <div id="product-name__container">
-        <span id="product-name">{name}</span>
-      </div>
+      <div id="product-details__container">
+        <div id="product-top">
+          <div id="product-name__container">
+            <span id="product-name">{name}</span>
+          </div>
+        </div>
 
-      <div id="product-img__container" onClick={() => handleNav(name)}>
-        <img id="product-img" src={imageUrl} alt={alt} />
-      </div>
+        <div id="product-body">
+          <div id="product-img__container" onClick={() => handleNav(name)}>
+            <img id="product-img" src={imageUrl} alt={alt} />
+          </div>
+        </div>
 
-      <div id="product-price__container">
-        <span id="product-price">${price}.00</span>
-      </div>
+        <div id="product-bottom">
+          <div id="product-price__container">
+            <span id="product-price">${price}.00</span>
+          </div>
 
-      <div id="add-btn__container">
-        <button id="add-to-cart-btn" onClick={() => handleCartUpdate(name)}>Add to Cart</button>
-      </div>
+          <div id="add-btn__container">
+            <button id="add-to-cart-btn" onClick={() => handleCartUpdate(name)}>Add to Cart</button>
+          </div>
 
-      <div id="view-details-btn__container">
-        <button id="view-details-btn" onClick={() => handleNav(name)}>View Details</button>
+          <div id="view-details-btn__container">
+            <button id="view-details-btn" onClick={() => handleNav(name)}>View Details</button>
+          </div>
+        </div>
       </div>
     </div>
   )

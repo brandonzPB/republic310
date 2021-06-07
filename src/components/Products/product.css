@@ -1,6 +1,6 @@
 #product__container {
-  width: 30rem;
-  height: 50rem;
+  min-width: 30rem;
+  min-height: 65rem;
   margin: 6rem auto;
   border-radius: 15px;
   display: flex;
@@ -8,7 +8,6 @@
   flex: 1;
   align-items: center;
   justify-content: center;
-  padding: 4rem 0;
   background: linear-gradient(0.25turn,
     rgba(255, 255, 255, 1),
     rgba(255, 255, 255, 0)
@@ -16,9 +15,27 @@
   box-shadow: 0 50px 100px -20px rgba(50,50,93,.25),0 30px 60px -30px rgba(0,0,0,.3);
 }
 
+#product-details__container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  margin-top: -5rem;
+}
+
+#product-top {
+  height: 10%;
+  width: 90%;
+  background: none;
+}
+
 #product-name__container {
   display: block;
-  height: auto;
+  height: 100%;
   text-align: center;
   margin: 1.5rem auto;
 }
@@ -30,42 +47,65 @@
   font-family: 'CooperBlack';
   font-weight: 400;
   color: #F36E33;
+  border-bottom: 2px solid #F36E33;
+}
+
+#product-body {
+  height: 48%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 #product-img__container {
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 #product-img {
   width: 67%;
+  margin: 0 auto;
+}
+
+#product-bottom {
+  height: 20%;
+  background: none;
 }
 
 #product-price__container {
   display: block;
   height: auto;
   text-align: center;
+  margin: 1rem auto;
 }
 
 #product-price {
-  font-size: 1.25rem;
+  font-size: 1.75rem;
+  font-family: 'Franklin Gothic Std';
 }
 
 #add-btn__container {
   display: block;
   height: auto;
   text-align: center;
+  background: none;
 }
 
 #add-to-cart-btn {
   font-size: 2rem;
-  font-weight: 600;
+  font-weight: 400;
   border: none;
   border-radius: 4px;
   background-color: #fdca77;
   transition: transform 0.2s ease;
-  height: 5rem;
-  width: 14rem;
+  height: 8rem;
+  width: 16rem;
   margin: 1rem auto;
+  font-family: 'Franklin Gothic Std';
 }
 
 #add-to-cart-btn:hover {
@@ -82,17 +122,20 @@
   display: block;
   height: auto;
   text-align: center;
+  background: none;
 }
 
 #view-details-btn {
   border: none;
-  margin: 0.5rem auto;
+  margin: 1rem auto;
+  border-radius: 4px;
   font-size: 1.75rem;
-  font-weight: 600;
-  width: 12rem;
-  height: 4rem;
+  font-weight: 400;
+  width: 16rem;
+  height: 6rem;
   background-color: #fde7c0;
   transition: transform 0.2s ease;
+  font-family: 'Franklin Gothic Std';
 }
 
 #view-details-btn:hover {
@@ -134,5 +177,15 @@
       rgba(255, 255, 255, 0)
     );
     box-shadow: 0 50px 100px -20px rgba(50,50,93,.25),0 30px 60px -30px rgba(0,0,0,.3);
+  }
+
+  #add-to-cart-btn,
+  #view-details-btn {
+    width: 14rem;
+    height: 5rem;
+  }
+
+  #product-price {
+    font-size: 1.3rem;
   }
 }
