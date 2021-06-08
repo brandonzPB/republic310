@@ -1,6 +1,9 @@
 #user-info__container {
   margin: 0 auto;
-  background: none;
+  width: 18rem;
+  border-radius: 5px;
+  height: auto;
+  position: absolute;
 }
 
 #hide-tab-text {
@@ -18,18 +21,52 @@
   margin: 1rem auto;
   text-align: center;
   background: none;
+  cursor: pointer;
 }
 
 .user-info-text-link {
-  font-size: 2.25rem;
+  font-size: 1.75rem;
   font-family: 'Franklin Gothic Std';
   background: none;
 }
 
-@media only screen and (max-width: 720) {
+.user-info-text-link:hover {
+  color: #F26D32;
+}
+
+@media only screen and (max-width: 720px) {
   #hide-tab-text {
     display: block;
     color: black;
+    background: none;
+  }
+
+  #user-info__container {
+    margin: 0 auto;
+    width: 30rem;
+    border-radius: 5px;
+    height: auto;
+    position: absolute;
+    left: 0;
+    right: 0;
+  }
+  
+  #user-info-list {
+    margin: 2rem auto;
+    background: none;
+  }
+  
+  .user-info-list-item {
+    list-style-type: none;
+    margin: 1rem auto;
+    text-align: center;
+    background: none;
+    cursor: pointer;
+  }
+  
+  .user-info-text-link {
+    font-size: 2.5rem;
+    font-family: 'Franklin Gothic Std';
     background: none;
   }
 }

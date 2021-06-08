@@ -10,7 +10,6 @@ import AdminForm from './components/Admin/Verification/AdminForm';
 import AllProducts from './components/Products/AllProducts';
 
 import Cart from './components/Cart/Cart';
-import Contact from './components/Contact/Contact';
 import Footer from './components/Footer/Footer';
 import Index from './components/Index/Index';
 
@@ -49,23 +48,22 @@ function App() {
 
             <Route exact path="/" component={Index} />
             <Route exact path="/about" component={About} />
-            <Route exact path="/contact" component={Contact} />
-
-            <Route exact path="/products" component={AllProducts} />
-            <Route exact path="/product/details" component={ProductDetails} />
 
             <Route exact path="/cart" component={Cart} />
-            <Route exact path="/checkout/shipping" component={ShippingDetails} />
-            <Route exact path="/checkout/payment" component={PaymentContainer} />
             <Route exact path="/checkout/confirmation" component={OrderConfirmation} />
+            <Route exact path="/checkout/payment" component={PaymentContainer} />
+            <Route exact path="/checkout/shipping" component={ShippingDetails} />
+
+            <Route exact path="/order/history" component={OrderHistory} />
+
+            <Route exact path="/product/details" component={ProductDetails} />
+            <Route exact path="/products" component={AllProducts} />
 
             <Route exact path="/user/update" component={UpdateUser} />
             <Route exact path="/user/update/password" component={PasswordUpdate} />
 
-            <Route exact path="/order/history" component={OrderHistory} />
-
-            <Route exact path="/reset/request" component={RequestResetCode} />
             <Route exact path="/reset/code" component={PostResetCode} />
+            <Route exact path="/reset/request" component={RequestResetCode} />
             <Route exact path="/reset/password" component={ResetPassword} />
 
             <Route exact path="/stats" component={AdminForm} />

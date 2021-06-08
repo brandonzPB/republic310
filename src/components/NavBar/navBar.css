@@ -86,7 +86,7 @@
 }
 
 #nav-cart__container {
-  width: auto;
+  width: 10%;
   background-color: transparent;
   font-size: 1.5rem;
   font-weight: 600;
@@ -125,8 +125,10 @@
 
 #login__container {
   max-height: 3rem;
+  width: 20rem;
   max-width: 20rem;
   text-align: center;
+  margin: 0 auto;
 }
 
 #login-tab__container {
@@ -147,7 +149,14 @@
 
 /* USER INFO TAB */
 
-#account-options__container {}
+#nav-account__container {
+  width: 20rem;
+}
+
+#account-options__container {
+  width: 90%;
+  margin: 0 auto;
+}
 
 #user-info__container {}
 

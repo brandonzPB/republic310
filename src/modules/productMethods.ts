@@ -182,3 +182,22 @@ export const getCartItemTotal = (cart: interfaces.Cart): any => {
   return cart.products.reduce((count, item) => { return count + item.quantity }, 0);
 };
 
+// check delivery status
+export const getDeliveryStatus = (eta: Date): any => {
+  const today = new Date();
+
+  if (
+    today.getFullYear() > eta.getFullYear() ||
+    today.getMonth() > eta.getMonth() ||
+    today.getDate() > eta.getDate()) {
+    return {
+      status: true,
+      date: eta
+    }
+  }
+
+  return {
+    status: false,
+    date: eta
+  }
+};

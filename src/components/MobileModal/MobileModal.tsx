@@ -109,16 +109,14 @@ const MobileModal: React.FC<ModalProps> = ({ hideMobileMenu }: ModalProps) => {
             id="modal-account-options"
             style={{ display: accountDisplay.state ? 'block' : 'none' }}
           >
-            <span id="hide-tab-text" onClick={hideAccountOptions}>Hide Options</span>
-            <UserInfoTab />
+            {/* <span id="hide-tab-text" onClick={hideAccountOptions}>Hide Options</span> */}
+            <UserInfoTab hide={hideAccountOptions} />
           </div>
         </div>
 
         <span className="modal-text" onClick={() => handleNav('/products')}>SHOP</span>
 
         <span className="modal-text" onClick={() => handleNav('/about')}>ABOUT US</span>
-
-        <span className="modal-text" onClick={() => handleNav('/contact')}>CONTACT US</span>
       </div>
     </div>
   )

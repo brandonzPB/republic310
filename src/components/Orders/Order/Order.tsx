@@ -3,8 +3,10 @@ import React, { useState, useContext } from 'react';
 import { GlobalContext } from '../../../contexts/GlobalContext';
 
 import * as interfaces from '../../../modules/interfaces';
+import * as productMethods from '../../../modules/productMethods';
 import getMonthName from '../../../modules/getMonthName';
 import getOrderNumber from '../../../modules/getOrderNumber';
+import { getETA } from '../../../modules/getETA';
 import ProductCartDetails from '../../Products/ProductCartDetails';
 
 import './order.css';
@@ -37,15 +39,19 @@ const Order: React.FC<OrderProps> = ({ date, id, products, totalItemCount, subto
 
   const orderDateString: string = date.toString();
 
-  console.log(`orderDateString`, orderDateString)
-
   const orderDate = {
     year: orderDateString.slice(0,4),
     month: getMonthName(orderDateString.slice(5, 7)),
     day: orderDateString.slice(8,10)
   };
 
-  const etaString = eta.toISOString();
+  const deliveryStatus = productMethods.getDeliveryStatus(eta);
+
+  console.log(`deliveryStatus`, deliveryStatus)
+
+  const etaString = eta.toString();
+    // ? eta.toString()
+    // : getETA().toISOString();
 
   const etaDate = {
     year: etaString.slice(0,4),

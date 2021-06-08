@@ -5,7 +5,11 @@ import { RouteContext } from '../../../contexts/RouteContext';
 
 import './userInfoTab.css';
 
-const UserInfoTab: React.FC = () => {
+interface InfoTabProps {
+  hide?: () => void;
+};
+
+const UserInfoTab: React.FC<InfoTabProps> = ({ hide }) => {
   const { user, logout } = useContext(GlobalContext);
 
   const { changeDest } = useContext(RouteContext);
@@ -18,6 +22,10 @@ const UserInfoTab: React.FC = () => {
   return (
     <div id="user-info__container">
       <ul id="user-info-list">
+        <li className="user-info-list-item" id="hide-tab-text">
+          <span className="user-info-text-link" onClick={hide}>Hide Info</span>
+        </li>
+
         <li className="user-info-list-item">
           <span className="user-info-text-link" onClick={() => changeDest('/order/history')}>View Orders</span>
         </li>

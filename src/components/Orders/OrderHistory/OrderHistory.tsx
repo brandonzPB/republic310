@@ -38,8 +38,10 @@ const OrderHistory: React.FC = () => {
       {
         dest === '/order/history'
           ? <div id="order-history__container">
-            <span id="order-header">Your Orders</span>
-            {OrderComponents}
+            <span id="order-history-header">Your Orders</span>
+            <div id="order-history-orders">
+              {OrderComponents}
+            </div>
           </div>
           : !dest
             ? <Route exact path="/order/history">
