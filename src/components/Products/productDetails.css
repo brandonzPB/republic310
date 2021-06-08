@@ -1,0 +1,157 @@
+#product-details__container {
+  width: 90%;
+  max-width: 90%;
+  margin: 5rem auto;
+  height: auto;
+}
+
+#product-details-content__container {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  flex-wrap: wrap;
+}
+
+#product-details-left {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 100%;
+}
+
+#product-details-image__container {
+  margin: 0 auto;
+  text-align: center;
+}
+
+#product-details-img {
+  width: 67%;
+}
+
+#product-details-right {
+  margin: 0 auto;
+}
+
+#product-details-name__container {
+  margin: 2rem auto;
+  text-align: center;
+}
+
+#product-details-name {
+  font-size: 2.25rem;
+  font-family: 'CooperBlack';
+  color: #F36E33;
+  border-bottom: 2px solid #F36E33;
+}
+
+#product-details-description__container {
+  margin: 0 auto;
+  text-align: center;
+}
+
+#product-details-description {
+  font-size: 2rem;
+  font-family: 'Franklin Gothic Std';
+  display: block;
+}
+
+#product-details-price {
+  font-size: 2rem;
+  font-family: 'Franklin Gothic Std';
+}
+
+#product-details-add-btn__container {
+  margin: 2rem auto;
+  display: block;
+  text-align: center;
+}
+
+#product-details-add-btn {}
+
+#certifications__container {}
+
+#suggested-products__container {}
+
+@media only screen and (min-width: 920px) {
+  #product-details__container {
+    width: 90%;
+    max-width: 90%;
+    margin: 5rem auto;
+    height: auto;
+  }
+  
+  #product-details-content__container {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    flex-wrap: nowrap;
+    text-align: center;
+  }
+  
+  #product-details-left {
+    margin: 0 auto;
+    width: 50%;
+    max-width: 50%;
+  }
+  
+  #product-details-image__container {
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  #product-details-img {
+    width: 67%;
+  }
+  
+  #product-details-right {
+    margin: 0 auto;
+    width: 50%;
+    text-align: left;
+  }
+  
+  #product-details-name__container {
+    margin: 2rem auto;
+    text-align: left;
+  }
+  
+  #product-details-name {
+    font-size: 2.25rem;
+    font-family: 'CooperBlack';
+    color: #F36E33;
+    border-bottom: 2px solid #F36E33;
+  }
+  
+  #product-details-description__container {
+    margin: 0 auto;
+    text-align: left;
+    line-height: 6rem;
+  }
+  
+  #product-details-description {
+    font-size: 2rem;
+    font-family: 'Franklin Gothic Std';
+    display: block;
+  }
+  
+  #product-details-price {
+    font-size: 2rem;
+    font-family: 'Franklin Gothic Std';
+  }
+  
+  #product-details-add-btn__container {
+    margin: 2rem auto;
+    display: block;
+    text-align: left;
+  }
+  
+  #product-details-add-btn {}
+  
+  #certifications__container {}
+  
+  #suggested-products__container {}
+}

@@ -118,20 +118,14 @@ const ProductDetails: React.FC = () => {
               </div>
 
               <div id="product-details-right">
-                <div id="product-details-name">
-                  <div id="product-details-name__container">
-                    <span id="product-details-name">{product.name}</span>
-                  </div>
+                <div id="product-details-name__container">
+                  <span id="product-details-name">{product.name}</span>
                 </div>
 
-                <div id="product-details-description">
-                  <div id="product-details-description__container">
-                    <span id="product-details-description">{product.description}</span>
-                  </div>
+                <div id="product-details-description__container">
+                  <span id="product-details-description">{product.description}</span>
 
-                  <div id="product-details-price__container">
-                    <span id="product-details-price">{product.price}</span>
-                  </div>
+                  <span id="product-details-price">${product.price}.00</span>
                 </div>
 
                 <div id="product-details-add-btn__container">
