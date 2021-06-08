@@ -29,10 +29,13 @@ type OrderProps = {
   subtotal: number;
   taxes: number;
   total: number;
-  eta: Date;
+  delivery: {
+    status: boolean;
+    eta: Date;
+  };
 };
 
-const Order: React.FC<OrderProps> = ({ date, id, products, totalItemCount, subtotal, taxes, total, eta }) => {
+const Order: React.FC<OrderProps> = ({ date, id, products, totalItemCount, subtotal, taxes, total, delivery }) => {
   const { user } = useContext(GlobalContext);
 
   const [displayProducts, setDisplayProducts] = useState(false);
@@ -45,11 +48,11 @@ const Order: React.FC<OrderProps> = ({ date, id, products, totalItemCount, subto
     day: orderDateString.slice(8,10)
   };
 
-  const deliveryStatus = productMethods.getDeliveryStatus(eta);
+  const deliveryStatus = productMethods.getDeliveryStatus(delivery.eta);
 
-  console.log(`deliveryStatus`, deliveryStatus)
+  console.log(`deliveryStatus`, deliveryStatus);
 
-  const etaString = eta.toString();
+  const etaString = delivery.eta.toString();
     // ? eta.toString()
     // : getETA().toISOString();
 

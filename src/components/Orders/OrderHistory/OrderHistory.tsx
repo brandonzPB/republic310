@@ -24,7 +24,7 @@ const OrderHistory: React.FC = () => {
       subtotal={order.subtotal}
       taxes={order.taxes}
       total={order.total}
-      eta={order.eta}
+      delivery={order.delivery}
     />
   ));
 

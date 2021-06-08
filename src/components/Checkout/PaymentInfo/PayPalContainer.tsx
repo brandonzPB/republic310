@@ -107,7 +107,10 @@ const PayPalContainer: React.FC<PayPalProps> = ({
           subtotal: cart.subtotal,
           total: cart.total + 2.99,
           id: uuidv4(),
-          eta: getETA(),
+          delivery: {
+            status: false,
+            eta: getETA()
+          },
         };
 
         // adds order to history

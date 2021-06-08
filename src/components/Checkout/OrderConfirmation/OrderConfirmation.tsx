@@ -61,8 +61,6 @@ const OrderConfirmation: React.FC = () => {
     setTimeout(() => { changeDest('/') }, 700);
   }
 
-  const eta = getETA();
-
   const completeOrder: interfaces.CompleteCart = user.orderHistory[0];
 
   if (!completeOrder) {
@@ -87,7 +85,7 @@ const OrderConfirmation: React.FC = () => {
               subtotal={completeOrder.subtotal}
               taxes={completeOrder.taxes}
               total={completeOrder.total}
-              eta={eta}
+              delivery={completeOrder.delivery}
             />
           </div>
           : !dest
