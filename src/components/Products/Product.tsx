@@ -1,9 +1,12 @@
 import React, { useContext } from 'react';
+
 import { RouteContext } from '../../contexts/RouteContext';
 import { GlobalContext } from '../../contexts/GlobalContext';
+
 import * as interfaces from '../../modules/interfaces';
 import * as types from '../../modules/types';
 import * as productMethods from '../../modules/productMethods';
+
 import './product.css';
 
 /// THIS IS THE DISPLAY/CARD COMPONENT OF A PRODUCT ///

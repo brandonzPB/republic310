@@ -88,6 +88,38 @@ const ProductDetails: React.FC = () => {
     changeDest('/product/details');
   }
 
+  const relatedProducts: Array<{ name: string }> = productMethods.getRelatedProducts(product.name);
+
+  const SuggestedProductsComponents = relatedProducts.map(product => {
+    const productDetails = productMethods.getProductDetails(product.name, allProducts);
+
+    return (
+      <div id="suggested-product__container">
+        <div id="suggested-product-img__container">
+          <img 
+            alt={productDetails.alt}
+            id="suggested-product-img"
+            src={
+              product.name === 'The Smog' ? smogSrc
+              : product.name === 'The Hollywood' ? hollywoodSrc
+              : product.name === 'The Golden Gate' ? goldenSrc
+              : product.name === 'The Bear' ? bearSrc
+              : product.name === 'The Surfer' ? surferSrc
+              : product.name === 'The San Andreas' ? sanAndreasSrc
+              : product.name === 'The Malibu' ? malibuSrc
+              : product.name === 'The Mudslide' ? mudslideSrc
+              : bruinSrc
+            }
+          />
+        </div>
+
+        <div id="suggested-product-name__container">
+          <span id="suggested-product-name">{product.name}</span>
+        </div>
+      </div>
+    )
+  })
+
   return (
     <>
       <Helmet>
@@ -136,7 +168,10 @@ const ProductDetails: React.FC = () => {
       
             <div id="certifications__container"></div>
             
-            <div id="suggested-products__container"></div>
+            <div id="suggested-products__container">
+              <span id="suggested-products-header">Products You'll Love</span>
+              {SuggestedProductsComponents}
+            </div>
           </div>
           : !dest
             ? <Route exact path="/product/details">

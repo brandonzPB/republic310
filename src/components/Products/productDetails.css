@@ -24,19 +24,23 @@
 #product-details-image__container {
   margin: 0 auto;
   text-align: center;
+  background: none;
 }
 
 #product-details-img {
   width: 67%;
+  box-shadow: 0 50px 100px -20px rgba(50,50,93,.25),0 30px 60px -30px rgba(0,0,0,.3);
 }
 
 #product-details-right {
   margin: 0 auto;
+  background: none;
 }
 
 #product-details-name__container {
   margin: 2rem auto;
   text-align: center;
+  background: none;
 }
 
 #product-details-name {
@@ -44,10 +48,12 @@
   font-family: 'CooperBlack';
   color: #F36E33;
   border-bottom: 2px solid #F36E33;
+  background: none;
 }
 
 #product-details-description__container {
   margin: 0 auto;
+  background: none;
   text-align: center;
 }
 
@@ -55,24 +61,79 @@
   font-size: 2rem;
   font-family: 'Franklin Gothic Std';
   display: block;
+  background: none;
 }
 
 #product-details-price {
   font-size: 2rem;
   font-family: 'Franklin Gothic Std';
+  background: none;
 }
 
 #product-details-add-btn__container {
   margin: 2rem auto;
   display: block;
   text-align: center;
+  background: none;
 }
 
 #product-details-add-btn {}
 
 #certifications__container {}
 
-#suggested-products__container {}
+#suggested-products__container {
+  margin: 6rem auto;
+  text-align: center;
+  width: 80%;
+  max-width: 80%;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  border-top: 1px solid #748B42;
+}
+
+#suggested-products-header {
+  font-family: 'CooperBlack';
+  font-size: 3rem;
+  color: #748B42;
+  margin: 6rem auto 3rem auto;
+}
+
+#suggested-product__container {
+  width: 70%;
+  margin: 4rem auto;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  flex: 1;
+  box-shadow: 0 50px 100px -20px rgba(50,50,93,.25),0 30px 60px -30px rgba(0,0,0,.3);
+  padding: 2rem;
+}
+
+#suggested-product-img__container {}
+
+#suggested-product-img {
+  width: 100%;
+}
+
+#suggested-product-name__container {
+  background: none;
+  margin: 2rem auto;
+}
+
+#suggested-product-name {
+  background: none;
+  font-family: 'CooperBlack';
+  font-size: 2rem;
+  color: #F36E33;
+  border-bottom: 2px solid #F36E33;
+}
 
 @media only screen and (min-width: 920px) {
   #product-details__container {
@@ -129,7 +190,7 @@
   #product-details-description__container {
     margin: 0 auto;
     text-align: left;
-    line-height: 6rem;
+    line-height: 4rem;
   }
   
   #product-details-description {
@@ -153,5 +214,85 @@
   
   #certifications__container {}
   
-  #suggested-products__container {}
+  #suggested-products__container {
+    margin: 6rem auto;
+    text-align: center;
+    width: 80%;
+    max-width: 80%;
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    border-top: 1px solid #748B42;
+  }
+  
+  #suggested-products-header {
+    font-family: 'CooperBlack';
+    font-size: 3rem;
+    color: #748B42;
+    margin: 6rem auto 3rem auto;
+    width: 100%;
+  }
+  
+  #suggested-product__container {
+    width: 40%;
+    max-width: 40%;
+    height: 50rem;
+    margin: 4rem auto;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex: 1;
+    box-shadow: 0 50px 100px -20px rgba(50,50,93,.25),0 30px 60px -30px rgba(0,0,0,.3);
+    padding: 0;
+    transition: transform 0.2s ease 0;
+  }
+
+  #suggested-product__container:hover {
+    transform: scale(1.02);
+  }
+
+  #suggested-product__container:active {
+    transform: scale(0.98);
+  }
+  
+  #suggested-product-img__container {
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  #suggested-product-img {
+    width: 60%;
+    cursor: pointer;
+  }
+  
+  #suggested-product-name__container {
+    background: none;
+    margin: 2rem auto;
+  }
+  
+  #suggested-product-name {
+    background: none;
+    font-family: 'CooperBlack';
+    font-size: 2rem;
+    color: #F36E33;
+    border-bottom: 2px solid #F36E33;
+    cursor: pointer;
+  }
+
+  #suggested-product-name:hover {
+    color: #f77943;
+  }
+
+  #suggested-product-name:active {
+    color: #ee6024;
+  }
 }
