@@ -1,11 +1,13 @@
 import React, { useContext } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
+
 import { GlobalContext } from '../../contexts/GlobalContext';
 import { RouteContext } from '../../contexts/RouteContext';
 
 import ProgressBar from '../Checkout/ProgressBar/ProgressBar';
 import ProductCartDetails from '../Products/ProductCartDetails';
+
 import './cart.css';
 
 const Cart: React.FC = () => {
@@ -50,11 +52,7 @@ const Cart: React.FC = () => {
   const ProductComponents: any = cart.products.map((item: any) => (
     <ProductCartDetails 
       key={item.id}
-      name={item.name}
-      imageUrl={item.imageUrl}
-      price={item.price}
-      quantity={item.quantity}
-      alt={item.name}
+      item={item}
       inCart={true}
     />
   ));

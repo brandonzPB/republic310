@@ -5,19 +5,11 @@ import { useForm } from 'react-hook-form';
 
 import { GlobalContext } from '../../contexts/GlobalContext';
 import { RouteContext } from '../../contexts/RouteContext';
-import Product from './Product';
+
 import * as interfaces from '../../modules/interfaces';
 import quickSortProducts from '../../modules/quickSortProducts';
 
-import bearSrc from '../../assets/images/products/the_bear.jpg';
-import bruinSrc from '../../assets/images/products/the_bruins.jpg';
-import goldenSrc from '../../assets/images/products/the_golden_gate.jpg';
-import hollywoodSrc from '../../assets/images/products/the_hollywood.jpg';
-import malibuSrc from '../../assets/images/products/the_malibu.jpg';
-import mudslideSrc from '../../assets/images/products/the_mudslide.jpg';
-import sanAndreasSrc from '../../assets/images/products/the_san_andreas.jpg';
-import smogSrc from '../../assets/images/products/the_smog.png';
-import surferSrc from '../../assets/images/products/the_surfer.jpg';
+import Product from './Product';
 
 import './allProducts.css';
 
@@ -62,25 +54,20 @@ const AllProducts: React.FC = () => {
       quickSortProducts(sortedProducts, 'price')
     : quickSortProducts(sortedProducts, 'price').reverse();
 
-  const ProductComponents: any = sortedProducts.map((product: interfaces.DisplayProduct) => (
-    <Product 
-      key={product._id}
-      name={product.name}
-      price={product.price}
-      imageUrl={
-        product.name === 'The Smog' ? smogSrc
-          : product.name === 'The Hollywood' ? hollywoodSrc
-          : product.name === 'The Golden Gate' ? goldenSrc
-          : product.name === 'The Bear' ? bearSrc
-          : product.name === 'The Surfer' ? surferSrc
-          : product.name === 'The San Andreas' ? sanAndreasSrc
-          : product.name === 'The Malibu' ? malibuSrc
-          : product.name === 'The Mudslide' ? mudslideSrc
-          : bruinSrc
-      }
-      alt={product.description}
-    />
-  ));
+  const ProductComponents: any = sortedProducts.map((product: interfaces.DisplayProduct) => {
+    const item = {
+      name: product.name,
+      price: product.price,
+      alt: product.alt,
+    };
+
+    return (
+      <Product 
+        key={product._id}
+        item={item}
+      />
+    )
+  });
 
   return (
     <>

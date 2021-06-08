@@ -1,10 +1,14 @@
 import React, { useContext } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
+
 import { GlobalContext } from '../../../contexts/GlobalContext';
 import { RouteContext } from '../../../contexts/RouteContext';
+
 import * as interfaces from '../../../modules/interfaces';
-import Order from '../Order/Order';
+
+import OrderPreview from '../OrderPreview/OrderPreview';
+
 import './orderHistory.css';
 
 const OrderHistory: React.FC = () => {
@@ -15,16 +19,9 @@ const OrderHistory: React.FC = () => {
   const content: string = 'Review your order history with The Republic 310';
 
   const OrderComponents: any = user.orderHistory.map((order: interfaces.CompleteCart) => (
-    <Order 
+    <OrderPreview
       key={order.id}
-      date={order.date}
-      id={order.id}
-      products={order.products}
-      totalItemCount={order.totalItemCount}
-      subtotal={order.subtotal}
-      taxes={order.taxes}
-      total={order.total}
-      delivery={order.delivery}
+      order={order}
     />
   ));
 

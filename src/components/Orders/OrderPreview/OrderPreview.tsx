@@ -6,12 +6,11 @@ interface OrderPreviewProps {
   order: {
     date: Date;
     id: string;
-    products: interfaces.DisplayProduct[];
+    products: interfaces.Product[];
     totalItemCount: number;
-    eta: Date;
     delivery?: {
       status: boolean;
-      date: Date;
+      eta: Date;
     };
   };
 };

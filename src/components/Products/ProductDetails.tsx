@@ -95,7 +95,7 @@ const ProductDetails: React.FC = () => {
 
     return (
       <div id="suggested-product__container">
-        <div id="suggested-product-img__container">
+        <div id="suggested-product-img__container" onClick={() => handleNav(product.name)}>
           <img 
             alt={productDetails.alt}
             id="suggested-product-img"
@@ -114,7 +114,9 @@ const ProductDetails: React.FC = () => {
         </div>
 
         <div id="suggested-product-name__container">
-          <span id="suggested-product-name">{product.name}</span>
+          <span id="suggested-product-name">
+            {product.name}
+          </span>
         </div>
       </div>
     )
