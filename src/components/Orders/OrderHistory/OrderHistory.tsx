@@ -14,7 +14,7 @@ import './orderHistory.css';
 const OrderHistory: React.FC = () => {
   const { user } = useContext(GlobalContext);
 
-  const { dest, changeDest } = useContext(RouteContext);
+  const { dest } = useContext(RouteContext);
 
   const content: string = 'Review your order history with The Republic 310';
 

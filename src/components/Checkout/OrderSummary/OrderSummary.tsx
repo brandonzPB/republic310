@@ -4,22 +4,14 @@ import { GlobalContext } from '../../../contexts/GlobalContext';
 import ProductCartDetails from '../../Products/ProductCartDetails';
 import './orderSummary.css';
 
-// interface OrderSummaryProps {
-
-// }
-
 const OrderSummary: React.FC = () => {
   const { cart } = useContext(GlobalContext);
-  
+
   const ProductComponents: any = cart.products.map((item: any) => (
     <ProductCartDetails 
       key={item.id}
-      name={item.name}
-      imageUrl={item.imageUrl}
-      price={item.price}
-      quantity={item.quantity}
-      alt={item.name}
       inCart={false}
+      item={item}
     />
   ));
 

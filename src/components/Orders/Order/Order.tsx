@@ -11,25 +11,15 @@ import ProductCartDetails from '../../Products/ProductCartDetails';
 import './order.css';
 
 type OrderProps = {
-  date: Date;
-  id: string;
-  products: interfaces.Product[];
-  totalItemCount: number;
-  subtotal: number;
-  taxes: number;
-  total: number;
-  delivery: {
-    status: boolean;
-    eta: Date;
-  };
+  order: interfaces.CompleteCart;
 };
 
-const Order: React.FC<OrderProps> = ({ date, id, products, totalItemCount, subtotal, taxes, total, delivery }) => {
+const Order: React.FC<OrderProps> = ({ order }) => {
   const { user } = useContext(GlobalContext);
 
   const [displayProducts, setDisplayProducts] = useState(false);
 
-  const orderDateString: string = date.toString();
+  const orderDateString: string = order.date.toString();
 
   const orderDate = {
     year: orderDateString.slice(0,4),
@@ -37,11 +27,11 @@ const Order: React.FC<OrderProps> = ({ date, id, products, totalItemCount, subto
     day: orderDateString.slice(8,10)
   };
 
-  const deliveryStatus = productMethods.getDeliveryStatus(delivery.eta);
+  const deliveryStatus = productMethods.getDeliveryStatus(order.delivery.eta);
 
   console.log(`deliveryStatus`, deliveryStatus);
 
-  const etaString = delivery.eta.toString();
+  const etaString = order.delivery.eta.toString();
     // ? eta.toString()
     // : getETA().toISOString();
 
@@ -51,11 +41,11 @@ const Order: React.FC<OrderProps> = ({ date, id, products, totalItemCount, subto
     day: etaString.slice(8,10)
   };
 
-  const orderNumber: string = getOrderNumber(id);
+  const orderNumber: string = getOrderNumber(order.id);
 
   const userShippingDetails: interfaces.Address = user.shippingAddress!;
 
-  const ProductComponents: any = products.map((item: any) => (
+  const ProductComponents: any = order.products.map((item: any) => (
     <ProductCartDetails 
       key={item.id}
       inCart={false}

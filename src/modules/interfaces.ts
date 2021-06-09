@@ -37,17 +37,17 @@ export interface Cart {
 
 // COMPLETE CART (once order is placed and date is added)
 export interface CompleteCart {
-  products: Product[];
   date: Date;
-  totalItemCount: number;
-  subtotal: number;
-  taxes: number;
-  total: number;
-  id: string;
   delivery: {
     status: boolean;
     eta: Date;
   };
+  id: string;
+  products: Product[];
+  subtotal: number;
+  taxes: number;
+  total: number;
+  totalItemCount: number;
 };
 
 /// USER INTERFACES ///
@@ -118,8 +118,10 @@ export interface Path {
   // history: string[];
   // historyIndex: number;
   product: DisplayProduct;
+  order?: CompleteCart;
   changeDest: (dest: string) => void;
   changeProduct: (product: DisplayProduct) => void;
+  changeOrder: (order: CompleteCart) => void;
   orderStatus: 'complete' | 'incomplete';
   changeOrderStatus: (newStatus: 'complete' | 'incomplete') => void;
   // pushToHistory: (path: string, history: string[]) => void;

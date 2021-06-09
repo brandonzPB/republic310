@@ -14,8 +14,10 @@ const initialPath: interfaces.Path = {
     imageUrl: '',
     alt: ''
   },
+  order: undefined,
   changeDest: (dest: string): void => {},
   changeProduct: (product: interfaces.DisplayProduct): void => {},
+  changeOrder: (order: interfaces.CompleteCart): void => {},
   orderStatus: 'incomplete',
   changeOrderStatus: (newStatus: 'complete' | 'incomplete'): void => {},
 }
@@ -36,6 +38,11 @@ const RouteContextProvider: React.FC = ({ children }) => {
     dispatch({ type: 'change_product', payload: product });
   }
 
+  // CHANGE ORDER (that user is viewing)
+  const changeOrder = (order: interfaces.CompleteCart): void => {
+    dispatch({ type: 'change_order', payload: order });
+  }
+
   // CHANGE ORDER STATUS
   const changeOrderStatus = (newStatus: 'complete' | 'incomplete'): void => {
     dispatch({ type: 'change_order_status', payload: newStatus });
@@ -43,6 +50,7 @@ const RouteContextProvider: React.FC = ({ children }) => {
 
   initialPath.changeDest = changeDest;
   initialPath.changeProduct = changeProduct;
+  initialPath.changeOrder = changeOrder;
   initialPath.changeOrderStatus = changeOrderStatus;
 
   return (

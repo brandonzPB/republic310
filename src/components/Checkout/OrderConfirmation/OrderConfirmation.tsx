@@ -77,16 +77,7 @@ const OrderConfirmation: React.FC = () => {
       {
         dest === '/checkout/confirmation'
           ? <div id="order-confirmation__container">
-            <Order 
-              date={completeOrder.date}
-              id={completeOrder.id}
-              products={completeOrder.products}
-              totalItemCount={completeOrder.totalItemCount}
-              subtotal={completeOrder.subtotal}
-              taxes={completeOrder.taxes}
-              total={completeOrder.total}
-              delivery={completeOrder.delivery}
-            />
+            <Order order={completeOrder} />
           </div>
           : !dest
             ? <Route exact path="/checkout/confirmation">

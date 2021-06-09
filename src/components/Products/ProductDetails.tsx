@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useContext, useRef } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 
@@ -7,6 +7,8 @@ import { RouteContext } from '../../contexts/RouteContext';
 
 import * as interfaces from '../../modules/interfaces';
 import * as productMethods from '../../modules/productMethods';
+
+import SimpleProduct from './SimpleProduct';
 
 import bearSrc from '../../assets/images/products/the_bear.jpg';
 import bruinSrc from '../../assets/images/products/the_bruins.jpg';
@@ -21,14 +23,20 @@ import surferSrc from '../../assets/images/products/the_surfer.jpg';
 import './productDetails.css';
 
 const ProductDetails: React.FC = () => {
-  const { allProducts, cart, updateTotalItemCount, updateSubtotal, updateQuantity, addToCart } = useContext(GlobalContext);
+  const { addToCart, allProducts, cart, updateSubtotal, updateQuantity, updateTotalItemCount } = useContext(GlobalContext);
 
-  const { dest, changeDest, product, changeProduct } = useContext(RouteContext);
+  const { dest, changeDest, changeProduct, product } = useContext(RouteContext);
+
+  const productRef = useRef(true);
 
   const content: string = 'Learn more about our top quality hemp products at The Republic 310';
 
   useEffect(() => {
     console.log(product);
+
+    return () => {
+      productRef.current = false;
+    }
   }, []);
 
   if (product.price === 0) {
@@ -94,31 +102,10 @@ const ProductDetails: React.FC = () => {
     const productDetails = productMethods.getProductDetails(product.name, allProducts);
 
     return (
-      <div id="suggested-product__container">
-        <div id="suggested-product-img__container" onClick={() => handleNav(product.name)}>
-          <img 
-            alt={productDetails.alt}
-            id="suggested-product-img"
-            src={
-              product.name === 'The Smog' ? smogSrc
-              : product.name === 'The Hollywood' ? hollywoodSrc
-              : product.name === 'The Golden Gate' ? goldenSrc
-              : product.name === 'The Bear' ? bearSrc
-              : product.name === 'The Surfer' ? surferSrc
-              : product.name === 'The San Andreas' ? sanAndreasSrc
-              : product.name === 'The Malibu' ? malibuSrc
-              : product.name === 'The Mudslide' ? mudslideSrc
-              : bruinSrc
-            }
-          />
-        </div>
-
-        <div id="suggested-product-name__container">
-          <span id="suggested-product-name">
-            {product.name}
-          </span>
-        </div>
-      </div>
+      <SimpleProduct 
+        handleNav={handleNav}
+        product={productDetails} 
+      />
     )
   })
 

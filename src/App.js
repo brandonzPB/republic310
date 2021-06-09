@@ -15,6 +15,7 @@ import Index from './components/Index/Index';
 
 import NavBar from './components/NavBar/NavBar';
 import OrderConfirmation from './components/Checkout/OrderConfirmation/OrderConfirmation';
+import OrderDetails from './components/Orders/OrderDetails/OrderDetails';
 import OrderHistory from './components/Orders/OrderHistory/OrderHistory';
 
 import PasswordUpdate from './components/User/Update/PasswordUpdate';
@@ -54,6 +55,7 @@ function App() {
             <Route exact path="/checkout/payment" component={PaymentContainer} />
             <Route exact path="/checkout/shipping" component={ShippingDetails} />
 
+            <Route exact path="/order/details" component={OrderDetails} />
             <Route exact path="/order/history" component={OrderHistory} />
 
             <Route exact path="/product/details" component={ProductDetails} />
