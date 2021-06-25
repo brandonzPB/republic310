@@ -33,9 +33,14 @@
 
 #cart-left-header {
   font-size: 2.5rem;
+  font-family: 'Franklin Gothic Std', sans-serif;
 }
 
-#cart-products__container {}
+#cart-products__container {
+  margin: 0 auto;
+  width: 90%;
+  text-align: center;
+}
 
 #cart-right__container {
   margin-right: auto;

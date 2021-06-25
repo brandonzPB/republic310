@@ -16,18 +16,11 @@ const Body: React.FC = () => {
 
   const ProductComponents: any = topProducts.map((product: any, index: number) => (
     <Product 
-      name={product.name}
-      price={product.price}
-      imageUrl={
-        product.name === 'The Hollywood' ? hollywoodSrc
-          : product.name === 'The Malibu' ? malibuSrc
-          : sanAndreasSrc
-      }
-      alt={product.alt}
+      item={product}
       key={index}
     />
   ));
-  
+
   return (
     <div id="body__container">
       <span id="hot-text">What's Hot</span>

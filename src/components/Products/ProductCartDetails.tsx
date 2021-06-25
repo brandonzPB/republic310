@@ -117,6 +117,8 @@ const ProductCartDetails: React.FC<CartProduct> = ({ inCart, item }: CartProduct
       </div>
 
       <div id="product-thumbnail-quantity-change__container" style={{ display: inCart ? 'block' : 'none' }}>
+        <span id="product-quantity-label">Quantity:</span>
+        
         <div id="product-quantity-change__container">
           <button id="decrement-quantity-btn" onClick={decrementQuantity}>-</button>
           <span className="product-thumbnail-quantity">{qty.amount}</span>

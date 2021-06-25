@@ -1,1 +1,125 @@
-/* box-shadow: 0 50px 100px -20px rgba(50,50,93,.25),0 30px 60px -30px rgba(0,0,0,.3); */
+#product-thumbnail__container {
+  margin: 0 auto;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#product-thumbnail-name__container {
+  margin: 0 auto;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1.5rem auto 0.5rem auto;
+}
+
+#product-thumbnail-name {
+  font-family: 'CooperBlack', sans-serif;
+  font-size: 2rem;
+  color: #758A42;
+}
+
+#product-thumbnail-image__container {
+  margin: 1rem auto;
+}
+
+#product-thumbnail-image {
+  width: 80%;
+}
+
+#product-thumbnail-view-btn {
+  border: none;
+  margin: 1rem auto;
+  border-radius: 4px;
+  font-size: 1.35rem;
+  font-weight: 400;
+  width: 11rem;
+  height: 4rem;
+  background-color: #fde7c0;
+  transition: transform 0.2s ease;
+  font-family: 'Franklin Gothic Std', sans-serif;
+}
+
+#product-thumbnail-price__container {
+  margin: -1rem auto 0.5rem auto;
+  text-align: center;
+}
+
+#product-thumbnail-price {
+  font-family: 'Franklin Gothic Std', sans-serif;
+  font-size: 1.3rem;
+}
+
+#product-thumbnail-quantity-change__container {
+  margin: 0 auto;
+}
+
+#product-quantity-change__container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  box-shadow: 0 0 3px black;
+  width: 15rem;
+  background-color: #758A42;
+}
+
+#product-quantity-label {
+  background: none;
+  font-size: 1.5rem;
+  margin: 1rem auto 0.5rem auto;
+  display: block;
+}
+
+#decrement-quantity-btn {
+  font-size: 3rem;
+  border: none;
+  width: 15%;
+  text-align: center;
+  font-weight: 600;
+  color: white;
+  background-color: #758A42;
+}
+
+.product-thumbnail-quantity {
+  width: 45%;
+  font-size: 2rem;
+  text-align: center;
+  color: white;
+  background-color: #758A42;
+  font-weight: 600;
+}
+
+#increment-quantity-btn {
+  text-align: center;
+  border: none;
+  width: 20%;
+  font-size: 2.7rem;
+  font-weight: 600;
+  color: white;
+  background-color: #758A42;
+}
+
+#product-quantity-update__container {
+  margin: 1rem auto;
+}
+
+#product-quantity-update-btn {
+  background-color: #fdca77;
+  font-size: 1.5rem;
+  width: 14rem;
+  height: 4rem;
+  border-radius: 4px;
+  border: none;
+  box-shadow: 0 0 3px black;
+  font-family: 'Franklin Gothic Std', sans-serif;
+}
+
+#product-thumbnail-quantity-display__container {}
+
+@media only screen and (min-width: 920px) {}
