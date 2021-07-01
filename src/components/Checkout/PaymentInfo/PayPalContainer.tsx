@@ -135,9 +135,6 @@ const PayPalContainer: React.FC<PayPalProps> = ({
         createOrder={createOrder}
         onApprove={onApprove}
         onError={onError}
-        // options={{
-        //   clientId: "PRODUCTION_CLIENT_ID"
-        // }}
       />
     </div>
   )

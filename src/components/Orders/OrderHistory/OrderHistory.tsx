@@ -14,7 +14,7 @@ import './orderHistory.css';
 const OrderHistory: React.FC = () => {
   const { user } = useContext(GlobalContext);
 
-  const { dest } = useContext(RouteContext);
+  const { dest, changeDest } = useContext(RouteContext);
 
   const content: string = 'Review your order history with The Republic 310';
 
@@ -24,6 +24,10 @@ const OrderHistory: React.FC = () => {
       order={order}
     />
   ));
+
+  const routeToProducts = () => {
+    changeDest('/products');
+  }
 
   return (
     <>
@@ -37,7 +41,18 @@ const OrderHistory: React.FC = () => {
           ? <div id="order-history__container">
             <span id="order-history-header">Your Orders</span>
             <div id="order-history-orders">
-              {OrderComponents}
+              {
+                OrderComponents.length
+                  ? OrderComponents
+                  : <>
+                    <span id="no-orders-text">
+                      You don't have any orders!
+                    </span>
+                    <span id="products-link-text" onClick={routeToProducts}>
+                      Let's change that. Click here to view the finest hemp products on the market.
+                    </span>
+                  </>
+              }
             </div>
           </div>
           : !dest

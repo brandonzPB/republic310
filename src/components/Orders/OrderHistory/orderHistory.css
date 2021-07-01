@@ -1,7 +1,59 @@
 #order-history__container {
   margin: 4rem auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  flex-wrap: wrap;
+  width: 90%;
 }
 
-#order-history-header {}
+#order-history-header {
+  font-size: 2rem;
+  font-family: 'CooperBlack', sans-serif;
+  color: #ED6E33;
+  margin: 2rem auto;
+  border-bottom: 2px solid #ED6E33;
+}
+
+#no-orders-text {
+  font-size: 1.75rem;
+  font-family: 'Franklin Gothic Std', sans-serif;
+  display: block;
+  color: #758A42;
+  margin: 2rem auto;
+}
+
+#products-link-text {
+  font-size: 1.75rem;
+  font-family: 'Franklin Gothic Std', sans-serif;
+  color: #758A42;
+  margin: 2rem auto;
+}
 
 #order-history-orders {}
+
+@media only screen and (min-width: 920px) {
+  #order-history__container {
+    margin: 8rem auto;
+  }
+
+  #order-history-header {
+    font-size: 3rem;
+  }
+
+  #no-orders-text,
+  #products-link-text {
+    font-size: 2.25rem;
+  }
+
+  #products-link-text:hover {
+    color: #81964e;
+  }
+
+  #products-link-text:active {
+    color: #697e36;
+  }
+}

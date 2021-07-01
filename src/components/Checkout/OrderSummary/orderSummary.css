@@ -7,12 +7,15 @@
   max-width: 50%;
   box-shadow: 0 50px 100px -20px rgba(50,50,93,.25),0 30px 60px -30px rgba(0,0,0,.3);
   background: none;
+  margin: 4rem auto;
 }
 
 #order-summary-header {
   font-size: 2rem;
-  font-weight: 600;
   margin: 2rem auto;
+  background: none;
+  font-family: 'Franklin Gothic Std', sans-serif;
+  font-weight: 400;
 }
 
 #order-summary-details__container {

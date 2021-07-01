@@ -131,7 +131,7 @@ const ProductCartDetails: React.FC<CartProduct> = ({ inCart, item }: CartProduct
       </div>
 
       <div id="product-thumbnail-quantity-display__container" style={{ display: inCart ? 'none' : 'block' }}>
-        <span className="product-thumbnail-quantity">Quantity: {item.quantity}</span>
+        <span className="product-thumbnail-quantity-constant">Quantity: {item.quantity}</span>
       </div>
     </div>
   )
