@@ -8,6 +8,8 @@
   align-items: center;
   justify-content: center;
   flex: 1;
+  margin: 0 auto;
+  text-align: center;
 }
 
 #top-footer__container {
@@ -100,7 +102,7 @@ blue: #6DABA0
 @media only screen and (min-width: 920px) {
   #footer__container {
     width: 100%;
-    height: auto;
+    height: 35rem;
     padding: 2rem 0;
     background-color: #6DABA0;
     display: flex;
@@ -119,8 +121,8 @@ blue: #6DABA0
     align-items: center;
     justify-content: center;
     flex: 1;
-    flex-wrap: nowrap;
-    width: 50%;
+    flex-wrap: wrap;
+    width: 70%;
   }
   
   #contact-footer__container {
@@ -128,7 +130,7 @@ blue: #6DABA0
     background: none;
     margin: 3rem auto;
     text-align: center;
-    height: 10rem;
+    height: auto;
     display: flex;
     flex: 1;
     flex-wrap: wrap;

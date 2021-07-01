@@ -11,12 +11,7 @@ const Footer: React.FC = () => {
       <div id="top-footer__container">
         <div id="contact-footer__container">
           <span id="contact-footer-header">Contact Us</span>
-          <a
-            href="mailto:contact@republic310.com"
-            id="email"
-          >
-            contact@republic310.com
-          </a>
+          <ContactForm />
         </div>
 
         <div id="socials-footer__container">

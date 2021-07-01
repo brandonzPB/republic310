@@ -5,14 +5,12 @@ import './contactForm.css';
 
 interface ContactForm {
   email: string;
-  error: boolean;
   feedback: string;
   name: string;
 };
 
 const initialState: ContactForm = {
   email: '',
-  error: false,
   feedback: '',
   name: '',
 };
@@ -24,37 +22,47 @@ const ContactForm: React.FC = () => {
   const [form, setForm] = useState<ContactForm>(initialState);
 
   const sendEmail = (e: any) => {
-    emailjs.sendForm('gmail', 'template_odx9wac', e.currentTarget, 'user_dgi0l1PJ4iuzlIsyG6DBd')
+    // e: [name, email, feedback]
+    emailjs.sendForm('service_t3n1a96', 'template_odx9wac', e.currentTarget, 'user_dgi0l1PJ4iuzlIsyG6DBd')
       .catch((err: any) => console.error(err));
   }
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {}
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    setForm({
+      ...form,
+      [e.currentTarget.name]: e.currentTarget.value,
+    })
+  }
   
-  const handleTextAreaChange = (e: React.ChangeEvent<HTMLTextAreaElement>): void => {}
+  const handleTextAreaChange = (e: React.ChangeEvent<HTMLTextAreaElement>): void => {
+    setForm({
+      ...form,
+      feedback: e.currentTarget.value,
+    })
+  }
 
   const handleSubmit = (e: React.SyntheticEvent): void => {
     e.preventDefault();
 
-    setForm({ ...form, error: false });
-
-    if (!(form.email.includes('@'))) {
-      return setForm({ ...form, error: true });
-    }
+    setLoading(loading => !loading);
 
     sendEmail(e);
+
+    setLoading(loading => !loading);
+    setFormSent(sent => !sent);
   }
 
   return (
-    <>
+    <div id="contact-form__container">
       {
         loading
           ? <>
             <span id="contact-form-loading">Sending feedback...</span>
           </>
           : formSent
-            ? <>
+            ? <div id="form-sent-text__container">
               <span id="form-sent-text">Thank you! We greatly appreciate your feedback.</span>
-            </>
+            </div>
             : <form onSubmit={handleSubmit}>
               <input
                 className="contact-input"
@@ -74,11 +82,8 @@ const ContactForm: React.FC = () => {
                 value={form.email}
               />
 
-              {form.error && (
-                <div id="contact-form-err">Please enter a valid email</div>
-              )}
-
               <textarea
+                id="contact-feedback-input"
                 onChange={handleTextAreaChange}
                 value={form.feedback}
               />
@@ -86,7 +91,7 @@ const ContactForm: React.FC = () => {
               <button id="contact-form-btn">Send Feedback</button>
             </form>
       }
-    </>
+    </div>
   )
 }
 
