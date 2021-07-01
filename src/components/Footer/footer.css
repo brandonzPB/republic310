@@ -37,17 +37,6 @@
   font-family: 'CooperBlack';
 }
 
-#email,
-#email:visited,
-#email:link {
-  font-size: 1.75rem;
-  background: none;
-  display: block;
-  text-decoration: none;
-  margin: 1.5rem auto 0 auto;
-  font-family: 'Franklin Gothic Std';
-}
-
 #socials-footer__container {
   width: 100%;
   background: none;
@@ -77,13 +66,63 @@
   transition: transform 0.2s ease 0;
 }
 
-#insta-link {
+#insta-link,
+#facebook-link,
+#twitter-link {
   background: none;
 }
 
-#insta {
+#insta,
+#facebook,
+#twitter {
   background: transparent;
   font-size: 2rem;
+  margin: 0 0.5rem;
+}
+
+#email__container {
+  background: none;
+  margin-top: 4rem;
+}
+
+#email,
+#email:visited,
+#email:link,
+#email-text {
+  font-size: 1.75rem;
+  background: none;
+  display: block;
+  text-decoration: none;
+  margin: 1.5rem auto 0 auto;
+  font-family: 'Franklin Gothic Std';
+}
+
+#site-links__container {
+  margin: 2rem auto;
+  background: none;
+}
+
+#site-links-header {
+  background: none;
+  font-size: 2rem;
+  font-weight: 400;
+  font-family: 'CooperBlack';
+  color: white;
+  display: block;
+  margin-bottom: 2rem;
+}
+
+#site-links {
+  margin: 0 auto;
+  background: none;
+}
+
+.site-link {
+  list-style-type: none;
+  background: none;
+  font-family: 'Franklin Gothic Std', sans-serif;
+  font-size: 1.9rem;
+  margin: 0.5rem auto;
 }
 
 #bottom-footer__container {
@@ -102,7 +141,7 @@ blue: #6DABA0
 @media only screen and (min-width: 920px) {
   #footer__container {
     width: 100%;
-    height: 35rem;
+    height: auto;
     padding: 2rem 0;
     background-color: #6DABA0;
     display: flex;
@@ -145,22 +184,6 @@ blue: #6DABA0
     font-weight: 400;
     color: white;
     font-family: 'CooperBlack';
-  }
-  
-  #email,
-  #email:visited,
-  #email:link {
-    font-size: 1.75rem;
-    background: none;
-    display: block;
-    text-decoration: none;
-    transition: color 0.3s ease 0;
-    font-family: 'Franklin Gothic Std';
-  }
-  
-  #email:hover {
-    color: #ddd;
-    border-bottom: none;
   }
   
   #socials-footer__container {
@@ -211,6 +234,61 @@ blue: #6DABA0
   #insta {
     background: transparent;
     font-size: 2rem;
+  }
+
+  #email__container {
+    margin: 0 auto;
+  }
+
+  #email,
+  #email:visited,
+  #email:link,
+  #email-text {
+    font-size: 1.75rem;
+    background: none;
+    display: block;
+    text-decoration: none;
+    transition: color 0.3s ease 0;
+    font-family: 'Franklin Gothic Std';
+  }
+  
+  #email:hover {
+    color: #ddd;
+    border-bottom: none;
+  }
+
+  #site-links__container {
+    margin: 2rem auto;
+    margin-left: 4rem;
+    background: none;
+  }
+  
+  #site-links-header {
+    background: none;
+    font-size: 2rem;
+    font-weight: 400;
+    font-family: 'CooperBlack';
+    color: white;
+    display: block;
+    margin-bottom: 2rem;
+  }
+  
+  #site-links {
+    margin: 0 auto;
+    background: none;
+  }
+  
+  .site-link {
+    list-style-type: none;
+    background: none;
+    font-family: 'Franklin Gothic Std', sans-serif;
+    font-size: 1.9rem;
+    margin: 0.5rem auto;
+    cursor: pointer;
+  }
+
+  .site-link:hover {
+    color: white;
   }
   
   #bottom-footer__container {
