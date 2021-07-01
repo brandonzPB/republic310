@@ -18,7 +18,7 @@ const OrderConfirmation: React.FC = () => {
 
   const confirmationRef = useRef(true);
 
-  const content: string = 'We hope you enjoy your order from The Republic 310';
+  const content: string = 'We hope you enjoy the best organic hemp has to offer from The Republic 310';
 
   useEffect(() => {
     if (!confirmationRef.current) {
@@ -70,7 +70,7 @@ const OrderConfirmation: React.FC = () => {
   return (
     <>
       <Helmet>
-        <title>Your Order Confirmation | The Republic 310</title>
+        <title>Confirming your order of the best hemp on the market from The Republic 310</title>
         <meta name="description" content={content} />
       </Helmet>
 

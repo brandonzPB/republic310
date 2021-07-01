@@ -14,7 +14,7 @@ const ShippingDetails: React.FC = () => {
 
   const { dest, changeDest } = useContext(RouteContext);
 
-  const content: string = 'Please input your shipping and contact information to receive your order from The Republic 310';
+  const content: string = 'Secure your address so you can receive the greatest organic hemp products available to you';
 
   if (cart.total === 0 || cart.totalItemCount === 0) {
     changeDest('/');
@@ -23,7 +23,7 @@ const ShippingDetails: React.FC = () => {
   return (
     <>
       <Helmet>
-        <title>Shipping and Contact Info | The Republic 310</title>
+        <title>Help us Help you receive the best organic hemp products with The Republic 310</title>
         <meta name="description" content={content} />
       </Helmet>
 

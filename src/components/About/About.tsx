@@ -5,15 +5,15 @@ import { RouteContext } from '../../contexts/RouteContext';
 
 import './about.css';
 
-const About: React.FC = ({ ...props }) => {
+const About: React.FC = () => {
   const { dest, } = useContext(RouteContext);
 
-  const content: string = "Our mission at The Republic 310 is to provide the best hemp product for your every need."
+  const content: string = "Our mission at The Republic 310 is to provide the best hemp products for your every need."
 
   return (
     <>
       <Helmet>
-        <title>About Us | The Republic 310</title>
+        <title>Learn More About the Best Hemp Products on the Market with The Republic 310</title>
         <meta name="description" content={content} />
       </Helmet>
 
@@ -59,7 +59,6 @@ const About: React.FC = ({ ...props }) => {
               
               <span id="sign-off">The Republic 310 Team</span>
             </span>
-
           </div>
           : !dest
           ? <Route exact path="/about">

@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { Route, Redirect } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 import { GlobalContext } from '../../../contexts/GlobalContext';
 import { RouteContext } from '../../../contexts/RouteContext';
 
@@ -12,6 +13,8 @@ const PaymentContainer: React.FC = () => {
   const { cart } = useContext(GlobalContext);
 
   const { dest, changeDest, orderStatus } = useContext(RouteContext);
+
+  const content = 'Secure your payment for the best organic hemp products on the market';
 
   if (cart.totalItemCount === 0 || cart.products.length === 0) {
     setTimeout(() => {
@@ -26,6 +29,10 @@ const PaymentContainer: React.FC = () => {
 
   return(
     <>
+      <Helmet>
+        <title>Secure your payment for the best organic hemp products on the market from The Republic 310</title>
+        <meta name="description" content={content} />
+      </Helmet>
       {
         dest === '/checkout/payment'
           ? <div id="payment__container">

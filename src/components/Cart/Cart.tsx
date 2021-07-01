@@ -15,7 +15,7 @@ const Cart: React.FC = () => {
 
   const { dest, changeDest, product } = useContext(RouteContext);
 
-  const content: string = 'Add some items to your cart';
+  const content: string = 'Select from the best hemp products on the market.';
 
   if (cart.totalItemCount === 0 || cart.products.length === 0) {
     setTimeout(() => { changeDest('/') }, 700);
@@ -60,7 +60,7 @@ const Cart: React.FC = () => {
   return (
     <>
       <Helmet>
-        <title>Your Cart | The Republic 310</title>
+        <title>View your favorite producst from The Republic 310</title>
         <meta name="description" content={content} />
       </Helmet>
 
