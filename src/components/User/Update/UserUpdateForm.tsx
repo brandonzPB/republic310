@@ -63,7 +63,7 @@ const UserUpdateForm: React.FC<UpdateFormProps> = ({
 
   return (
     <div id="user-update__container">
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit)} id="user-update-details-form">
         <input 
           style={{ backgroundColor: errors.email ? 'pink' : 'white' }}
           className="update-input"
@@ -76,7 +76,7 @@ const UserUpdateForm: React.FC<UpdateFormProps> = ({
         />
 
         {errors.email && errors.email.type === 'validate' && (
-          <div style={{ color: 'red' }}>Email is already in use</div>
+          <div id="update-error-text">Email is already in use</div>
         )}
 
         <input 
@@ -90,7 +90,9 @@ const UserUpdateForm: React.FC<UpdateFormProps> = ({
           ref={register({ required: false })}
         />
 
-        {errors.phoneNumber && <div>Please enter a valid phone number</div>}
+        {errors.phoneNumber && (
+          <div id="update-error-text">Please enter a valid phone number</div>
+        )}
 
         <input 
           className="update-input update-password-input"
@@ -100,9 +102,13 @@ const UserUpdateForm: React.FC<UpdateFormProps> = ({
           ref={register({ required: true, validate: isCorrectPassword })}
         />
 
-        {errors.password && errors.password.type === 'validate' && <div>Incorrect password</div>}
+        {errors.password && errors.password.type === 'validate' && (
+          <div id="update-error-text">Incorrect password</div>
+        )}
         
-        {errors.password && errors.password.type !== 'validate' && <div>Please enter your password</div>}
+        {errors.password && errors.password.type !== 'validate' && (
+          <div id="update-error-text">Please enter your password</div>
+        )}
 
         <input 
           className="update-input"

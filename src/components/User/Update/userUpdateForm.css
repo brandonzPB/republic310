@@ -1,0 +1,29 @@
+#user-update__container {}
+
+#user-update-details-form {}
+
+.update-input {}
+
+#update-email-input {}
+
+#update-phone-input {}
+
+.update-password-input {}
+
+#update-street-input {}
+
+#update-city-input {}
+
+#update-zipCode-input {}
+
+#update-state-input {}
+
+#update-country-input {}
+
+#update-error-text {
+  color: 'red';
+}
+
+#submit-update-btn {}
+
+@media only screen and (min-width: 920px) {}
