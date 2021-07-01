@@ -75,6 +75,10 @@
   transition: transform 0.2s ease 0;
 }
 
+#insta-link {
+  background: none;
+}
+
 #insta {
   background: transparent;
   font-size: 2rem;
