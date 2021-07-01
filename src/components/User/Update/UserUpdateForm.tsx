@@ -63,6 +63,8 @@ const UserUpdateForm: React.FC<UpdateFormProps> = ({
 
   return (
     <div id="user-update__container">
+      <span id="user-update-header">Update your account info</span>
+      
       <form onSubmit={handleSubmit(onSubmit)} id="user-update-details-form">
         <input 
           style={{ backgroundColor: errors.email ? 'pink' : 'white' }}

@@ -21,10 +21,15 @@ const Footer: React.FC = () => {
           <span id="socials-footer-header">Stay Connected</span>
           
           <div id="socials__container">
-            <GrInstagram 
-              className="social-icon"
-              id="insta" 
-            />
+            <a
+              href="https://www.instagram.com/republic.310/"
+              id="insta-link"
+            >
+              <GrInstagram 
+                className="social-icon"
+                id="insta" 
+              />
+            </a>
           </div>
         </div>
       </div>
