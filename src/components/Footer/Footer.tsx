@@ -1,6 +1,8 @@
 import React from 'react';
 import { GrInstagram } from 'react-icons/gr';
 
+import ContactForm from './ContactForm';
+
 import './footer.css';
 
 const Footer: React.FC = () => {
