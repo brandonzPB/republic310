@@ -29,7 +29,7 @@ const ProductDetails: React.FC = () => {
 
   const productRef = useRef(true);
 
-  const content: string = 'Learn more about our top quality hemp products at The Republic 310';
+  const content: string = 'Learn more about the highest quality hemp products on the market from The Republic 310';
 
   useEffect(() => {
     console.log(product);
@@ -112,7 +112,7 @@ const ProductDetails: React.FC = () => {
   return (
     <>
       <Helmet>
-        <title>Product Info | The Republic 310</title>
+        <title>Learn more about our completely organic hemp products</title>
         <meta name="description" content={content} />
       </Helmet>
 

@@ -20,7 +20,7 @@ const AllProducts: React.FC = () => {
 
   const [sort, setSort] = useState({ type: '' });
 
-  const content: string = 'View the best hemp has to offer with The Republic 310';
+  const content: string = 'View the best completely organic hemp has to offer with The Republic 310';
 
   const { register, handleSubmit } = useForm();
 
@@ -72,7 +72,7 @@ const AllProducts: React.FC = () => {
   return (
     <>
       <Helmet>
-        <title>The Finest Hemp Products | The Republic 310</title>
+        <title>The Best Organic Hemp Products from The Republic 310</title>
         <meta name="description" content={content} />
       </Helmet>
 

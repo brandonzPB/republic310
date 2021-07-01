@@ -8,12 +8,12 @@ import Body from './Body/Body'
 const Index: React.FC = () => {
   const { dest } = useContext(RouteContext); 
 
-  const content: string = 'The Republic 310 | Born and Raised in LA. Free of pesticides and preservatives';
+  const content: string = 'Hemp born and Raised in LA. Completely organic and free of pesticides and preservatives';
 
   return (
     <>
       <Helmet>
-        <title>The Republic 310 | Hemp Re-imagined</title>
+        <title>The Best Organic Hemp on the Market</title>
         <meta name="description" content={content} />
       </Helmet>
       
