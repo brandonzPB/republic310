@@ -2,9 +2,16 @@ import React from 'react';
 
 import './review.css';
 
-const Review: React.FC = () => {
+interface ReviewProps {
+  author: string;
+  review: string;
+};
+
+const Review: React.FC<ReviewProps> = ({ author, review }) => {
   return (
     <div id="review__container">
+      <span id="review-content">{review}</span>
+      <span id="review-author">{author}</span>
     </div>
   )
 }

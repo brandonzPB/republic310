@@ -40,6 +40,8 @@ export const testimonials = [
   },
   {
     author: 'Justin Nguyen',
-    review: '',
+    review: `
+      
+    `,
   },
 ];
