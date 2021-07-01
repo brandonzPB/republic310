@@ -23,8 +23,8 @@ const ContactForm: React.FC = () => {
 
   const [form, setForm] = useState<ContactForm>(initialState);
 
-  const sendEmail = e => {
-    emailjs.sendForm('gmail', 'template_odx9wac', e.target, 'your_user_id')
+  const sendEmail = (e: any) => {
+    emailjs.sendForm('gmail', 'template_odx9wac', e.currentTarget, 'user_dgi0l1PJ4iuzlIsyG6DBd')
       .catch((err: any) => console.error(err));
   }
 
@@ -40,6 +40,8 @@ const ContactForm: React.FC = () => {
     if (!(form.email.includes('@'))) {
       return setForm({ ...form, error: true });
     }
+
+    sendEmail(e);
   }
 
   return (
