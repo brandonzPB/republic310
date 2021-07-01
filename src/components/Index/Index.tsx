@@ -2,8 +2,10 @@ import React, { useContext } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import { RouteContext } from '../../contexts/RouteContext';
+
 import Header from './Header/Header';
 import Body from './Body/Body'
+import Testimonials from './Testimonials/Testimonials';
 
 const Index: React.FC = () => {
   const { dest } = useContext(RouteContext); 
@@ -22,6 +24,7 @@ const Index: React.FC = () => {
           ? <div id="index__container">
             <Header />
             <Body />
+            <Testimonials />
           </div>
           : !dest
             ? <Route exact path="/">
