@@ -73,7 +73,9 @@
   margin: 0 auto;
 }
 
-#password-input__container {}
+#password-input__container {
+  margin-bottom: 2rem;
+}
 
 #create-password-input {}
 

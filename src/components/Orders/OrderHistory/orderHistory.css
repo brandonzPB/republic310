@@ -31,6 +31,7 @@
   font-family: 'Franklin Gothic Std', sans-serif;
   color: #758A42;
   margin: 2rem auto;
+  cursor: pointer;
 }
 
 #order-history-orders {}
