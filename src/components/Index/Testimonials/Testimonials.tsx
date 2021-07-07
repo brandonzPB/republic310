@@ -39,11 +39,11 @@ const Testimonials = () => {
           <span id="testimonial-content">"{testimonial.review}"</span>
           <span id="testimonial-author">{testimonial.author}</span>
         </div>
+      </div>
 
-        <div id="carousel-btns__container">
-          <button onClick={prevReview}>Previous</button>
-          <button onClick={nextReview}>Next</button>
-        </div>
+      <div id="carousel-btns__container">
+        <button className="carousel-btn" onClick={prevReview}>Previous</button>
+        <button className="carousel-btn" onClick={nextReview}>Next</button>
       </div>
     </div>
   )
