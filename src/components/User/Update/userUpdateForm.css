@@ -1,10 +1,32 @@
-#user-update__container {}
+#user-update__container {
+  margin: 4rem auto;
+  width: 80%;
+  text-align: center;
+}
 
-#user-update-header {}
+#user-update-header {
+  text-align: center;
+  font-family: 'CooperBlack', sans-serif;
+  margin: 2rem auto;
+  font-weight: 400;
+  font-size: 2rem;
+  color: #748B42;
+}
 
-#user-update-details-form {}
+#user-update-details-form {
+  margin: 2rem auto;
+}
 
-.update-input {}
+.user-update-label {
+  font-size: 1.5rem;
+  font-family: 'Franklin Gothic Std', sans-serif;
+  font-weight: 400;
+  margin: 0 auto;
+}
+
+.update-input {
+  margin: 1rem auto 3.5rem auto;
+}
 
 #update-email-input {}
 
@@ -26,6 +48,27 @@
   color: 'red';
 }
 
-#submit-update-btn {}
+#submit-update-btn {
+  background-color: #fde7c0;
+  border: none;
+  border-radius: 4px;
+  width: 13rem;
+  height: 5rem;
+  font-size: 1.5rem;
+  font-family: 'Franklin Gothic Std', sans-serif;
+}
 
-@media only screen and (min-width: 920px) {}
+@media only screen and (min-width: 920px) {
+  #submit-update-btn {
+    transition: transform 0.2s ease;
+  }
+
+  #submit-update-btn:hover {
+    transform: scale(1.05);
+  }
+
+  #submit-update-btn:active {
+    background-color: #ffdea4;
+    transform: scale(0.95);
+  }
+}

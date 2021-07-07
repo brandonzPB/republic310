@@ -66,6 +66,7 @@ const UserUpdateForm: React.FC<UpdateFormProps> = ({
       <span id="user-update-header">Update your account info</span>
       
       <form onSubmit={handleSubmit(onSubmit)} id="user-update-details-form">
+        <span className="user-update-label">Email</span>
         <input 
           style={{ backgroundColor: errors.email ? 'pink' : 'white' }}
           className="update-input"
@@ -81,6 +82,7 @@ const UserUpdateForm: React.FC<UpdateFormProps> = ({
           <div id="update-error-text">Email is already in use</div>
         )}
 
+        <span className="user-update-label">Phone Number</span>
         <input 
           style={{ backgroundColor: errors.phoneNumber ? 'pink' : 'white' }}
           className="update-input"
@@ -96,6 +98,7 @@ const UserUpdateForm: React.FC<UpdateFormProps> = ({
           <div id="update-error-text">Please enter a valid phone number</div>
         )}
 
+        <span className="user-update-label">Password</span>
         <input 
           className="update-input update-password-input"
           type="password"
@@ -112,6 +115,7 @@ const UserUpdateForm: React.FC<UpdateFormProps> = ({
           <div id="update-error-text">Please enter your password</div>
         )}
 
+        <span className="user-update-label">Street</span>
         <input 
           className="update-input"
           id="update-street-input"
@@ -122,6 +126,7 @@ const UserUpdateForm: React.FC<UpdateFormProps> = ({
           ref={register({ required: false })}
         />
         
+        <span className="user-update-label">City</span>
         <input 
           className="update-input"
           id="update-city-input"
@@ -132,6 +137,7 @@ const UserUpdateForm: React.FC<UpdateFormProps> = ({
           ref={register({ required: false })}
         />
 
+        <span className="user-update-label">Zip Code</span>
         <input 
           className="update-input"
           id="update-zipCode-input"
@@ -142,6 +148,7 @@ const UserUpdateForm: React.FC<UpdateFormProps> = ({
           ref={register({ required: false })}
         />
 
+        <span className="user-update-label">State</span>
         <input 
           className="update-input"
           id="update-state-input"
@@ -152,6 +159,7 @@ const UserUpdateForm: React.FC<UpdateFormProps> = ({
           ref={register({ required: false })}
         />
 
+        <span className="user-update-label">Country</span>
         <input 
           className="update-input"
           id="update-country-input"
