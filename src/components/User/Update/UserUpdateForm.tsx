@@ -66,17 +66,19 @@ const UserUpdateForm: React.FC<UpdateFormProps> = ({
       <span id="user-update-header">Update your account info</span>
       
       <form onSubmit={handleSubmit(onSubmit)} id="user-update-details-form">
-        <span className="user-update-label">Email</span>
-        <input 
-          style={{ backgroundColor: errors.email ? 'pink' : 'white' }}
-          className="update-input"
-          id="update-email-input"
-          type="email"
-          name="email"
-          placeholder="Email"
-          defaultValue={ user.email ? user.email : '' }
-          ref={register({ required: false, validate: emailIsAvailable })}
-        />
+        <div id="email-update__container">
+          <span className="user-update-label">Email</span>
+          <input 
+            style={{ backgroundColor: errors.email ? 'pink' : 'white' }}
+            className="update-input"
+            id="update-email-input"
+            type="email"
+            name="email"
+            placeholder="Email"
+            defaultValue={ user.email ? user.email : '' }
+            ref={register({ required: false, validate: emailIsAvailable })}
+          />
+        </div>
 
         {errors.email && errors.email.type === 'validate' && (
           <div id="update-error-text">Email is already in use</div>
