@@ -21,7 +21,7 @@ export const testimonials = [
     `,
   },
   {
-    author: 'Eloise Holland',
+    author: 'Brandon Z',
     review: `
       I've dealt with insomnia for my entire life. I've tried using 
       melatonin tablets, in addition to all other sorts of prescribed 
@@ -36,12 +36,6 @@ export const testimonials = [
       on end thinking about what I'm going to do tomorrow and the next day, 
       all to wake up groggy in the morning! Instead, I fall asleep easily 
       and wake up well-rested. I must (still) be dreaming!
-    `,
-  },
-  {
-    author: 'Justin Nguyen',
-    review: `
-      
     `,
   },
 ];
