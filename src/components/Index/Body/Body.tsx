@@ -4,12 +4,8 @@ import { RouteContext } from '../../../contexts/RouteContext';
 import { topProducts } from '../../../modules/topProducts';
 
 import Product from '../../Products/Product';
-
-import hollywoodSrc from '../../../assets/images/products/the_hollywood.jpg';
-import malibuSrc from '../../../assets/images/products/the_malibu.jpg';
-import sanAndreasSrc from '../../../assets/images/products/the_san_andreas.jpg';
-
 import './body.css';
+import womanSrc from '../../../assets/images/woman_using_small.png';
 
 const Body: React.FC = () => {
   const { changeDest } = useContext(RouteContext);
@@ -30,6 +26,14 @@ const Body: React.FC = () => {
       </div>
 
       <span id="all-products-link" onClick={() => changeDest('/products')}>View All of Our Products</span>
+      
+      <div id="body-img__container">
+        <img
+          alt="A smiling woman with a stylish afro using a Full-Spectrum CBD tincture from The Republic 310"
+          id="woman-img"
+          src={womanSrc}
+        />
+      </div>
     </div>
   )
 }

@@ -42,6 +42,17 @@
   color: #6b813a;
 }
 
+#body-img__container {
+  width: 80%;
+  margin: 4rem auto 0 auto;
+  text-align: center;
+}
+
+#woman-img {
+  width: 50%;
+  border-radius: 4px;
+}
+
 @media only screen and (min-width: 900px) {
   #body__container {
     margin-top: -10rem;
