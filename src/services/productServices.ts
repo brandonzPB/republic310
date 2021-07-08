@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseUrl = '/catalog/';
+const baseUrl = 'https://bz-republic-310.herokuapp.com/catalog';
 
 // GET ALL PRODUCTS
 export const getAllProducts = (): any => {

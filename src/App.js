@@ -36,7 +36,7 @@ function App() {
   const content = 'The Republic 310 | Born and Raised in LA. Free of pesticides and preservatives';
 
   return (
-    <BrowserRouter>
+    <HashRouter basename="/">
       <div className="App">
         <Helmet>
           <title>The Republic 310 | Hemp Re-imagined</title>
@@ -75,7 +75,7 @@ function App() {
           </RouteContextProvider>
         </GlobalContextProvider>
       </div>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 

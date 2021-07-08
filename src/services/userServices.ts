@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseUrl: string = '/catalog/user';
+const baseUrl: string = 'https://bz-republic-310.herokuapp.com/catalog/user';
 
 // CHECK EMAIL AVAILABILITY
 export const checkEmail = (email: object): any => {
