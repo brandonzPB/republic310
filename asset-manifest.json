@@ -1,0 +1,36 @@
+{
+  "files": {
+    "main.css": "/republic310/static/css/main.60947639.chunk.css",
+    "main.js": "/republic310/static/js/main.c58b28fe.chunk.js",
+    "main.js.map": "/republic310/static/js/main.c58b28fe.chunk.js.map",
+    "runtime-main.js": "/republic310/static/js/runtime-main.8e24fc99.js",
+    "runtime-main.js.map": "/republic310/static/js/runtime-main.8e24fc99.js.map",
+    "static/js/2.51cfa924.chunk.js": "/republic310/static/js/2.51cfa924.chunk.js",
+    "static/js/2.51cfa924.chunk.js.map": "/republic310/static/js/2.51cfa924.chunk.js.map",
+    "static/js/3.6155ed06.chunk.js": "/republic310/static/js/3.6155ed06.chunk.js",
+    "static/js/3.6155ed06.chunk.js.map": "/republic310/static/js/3.6155ed06.chunk.js.map",
+    "index.html": "/republic310/index.html",
+    "static/css/main.60947639.chunk.css.map": "/republic310/static/css/main.60947639.chunk.css.map",
+    "static/js/2.51cfa924.chunk.js.LICENSE.txt": "/republic310/static/js/2.51cfa924.chunk.js.LICENSE.txt",
+    "static/media/index.css": "/republic310/static/media/Franklin Gothic Std Condensed.f9058542.otf",
+    "static/media/hero_1.8234280a.jpg": "/republic310/static/media/hero_1.8234280a.jpg",
+    "static/media/requestResetCode.css": "/republic310/static/media/hero_3.23d89725.jpg",
+    "static/media/header.css": "/republic310/static/media/hero_4.3fbfe8c8.jpg",
+    "static/media/logo.a6a80024.jpg": "/republic310/static/media/logo.a6a80024.jpg",
+    "static/media/the_bear.ea7089c9.jpg": "/republic310/static/media/the_bear.ea7089c9.jpg",
+    "static/media/the_bruins.36a2e734.jpg": "/republic310/static/media/the_bruins.36a2e734.jpg",
+    "static/media/the_hollywood.4557c7ec.jpg": "/republic310/static/media/the_hollywood.4557c7ec.jpg",
+    "static/media/the_malibu.27de5453.jpg": "/republic310/static/media/the_malibu.27de5453.jpg",
+    "static/media/the_mudslide.a346680e.jpg": "/republic310/static/media/the_mudslide.a346680e.jpg",
+    "static/media/the_san_andreas.9b0556bd.jpg": "/republic310/static/media/the_san_andreas.9b0556bd.jpg",
+    "static/media/the_smog.4b8c1cba.png": "/republic310/static/media/the_smog.4b8c1cba.png",
+    "static/media/the_surfer.3dd67e43.jpg": "/republic310/static/media/the_surfer.3dd67e43.jpg",
+    "static/media/woman_using_small.a28f7a7a.png": "/republic310/static/media/woman_using_small.a28f7a7a.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.8e24fc99.js",
+    "static/js/2.51cfa924.chunk.js",
+    "static/css/main.60947639.chunk.css",
+    "static/js/main.c58b28fe.chunk.js"
+  ]
+}
