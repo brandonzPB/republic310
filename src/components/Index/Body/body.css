@@ -49,7 +49,7 @@
 }
 
 #woman-img {
-  width: 50%;
+  width: 80%;
   border-radius: 4px;
 }
 
@@ -60,5 +60,9 @@
 
   #hot-products__container {
     flex-direction: row;
+  }
+  
+  #woman-img {
+    width: 50%;
   }
 }
