@@ -28,22 +28,6 @@
   margin: 1rem auto 3.5rem auto;
 }
 
-#update-email-input {}
-
-#update-phone-input {}
-
-.update-password-input {}
-
-#update-street-input {}
-
-#update-city-input {}
-
-#update-zipCode-input {}
-
-#update-state-input {}
-
-#update-country-input {}
-
 #update-error-text {
   color: 'red';
 }
@@ -59,13 +43,19 @@
 }
 
 @media only screen and (min-width: 920px) {
-  #user-update-details-form {
+  #user-update__container {
+    margin: 8rem auto;
+  }
+  
+  #input-parent__container {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    width: 60%;
   }
 
   #submit-update-btn {
     transition: transform 0.2s ease;
+    margin: 0 auto;
   }
 
   #submit-update-btn:hover {
